@@ -19,7 +19,7 @@ format:
     code-summary: "Ver el código"
     other-links:
       - text: Diapositivas
-        href: slides.qmd
+        href: slides.html
 ---
 
 ![](fig/portada.svg){.portada fig-alt="Una tabla con columnas orden, equipo, tipo y coste en la que una celda aparece resaltada con la palabra missing; una flecha lleva a un diagrama de barras a la derecha"}

@@ -17,7 +17,7 @@ format:
     code-summary: "Ver el código"
     other-links:
       - text: Diapositivas
-        href: slides.qmd
+        href: slides.html
 ---
 
 ![](fig/portada.svg){.portada fig-alt="De izquierda a derecha: una señal en el tiempo, su espectro con dos picos, un espectrograma en forma de mosaico de celdas de intensidad variable, y debajo la respuesta de un filtro pasa-banda"}

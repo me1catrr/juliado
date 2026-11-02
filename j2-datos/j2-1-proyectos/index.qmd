@@ -19,7 +19,7 @@ format:
     code-summary: "Ver el código"
     other-links:
       - text: Diapositivas
-        href: slides.qmd
+        href: slides.html
 ---
 
 ![](fig/portada.svg){.portada fig-alt="Una lista de carpetas de un proyecto (datos/crudos, scripts, resultados, notas) con una flecha hacia un registro de ejecución en una ventana oscura que muestra las líneas de inicio, lectura de muestras, escritura de una tabla con su huella sha256 y fin"}

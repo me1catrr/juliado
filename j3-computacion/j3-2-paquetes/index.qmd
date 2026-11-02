@@ -18,7 +18,7 @@ format:
     code-summary: "Ver el código"
     other-links:
       - text: Diapositivas
-        href: slides.qmd
+        href: slides.html
 ---
 
 ![](fig/portada.svg){.portada fig-alt="A la izquierda, el árbol de carpetas de un paquete llamado Descriptores con Project.toml, una carpeta src con Descriptores.jl y una carpeta test con runtests.jl; a la derecha, el uso del paquete con using Descriptores y un resultado de pruebas con cuatro aciertos de cuatro"}

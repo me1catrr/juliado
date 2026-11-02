@@ -18,7 +18,7 @@ format:
     code-summary: "Ver el código"
     other-links:
       - text: Diapositivas
-        href: slides.qmd
+        href: slides.html
 ---
 
 ![](fig/portada.svg){.portada fig-alt="A la izquierda, la curva en forma de campana estrecha de la respuesta de un modo con el área bajo ella sombreada de azul y la letra integral; a la derecha, una curva con su recta tangente en un punto en naranja y una flecha que indica la derivada, con una matriz de tres por tres de sensibilidades debajo"}

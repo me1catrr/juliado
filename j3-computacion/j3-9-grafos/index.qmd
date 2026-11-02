@@ -19,7 +19,7 @@ format:
     code-summary: "Ver el código"
     other-links:
       - text: Diapositivas
-        href: slides.qmd
+        href: slides.html
 ---
 
 ![](fig/portada.svg){.portada fig-alt="A la izquierda, una red de ocho nodos blancos unidos por líneas grises, con un cuadrado verde en un extremo y una ruta naranja gruesa que lo une con el nodo opuesto; a la derecha, un reticulado de cuatro módulos con cordones, montantes y diagonales azules, apoyado en sus dos extremos, con la última diagonal naranja discontinua que indica una barra fuera de servicio"}

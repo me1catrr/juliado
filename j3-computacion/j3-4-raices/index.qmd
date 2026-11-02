@@ -18,7 +18,7 @@ format:
     code-summary: "Ver el código"
     other-links:
       - text: Diapositivas
-        href: slides.qmd
+        href: slides.html
 ---
 
 ![](fig/portada.svg){.portada fig-alt="A la izquierda, una viga horizontal empotrada en una pared a su izquierda, con su forma deformada del primer modo en azul y cinco puntos naranjas que son sensores; a la derecha, una curva verde oscilante que cruza el eje horizontal en tres puntos naranjas, con la ecuación coseno de x más uno partido por coseno hiperbólico de x igual a cero"}

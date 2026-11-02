@@ -18,7 +18,7 @@ format:
     code-summary: "Ver el código"
     other-links:
       - text: Diapositivas
-        href: slides.qmd
+        href: slides.html
 ---
 
 ![](fig/portada.svg){.portada fig-alt="Un cronómetro a la izquierda y tres barras horizontales a la derecha, etiquetadas versión ingenua, con vistas y sin asignaciones, cada una más corta que la anterior"}

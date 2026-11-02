@@ -19,7 +19,7 @@ format:
     code-summary: "Ver el código"
     other-links:
       - text: Diapositivas
-        href: slides.qmd
+        href: slides.html
 ---
 
 ![](fig/portada.svg){.portada fig-alt="Una cuadrícula de celdas azules de días por horas con tres celdas naranjas consecutivas que marcan un hueco; una flecha lleva a la curva suave de un ciclo diario; otra flecha lleva a dos tablas conectadas por una línea que representan una unión"}

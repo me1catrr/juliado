@@ -19,7 +19,7 @@ format:
     code-summary: "Ver el código"
     other-links:
       - text: Diapositivas
-        href: slides.qmd
+        href: slides.html
 ---
 
 ![](fig/portada.svg){.portada fig-alt="Una señal oscilante con tres defectos señalados en naranja: un pico aislado que sale muy por encima del resto, un tramo plano en el que la señal se queda constante y un salto de nivel tras el cual toda la señal queda desplazada hacia arriba"}

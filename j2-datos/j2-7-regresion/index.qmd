@@ -19,7 +19,7 @@ format:
     code-summary: "Ver el código"
     other-links:
       - text: Diapositivas
-        href: slides.qmd
+        href: slides.html
 ---
 
 ![](fig/portada.svg){.portada fig-alt="A la izquierda, una nube de puntos azules con una recta naranja ajustada y una banda azul clara alrededor, con la ecuación f igual a beta cero más beta uno por T más epsilon; a la derecha, barras verdes verticales que representan los residuos, alrededor de cero y sin ningún patrón"}

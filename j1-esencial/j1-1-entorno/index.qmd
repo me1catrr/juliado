@@ -19,7 +19,7 @@ format:
     code-summary: "Ver el código"
     other-links:
       - text: Diapositivas
-        href: slides.qmd
+        href: slides.html
 ---
 
 ![](fig/portada.svg){.portada fig-alt="Una ventana de terminal con el prompt de Julia, la señal de un acelerómetro con dos frecuencias y tres celdas de un cuaderno reactivo"}

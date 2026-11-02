@@ -18,7 +18,7 @@ format:
     code-summary: "Ver el código"
     other-links:
       - text: Diapositivas
-        href: slides.qmd
+        href: slides.html
 ---
 
 ![](fig/portada.svg){.portada fig-alt="A la izquierda, un oscilador de un grado de libertad: una masa unida a una pared por un muelle y un amortiguador, con una flecha naranja de fuerza; una flecha verde con la palabra solve lleva a la derecha, donde una curva azul oscilante y amortiguada tiene puntos naranjas cada vez más separados que son los pasos del integrador"}

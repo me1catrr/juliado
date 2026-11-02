@@ -19,7 +19,7 @@ format:
     code-summary: "Ver el código"
     other-links:
       - text: Diapositivas
-        href: slides.qmd
+        href: slides.html
 ---
 
 ![](fig/portada.svg){.portada fig-alt="Dos campanas de Gauss parcialmente solapadas, una azul para el estado A y otra naranja para el estado C, con la cola de la segunda sombreada; a la derecha, un recuadro con un valor de p, un intervalo de confianza del 95 por ciento y un tamaño de efecto, y la pregunta si es relevante"}

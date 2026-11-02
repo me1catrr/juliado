@@ -19,7 +19,7 @@ format:
     code-summary: "Ver el código"
     other-links:
       - text: Diapositivas
-        href: slides.qmd
+        href: slides.html
 ---
 
 ![](fig/portada.svg){.portada fig-alt="Una recta con marcas igualmente espaciadas en tres tramos, de 1 a 2, de 2 a 4 y de 4 a 8, donde la separación entre marcas se duplica en cada tramo"}
@@ -49,7 +49,7 @@ include("../../recursos/_tema.jl")
 
 **Prerrequisitos.** [J1.1](../j1-1-entorno/index.qmd) y [J1.2](../j1-2-paquetes/index.qmd).
 
-**Reparto con otras unidades.** Las funciones se tratan en [J1.4](../j1-4-funciones/index.qmd) y los arrays en [J1.5](../j1-5-arrays/index.qmd). El análisis riguroso del error de redondeo y del condicionamiento está en [M2.1](https://me1catrr.github.io/resonancia/mse/m02-matematicas/matrices/).
+**Reparto con otras unidades.** Las funciones se tratan en [J1.4](../j1-4-funciones/index.qmd) y los arrays en [J1.5](../j1-5-arrays/index.qmd). El análisis riguroso del error de redondeo y del condicionamiento está en [A1.1 de matematicado](https://me1catrr.github.io/matematicado/algebra/matrices/index.html#a1-1).
 
 ## Teoría breve
 

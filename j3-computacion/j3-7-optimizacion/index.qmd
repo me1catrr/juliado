@@ -18,7 +18,7 @@ format:
     code-summary: "Ver el código"
     other-links:
       - text: Diapositivas
-        href: slides.qmd
+        href: slides.html
 ---
 
 ![](fig/portada.svg){.portada fig-alt="A la izquierda, puntos azules con ruido alrededor de un pico de resonancia y la curva naranja ajustada, junto a una curva gris discontinua del punto de partida; una flecha verde con la palabra mín lleva a la derecha, donde elipses concéntricas azules son las curvas de nivel de una función de coste y una línea naranja quebrada baja por el valle hasta un punto verde en el mínimo"}

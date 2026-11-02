@@ -19,7 +19,7 @@ format:
     code-summary: "Ver el código"
     other-links:
       - text: Diapositivas
-        href: slides.qmd
+        href: slides.html
 ---
 
 ![](fig/portada.svg){.portada fig-alt="A la izquierda, el árbol de tipos numéricos de Julia: Number, Real, AbstractFloat e Integer como tipos abstractos y Float64, Float32 e Int64 como concretos. A la derecha, un tipo abstracto Senal con un tipo concreto Registro que tiene los campos datos, fs y canales"}

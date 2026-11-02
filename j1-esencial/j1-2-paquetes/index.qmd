@@ -19,7 +19,7 @@ format:
     code-summary: "Ver el código"
     other-links:
       - text: Diapositivas
-        href: slides.qmd
+        href: slides.html
 ---
 
 ![](fig/portada.svg){.portada fig-alt="A la izquierda, un fichero Project.toml con una lista de nombres de paquetes; una flecha etiquetada resolver lleva a la derecha, a un fichero Manifest.toml con la versión exacta de cada paquete"}

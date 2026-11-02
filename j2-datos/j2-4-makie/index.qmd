@@ -19,7 +19,7 @@ format:
     code-summary: "Ver el código"
     other-links:
       - text: Diapositivas
-        href: slides.qmd
+        href: slides.html
 ---
 
 ![](fig/portada.svg){.portada fig-alt="Una figura de tres paneles rotulados a, b y c: una serie temporal, un espectro con picos marcados y un diagrama de barras; debajo, seis cuadrados de la paleta de colores del curso y la leyenda ejes con unidades, pie y texto alternativo"}
