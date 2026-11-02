@@ -8,6 +8,9 @@
 # Crea carpetas, index.qmd y slides.qmd de cada unidad, los index.qmd de vía
 # y de nivel (J), recursos/bibliografia.bib y _navegacion.yml.
 #
+# `externos` (opcional) declara páginas de sitios hermanos que las unidades
+# pueden citar en `requiere`; sus prerrequisitos se enlazan con la URL publicada.
+#
 # Es idempotente: nunca sobrescribe un fichero .qmd o .bib existente. Solo
 # _navegacion.yml se regenera siempre, porque deriva por completo del temario,
 # y las tablas de unidades de los índices, que se reescriben entre los marcadores
@@ -111,12 +114,36 @@ function cargar_temario()
     return d, vias, niveles, unidades
 end
 
-function validar(vias, niveles, unidades)
+# Páginas de los sitios hermanos (bloque `externos`), con su URL completa en "url".
+function cargar_externos(d)
+    ext = Dict{String,Any}[]
+    for s in get(d, "externos", [])
+        web = string(s["web"])
+        for p in s["paginas"]
+            e = Dict{String,Any}(p)
+            e["sitio"] = s["sitio"]
+            e["web"] = web
+            e["url"] = web * string(e["ruta"])
+            push!(ext, e)
+        end
+    end
+    return ext
+end
+
+function validar(vias, niveles, unidades, externos = Dict{String,Any}[])
     errores = String[]
     indice = Dict{String,Dict{String,Any}}()
     for e in Iterators.flatten((niveles, unidades))
         haskey(indice, e["id"]) && push!(errores, "identificador repetido: $(e["id"])")
         indice[e["id"]] = e
+    end
+    for e in externos
+        endswith(e["web"], "/") || push!(errores, "externos: la web de $(e["sitio"]) debe acabar en «/»")
+        startswith(string(e["ruta"]), "/") && push!(errores, "externos: la ruta «$(e["ruta"])» debe ser relativa")
+        haskey(e, "id") || continue
+        id = string(e["id"])
+        haskey(indice, id) && push!(errores, "identificador repetido: $id (externo, de $(e["sitio"]))")
+        indice[id] = e
     end
     dirs = Dict{String,String}()
     for u in unidades
@@ -234,7 +261,8 @@ function prerrequisitos(u, indice)
     isempty(ids) && return "Ninguno declarado en `temario.yml`."
     enlaces = map(ids) do id
         e = indice[id]
-        "[$(etiqueta(e))]($(ruta_relativa(u["dir"], e["ruta"])))"
+        destino = haskey(e, "url") ? e["url"] : ruta_relativa(u["dir"], e["ruta"])
+        "[$(etiqueta(e))]($destino)"
     end
     return join(enlaces, ", ")
 end
@@ -613,13 +641,13 @@ function main()
             println(stderr, "--comprobar y --dry-run no se pueden combinar.")
             exit(2)
         end
-        _, vias, niveles, unidades = cargar_temario()
-        validar(vias, niveles, unidades)
+        d, vias, niveles, unidades = cargar_temario()
+        validar(vias, niveles, unidades, cargar_externos(d))
         exit(comprobar(unidades) == 0 ? 0 : 1)
     end
 
     d, vias, niveles, unidades = cargar_temario()
-    indice = validar(vias, niveles, unidades)
+    indice = validar(vias, niveles, unidades, cargar_externos(d))
 
     generar_unidades(unidades, indice)
     generar_vias(vias, niveles, unidades)
