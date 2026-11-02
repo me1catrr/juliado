@@ -26,6 +26,8 @@ ficheros sigue en el [repositorio de Resonancia](https://github.com/me1catrr/res
 - [Resonancia](https://me1catrr.github.io/resonancia/): monitorización de la salud
   estructural, laboratorios y recursos. Explica los conceptos que aquí se
   programan.
+- [matematicado](https://me1catrr.github.io/matematicado/): matemáticas aplicadas a
+  vibraciones y monitorización estructural (álgebra, señales, sistemas, estadística).
 - [ClaudeDo](https://me1catrr.github.io/claudedo/): autoformación con Claude y
   Claude Code.
 
