@@ -8,44 +8,44 @@ Rafael Castro Triguero.
 
 ## Propósito del curso
 
-Resonancia es una web de autoformación sobre vibraciones, señales y
-monitorización estructural, apoyada en Julia y en Claude Code. Busca que quien
-la recorra sea capaz de analizar datos de una estructura real y de usar un
-asistente de programación con criterio: delegando lo que conviene, verificando
-lo que entrega y sabiendo qué no puede hacer por él.
+JuliaDo es una web de autoformación en programación y computación científica
+con Julia. Busca que quien la recorra sepa escribir, comprobar y mantener código
+científico reproducible, y que use un asistente de programación con criterio:
+delegando lo que conviene, verificando lo que entrega y sabiendo qué no puede
+hacer por él.
 
-## Relación con la asignatura MSE
+## Origen y sitios hermanos
 
-El curso acompaña a la asignatura *Monitorización de la Salud Estructural*
-(655023) del Máster Universitario en Ingeniería Industrial de la Universidad de
-Córdoba (EPS Córdoba). La vía M tiene una unidad por sesión de la asignatura y
-las prácticas P1–P8 corresponden a los laboratorios L1–L8. Quien no cursa la
-asignatura puede usar el material por su cuenta siguiendo alguno de los
-itinerarios de la [portada](index.qmd).
+JuliaDo nació como la vía J de [Resonancia](https://me1catrr.github.io/resonancia/),
+el curso de vibraciones, señales y monitorización estructural que acompaña a la
+asignatura *Monitorización de la Salud Estructural* (655023) del Máster
+Universitario en Ingeniería Industrial de la Universidad de Córdoba. En
+noviembre de 2026 se separó en un sitio propio; el historial anterior de sus
+ficheros sigue en el [repositorio de Resonancia](https://github.com/me1catrr/resonancia).
+
+- [Resonancia](https://me1catrr.github.io/resonancia/): monitorización de la salud
+  estructural, laboratorios y recursos. Explica los conceptos que aquí se
+  programan.
+- [ClaudeDo](https://me1catrr.github.io/claudedo/): autoformación con Claude y
+  Claude Code.
+
+Los ejemplos de JuliaDo usan los datos sintéticos del edificio de tres plantas y
+los casos de empresa de `datos/sinteticos/`, y el paquete `Resonancia.jl`, del
+que este repositorio incluye una copia (versión 0.9.0) para compilar sin
+depender de Resonancia.
 
 ## Repositorio
 
 El código, los textos y el historial de cambios están en
-<https://github.com/me1catrr/resonancia>.
-
-## Organización en vías
-
-- [**M** · Monitorización de la Salud Estructural](mse/index.qmd): los conceptos.
-- [**J** · Julia para ingeniería](julia/index.qmd): su implementación.
-- [**C** · Claude y Claude Code](claude/index.qmd): el asistente.
-- [**L** · Laboratorios](labs/index.qmd): las prácticas y el proyecto globalizador.
-- [**R** · Recursos](recursos/index.qmd): el catálogo de datos y la referencia de Resonancia.jl.
-
-El concepto se explica en M, su implementación en J y su uso asistido con Claude
-en L. Los contenidos no se repiten entre vías: se enlazan.
+<https://github.com/me1catrr/juliado>.
 
 ## Uso de Claude Code
 
 Este material se elabora con la ayuda de Claude Code. El responsable define la
 estructura y los contenidos, y revisa, ejecuta y corrige lo que el asistente
 propone. Cada unidad lleva un estado (borrador, revisado o publicado) que indica
-hasta dónde ha llegado esa revisión, y las unidades sobre Claude Code indican la
-versión con la que se comprobaron.
+hasta dónde ha llegado esa revisión y la versión de Julia con la que se
+comprobó.
 
 ## Licencias
 
@@ -62,8 +62,9 @@ El DOI de Zenodo se añadirá con la primera versión publicada.
 
 ## Contacto
 
-A través de los [issues del repositorio](https://github.com/me1catrr/resonancia/issues).
+A través de los [issues del repositorio](https://github.com/me1catrr/juliado/issues).
 
 ## Aviso
 
-Resonancia es un proyecto docente independiente, sin afiliación con Anthropic.
+JuliaDo es un proyecto docente independiente, sin afiliación con Anthropic ni con
+JuliaHub o el proyecto Julia.

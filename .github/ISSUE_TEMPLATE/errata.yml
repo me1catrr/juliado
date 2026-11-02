@@ -1,5 +1,5 @@
 name: He encontrado un error
-description: Comunica una errata o un error en una unidad de Resonancia.
+description: Comunica una errata o un error en una unidad de JuliaDo.
 title: "[Errata] "
 labels: ["errata"]
 body:
@@ -15,7 +15,7 @@ body:
     id: enlace
     attributes:
       label: Enlace a la página
-      placeholder: "https://me1catrr.github.io/resonancia/mse/m03-senales-i/"
+      placeholder: "https://me1catrr.github.io/juliado/j3-computacion/j3-8-senales/"
     validations:
       required: true
   - type: textarea
