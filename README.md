@@ -59,7 +59,7 @@ confirma también los cambios de `_freeze/`.
 ## Pruebas
 
 ```sh
-julia --project=. -e 'using Pkg; Pkg.test("Resonancia")'     # paquete
+julia --project=. Resonancia.jl/test/runtests.jl            # paquete
 uv run pytest j1-esencial j2-datos                           # pestañas Python
 julia --project=. scripts/compilar_tikz.jl --comprobar       # figuras TikZ
 julia --project=. scripts/generar_estructura.jl --comprobar  # cabeceras frente al temario
