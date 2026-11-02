@@ -1,11 +1,44 @@
 ---
-title: "J · Julia para ingeniería"
+title: "JuliaDo"
+subtitle: "Aprende Julia haciendo"
 via: J
 ---
 
-La herramienta. Ejemplos siempre tomados de la vía M o de la planta.
+![](recursos/identidad/fig/banner.svg){fig-alt="JuliaDo: aprende Julia haciendo. Computación científica." width="100%"}
 
-## [J1 · Julia esencial](j1-esencial/index.qmd)
+JuliaDo es un curso de autoformación en programación y computación científica
+con [Julia](https://julialang.org/). Se aprende escribiendo código desde la
+primera unidad: cada una tiene objetivos, una teoría breve, una práctica guiada
+con código que se ejecuta, un apartado «Pídeselo a Claude» con su comprobación,
+ejercicios de autoevaluación y diapositivas.
+
+Los ejemplos proceden de la ingeniería de vibraciones y de una planta termosolar
+real, porque el curso nació como la vía J de
+[Resonancia](https://me1catrr.github.io/resonancia/), pero lo que se aprende
+(datos, estadística, álgebra lineal, ecuaciones diferenciales, optimización,
+señales) sirve para cualquier problema científico o técnico.
+
+## Tres niveles
+
+| Nivel | Para qué |
+|---|---|
+| [J1 · Julia esencial](j1-esencial/index.qmd) | Del primer arranque de Julia a un tipo propio que valida sus datos. |
+| [J2 · Datos y estadística](j2-datos/index.qmd) | Leer, limpiar, dibujar y analizar datos reales con criterio estadístico. |
+| [J3 · Computación científica](j3-computacion/index.qmd) | Métodos numéricos, rendimiento y paquetes, con los resultados verificados. |
+
+## Itinerarios
+
+- **Estudiante de la asignatura MSE.** J1 completo y las unidades de J2 y J3 que
+  piden las sesiones de [Resonancia](https://me1catrr.github.io/resonancia/).
+- **Docente o investigador.** J1 a J3 según tu nivel de partida.
+- **Personal de planta.** J1 y J2, con la pestaña de Python como apoyo.
+
+Para trabajar con un asistente de programación con criterio, el curso hermano
+[ClaudeDo](https://me1catrr.github.io/claudedo/) enseña a usar Claude y Claude Code.
+
+## Todas las unidades
+
+### [J1 · Julia esencial](j1-esencial/index.qmd)
 
 <!-- INDICE:J1:inicio -->
 
@@ -26,7 +59,7 @@ La herramienta. Ejemplos siempre tomados de la vía M o de la planta.
 
 <!-- INDICE:J1:fin -->
 
-## [J2 · Datos y estadística](j2-datos/index.qmd)
+### [J2 · Datos y estadística](j2-datos/index.qmd)
 
 <!-- INDICE:J2:inicio -->
 
@@ -47,7 +80,7 @@ La herramienta. Ejemplos siempre tomados de la vía M o de la planta.
 
 <!-- INDICE:J2:fin -->
 
-## [J3 · Computación científica](j3-computacion/index.qmd)
+### [J3 · Computación científica](j3-computacion/index.qmd)
 
 <!-- INDICE:J3:inicio -->
 

@@ -1,5 +1,8 @@
 /* =============================================================================
-   Resonancia: estilos comunes (web y diapositivas)
+   Resonancia · JuliaDo · ClaudeDo: base común de estilos (web y diapositivas)
+   Base común v1. Este fichero es idéntico en los tres sitios: los cambios se
+   hacen en uno y se copian a los otros dos. Los acentos propios de cada sitio
+   van en marca.css (tokens --sitio-acento…).
    -----------------------------------------------------------------------------
    Paleta única (la misma que usan las figuras TikZ y las gráficas):
      azul #1b6ca8 · naranja #d95f02 · verde azulado #2a9d8f · gris #6b7280
@@ -34,6 +37,9 @@
   --caja-exm-borde: #b45f06;      --caja-exm-fondo: #fff5e8;
   --caja-dem-borde: #6b7280;      --caja-dem-fondo: #f4f5f7;
   --caja-clave-borde: #6f42c1;    --caja-clave-fondo: #f4effb;
+
+  /* Acento del sitio: azul en Resonancia; cada sitio lo redefine en marca.css. */
+  --sitio-acento: var(--r-azul);  --sitio-acento-oscuro: #14507d;
 
   --indice-borde: #d5dde6;        --indice-cabecera: #eef5fb;
   --indice-fila-par: #f8fafc;     --indice-fila-hover: #eef5fb;
@@ -337,15 +343,15 @@ div.callout.avanzado .callout-title-container::before { content: "▲ "; }
   border: 1px solid var(--indice-borde); border-radius: 8px; overflow: hidden; font-size: 0.95rem;
 }
 .indice-unidades thead th {
-  background: var(--indice-cabecera); color: var(--r-azul); text-align: left;
+  background: var(--indice-cabecera); color: var(--sitio-acento); text-align: left;
   font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase;
-  padding: 0.6rem 0.8rem; border-bottom: 2px solid var(--r-azul);
+  padding: 0.6rem 0.8rem; border-bottom: 2px solid var(--sitio-acento);
 }
 .indice-unidades tbody td { padding: 0.65rem 0.8rem; border-bottom: 1px solid var(--indice-borde); vertical-align: top; }
 .indice-unidades tbody tr:last-child td { border-bottom: 0; }
 .indice-unidades tbody tr:nth-child(even) { background: var(--indice-fila-par); }
 .indice-unidades tbody tr:hover { background: var(--indice-fila-hover); }
-.indice-unidades td:first-child { font-family: var(--bs-font-monospace, monospace); font-weight: 600; white-space: nowrap; color: var(--r-azul); }
+.indice-unidades td:first-child { font-family: var(--bs-font-monospace, monospace); font-weight: 600; white-space: nowrap; color: var(--sitio-acento); }
 .indice-unidades td:nth-child(2) a { font-weight: 600; text-decoration: none; border-bottom: 1px solid transparent; }
 .indice-unidades td:nth-child(2) a:hover, .indice-unidades td:nth-child(2) a:focus-visible { border-bottom-color: currentColor; }
 .indice-unidades td:last-child { white-space: nowrap; font-variant-numeric: tabular-nums; }
@@ -378,7 +384,7 @@ body:has(.referencias-unidad) #TOC li:has(> #toc-bibliography) { display: none; 
    (.sidebar nav[role=doc-toc] ul>li>a.active, con !important) para poder sustituirla. */
 .sidebar nav[role="doc-toc"] ul li a.nav-link.active,
 .sidebar nav[role="doc-toc"] ul > li > ul > li > a.nav-link.active {
-  color: #14507d !important;
+  color: var(--sitio-acento-oscuro) !important;
   font-weight: 600;
   background: var(--indice-cabecera);
   border-left: 3px solid var(--r-naranja) !important;

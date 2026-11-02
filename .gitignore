@@ -6,10 +6,6 @@
 
 # --- Datos privados: nunca salen de este equipo ---
 /datos/privados/
-# --- Datos reales sin ordenar: la versión publicable vive en datos/reales-publicables/ ---
-/datos/reales/
-# --- Paquetes completos para Zenodo: se regeneran, no van a git ---
-/datos/zenodo/
 # --- Apuntes de consulta: solo locales, nunca se publican ---
 /docs/
 
@@ -26,9 +22,3 @@ __pycache__/
 
 /.luarc.json
 _capturas/
-
-# Salidas del informe de ejemplo de C6 (se regeneran con quarto render)
-claude/c6-informes/_ejemplo/informe/*.html
-claude/c6-informes/_ejemplo/informe/*.pdf
-claude/c6-informes/_ejemplo/informe/*_files/
-claude/c6-informes/_ejemplo/informe/.quarto/

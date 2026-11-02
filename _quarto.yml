@@ -1,21 +1,19 @@
 project:
   type: website
   # docs/ contiene apuntes de consulta, no páginas ni descargas públicas.
+  # _migracion/ y _plan/ son notas de trabajo (el prefijo _ ya las excluye).
   render:
     - "*"
     - "!docs/**"
-    - "!claude/descargas/**"
   resources:
     - "!docs/**"
-    - claude/descargas/*.txt
   post-render:
     - scripts/no_publicar_docs.ts
 
-# La barra superior y las barras laterales las genera
+# La barra superior y la barra lateral las genera
 # scripts/generar_estructura.jl a partir de temario.yml. No editarlas aquí.
 metadata-files:
   - _navegacion.yml
-  - claude/_versiones.yml
 
 lang: es
 bibliography: recursos/bibliografia.bib
@@ -24,27 +22,28 @@ bibliography: recursos/bibliografia.bib
 filters:
   - scripts/ejercicios.lua
   - scripts/referencias.lua
-  - scripts/version_unidad.lua
 
 website:
-  title: "Resonancia"
-  description: "Vibraciones, señales y monitorización estructural con Claude Code"
-  site-url: https://me1catrr.github.io/resonancia/
-  repo-url: https://github.com/me1catrr/resonancia
+  title: "JuliaDo"
+  description: "Aprende Julia haciendo: programación y computación científica con ejemplos de ingeniería"
+  site-url: https://me1catrr.github.io/juliado/
+  repo-url: https://github.com/me1catrr/juliado
   repo-actions: [edit, issue]
   favicon: recursos/identidad/fig/marca.svg
   navbar:
     logo: recursos/identidad/fig/marca.svg
-    logo-alt: "Resonancia"
+    logo-alt: "JuliaDo"
 
 format:
   html:
     theme:
       - cosmo
       - brand
-    css: styles.css
-    # Cuerpo algo más ancho que el valor por defecto (800 px): el texto sigue
-    # cómodo y las tablas, el código y las simulaciones respiran en pantallas grandes.
+    # styles.css es la base común de Resonancia, JuliaDo y ClaudeDo;
+    # marca.css solo cambia los acentos de este sitio.
+    css:
+      - styles.css
+      - marca.css
     grid:
       sidebar-width: 270px
       body-width: 880px
@@ -52,8 +51,6 @@ format:
       gutter-width: 1.5rem
     toc: true
     code-copy: true
-    # Referencias: tarjeta emergente al pasar el ratón y la entrada completa
-    # junto al texto (margen). La lista completa queda al final de la unidad.
     citations-hover: true
     link-citations: true
     reference-section-title: "Referencias"

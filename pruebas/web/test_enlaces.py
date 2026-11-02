@@ -1,4 +1,4 @@
-"""Enlaces internos de _site/: ficheros y anclas existentes (solo vía C y lo que enlaza)."""
+"""Enlaces internos de _site/: ficheros y anclas existentes en todas las páginas del sitio."""
 import re
 from html.parser import HTMLParser
 from pathlib import Path
@@ -30,7 +30,7 @@ def analiza(ruta):
     return e
 
 
-PAGINAS = sorted((SITIO / "claude").rglob("*.html")) + sorted((SITIO / "mse" / "m03-senales-i").glob("*.html"))
+PAGINAS = sorted(p for p in SITIO.rglob("*.html") if "site_libs" not in p.parts)
 
 
 @pytest.mark.parametrize("pagina", PAGINAS, ids=lambda p: p.relative_to(SITIO).as_posix())

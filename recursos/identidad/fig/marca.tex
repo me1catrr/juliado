@@ -1,9 +1,10 @@
-% Marca de Resonancia: un pico de resonancia sobre fondo azul. Cuadrada, para favicon y avatar.
+% Marca de JuliaDo: el pico de resonancia de la familia Resonancia sobre fondo verde. Cuadrada, para favicon y avatar.
 \documentclass[tikz,border=0pt]{standalone}
 \usepackage{resonancia}
+\definecolor{sitio}{HTML}{166136}
 \begin{document}
 \begin{tikzpicture}
-  \shade[rounded corners=0.62cm, top color=rAzul!85!white, bottom color=rAzul!55!black] (0,0) rectangle (3,3);
+  \shade[rounded corners=0.62cm, top color=sitio!85!white, bottom color=sitio!55!black] (0,0) rectangle (3,3);
   % ejes sutiles
   \draw[white, opacity=0.35, line width=0.8pt, line cap=round] (0.55,0.62) -- (2.45,0.62);
   % pico de resonancia
