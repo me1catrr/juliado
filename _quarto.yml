@@ -1,0 +1,80 @@
+project:
+  type: website
+  # docs/ contiene apuntes de consulta, no páginas ni descargas públicas.
+  render:
+    - "*"
+    - "!docs/**"
+    - "!claude/descargas/**"
+  resources:
+    - "!docs/**"
+    - claude/descargas/*.txt
+  post-render:
+    - scripts/no_publicar_docs.ts
+
+# La barra superior y las barras laterales las genera
+# scripts/generar_estructura.jl a partir de temario.yml. No editarlas aquí.
+metadata-files:
+  - _navegacion.yml
+  - claude/_versiones.yml
+
+lang: es
+bibliography: recursos/bibliografia.bib
+
+# Ejercicios intercalados en el texto (véase scripts/ejercicios.lua).
+filters:
+  - scripts/ejercicios.lua
+  - scripts/referencias.lua
+  - scripts/version_unidad.lua
+
+website:
+  title: "Resonancia"
+  description: "Vibraciones, señales y monitorización estructural con Claude Code"
+  site-url: https://me1catrr.github.io/resonancia/
+  repo-url: https://github.com/me1catrr/resonancia
+  repo-actions: [edit, issue]
+  favicon: recursos/identidad/fig/marca.svg
+  navbar:
+    logo: recursos/identidad/fig/marca.svg
+    logo-alt: "Resonancia"
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+    css: styles.css
+    # Cuerpo algo más ancho que el valor por defecto (800 px): el texto sigue
+    # cómodo y las tablas, el código y las simulaciones respiran en pantallas grandes.
+    grid:
+      sidebar-width: 270px
+      body-width: 880px
+      margin-width: 270px
+      gutter-width: 1.5rem
+    toc: true
+    code-copy: true
+    # Referencias: tarjeta emergente al pasar el ratón y la entrada completa
+    # junto al texto (margen). La lista completa queda al final de la unidad.
+    citations-hover: true
+    link-citations: true
+    reference-section-title: "Referencias"
+
+# Nombres en español de los entornos numerados (def-, thm-, prp-, exm-…).
+crossref:
+  fig-title: "Figura"
+  tbl-title: "Tabla"
+  eq-prefix: "ecuación"
+  thm-title: "Teorema"
+  prp-title: "Proposición"
+  def-title: "Definición"
+  exm-title: "Ejemplo"
+  lem-title: "Lema"
+  cor-title: "Corolario"
+  thm-prefix: "Teorema"
+  prp-prefix: "Proposición"
+  def-prefix: "Definición"
+  exm-prefix: "Ejemplo"
+  lem-prefix: "Lema"
+  cor-prefix: "Corolario"
+
+execute:
+  freeze: auto

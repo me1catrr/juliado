@@ -1,0 +1,389 @@
+/* =============================================================================
+   Resonancia: estilos comunes (web y diapositivas)
+   -----------------------------------------------------------------------------
+   Paleta única (la misma que usan las figuras TikZ y las gráficas):
+     azul #1b6ca8 · naranja #d95f02 · verde azulado #2a9d8f · gris #6b7280
+     violeta #6f42c1 · ocre #8a5a00
+   Regla de accesibilidad: cada caja lleva rótulo escrito (y, si procede, icono);
+   el color nunca es la única señal. Contraste de texto sobre fondo ≥ 7:1.
+
+   Cajas disponibles (Markdown de Quarto):
+     ::: {#def-nombre}                 Definición      (numerada, enlazable)
+     ::: {#thm-nombre} / {#prp-nombre} Teorema / Proposición
+     ::: {#exm-nombre}                 Ejemplo resuelto
+     ::: {.callout-note .demostracion collapse="true" title="Demostración"}
+     ::: {.callout-tip .idea-clave title="Idea clave"}
+     ::: {.callout-warning title="Errores frecuentes"}   (ya existente)
+     ::: {.callout-note .caso-real icon=false title="Caso real: …"}     ⚙ azul
+     ::: {.callout-note .curiosidad icon=false title="Curiosidad: …"}   ◇ verde azulado
+     ::: {.callout-note .reto icon=false title="Reto: …"}               ⚑ naranja
+     ::: {.laboratorio .solo-pantalla}  simulador (se oculta al imprimir)
+     ::: {.solo-impresion}              figura estática que lo sustituye al imprimir
+   ========================================================================== */
+
+:root {
+  --r-azul: #1b6ca8;
+  --r-naranja: #d95f02;
+  --r-verde: #2a9d8f;
+  --r-gris: #6b7280;
+  --r-violeta: #6f42c1;
+  --r-ocre: #8a5a00;
+
+  --caja-def-borde: #1b6ca8;      --caja-def-fondo: #eef5fb;
+  --caja-thm-borde: #1f7a6f;      --caja-thm-fondo: #e9f6f3;
+  --caja-exm-borde: #b45f06;      --caja-exm-fondo: #fff5e8;
+  --caja-dem-borde: #6b7280;      --caja-dem-fondo: #f4f5f7;
+  --caja-clave-borde: #6f42c1;    --caja-clave-fondo: #f4effb;
+
+  --indice-borde: #d5dde6;        --indice-cabecera: #eef5fb;
+  --indice-fila-par: #f8fafc;     --indice-fila-hover: #eef5fb;
+  --indice-texto-suave: #4b5563;
+}
+
+/* ---------- Teoremas, definiciones y ejemplos (crossref de Quarto) ---------- */
+.theorem, .proposition, .lemma, .corollary,
+.definition, .example, .remark, .hypothesis {
+  margin: 1.2rem 0;
+  padding: 0.7rem 1rem 0.6rem 1rem;
+  border-left: 0.35rem solid var(--caja-def-borde);
+  border-radius: 0 0.4rem 0.4rem 0;
+  background: var(--caja-def-fondo);
+}
+.theorem, .proposition, .lemma, .corollary {
+  border-left-color: var(--caja-thm-borde);
+  background: var(--caja-thm-fondo);
+}
+.example, .remark {
+  border-left-color: var(--caja-exm-borde);
+  background: var(--caja-exm-fondo);
+}
+.theorem > p:first-child, .proposition > p:first-child, .lemma > p:first-child,
+.definition > p:first-child, .example > p:first-child, .remark > p:first-child,
+.corollary > p:first-child, .hypothesis > p:first-child { margin-top: 0; }
+.theorem > :last-child, .proposition > :last-child, .lemma > :last-child,
+.definition > :last-child, .example > :last-child, .remark > :last-child,
+.corollary > :last-child, .hypothesis > :last-child { margin-bottom: 0; }
+.theorem-title, .definition-title, .example-title, .proposition-title,
+.lemma-title, .remark-title, .corollary-title, .hypothesis-title {
+  font-weight: 700;
+}
+.definition .definition-title, .definition > p:first-child > span:first-child { color: #134a73; }
+.theorem .theorem-title, .proposition .proposition-title { color: #14574f; }
+.example .example-title { color: #7a4204; }
+
+/* Quarto añade la clase «theorem» a todos los entornos: se especifica cada tipo */
+.theorem.definition, .theorem.hypothesis {
+  border-left-color: var(--caja-def-borde);
+  background: var(--caja-def-fondo);
+}
+.theorem.example, .theorem.remark {
+  border-left-color: var(--caja-exm-borde);
+  background: var(--caja-exm-fondo);
+}
+.theorem.proposition, .theorem.lemma, .theorem.corollary {
+  border-left-color: var(--caja-thm-borde);
+  background: var(--caja-thm-fondo);
+}
+
+/* ---------- Cajas basadas en callouts de Quarto ---------- */
+div.callout.demostracion,
+div.callout.idea-clave {
+  border-left-width: 0.35rem;
+  border-radius: 0 0.4rem 0.4rem 0;
+}
+div.callout.demostracion { border-left-color: var(--caja-dem-borde) !important; }
+div.callout.demostracion > .callout-header,
+div.callout.demostracion .callout-header { background: var(--caja-dem-fondo) !important; color: #374151; }
+div.callout.demostracion .callout-body-container { background: #fbfbfc; }
+div.callout.demostracion .callout-title-container::before {
+  content: "∎ ";
+  margin-right: 0.35em;
+  font-weight: 700;
+}
+
+div.callout.idea-clave { border-left-color: var(--caja-clave-borde) !important; }
+div.callout.idea-clave > .callout-header,
+div.callout.idea-clave .callout-header { background: var(--caja-clave-fondo) !important; color: #4a2b94; }
+div.callout.idea-clave .callout-title-container::before {
+  content: "★ ";
+  margin-right: 0.35em;
+}
+
+/* El fin de una demostración marcado con ∎ al final del último párrafo */
+div.callout.demostracion .callout-body-container > :last-child::after {
+  content: " ∎";
+  float: right;
+  color: var(--caja-dem-borde);
+}
+
+/* ---------- Figuras ---------- */
+figure.quarto-float img, figure.quarto-float svg { max-width: 100%; height: auto; }
+figcaption.quarto-float-caption, .figure-caption { font-size: 0.92rem; }
+.figura-ancha { width: 100%; }
+.figura-media { width: 70%; margin-left: auto; margin-right: auto; }
+
+/* ---------- Referencias: lista final y tarjetas ---------- */
+#refs, .references { font-size: 0.93rem; }
+div.csl-entry { margin-bottom: 0.45rem; }
+div.csl-entry a { word-break: break-word; }
+.cita-bloque { font-size: 0.9rem; color: var(--r-gris); }
+
+/* Tarjeta emergente de la cita (Quarto/Tippy) */
+.tippy-content .csl-entry { margin: 0; font-size: 0.9rem; }
+
+/* ---------- Diapositivas (reveal.js) ---------- */
+.reveal .theorem, .reveal .definition, .reveal .example,
+.reveal .proposition, .reveal .lemma {
+  font-size: 0.85em;
+  text-align: left;
+}
+.reveal .callout.idea-clave, .reveal .callout.demostracion { font-size: 0.85em; }
+
+/* ---------- R5: fichas de bibliografía ---------- */
+.ref-ficha {
+  margin: 0 0 0.9rem 0;
+  padding: 0.5rem 0.8rem;
+  border-left: 0.25rem solid var(--r-gris);
+  background: #f8f9fb;
+  border-radius: 0 0.3rem 0.3rem 0;
+}
+.ref-ficha > p:first-child { margin-bottom: 0.35rem; }
+.ref-estado { font-weight: 600; font-size: 0.88rem; }
+.ref-detalle, .ref-citada { font-size: 0.86rem; color: #4b5563; }
+.ref-enlace { font-size: 0.88rem; }
+
+/* ---------- Ejercicios intercalados (scripts/ejercicios.lua + recursos/js/ejercicios.js) ----------
+   Sin JavaScript (o al imprimir) todo el contenido, soluciones incluidas, queda visible. */
+.ejercicio {
+  margin: 1.4rem 0;
+  padding: 0.8rem 1rem 0.9rem 1rem;
+  border: 1px solid #c7ced8;
+  border-left: 0.35rem solid var(--r-azul);
+  border-radius: 0 0.4rem 0.4rem 0;
+  background: #fbfcfe;
+}
+.ejercicio.ej-activo[data-estado="correcto"], .ejercicio.ej-activo[data-estado="hecho"] {
+  border-left-color: var(--r-verde);
+  background: #f3faf8;
+}
+.ej-cabecera { display: flex; gap: 0.5rem; align-items: baseline; margin-bottom: 0.4rem; font-size: 0.9rem; font-weight: 700; color: #134a73; }
+.ej-icono { font-size: 1rem; }
+.ej-estado { margin-left: auto; font-weight: 600; color: #1f7a6f; }
+.ej-oculto, [hidden].ej-oculto { display: none !important; }
+.ej-ui { margin-top: 0.5rem; }
+.ej-opcion { display: flex; gap: 0.5rem; align-items: baseline; margin: 0.25rem 0; cursor: pointer; }
+.ej-opcion input { flex: none; }
+.ej-letra { font-weight: 700; flex: none; }
+.ej-vf { display: flex; gap: 1.5rem; }
+.ej-numero { display: flex; gap: 0.5rem; align-items: center; }
+.ej-entrada { width: 12rem; max-width: 100%; padding: 0.3rem 0.5rem; border: 1px solid #8b95a5; border-radius: 0.25rem; font: inherit; }
+.ej-unidad { color: #4b5563; }
+.ej-texto-libre { width: 100%; padding: 0.4rem 0.5rem; border: 1px solid #8b95a5; border-radius: 0.25rem; font: inherit; }
+.ej-rubrica { margin-top: 0.6rem; padding: 0.4rem 0.7rem; border: 1px dashed #aab2bf; border-radius: 0.3rem; }
+.ej-rubrica legend { font-size: 0.9rem; font-weight: 600; width: auto; padding: 0 0.3rem; }
+.ej-botones { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.6rem; }
+.ej-btn { padding: 0.3rem 0.8rem; border: 1px solid var(--r-azul); border-radius: 0.3rem; background: #fff; color: #134a73; font: inherit; font-size: 0.92rem; cursor: pointer; }
+.ej-btn:hover, .ej-btn:focus-visible { background: #eef5fb; outline: 2px solid var(--r-azul); outline-offset: 1px; }
+.ej-btn-principal { background: var(--r-azul); color: #fff; }
+.ej-btn-principal:hover, .ej-btn-principal:focus-visible { background: #14557f; color: #fff; }
+.ej-btn-sec { border-color: #8b95a5; color: #374151; }
+.ej-feedback { margin-top: 0.5rem; font-weight: 600; }
+.ej-feedback:empty { display: none; }
+.ej-feedback.ej-ok { color: #14574f; }
+.ej-feedback.ej-ok::before { content: "✔ "; }
+.ej-feedback.ej-mal { color: #8a3b00; }
+.ej-feedback.ej-mal::before { content: "✗ "; }
+.ej-feedback.ej-aviso { color: #374151; }
+.ej-feedback.ej-aviso::before { content: "ℹ "; }
+.ejercicio .pista, .ejercicio .solucion {
+  margin-top: 0.6rem; padding: 0.5rem 0.8rem; border-radius: 0 0.3rem 0.3rem 0; border-left: 0.25rem solid;
+}
+.ejercicio .pista { border-left-color: var(--r-ocre); background: #fff7e6; }
+.ejercicio .pista::before { content: "Pista. "; font-weight: 700; color: #6b4400; }
+.ejercicio .solucion { border-left-color: var(--r-verde); background: #eaf6f3; }
+.ejercicio .solucion::before { content: "Solución. "; font-weight: 700; color: #14574f; }
+.ejercicio .retro { margin-top: 0.6rem; padding: 0.5rem 0.8rem; border-radius: 0 0.3rem 0.3rem 0; border-left: 0.25rem solid var(--r-violeta); background: #f3effb; }
+.ejercicio .retro::before { content: "Comentario a cada opción. "; font-weight: 700; color: #4b2a85; }
+.ejercicio .retro ul, .ejercicio .retro ol { margin: 0.3rem 0 0; padding-left: 1.1rem; }
+.ej-progreso { margin: 1rem 0 1.5rem; padding: 0.7rem 1rem; border: 1px solid #c7ced8; border-radius: 0.4rem; background: #f6f8fb; }
+.ej-progreso progress { width: 100%; height: 0.8rem; }
+.ej-resumen { margin: 0 0 0.4rem; font-weight: 600; }
+.ej-nota { margin: 0.4rem 0 0; font-size: 0.85rem; color: #4b5563; }
+@media print { .ej-botones, .ej-progreso, .ej-ui { display: none !important; } .ej-oculto { display: block !important; } }
+
+/* Lista final de referencias de cada unidad (scripts/referencias.lua) */
+.referencias-unidad .ref-final { margin: 0 0 0.5rem 0; padding-left: 1.5rem; text-indent: -1.5rem; font-size: 0.93rem; }
+
+/* ---------- Historia y noticias ---------- */
+div.callout.historia, div.callout.noticia { border-left-width: 0.35rem; border-radius: 0 0.4rem 0.4rem 0; }
+div.callout.historia { border-left-color: var(--r-ocre) !important; }
+div.callout.historia > .callout-header, div.callout.historia .callout-header { background: #f8efdc !important; color: #5f3d00; }
+div.callout.historia .callout-title-container::before { content: "◷ "; margin-right: 0.35em; }
+div.callout.noticia { border-left-color: #475569 !important; }
+div.callout.noticia > .callout-header, div.callout.noticia .callout-header { background: #e8edf3 !important; color: #2b3647; }
+div.callout.noticia .callout-title-container::before { content: "▤ "; margin-right: 0.35em; }
+div.callout.historia .callout-icon, div.callout.noticia .callout-icon { display: none; }
+.fuentes-caja { font-size: 0.88rem; color: #4b5563; margin-top: 0.4rem; }
+
+/* ---------- Caso real, curiosidad y reto (M3 en adelante) ---------- */
+div.callout.caso-real, div.callout.curiosidad, div.callout.reto { border-left-width: 0.35rem; border-radius: 0 0.4rem 0.4rem 0; }
+div.callout.caso-real { border-left-color: var(--r-azul) !important; }
+div.callout.caso-real .callout-header { background: #e3eef8 !important; color: #0f3f63; }
+div.callout.caso-real .callout-title-container::before { content: "⚙ "; margin-right: 0.35em; }
+div.callout.curiosidad { border-left-color: var(--r-verde) !important; }
+div.callout.curiosidad .callout-header { background: #e2f3f0 !important; color: #10473f; }
+div.callout.curiosidad .callout-title-container::before { content: "◇ "; margin-right: 0.35em; }
+div.callout.reto { border-left-color: var(--r-naranja) !important; }
+div.callout.reto .callout-header { background: #fdebd9 !important; color: #6e2e00; }
+div.callout.reto .callout-title-container::before { content: "⚑ "; margin-right: 0.35em; }
+div.callout.caso-real .callout-icon, div.callout.curiosidad .callout-icon, div.callout.reto .callout-icon { display: none; }
+
+/* ---------- Simuladores: versión de pantalla y alternativa estática para imprimir ---------- */
+.laboratorio { margin: 1rem 0 1.4rem; padding: 0.7rem 0.9rem; border: 1px solid #c7ced8; border-top: 0.3rem solid var(--r-azul); border-radius: 0.4rem; background: #fbfcfe; }
+.laboratorio .lectura { margin-top: 0.4rem; font-size: 0.95rem; }
+.laboratorio form { max-width: 100%; }
+.solo-impresion { display: none; }
+@media print {
+  .solo-pantalla, .laboratorio { display: none !important; }
+  .solo-impresion { display: block !important; }
+  .ejercicio .retro li[hidden] { display: list-item !important; }
+}
+
+/* ---------- Ruta de la sesión: obligatoria frente a ampliación (texto + color) ---------- */
+.ruta-obligatoria, .ruta-ampliacion, .ruta-descanso { display: inline-block; font-size: 0.78rem; font-weight: 600; padding: 0.05rem 0.55rem; border-radius: 0.8rem; border: 1px solid currentColor; white-space: nowrap; }
+.ruta-obligatoria { color: #14574f; } .ruta-obligatoria::before { content: "● "; }
+.ruta-ampliacion { color: #5a3399; } .ruta-ampliacion::before { content: "○ "; }
+.ruta-descanso { color: #4b5563; } .ruta-descanso::before { content: "☕ "; }
+/* La sección vacía «Referencias» que Quarto añade en modo margen */
+section#bibliography { display: none; }
+
+/* Imagen de portada al inicio de cada unidad */
+img.portada { display: block; width: 100% !important; max-width: 100% !important; height: auto; margin: 0 0 1.6rem 0; border-radius: 0.6rem; box-shadow: 0 2px 10px rgba(31, 41, 55, 0.12); }
+
+/* ---------- Figuras: tarjeta limpia y pie legible ---------- */
+.quarto-figure img.figure-img, figure.figure > p > img, figure.quarto-float img.img-fluid {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 0.7rem;
+  box-shadow: 0 1px 4px rgba(31, 41, 55, 0.07);
+}
+figure.quarto-float { margin: 1.5rem auto; }
+figure.quarto-float > figcaption, .quarto-figure figcaption {
+  margin-top: 0.6rem; font-size: 0.9rem; line-height: 1.45; color: #4b5563; text-align: left;
+}
+/* Panel de progreso: compacto, en la columna principal */
+.ej-progreso { max-width: 100%; }
+
+/* ---------- Línea temporal (recursos/js/componentes/linea-temporal.js) ---------- */
+.linea-temporal { margin: 1rem 0 1.5rem; }
+.lt-filtros { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.lt-boton { border: 1px solid var(--r-azul); background: #fff; color: var(--r-azul); border-radius: 1rem; padding: 0.15rem 0.75rem; font-size: 0.9rem; cursor: pointer; }
+.lt-boton[aria-pressed="true"] { background: var(--r-azul); color: #fff; font-weight: 600; }
+.lt-boton[aria-pressed="true"]::before { content: "✓ "; }
+.lt-boton:focus-visible { outline: 3px solid var(--r-naranja); outline-offset: 2px; }
+.lt-aviso { font-size: 0.85rem; color: var(--r-gris); margin: 0.4rem 0; }
+.lt-lista { list-style: none; padding-left: 0; margin: 0; border-left: 3px solid var(--r-ocre); }
+.lt-hito { position: relative; padding: 0.2rem 0 0.8rem 1.4rem; }
+.lt-hito::before { content: ""; position: absolute; left: -0.5rem; top: 0.55rem; width: 0.8rem; height: 0.8rem; border-radius: 50%; background: #fff; border: 3px solid var(--r-ocre); }
+.lt-hito[hidden] { display: none; }
+.lt-anio { font-weight: 700; color: #5f3d00; margin-right: 0.5rem; font-variant-numeric: tabular-nums; }
+.lt-categoria { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--r-gris); }
+.lt-titulo { display: block; margin-top: 0.1rem; }
+.lt-hito p { margin: 0.15rem 0; }
+.lt-fuente { font-size: 0.85rem; }
+
+/* ---------- Etiquetas de ejecución y apartados avanzados (claude/_curso/MODELO.md) ---------- */
+.ejec { display: inline-block; font-size: 0.78rem; font-weight: 600; padding: 0.05rem 0.55rem; border-radius: 0.8rem; border: 1px solid currentColor; vertical-align: middle; }
+.ejec::before { margin-right: 0.3em; }
+.ejec-local { color: #1f7a6f; } .ejec-local::before { content: "⌂"; }
+.ejec-sim { color: var(--r-azul); } .ejec-sim::before { content: "▶"; }
+.ejec-cuenta { color: var(--r-violeta); } .ejec-cuenta::before { content: "◉"; }
+.ejec-coste { color: #a23b00; } .ejec-coste::before { content: "€"; }
+div.callout.avanzado { border-left-color: var(--r-violeta) !important; }
+div.callout.avanzado .callout-title-container::before { content: "▲ "; }
+
+/* Indicador de versión de la vía C (scripts/version_unidad.lua) */
+.version-unidad { font-size: 0.8rem; opacity: 0.8; border-left: 3px solid currentColor; padding: 0.1rem 0.6rem; margin: 0 0 1rem; }
+.version-unidad p { margin: 0; }
+.version-ok::before { content: "✔ "; }
+.version-pend::before { content: "⚠ "; }
+.version-hist::before { content: "⌛ "; }
+
+/* ── Diseño adaptable (vía C y resto del sitio) ──────────────────────────────
+   Anchura de lectura para el texto; los elementos técnicos pueden ser más
+   anchos y se desplazan dentro de su caja en lugar de desbordar la página. */
+.content p, .content li { max-width: 78ch; }
+.table-responsive-wrap, .content table { max-width: 100%; }
+.content .cell-output-display, .content div.sourceCode, .content pre { max-width: 100%; overflow-x: auto; }
+.content table { display: block; overflow-x: auto; }
+/* Ecuaciones destacadas más anchas que la pantalla: desplazamiento interno, nunca de toda la página */
+.content mjx-container[display="true"] { max-width: 100%; min-width: 0 !important; overflow-x: auto; overflow-y: hidden; }
+.content img, .content svg, .content video, .content canvas { max-width: 100%; height: auto; }
+.content, .content * { overflow-wrap: break-word; }
+.content pre, .content pre * { overflow-wrap: normal; }
+.dos-columnas { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 1.5rem; align-items: start; }
+@media (max-width: 767.98px) { .dos-columnas { grid-template-columns: 1fr; } }
+
+/* ── Índices de unidades (.indice-unidades) ─────────────────────────────────
+   Tabla de vía, de nivel o de sesión generada por scripts/generar_estructura.jl.
+   Columnas: Id · título (enlace) · [Sesión | Práctica | descripción] · Duración.
+   El detalle «lectura · práctica» va en un span .dur-detalle bajo el total.
+   Variantes: .col-sesion y .col-practica (etiquetan la tercera columna al
+   apilar en móvil), .indice-detalle (tercera columna = descripción larga). */
+.indice-unidades { margin: 1rem 0 1.5rem; }
+.content .indice-unidades table {
+  display: table; width: 100%; border-collapse: separate; border-spacing: 0;
+  border: 1px solid var(--indice-borde); border-radius: 8px; overflow: hidden; font-size: 0.95rem;
+}
+.indice-unidades thead th {
+  background: var(--indice-cabecera); color: var(--r-azul); text-align: left;
+  font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase;
+  padding: 0.6rem 0.8rem; border-bottom: 2px solid var(--r-azul);
+}
+.indice-unidades tbody td { padding: 0.65rem 0.8rem; border-bottom: 1px solid var(--indice-borde); vertical-align: top; }
+.indice-unidades tbody tr:last-child td { border-bottom: 0; }
+.indice-unidades tbody tr:nth-child(even) { background: var(--indice-fila-par); }
+.indice-unidades tbody tr:hover { background: var(--indice-fila-hover); }
+.indice-unidades td:first-child { font-family: var(--bs-font-monospace, monospace); font-weight: 600; white-space: nowrap; color: var(--r-azul); }
+.indice-unidades td:nth-child(2) a { font-weight: 600; text-decoration: none; border-bottom: 1px solid transparent; }
+.indice-unidades td:nth-child(2) a:hover, .indice-unidades td:nth-child(2) a:focus-visible { border-bottom-color: currentColor; }
+.indice-unidades td:last-child { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.indice-unidades .dur-detalle { display: block; font-size: 0.78rem; color: var(--indice-texto-suave); white-space: normal; }
+.indice-unidades.indice-detalle td:nth-child(3) { color: var(--indice-texto-suave); }
+
+@media (max-width: 640px) {
+  /* Cada fila pasa a ser una tarjeta: id y título arriba, el resto debajo con su etiqueta. */
+  .content .indice-unidades table { display: block; border: 0; }
+  .indice-unidades thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .indice-unidades tbody, .indice-unidades tbody tr, .indice-unidades tbody td { display: block; }
+  .indice-unidades tbody tr { border: 1px solid var(--indice-borde); border-radius: 8px; margin-bottom: 0.7rem; padding: 0.5rem 0.2rem; background: transparent; }
+  .indice-unidades tbody tr:nth-child(even) { background: var(--indice-fila-par); }
+  .indice-unidades tbody td { border: 0; padding: 0.15rem 0.8rem; white-space: normal; }
+  .indice-unidades td:last-child::before { content: "Duración estimada: "; color: var(--indice-texto-suave); font-size: 0.82rem; }
+  .indice-unidades.col-sesion td:nth-child(3)::before { content: "Sesión: "; color: var(--indice-texto-suave); font-size: 0.82rem; }
+  .indice-unidades.col-practica td:nth-child(3)::before { content: "Práctica: "; color: var(--indice-texto-suave); font-size: 0.82rem; }
+  .indice-unidades td:last-child { white-space: normal; }
+}
+
+/* Con citas al margen, Quarto deja una sección «Referencias» vacía; la lista real la añade
+   scripts/referencias.lua (.referencias-unidad). Se oculta la vacía y su entrada del índice. */
+body:has(.referencias-unidad) section#bibliography,
+body:has(.referencias-unidad) #TOC li:has(> #toc-bibliography) { display: none; }
+
+/* Índice lateral («En esta página»): la sección que se está leyendo se destaca como guía.
+   Quarto marca como activo un solo enlace (el de la sección visible). Lleva texto azul oscuro
+   en negrita, fondo claro y barra naranja. El color no es la única señal: negrita y barra
+   marcan la posición. La especificidad iguala la de la regla de Quarto
+   (.sidebar nav[role=doc-toc] ul>li>a.active, con !important) para poder sustituirla. */
+.sidebar nav[role="doc-toc"] ul li a.nav-link.active,
+.sidebar nav[role="doc-toc"] ul > li > ul > li > a.nav-link.active {
+  color: #14507d !important;
+  font-weight: 600;
+  background: var(--indice-cabecera);
+  border-left: 3px solid var(--r-naranja) !important;
+  border-radius: 0 4px 4px 0;
+}
+
+/* Código en línea largo: puede partirse en pantallas estrechas (los bloques <pre> siguen desplazándose). */
+.content :not(pre) > code { white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; }
