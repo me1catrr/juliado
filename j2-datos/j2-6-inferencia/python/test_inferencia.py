@@ -9,7 +9,7 @@ import pytest
 
 import inferencia as inf
 
-RAIZ = Path(__file__).resolve().parents[4]
+RAIZ = Path(__file__).resolve().parents[3]
 BASE = RAIZ / "datos" / "sinteticos" / "edificio-3-plantas"
 
 

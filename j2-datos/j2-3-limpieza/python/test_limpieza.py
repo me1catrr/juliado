@@ -10,7 +10,7 @@ import pytest
 
 import limpieza as lp
 
-RAIZ = Path(__file__).resolve().parents[4]
+RAIZ = Path(__file__).resolve().parents[3]
 CSV = RAIZ / "datos" / "sinteticos" / "curso-claude" / "e_vibracion.csv"
 
 

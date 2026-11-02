@@ -40,8 +40,8 @@ El temario anuncia esta unidad «con MLJ», el entorno de aprendizaje automátic
 ```{julia}
 #| include: false
 using CSV, DataFrames, Statistics, StatsBase, Random, LinearAlgebra, Resonancia
-include("../../../recursos/r1-datos/_tema.jl")
-RAIZ = "../../../"
+include("../../recursos/_tema.jl")
+RAIZ = "../../"
 ```
 
 ## Objetivos y prerrequisitos

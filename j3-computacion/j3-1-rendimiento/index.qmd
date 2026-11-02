@@ -33,7 +33,7 @@ Julia presume de ser rápida, pero lo es **si se escribe de la forma en que el c
 ```{julia}
 #| include: false
 using BenchmarkTools, Statistics, Random, Resonancia
-include("../../../recursos/r1-datos/_tema.jl")
+include("../../recursos/_tema.jl")
 ```
 
 ## Objetivos y prerrequisitos

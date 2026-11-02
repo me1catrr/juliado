@@ -34,7 +34,7 @@ Toda cifra que sale de un modelo hereda la incertidumbre de lo que se le dio: un
 ```{julia}
 #| include: false
 using Distributions, StatsBase, Random, Statistics, DataFrames, Resonancia
-include("../../../recursos/r1-datos/_tema.jl")
+include("../../recursos/_tema.jl")
 ```
 
 ## Objetivos y prerrequisitos

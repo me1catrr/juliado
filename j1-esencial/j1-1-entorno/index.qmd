@@ -34,7 +34,7 @@ Todo lo que viene después en el curso (señales, modos, identificación) se pro
 ```{julia}
 #| include: false
 using Random, Statistics
-include("../../../recursos/r1-datos/_tema.jl")
+include("../../recursos/_tema.jl")
 ```
 
 ## Objetivos y prerrequisitos
@@ -47,7 +47,7 @@ include("../../../recursos/r1-datos/_tema.jl")
 - decidir si una tarea va al REPL, a un script, a un cuaderno Pluto o a una página de Quarto;
 - generar y dibujar una señal sintética con semilla fija.
 
-**Prerrequisitos.** Ninguno. Conviene haber usado una terminal alguna vez; si no, [C2](../../../claude/index.qmd) la explica desde cero.
+**Prerrequisitos.** Ninguno. Conviene haber usado una terminal alguna vez; si no, [C2](https://me1catrr.github.io/claudedo/) la explica desde cero.
 
 **Reparto con otras unidades.** Aquí se instala y se explora. El gestor de paquetes y los ficheros `Project.toml` y `Manifest.toml` se explican en [J1.2](../j1-2-paquetes/index.qmd); el lenguaje en sí empieza en [J1.3](../j1-3-tipos/index.qmd).
 
@@ -181,7 +181,7 @@ Escribir `ls` en el prompt `julia>` da `UndefVarError`, porque es un comando de 
 
 ## Práctica guiada
 
-Vamos a generar la señal que un acelerómetro mediría en un edificio con dos modos: uno de 2,5 Hz y otro, más débil, de 7 Hz, con algo de ruido. Es el mismo tipo de señal que se analizará en [M3](../../../mse/m03-senales-i/index.qmd). Se fija la semilla para que cualquiera obtenga exactamente los mismos números.
+Vamos a generar la señal que un acelerómetro mediría en un edificio con dos modos: uno de 2,5 Hz y otro, más débil, de 7 Hz, con algo de ruido. Es el mismo tipo de señal que se analizará en [M3](https://me1catrr.github.io/resonancia/mse/m03-senales-i/). Se fija la semilla para que cualquiera obtenga exactamente los mismos números.
 
 ::: {.panel-tabset}
 ## Julia

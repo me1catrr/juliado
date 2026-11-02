@@ -22,7 +22,7 @@ format:
 
 ![](fig/portada.svg){.portada fig-alt="De izquierda a derecha: una señal en el tiempo, su espectro con dos picos, un espectrograma en forma de mosaico de celdas de intensidad variable, y debajo la respuesta de un filtro pasa-banda"}
 
-Las unidades de procesado de señales de la vía M ([M3](../../../mse/m03-senales-i/index.qmd) y [M4](../../../mse/m04-senales-ii/index.qmd)) explican *qué* es un espectro, una ventana o un filtro. Esta unidad enseña *cómo se calculan* con los paquetes `FFTW.jl` y `DSP.jl`, comprobando cada resultado contra una cuenta a mano o contra las funciones de `Resonancia.jl`. Se recomienda haber hecho antes J1.4 a J1.7.
+Las unidades de procesado de señales de la vía M ([M3](https://me1catrr.github.io/resonancia/mse/m03-senales-i/) y [M4](https://me1catrr.github.io/resonancia/mse/m04-senales-ii/)) explican *qué* es un espectro, una ventana o un filtro. Esta unidad enseña *cómo se calculan* con los paquetes `FFTW.jl` y `DSP.jl`, comprobando cada resultado contra una cuenta a mano o contra las funciones de `Resonancia.jl`. Se recomienda haber hecho antes J1.4 a J1.7.
 
 ::: {.callout-note}
 ## Cómo se lee esta unidad
@@ -32,8 +32,8 @@ Las unidades de procesado de señales de la vía M ([M3](../../../mse/m03-senale
 ```{julia}
 #| include: false
 using CSV, DataFrames, Statistics, Random, FFTW, DSP, Resonancia
-include("../../../recursos/r1-datos/_tema.jl")
-RAIZ = "../../../"
+include("../../recursos/_tema.jl")
+RAIZ = "../../"
 ```
 
 ## Objetivos y prerrequisitos
@@ -388,4 +388,4 @@ Un compañero te entrega una figura de PSD sin más datos. ¿Qué cuatro paráme
 
 **Cierre.** Escribe tres líneas: qué he entendido, qué todavía no domino y cuál es mi siguiente paso pequeño. Anota siempre `fs`, `nseg`, solape y ventana junto a cada espectro.
 
-**Siguiente:** [J3.1 · Rendimiento](../j3-1-rendimiento/index.qmd), o las unidades de [M3](../../../mse/m03-senales-i/index.qmd) y [M4](../../../mse/m04-senales-ii/index.qmd), que usan lo de aquí.
+**Siguiente:** [J3.1 · Rendimiento](../j3-1-rendimiento/index.qmd), o las unidades de [M3](https://me1catrr.github.io/resonancia/mse/m03-senales-i/) y [M4](https://me1catrr.github.io/resonancia/mse/m04-senales-ii/), que usan lo de aquí.

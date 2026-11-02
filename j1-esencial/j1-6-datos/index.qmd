@@ -34,8 +34,8 @@ Los datos no llegan como matrices limpias: llegan como **ficheros**, en CSV o en
 ```{julia}
 #| include: false
 using CSV, DataFrames, XLSX, Statistics, TOML, Dates
-include("../../../recursos/r1-datos/_tema.jl")
-RAIZ = "../../../"
+include("../../recursos/_tema.jl")
+RAIZ = "../../"
 ```
 
 ## Objetivos y prerrequisitos

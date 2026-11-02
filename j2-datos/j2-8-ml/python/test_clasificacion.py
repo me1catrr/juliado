@@ -11,7 +11,7 @@ from scipy import optimize, stats
 
 import clasificacion as cl
 
-RAIZ = Path(__file__).resolve().parents[4]
+RAIZ = Path(__file__).resolve().parents[3]
 DATOS = RAIZ / "datos" / "sinteticos" / "edificio-3-plantas"
 BANDAS = ((0.8, 1.5), (2.5, 3.4), (3.8, 5.0))
 

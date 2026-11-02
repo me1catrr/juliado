@@ -6,7 +6,7 @@ from pathlib import Path
 
 import entorno as en
 
-RAIZ = Path(__file__).resolve().parents[4]
+RAIZ = Path(__file__).resolve().parents[3]
 
 
 def test_dependencias_declaradas():

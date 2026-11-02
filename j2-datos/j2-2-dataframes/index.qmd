@@ -34,8 +34,8 @@ Los datos reales de planta son tablas con **fechas**: una lectura cada diez minu
 ```{julia}
 #| include: false
 using CSV, DataFrames, Dates, Statistics
-include("../../../recursos/r1-datos/_tema.jl")
-RAIZ = "../../../"
+include("../../recursos/_tema.jl")
+RAIZ = "../../"
 ```
 
 ## Objetivos y prerrequisitos

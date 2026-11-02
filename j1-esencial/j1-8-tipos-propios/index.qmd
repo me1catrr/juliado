@@ -34,8 +34,8 @@ Hasta ahora un registro de vibraciones ha sido una matriz suelta y, a su lado, u
 ```{julia}
 #| include: false
 using CSV, DataFrames, Statistics
-include("../../../recursos/r1-datos/_tema.jl")
-RAIZ = "../../../"
+include("../../recursos/_tema.jl")
+RAIZ = "../../"
 ```
 
 ## Objetivos y prerrequisitos

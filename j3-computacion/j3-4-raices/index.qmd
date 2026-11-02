@@ -33,7 +33,7 @@ Dos preguntas aparecen una y otra vez en vibraciones. **¿Para qué valores de u
 ```{julia}
 #| include: false
 using Roots, Interpolations, LinearAlgebra, Statistics, DataFrames, Resonancia
-include("../../../recursos/r1-datos/_tema.jl")
+include("../../recursos/_tema.jl")
 ```
 
 ## Objetivos y prerrequisitos

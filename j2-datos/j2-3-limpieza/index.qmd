@@ -34,8 +34,8 @@ Los datos reales traen defectos: el sensor se cae un rato, un cable da un pico, 
 ```{julia}
 #| include: false
 using CSV, DataFrames, Dates, Statistics, Random, Resonancia
-include("../../../recursos/r1-datos/_tema.jl")
-RAIZ = "../../../"
+include("../../recursos/_tema.jl")
+RAIZ = "../../"
 ```
 
 ## Objetivos y prerrequisitos

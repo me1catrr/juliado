@@ -10,7 +10,7 @@ import pytest
 
 import figuras as fg
 
-RAIZ = Path(__file__).resolve().parents[4]
+RAIZ = Path(__file__).resolve().parents[3]
 BASE = RAIZ / "datos" / "sinteticos" / "edificio-3-plantas"
 
 

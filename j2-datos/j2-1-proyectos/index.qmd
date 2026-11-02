@@ -34,8 +34,8 @@ Un análisis que solo funciona en tu ordenador, el día que lo hiciste y con los
 ```{julia}
 #| include: false
 using SHA, Dates, Statistics
-include("../../../recursos/r1-datos/_tema.jl")
-RAIZ = "../../../"
+include("../../recursos/_tema.jl")
+RAIZ = "../../"
 ```
 
 ## Objetivos y prerrequisitos
@@ -49,7 +49,7 @@ RAIZ = "../../../"
 
 **Prerrequisitos.** El curso no los impone en el temario; conviene J1.1 y J1.2 (entorno, `--project=.`) y J1.6 (datos tabulares).
 
-**Reparto con otras unidades.** Aquí se organiza y se verifica la reproducibilidad. Las herramientas de datos (fechas, uniones, limpieza) vienen en [J2.2](../j2-2-dataframes/index.qmd) y [J2.3](../j2-3-limpieza/index.qmd); el control de versiones con Git, en [C3](../../../claude/index.qmd).
+**Reparto con otras unidades.** Aquí se organiza y se verifica la reproducibilidad. Las herramientas de datos (fechas, uniones, limpieza) vienen en [J2.2](../j2-2-dataframes/index.qmd) y [J2.3](../j2-3-limpieza/index.qmd); el control de versiones con Git, en [C3](https://me1catrr.github.io/claudedo/).
 
 ## Teoría breve
 

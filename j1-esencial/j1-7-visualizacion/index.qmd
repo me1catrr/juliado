@@ -28,14 +28,14 @@ Una figura bien hecha es un resultado; una mal hecha es una fuente de errores. E
 
 ::: {.callout-note}
 ## Cómo se lee esta unidad
-**Tiempo orientativo: 90 minutos.** Objetivos (4), teoría en cinco píldoras (18), práctica guiada (40), «Pídeselo a Claude» (12), ejercicios (14) y cierre (2). La física de la comparación (por qué baja la frecuencia cuando baja la rigidez) está en [M5](../../../mse/m05-vibraciones-i/index.qmd) y el espectro de Welch, en M3.6.
+**Tiempo orientativo: 90 minutos.** Objetivos (4), teoría en cinco píldoras (18), práctica guiada (40), «Pídeselo a Claude» (12), ejercicios (14) y cierre (2). La física de la comparación (por qué baja la frecuencia cuando baja la rigidez) está en [M5](https://me1catrr.github.io/resonancia/mse/m05-vibraciones-i/) y el espectro de Welch, en M3.6.
 :::
 
 ```{julia}
 #| include: false
 using CSV, DataFrames, Statistics, Resonancia
-include("../../../recursos/r1-datos/_tema.jl")
-RAIZ = "../../../"
+include("../../recursos/_tema.jl")
+RAIZ = "../../"
 ```
 
 ## Objetivos y prerrequisitos

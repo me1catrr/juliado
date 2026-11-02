@@ -33,7 +33,7 @@ En J1.5 se resolvió `A \ b` y se calcularon valores propios sin preguntar *cóm
 ```{julia}
 #| include: false
 using LinearAlgebra, SparseArrays, Random, Statistics, Resonancia
-include("../../../recursos/r1-datos/_tema.jl")
+include("../../recursos/_tema.jl")
 ```
 
 ## Objetivos y prerrequisitos
@@ -46,9 +46,9 @@ include("../../../recursos/r1-datos/_tema.jl")
 - estimar el rango numérico con la SVD y construir aproximaciones de bajo rango;
 - calcular valores propios de un problema generalizado `K φ = λ M φ` con Cholesky, y resolver con matrices dispersas.
 
-**Prerrequisitos.** El curso no los impone en el temario; conviene J1.5 (arrays y `LinearAlgebra`) y la unidad [M2.1](../../../mse/m02-matematicas/matrices/index.qmd), que explica la teoría de normas y condicionamiento.
+**Prerrequisitos.** El curso no los impone en el temario; conviene J1.5 (arrays y `LinearAlgebra`) y la unidad [M2.1](https://me1catrr.github.io/resonancia/mse/m02-matematicas/matrices/), que explica la teoría de normas y condicionamiento.
 
-**Reparto con otras unidades.** La teoría (propiedades, demostraciones) está en [M2.1](../../../mse/m02-matematicas/matrices/index.qmd) y la SVD aplicada, en M2.4 y M7. Aquí se implementa y se verifica con cifras.
+**Reparto con otras unidades.** La teoría (propiedades, demostraciones) está en [M2.1](https://me1catrr.github.io/resonancia/mse/m02-matematicas/matrices/) y la SVD aplicada, en M2.4 y M7. Aquí se implementa y se verifica con cifras.
 
 ## Teoría breve
 
@@ -250,7 +250,7 @@ No se elige el método por costumbre sino por la **estructura** (@fig-elegir): c
 
 - Driscoll y Braun, *Fundamentals of Numerical Computation*, caps. 2 y 3 (factorizaciones y mínimos cuadrados), edición en línea gratuita [@driscoll2022].
 - Golub y Van Loan, *Matrix Computations*: la referencia de los algoritmos [@golub2013].
-- La teoría de normas, condicionamiento y SVD, en [M2.1](../../../mse/m02-matematicas/matrices/index.qmd).
+- La teoría de normas, condicionamiento y SVD, en [M2.1](https://me1catrr.github.io/resonancia/mse/m02-matematicas/matrices/).
 
 ## Práctica guiada
 

@@ -34,8 +34,8 @@ Una figura de un informe o de un artículo se lee en pocos segundos y se juzga p
 ```{julia}
 #| include: false
 using CSV, DataFrames, Statistics, Random, Resonancia
-include("../../../recursos/r1-datos/_tema.jl")
-RAIZ = "../../../"
+include("../../recursos/_tema.jl")
+RAIZ = "../../"
 ```
 
 ## Objetivos y prerrequisitos
@@ -95,7 +95,7 @@ Verdadero. Es útil para comparar dos señales sobre la misma ventana de tiempo 
 
 ### J2.4.2 Tema, paleta y accesibilidad {#j2-4-2}
 
-Un **tema** fija de una vez fuentes, grosores y colores de todas las figuras: `set_theme!(...)` para toda la sesión, `with_theme(f, tema)` para una figura. El curso usa la paleta de `recursos/r1-datos/_tema.jl`, que se aplica a todas las páginas. Dos criterios la hacen **accesible**: que los colores tengan **contraste suficiente** con el fondo y que **el color no sea la única señal** (se añade trazo, marcador o etiqueta). La pauta de accesibilidad WCAG 2.1 pide una relación de contraste de al menos 3:1 para los elementos gráficos necesarios para entender el contenido [@wcag21], con la relación $(L_1+0{,}05)/(L_2+0{,}05)$ entre las luminancias relativas de dos colores:
+Un **tema** fija de una vez fuentes, grosores y colores de todas las figuras: `set_theme!(...)` para toda la sesión, `with_theme(f, tema)` para una figura. El curso usa la paleta de `recursos/_tema.jl`, que se aplica a todas las páginas. Dos criterios la hacen **accesible**: que los colores tengan **contraste suficiente** con el fondo y que **el color no sea la única señal** (se añade trazo, marcador o etiqueta). La pauta de accesibilidad WCAG 2.1 pide una relación de contraste de al menos 3:1 para los elementos gráficos necesarios para entender el contenido [@wcag21], con la relación $(L_1+0{,}05)/(L_2+0{,}05)$ entre las luminancias relativas de dos colores:
 
 ```{julia}
 canal(c) = c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055)^2.4
@@ -282,7 +282,7 @@ Una figura de tres paneles con rotulado, curvas que se distinguen sin color, una
 
 ::: {.callout-tip}
 ## Prompt
-«Con Julia, `--project=.` y `CairoMakie` (con el tema de `recursos/r1-datos/_tema.jl`), y `Resonancia.jl`: para los registros `escenario_A.csv`, `escenario_B.csv` y `escenario_C.csv` del edificio (separador `;`, 100 Hz, columna `a3_ms2`), divide cada uno en 10 segmentos de 60 s, calcula en cada uno el espectro de Welch (`nseg=2048`) y la frecuencia del pico entre 3,8 y 5 Hz. Haz una figura de dos paneles de 504 × 210 pt: (a) los tres espectros de 3,8 a 5 Hz, con tipos de línea distintos además del color; (b) un diagrama de cajas con los puntos individuales de las 10 estimaciones por estado y una línea con la frecuencia del tercer modo del modelo. Rotula los paneles (a) y (b), pon unidades en los ejes y guárdala en SVG y PDF en una carpeta temporal. Dime la media y la desviación típica de cada estado. No inventes cifras.»
+«Con Julia, `--project=.` y `CairoMakie` (con el tema de `recursos/_tema.jl`), y `Resonancia.jl`: para los registros `escenario_A.csv`, `escenario_B.csv` y `escenario_C.csv` del edificio (separador `;`, 100 Hz, columna `a3_ms2`), divide cada uno en 10 segmentos de 60 s, calcula en cada uno el espectro de Welch (`nseg=2048`) y la frecuencia del pico entre 3,8 y 5 Hz. Haz una figura de dos paneles de 504 × 210 pt: (a) los tres espectros de 3,8 a 5 Hz, con tipos de línea distintos además del color; (b) un diagrama de cajas con los puntos individuales de las 10 estimaciones por estado y una línea con la frecuencia del tercer modo del modelo. Rotula los paneles (a) y (b), pon unidades en los ejes y guárdala en SVG y PDF en una carpeta temporal. Dime la media y la desviación típica de cada estado. No inventes cifras.»
 
 **Verifica.** (a) Que las medias son 4,419 (A), 4,375 (B) y 4,273 Hz (C), con desviaciones de unos 0,03–0,04 Hz. (b) Que las curvas se distinguen por tipo de línea y no solo por color. (c) Que los ejes llevan unidades y los paneles, rotulado. (d) Que el tamaño de la figura es de 504 × 210 pt y que los ficheros se han escrito fuera del repositorio. (e) Que no concluye «hay daño» a partir de A frente a B: B es variabilidad ambiental (−1 % de rigidez), no un daño, y la diferencia es pequeña.
 :::

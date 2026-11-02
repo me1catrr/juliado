@@ -24,7 +24,7 @@ format:
 
 ![](fig/portada.svg){.portada fig-alt="Una señal con dos frecuencias entra por la izquierda en una caja etiquetada descriptores(x) y de ella sale a la derecha una lista con cuatro valores: rms, pico, cresta y curtosis"}
 
-Una función es la unidad mínima de trabajo reutilizable: recibe datos, hace un cálculo y devuelve un resultado. En el curso, todo análisis de una señal acaba siendo una cadena de funciones: quitar la media, calcular un espectro, buscar picos. Aquí se aprende a escribirlas bien (con argumentos con nombre, varios valores de retorno y documentación) y a combinarlas. Como ejemplo se construyen los **descriptores temporales** que se usarán en [M3.2](../../../mse/m03-senales-i/index.qmd): RMS, pico, factor de cresta y curtosis.
+Una función es la unidad mínima de trabajo reutilizable: recibe datos, hace un cálculo y devuelve un resultado. En el curso, todo análisis de una señal acaba siendo una cadena de funciones: quitar la media, calcular un espectro, buscar picos. Aquí se aprende a escribirlas bien (con argumentos con nombre, varios valores de retorno y documentación) y a combinarlas. Como ejemplo se construyen los **descriptores temporales** que se usarán en [M3.2](https://me1catrr.github.io/resonancia/mse/m03-senales-i/): RMS, pico, factor de cresta y curtosis.
 
 ::: {.callout-note}
 ## Cómo se lee esta unidad
@@ -34,7 +34,7 @@ Una función es la unidad mínima de trabajo reutilizable: recibe datos, hace un
 ```{julia}
 #| include: false
 using Random, Statistics, Resonancia
-include("../../../recursos/r1-datos/_tema.jl")
+include("../../recursos/_tema.jl")
 ```
 
 ## Objetivos y prerrequisitos

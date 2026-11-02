@@ -11,7 +11,7 @@ import pytest
 
 import registro as rg
 
-RAIZ = Path(__file__).resolve().parents[4]
+RAIZ = Path(__file__).resolve().parents[3]
 CSV = RAIZ / "datos" / "sinteticos" / "edificio-3-plantas" / "escenario_A.csv"
 
 

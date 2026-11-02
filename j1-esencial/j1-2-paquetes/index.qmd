@@ -34,7 +34,7 @@ Un análisis de vibraciones que da un resultado hoy y otro distinto dentro de se
 ```{julia}
 #| include: false
 using Random, Statistics, TOML, Resonancia
-include("../../../recursos/r1-datos/_tema.jl")
+include("../../recursos/_tema.jl")
 ```
 
 ## Objetivos y prerrequisitos
@@ -49,7 +49,7 @@ include("../../../recursos/r1-datos/_tema.jl")
 
 **Prerrequisitos.** [J1.1](../j1-1-entorno/index.qmd): REPL y `julia --project=.`.
 
-**Reparto con otras unidades.** Aquí se aprende a *usar* el entorno. Crear un paquete propio, con módulos, tests y documentación, es el tema de [J3.2](../../j3-computacion/j3-2-paquetes/index.qmd). El control de versiones con Git está en [C3](../../../claude/index.qmd).
+**Reparto con otras unidades.** Aquí se aprende a *usar* el entorno. Crear un paquete propio, con módulos, tests y documentación, es el tema de [J3.2](../../j3-computacion/j3-2-paquetes/index.qmd). El control de versiones con Git está en [C3](https://me1catrr.github.io/claudedo/).
 
 ## Teoría breve
 
@@ -177,7 +177,7 @@ Vamos a **leer** el entorno del curso y a usar `Resonancia.jl` sobre la señal d
 **Paso 1. ¿Qué paquetes pide el curso?** El fichero es TOML, y Julia lo lee con la biblioteca estándar `TOML`.
 
 ```{julia}
-proyecto = TOML.parsefile("../../../Project.toml")
+proyecto = TOML.parsefile("../../Project.toml")
 sort(collect(keys(proyecto["deps"])))
 ```
 

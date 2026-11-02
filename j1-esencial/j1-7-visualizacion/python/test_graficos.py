@@ -10,7 +10,7 @@ import pytest
 
 import graficos as gr
 
-RAIZ = Path(__file__).resolve().parents[4]
+RAIZ = Path(__file__).resolve().parents[3]
 BASE = RAIZ / "datos" / "sinteticos" / "edificio-3-plantas"
 
 # Julia: buscar_picos(f, P; fmin=0.5, fmax=6, n=3) sobre la planta 3 con psd_welch(nseg=4096)

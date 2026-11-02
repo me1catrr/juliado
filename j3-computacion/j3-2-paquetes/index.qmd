@@ -33,7 +33,7 @@ Mientras una función vive en una página, solo la usa esa página. En cuanto se
 ```{julia}
 #| include: false
 using Test, TOML, Statistics, Resonancia
-include("../../../recursos/r1-datos/_tema.jl")
+include("../../recursos/_tema.jl")
 ```
 
 ## Objetivos y prerrequisitos
@@ -48,7 +48,7 @@ include("../../../recursos/r1-datos/_tema.jl")
 
 **Prerrequisitos.** El curso no los impone en el temario; conviene J1.2 (entorno y `Resonancia.jl`), J1.4 (funciones y docstrings) y J1.8 (tipos y métodos).
 
-**Reparto con otras unidades.** Esta unidad explica el mecanismo. La política de qué entra en `Resonancia.jl` está en `CLAUDE.md` (función reutilizable, con docstring y test) y el control de versiones, en [C3](../../../claude/index.qmd).
+**Reparto con otras unidades.** Esta unidad explica el mecanismo. La política de qué entra en `Resonancia.jl` está en `CLAUDE.md` (función reutilizable, con docstring y test) y el control de versiones, en [C3](https://me1catrr.github.io/claudedo/).
 
 ## Teoría breve
 
@@ -105,7 +105,7 @@ Falso. Se puede acceder cualificándolo (`Modulo._ayuda(x)`). `export` solo deci
 Un paquete es un módulo con la estructura que Pkg entiende: un `Project.toml` con `name`, `uuid` y `version`, y una carpeta `src/` con un fichero `NombreDelPaquete.jl` que define el módulo; las pruebas van en `test/runtests.jl` [@pkg-crear]. Así es `Resonancia.jl`, el paquete de este curso, que se puede inspeccionar por código:
 
 ```{julia}
-ruta = "../../../Resonancia.jl"
+ruta = "../../Resonancia.jl"
 pt = TOML.parsefile(joinpath(ruta, "Project.toml"))
 (carpeta = sort(readdir(ruta)), ficheros_src = sort(readdir(joinpath(ruta, "src"))),
  nombre_y_version = (pt["name"], pt["version"]), dependencias = sort(collect(keys(pt["deps"]))),

@@ -34,7 +34,7 @@ Las frecuencias propias de una estructura **no son constantes**: cambian con la 
 ```{julia}
 #| include: false
 using GLM, DataFrames, Random, Statistics, Distributions, StatsBase, LinearAlgebra, HypothesisTests
-include("../../../recursos/r1-datos/_tema.jl")
+include("../../recursos/_tema.jl")
 ```
 
 ## Objetivos y prerrequisitos

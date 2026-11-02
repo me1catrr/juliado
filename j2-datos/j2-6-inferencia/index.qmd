@@ -34,8 +34,8 @@ format:
 ```{julia}
 #| include: false
 using CSV, DataFrames, Statistics, Random, HypothesisTests, Distributions, StatsBase, Resonancia
-include("../../../recursos/r1-datos/_tema.jl")
-RAIZ = "../../../"
+include("../../recursos/_tema.jl")
+RAIZ = "../../"
 ```
 
 ## Objetivos y prerrequisitos

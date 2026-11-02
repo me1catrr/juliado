@@ -8,7 +8,7 @@ import pytest
 
 import proyecto as pr
 
-RAIZ = Path(__file__).resolve().parents[4]
+RAIZ = Path(__file__).resolve().parents[3]
 CSV = RAIZ / "datos" / "sinteticos" / "curso-claude" / "d_ambiental.csv"
 
 

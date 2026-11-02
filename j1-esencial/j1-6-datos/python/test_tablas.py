@@ -8,7 +8,7 @@ import pytest
 
 import tablas as tb
 
-RAIZ = Path(__file__).resolve().parents[4]
+RAIZ = Path(__file__).resolve().parents[3]
 EDIFICIO = RAIZ / "datos" / "sinteticos" / "edificio-3-plantas" / "escenario_A.csv"
 MANTENIMIENTO = RAIZ / "datos" / "sinteticos" / "curso-claude" / "c_mantenimiento.csv"
 

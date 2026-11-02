@@ -33,8 +33,8 @@ Casi todo lo que se hace con datos de vibraciones acaba en la misma pregunta: **
 ```{julia}
 #| include: false
 using Optim, LsqFit, CSV, DataFrames, LinearAlgebra, Random, Statistics, Resonancia
-include("../../../recursos/r1-datos/_tema.jl")
-RAIZ = "../../../"
+include("../../recursos/_tema.jl")
+RAIZ = "../../"
 ```
 
 ## Objetivos y prerrequisitos
@@ -47,9 +47,9 @@ RAIZ = "../../../"
 - detectar mínimos locales con una estrategia multi-start, imponer cotas y comprobar la sensibilidad a la inicialización;
 - actualizar la rigidez de un modelo de edificio con frecuencias medidas y dar el resultado con su incertidumbre.
 
-**Prerrequisitos.** El curso no los impone en el temario; conviene [J3.3](../j3-3-algebra-numerica/index.qmd) (mínimos cuadrados lineales y condicionamiento) y [J3.5](../j3-5-integracion-ad/index.qmd) (diferenciación automática), y haber visto en [M6.7](../../../mse/m06-vibraciones-ii/index.qmd) la idea de *model updating*.
+**Prerrequisitos.** El curso no los impone en el temario; conviene [J3.3](../j3-3-algebra-numerica/index.qmd) (mínimos cuadrados lineales y condicionamiento) y [J3.5](../j3-5-integracion-ad/index.qmd) (diferenciación automática), y haber visto en [M6.7](https://me1catrr.github.io/resonancia/mse/m06-vibraciones-ii/) la idea de *model updating*.
 
-**Reparto con otras unidades.** La teoría de la identificación modal está en [M7](../../../mse/m07-identificacion/index.qmd) y la del *model updating*, en M6.7. Aquí se implementa y se comprueba con cifras.
+**Reparto con otras unidades.** La teoría de la identificación modal está en [M7](https://me1catrr.github.io/resonancia/mse/m07-identificacion/) y la del *model updating*, en M6.7. Aquí se implementa y se comprueba con cifras.
 
 ## Teoría breve
 

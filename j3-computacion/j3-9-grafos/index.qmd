@@ -28,13 +28,13 @@ Mucho de lo que se hace en monitorización estructural tiene forma de **red**: l
 
 ::: {.callout-note}
 ## Cómo se lee esta unidad
-**Tiempo orientativo: 60 minutos.** Objetivos (3), teoría en cinco píldoras (15), práctica guiada (22), «Pídeselo a Claude» (8), ejercicios (10) y cierre (2). Unidad **opcional** del perfil uco; la red de sensores se usa en [M9](../../../mse/m09-redes-sensores/index.qmd). **Los datos son sintéticos**: la posición de los 16 nodos de un puente se genera en la página con semilla fija. Se usan `Graphs.jl` y las funciones de `Resonancia.jl` (`red_sensores`, `reticulado_plano`, `adyacencia_barras`, `grafo_de_matriz`, `laplaciana`).
+**Tiempo orientativo: 60 minutos.** Objetivos (3), teoría en cinco píldoras (15), práctica guiada (22), «Pídeselo a Claude» (8), ejercicios (10) y cierre (2). Unidad **opcional** del perfil uco; la red de sensores se usa en [M9](https://me1catrr.github.io/resonancia/mse/m09-redes-sensores/). **Los datos son sintéticos**: la posición de los 16 nodos de un puente se genera en la página con semilla fija. Se usan `Graphs.jl` y las funciones de `Resonancia.jl` (`red_sensores`, `reticulado_plano`, `adyacencia_barras`, `grafo_de_matriz`, `laplaciana`).
 :::
 
 ```{julia}
 #| include: false
 using Graphs, LinearAlgebra, SparseArrays, Random, Statistics, Resonancia
-include("../../../recursos/r1-datos/_tema.jl")
+include("../../recursos/_tema.jl")
 ```
 
 ## Objetivos y prerrequisitos
@@ -47,7 +47,7 @@ include("../../../recursos/r1-datos/_tema.jl")
 
 **Prerrequisitos.** El curso no los impone en el temario; conviene J1.5 (arrays) y J3.3 (matrices dispersas y valores propios).
 
-**Reparto con otras unidades.** El diseño y la planificación de redes de sensores se tratan en [M9](../../../mse/m09-redes-sensores/index.qmd); aquí se aprende la herramienta.
+**Reparto con otras unidades.** El diseño y la planificación de redes de sensores se tratan en [M9](https://me1catrr.github.io/resonancia/mse/m09-redes-sensores/); aquí se aprende la herramienta.
 
 ## Teoría breve
 
@@ -404,4 +404,4 @@ Un compañero afirma: «mi red de sensores está bien, todos los nodos están co
 
 **Cierre.** Escribe tres líneas: qué he entendido, qué todavía no domino y cuál es mi siguiente paso pequeño. Antes de aceptar una «ruta óptima» de Claude, pregunta por el criterio de peso.
 
-**Siguiente:** [M9 · Nodos embebidos y redes de sensores](../../../mse/m09-redes-sensores/index.qmd), donde se usa la red de sensores, o el [índice de J3](../index.qmd).
+**Siguiente:** [M9 · Nodos embebidos y redes de sensores](https://me1catrr.github.io/resonancia/mse/m09-redes-sensores/), donde se usa la red de sensores, o el [índice de J3](../index.qmd).

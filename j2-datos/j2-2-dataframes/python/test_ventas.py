@@ -8,7 +8,7 @@ import pytest
 
 import ventas as vt
 
-RAIZ = Path(__file__).resolve().parents[4]
+RAIZ = Path(__file__).resolve().parents[3]
 BASE = RAIZ / "datos" / "sinteticos" / "curso-claude"
 
 
