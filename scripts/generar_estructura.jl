@@ -138,6 +138,21 @@ function validar(vias, niveles, unidades)
             ok || push!(errores, "$(u["id"]): `duracion` debe ser {lectura: min, practica: min} con enteros positivos")
         end
     end
+    # Si una vía declara áreas, cada una de sus unidades está en exactamente un área.
+    for v in vias
+        haskey(v, "areas") || continue
+        en_areas = [string(id) for a in v["areas"] for id in a["unidades"]]
+        propias = [u["id"] for u in unidades if u["via"] == v["id"]]
+        for id in unique(filter(x -> count(==(x), en_areas) > 1, en_areas))
+            push!(errores, "$id aparece en varias áreas de la vía $(v["id"])")
+        end
+        for id in setdiff(propias, en_areas)
+            push!(errores, "$id no está en ningún área de la vía $(v["id"])")
+        end
+        for id in setdiff(en_areas, propias)
+            push!(errores, "el área de la vía $(v["id"]) cita «$id», que no es unidad de esa vía")
+        end
+    end
     isempty(errores) || error("temario.yml no es válido:\n  - " * join(errores, "\n  - "))
     return indice
 end
@@ -446,6 +461,11 @@ function navegacion(d, vias, niveles, unidades)
         println(io, "      - text: ", yq(get(ETIQUETA_NAVBAR, v["id"], v["titulo"])))
         println(io, "        href: ", v["ruta"])
     end
+    # Enlaces extra de la barra superior (curso.menu), p. ej. una página de consulta.
+    for m in get(d["curso"], "menu", [])
+        println(io, "      - text: ", yq(m["texto"]))
+        println(io, "        href: ", m["href"])
+    end
     println(io, "    right:")
     println(io, "      - text: Acerca de")
     println(io, "        href: about.qmd")
@@ -475,6 +495,17 @@ function navegacion(d, vias, niveles, unidades)
                 println(io, "          contents:")
                 for u in unidades
                     get(u, "nivel", "") == n["id"] || continue
+                    println(io, "            - text: ", yq(etiqueta(u)))
+                    println(io, "              href: ", u["ruta"])
+                end
+            end
+        elseif haskey(v, "areas")
+            # Áreas: agrupan unidades en la barra lateral sin cambiar sus carpetas.
+            for a in v["areas"]
+                println(io, "        - section: ", yq(a["titulo"]))
+                println(io, "          contents:")
+                for id in string.(a["unidades"])
+                    u = only(filter(x -> x["id"] == id, unidades))
                     println(io, "            - text: ", yq(etiqueta(u)))
                     println(io, "              href: ", u["ruta"])
                 end

@@ -39,7 +39,7 @@ historial anterior de estos ficheros está en Resonancia. Detalles en `_migracio
 congeladas: la versión de referencia vive en Resonancia. `styles.css`,
 `recursos/tikz/resonancia.sty`, `recursos/js/ejercicios.js` y los filtros `scripts/*.lua`
 son la base común de Resonancia, JuliaDo y ClaudeDo; los acentos de este sitio están en
-`marca.css` y `_brand.yml`. Ninguna copia se descarga al compilar: el sitio es autónomo.
+`marca.scss`. Ninguna copia se descarga al compilar: el sitio es autónomo.
 
 ## Compilar en local
 

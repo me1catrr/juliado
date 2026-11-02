@@ -36,14 +36,12 @@ website:
 
 format:
   html:
+    # styles.css es la base común de Resonancia, JuliaDo y ClaudeDo;
+    # marca.scss solo cambia el color principal y los acentos de este sitio.
     theme:
       - cosmo
-      - brand
-    # styles.css es la base común de Resonancia, JuliaDo y ClaudeDo;
-    # marca.css solo cambia los acentos de este sitio.
-    css:
-      - styles.css
-      - marca.css
+      - marca.scss
+    css: styles.css
     grid:
       sidebar-width: 270px
       body-width: 880px

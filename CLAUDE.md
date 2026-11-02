@@ -59,7 +59,7 @@ publicado) y `verificado` (versión de Julia con la que se comprobó).
 `styles.css`, `recursos/tikz/resonancia.sty`, `recursos/js/ejercicios.js` (y sus tests),
 `scripts/ejercicios.lua`, `scripts/referencias.lua` y `scripts/no_publicar_docs.ts` son
 idénticos en los tres sitios. Un cambio en uno se copia a los otros dos. Los acentos
-propios (verde) van en `marca.css` y `_brand.yml`.
+propios (verde) van en `marca.scss`.
 
 ## Figuras, cajas y bibliografía
 - **Reparto de figuras.** TikZ para esquemas y diagramas; Makie u OJS para datos y
