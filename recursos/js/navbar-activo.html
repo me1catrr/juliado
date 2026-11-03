@@ -1,0 +1,20 @@
+<script>
+// Enlace activo de la barra superior. Quarto marca «Inicio» en todas las páginas porque
+// la barra lateral única empieza en index.qmd. Aquí se marca el nivel (J1, J2 o J3) cuya
+// carpeta contiene la página; en la portada y en «Acerca de» se deja lo que pone Quarto.
+(() => {
+  const enlaces = [...document.querySelectorAll(".navbar .navbar-nav .nav-link")];
+  const ruta = location.pathname;
+  const nivel = enlaces.find((a) => {
+    const u = new URL(a.href, location.href);
+    if (u.origin !== location.origin) return false;
+    const dir = u.pathname.replace(/index\.html$/, "");
+    return /\/j[123]-[^/]+\/$/.test(dir) && ruta.startsWith(dir);
+  });
+  if (!nivel) return;
+  for (const a of enlaces) { a.classList.remove("active"); a.removeAttribute("aria-current"); }
+  const dir = new URL(nivel.href, location.href).pathname.replace(/index\.html$/, "");
+  nivel.classList.add("active");
+  nivel.setAttribute("aria-current", ruta === dir || ruta === dir + "index.html" ? "page" : "true");
+})();
+</script>

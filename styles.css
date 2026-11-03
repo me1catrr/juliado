@@ -1,10 +1,14 @@
 /* =============================================================================
-   JuliaDo: base de estilos (web y diapositivas)
-   Base común v1. Este fichero es idéntico en los tres sitios: los cambios se
-   hacen en uno y se copian a los otros dos. Los acentos propios de cada sitio
-   van en marca.scss (tokens --sitio-acento…).
+   JuliaDo: estilos de la web y de las diapositivas
+   Las variables del tema (color principal, barra superior, callouts) están en
+   marca.scss; aquí, los tokens CSS y los componentes. Secciones:
+     tokens · cajas · figuras · referencias · ejercicios · historia · simuladores
+     · índices · TOC · barra superior · código · portada
    -----------------------------------------------------------------------------
-   Paleta única (la misma que usan las figuras TikZ y las gráficas):
+   Acento del sitio: verde JuliaDo #166136. Colores oficiales de Julia como
+   acentos discretos (bordes, puntos, filetes): verde #389826, morado #9558B2,
+   rojo #CB3C33 y azul #4063D8; cuando llevan texto se usan sus variantes oscuras.
+   Paleta de las figuras TikZ y las gráficas (sin cambios):
      azul #1b6ca8 · naranja #d95f02 · verde azulado #2a9d8f · gris #6b7280
      violeta #6f42c1 · ocre #8a5a00
    Regla de accesibilidad: cada caja lleva rótulo escrito (y, si procede, icono);
@@ -36,14 +40,24 @@
   --caja-thm-borde: #1f7a6f;      --caja-thm-fondo: #e9f6f3;
   --caja-exm-borde: #b45f06;      --caja-exm-fondo: #fff5e8;
   --caja-dem-borde: #6b7280;      --caja-dem-fondo: #f4f5f7;
-  --caja-clave-borde: #6f42c1;    --caja-clave-fondo: #f4effb;
+  --caja-clave-borde: #9558b2;    --caja-clave-fondo: #f6f0fa;
 
-  /* Acento del sitio: se redefine en marca.scss. */
-  --sitio-acento: var(--r-azul);  --sitio-acento-oscuro: #14507d;
+  /* Colores oficiales de Julia y sus variantes para texto (≥ 4,5:1 sobre blanco) */
+  --julia-verde: #389826;   --julia-verde-texto: #2a7019;
+  --julia-morado: #9558b2;  --julia-morado-texto: #6e3d8a;
+  --julia-rojo: #cb3c33;    --julia-rojo-texto: #a02a22;
+  --julia-azul: #4063d8;    --julia-azul-texto: #2f4bb0;
 
-  --indice-borde: #d5dde6;        --indice-cabecera: #eef5fb;
-  --indice-fila-par: #f8fafc;     --indice-fila-hover: #eef5fb;
+  /* Acento del sitio */
+  --sitio-acento: #166136;  --sitio-acento-oscuro: #0f4a29;  --sitio-acento-suave: #ecf6ef;
+
+  --indice-borde: #d5dde6;        --indice-cabecera: var(--sitio-acento-suave);
+  --indice-fila-par: #f8fafc;     --indice-fila-hover: var(--sitio-acento-suave);
   --indice-texto-suave: #4b5563;
+
+  /* Código y resultados */
+  --codigo-fondo: #f7f8fa;  --codigo-borde: #e3e6eb;
+  --salida-fondo: #ffffff;  --salida-borde: #c9ced6;
 }
 
 /* ---------- Teoremas, definiciones y ejemplos (crossref de Quarto) ---------- */
@@ -109,11 +123,12 @@ div.callout.demostracion .callout-title-container::before {
 
 div.callout.idea-clave { border-left-color: var(--caja-clave-borde) !important; }
 div.callout.idea-clave > .callout-header,
-div.callout.idea-clave .callout-header { background: var(--caja-clave-fondo) !important; color: #4a2b94; }
+div.callout.idea-clave .callout-header { background: var(--caja-clave-fondo) !important; color: var(--julia-morado-texto); }
 div.callout.idea-clave .callout-title-container::before {
   content: "★ ";
   margin-right: 0.35em;
 }
+div.callout.idea-clave .callout-icon-container { display: none; }
 
 /* El fin de una demostración marcado con ∎ al final del último párrafo */
 div.callout.demostracion .callout-body-container > :last-child::after {
@@ -164,7 +179,7 @@ div.csl-entry a { word-break: break-word; }
   margin: 1.4rem 0;
   padding: 0.8rem 1rem 0.9rem 1rem;
   border: 1px solid #c7ced8;
-  border-left: 0.35rem solid var(--r-azul);
+  border-left: 0.35rem solid var(--sitio-acento);
   border-radius: 0 0.4rem 0.4rem 0;
   background: #fbfcfe;
 }
@@ -172,7 +187,7 @@ div.csl-entry a { word-break: break-word; }
   border-left-color: var(--r-verde);
   background: #f3faf8;
 }
-.ej-cabecera { display: flex; gap: 0.5rem; align-items: baseline; margin-bottom: 0.4rem; font-size: 0.9rem; font-weight: 700; color: #134a73; }
+.ej-cabecera { display: flex; gap: 0.5rem; align-items: baseline; margin-bottom: 0.4rem; font-size: 0.9rem; font-weight: 700; color: var(--sitio-acento-oscuro); }
 .ej-icono { font-size: 1rem; }
 .ej-estado { margin-left: auto; font-weight: 600; color: #1f7a6f; }
 .ej-oculto, [hidden].ej-oculto { display: none !important; }
@@ -188,10 +203,10 @@ div.csl-entry a { word-break: break-word; }
 .ej-rubrica { margin-top: 0.6rem; padding: 0.4rem 0.7rem; border: 1px dashed #aab2bf; border-radius: 0.3rem; }
 .ej-rubrica legend { font-size: 0.9rem; font-weight: 600; width: auto; padding: 0 0.3rem; }
 .ej-botones { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.6rem; }
-.ej-btn { padding: 0.3rem 0.8rem; border: 1px solid var(--r-azul); border-radius: 0.3rem; background: #fff; color: #134a73; font: inherit; font-size: 0.92rem; cursor: pointer; }
-.ej-btn:hover, .ej-btn:focus-visible { background: #eef5fb; outline: 2px solid var(--r-azul); outline-offset: 1px; }
-.ej-btn-principal { background: var(--r-azul); color: #fff; }
-.ej-btn-principal:hover, .ej-btn-principal:focus-visible { background: #14557f; color: #fff; }
+.ej-btn { padding: 0.3rem 0.8rem; border: 1px solid var(--sitio-acento); border-radius: 0.3rem; background: #fff; color: var(--sitio-acento-oscuro); font: inherit; font-size: 0.92rem; cursor: pointer; }
+.ej-btn:hover, .ej-btn:focus-visible { background: var(--sitio-acento-suave); outline: 2px solid var(--sitio-acento); outline-offset: 1px; }
+.ej-btn-principal { background: var(--sitio-acento); color: #fff; }
+.ej-btn-principal:hover, .ej-btn-principal:focus-visible { background: var(--sitio-acento-oscuro); color: #fff; }
 .ej-btn-sec { border-color: #8b95a5; color: #374151; }
 .ej-feedback { margin-top: 0.5rem; font-weight: 600; }
 .ej-feedback:empty { display: none; }
@@ -245,7 +260,7 @@ div.callout.reto .callout-title-container::before { content: "⚑ "; margin-righ
 div.callout.caso-real .callout-icon, div.callout.curiosidad .callout-icon, div.callout.reto .callout-icon { display: none; }
 
 /* ---------- Simuladores: versión de pantalla y alternativa estática para imprimir ---------- */
-.laboratorio { margin: 1rem 0 1.4rem; padding: 0.7rem 0.9rem; border: 1px solid #c7ced8; border-top: 0.3rem solid var(--r-azul); border-radius: 0.4rem; background: #fbfcfe; }
+.laboratorio { margin: 1rem 0 1.4rem; padding: 0.7rem 0.9rem; border: 1px solid #c7ced8; border-top: 0.3rem solid var(--julia-azul); border-radius: 0.4rem; background: #fbfcfe; }
 .laboratorio .lectura { margin-top: 0.4rem; font-size: 0.95rem; }
 .laboratorio form { max-width: 100%; }
 .solo-impresion { display: none; }
@@ -378,8 +393,8 @@ body:has(.referencias-unidad) section#bibliography,
 body:has(.referencias-unidad) #TOC li:has(> #toc-bibliography) { display: none; }
 
 /* Índice lateral («En esta página»): la sección que se está leyendo se destaca como guía.
-   Quarto marca como activo un solo enlace (el de la sección visible). Lleva texto azul oscuro
-   en negrita, fondo claro y barra naranja. El color no es la única señal: negrita y barra
+   Quarto marca como activo un solo enlace (el de la sección visible). Lleva texto verde oscuro
+   en negrita, fondo claro y barra morada (Julia). El color no es la única señal: negrita y barra
    marcan la posición. La especificidad iguala la de la regla de Quarto
    (.sidebar nav[role=doc-toc] ul>li>a.active, con !important) para poder sustituirla. */
 .sidebar nav[role="doc-toc"] ul li a.nav-link.active,
@@ -387,9 +402,143 @@ body:has(.referencias-unidad) #TOC li:has(> #toc-bibliography) { display: none; 
   color: var(--sitio-acento-oscuro) !important;
   font-weight: 600;
   background: var(--indice-cabecera);
-  border-left: 3px solid var(--r-naranja) !important;
+  border-left: 3px solid var(--julia-morado) !important;
   border-radius: 0 4px 4px 0;
 }
 
 /* Código en línea largo: puede partirse en pantallas estrechas (los bloques <pre> siguen desplazándose). */
 .content :not(pre) > code { white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; }
+
+/* =============================================================================
+   Barra superior clara (las variables están en marca.scss): filete inferior y
+   enlace activo en verde y en negrita, de modo que no depende solo del color.
+   ========================================================================== */
+.navbar { border-bottom: 1px solid var(--codigo-borde); }
+.navbar .navbar-title { font-weight: 600; color: #1f2937; }
+.navbar .nav-link:hover, .navbar .nav-link:focus-visible { color: var(--sitio-acento) !important; }
+.navbar .nav-link.active { color: var(--sitio-acento) !important; font-weight: 600; }
+
+/* =============================================================================
+   Código Julia y resultados de ejecución
+   Código: fondo neutro y filete morado (Julia); en las pestañas de Python, gris.
+   Resultado: caja blanca con borde discontinuo, filete verde y rótulo escrito
+   «Resultado», para distinguirlo del código y del texto sin depender del color.
+   ========================================================================== */
+div.sourceCode {
+  background: var(--codigo-fondo);
+  border: 1px solid var(--codigo-borde);
+  border-left: 3px solid var(--julia-morado);
+  border-radius: 0 0.4rem 0.4rem 0;
+}
+div.sourceCode pre.sourceCode { background: transparent; }
+div.sourceCode:has(> pre.python) { border-left-color: var(--r-gris); }
+
+.cell-output-display > pre,
+.cell-output-stdout > pre {
+  position: relative;
+  margin: 0.4rem 0 1rem;
+  padding: 1.55rem 0.9rem 0.65rem;
+  background: var(--salida-fondo);
+  border: 1px dashed var(--salida-borde);
+  border-left: 3px solid var(--julia-verde);
+  border-radius: 0 0.4rem 0.4rem 0;
+  font-size: 0.875rem;
+}
+.cell-output-display > pre::before,
+.cell-output-stdout > pre::before {
+  content: "Resultado";
+  position: absolute; top: 0.35rem; left: 0.9rem;
+  font-family: var(--bs-body-font-family, sans-serif);
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--julia-verde-texto);
+}
+.cell-output-stderr > pre { border-left: 3px solid var(--julia-rojo); padding-left: 0.9rem; }
+
+/* «Ver el código» (code-fold) y pestañas Julia/Python */
+/* Controles de formulario (ejercicios, simuladores OJS) con el acento del sitio */
+.content input[type="range"], .content input[type="radio"], .content input[type="checkbox"] { accent-color: var(--sitio-acento); }
+
+details.code-fold > summary { color: var(--sitio-acento-oscuro); font-size: 0.9rem; }
+details.code-fold > summary:focus-visible { outline: 2px solid var(--sitio-acento); outline-offset: 2px; }
+.panel-tabset .nav-tabs .nav-link.active {
+  color: var(--sitio-acento-oscuro); font-weight: 600;
+  border-top: 2px solid var(--julia-morado);
+}
+
+/* =============================================================================
+   Portada (index.qmd). Se activa solo si la página contiene .niveles.
+   Cabecera verde con una franja inferior en los tres colores de Julia; tarjetas
+   de nivel con su identificador escrito (J1, J2, J3), así que el color nunca es
+   la única señal. Texto blanco sobre #134e2c: 10:1.
+   ========================================================================== */
+body:has(.niveles) .quarto-title-banner {
+  background: #134e2c !important;
+  color: #ffffff;
+  border-bottom: 5px solid transparent;
+  border-image: linear-gradient(90deg, var(--julia-verde) 0 33.34%, var(--julia-morado) 33.34% 66.67%, var(--julia-rojo) 66.67% 100%) 1;
+}
+body:has(.niveles) .quarto-title-banner .title { color: #ffffff; letter-spacing: 0.01em; }
+body:has(.niveles) .quarto-title-banner .subtitle { color: #e2f1e6; }
+body:has(.niveles) .quarto-title-banner .description,
+body:has(.niveles) .quarto-title-banner .description p { color: #ffffff; max-width: 46rem; font-size: 1.05rem; opacity: 1; }
+body:has(.niveles) .quarto-title-banner .quarto-category {
+  background: rgba(255, 255, 255, 0.14); color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.55); border-radius: 1rem;
+  padding: 0.1rem 0.8rem; font-size: 0.85rem;
+}
+body:has(.niveles) main h2 { border-bottom: 3px solid var(--sitio-acento); padding-bottom: 0.25rem; }
+
+.acciones { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1.1rem 0 1.8rem; }
+.acciones > p { display: contents; }
+.acciones .btn { font-weight: 600; }
+
+/* Tarjetas de los tres niveles */
+.niveles {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1rem; margin: 1rem 0 2rem;
+}
+.nivel {
+  display: flex; flex-direction: column;
+  padding: 1rem 1.1rem 0.9rem;
+  border: 1px solid var(--nivel-borde); border-top: 5px solid var(--nivel-color);
+  border-radius: 0.6rem; background: var(--nivel-fondo);
+}
+.nivel > p { margin: 0 0 0.6rem; }
+.nivel > p:first-child { display: flex; align-items: center; gap: 0.7rem; }
+.nivel > p:last-child { margin: auto 0 0; padding-top: 0.4rem; }
+.nivel-id {
+  flex: none; display: inline-flex; align-items: center; justify-content: center;
+  width: 2.5rem; height: 2.5rem; border-radius: 50%;
+  background: var(--nivel-texto); color: #ffffff;
+  font-family: var(--bs-font-monospace, monospace); font-weight: 700; font-size: 0.95rem;
+}
+.nivel-titulo { font-weight: 700; font-size: 1.05rem; line-height: 1.25; color: var(--nivel-texto); }
+.nivel-meta { font-size: 0.85rem; color: var(--indice-texto-suave); font-variant-numeric: tabular-nums; }
+.nivel-1 { --nivel-color: var(--julia-verde);  --nivel-texto: var(--julia-verde-texto);  --nivel-fondo: #f2f8f0; --nivel-borde: #cfe5c9; }
+.nivel-2 { --nivel-color: var(--julia-morado); --nivel-texto: var(--julia-morado-texto); --nivel-fondo: #f8f2fb; --nivel-borde: #e2d0ec; }
+.nivel-3 { --nivel-color: var(--julia-rojo);   --nivel-texto: var(--julia-rojo-texto);   --nivel-fondo: #fcf2f1; --nivel-borde: #f0d0cd; }
+
+/* «Cómo es cada unidad»: rejilla de piezas */
+.piezas {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 0.8rem; margin: 1rem 0 1.8rem;
+}
+.pieza { padding: 0.75rem 0.95rem; border: 1px solid var(--codigo-borde); border-radius: 0.5rem; background: #ffffff; }
+.pieza > p { margin: 0; font-size: 0.95rem; }
+.pieza strong { color: var(--sitio-acento-oscuro); }
+
+/* Itinerarios */
+.entradas { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1rem; margin: 1rem 0 1.8rem; }
+.entrada {
+  padding: 0.85rem 1.05rem; border: 1px solid var(--indice-borde);
+  border-left: 5px solid var(--julia-verde); border-radius: 0.5rem; background: var(--indice-fila-par);
+}
+.entrada:nth-child(2) { border-left-color: var(--julia-morado); }
+.entrada:nth-child(3) { border-left-color: var(--julia-rojo); }
+.entrada > p { margin: 0; }
+
+/* Colofón */
+.creditos {
+  margin: 1.5rem 0 0; padding-top: 0.8rem; border-top: 1px solid var(--indice-borde);
+  font-size: 0.85rem; line-height: 1.5; color: var(--indice-texto-suave);
+}

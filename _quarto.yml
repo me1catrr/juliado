@@ -49,6 +49,8 @@ format:
       gutter-width: 1.5rem
     toc: true
     code-copy: true
+    # Corrige el enlace activo de la barra superior (véase el propio fichero).
+    include-after-body: recursos/js/navbar-activo.html
     citations-hover: true
     link-citations: true
     reference-section-title: "Referencias"

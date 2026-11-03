@@ -1,35 +1,112 @@
 ---
 title: "JuliaDo"
 subtitle: "Aprende Julia haciendo"
+description: "Curso de autoformación en programación y computación científica con Julia, con ejemplos de ingeniería: escribir, comprobar y mantener código científico reproducible."
+author:
+  - name: Rafael Castro Triguero
+    affiliation: Universidad de Córdoba
+date-modified: last-modified
+date-format: "D [de] MMMM [de] YYYY"
+title-block-banner: true
+categories: [Julia, Computación científica, Autoformación]
 via: J
 ---
 
-![](recursos/identidad/fig/banner.svg){fig-alt="JuliaDo: aprende Julia haciendo. Computación científica." width="100%"}
+JuliaDo enseña Julia escribiendo código desde la primera unidad. Cada unidad
+plantea un problema técnico (una señal de vibración, un registro con huecos, un
+modelo que ajustar), lo resuelve paso a paso con código que se ejecuta y se
+comprueba, y termina con ejercicios para practicar lo aprendido.
 
-JuliaDo es un curso independiente de autoformación en programación y
-computación científica con [Julia](https://julialang.org/). Se aprende
-escribiendo código desde la primera unidad: cada una tiene objetivos, una teoría
-breve, una práctica guiada con código que se ejecuta, un apartado «Pídeselo a
-Claude» con su comprobación, ejercicios de autoevaluación y diapositivas.
-
-Los ejemplos son problemas de ingeniería (vibraciones de estructuras, señales
-de sensores, datos de una planta industrial), pero lo que se aprende (datos,
-estadística, álgebra lineal, ecuaciones diferenciales, optimización, señales)
-sirve para cualquier problema científico o técnico.
+::: {.acciones}
+[Empezar por J1.1](j1-esencial/j1-1-entorno/index.qmd){.btn .btn-primary}
+[Ver todas las unidades](#todas-las-unidades){.btn .btn-outline-primary}
+:::
 
 ## Tres niveles
 
-| Nivel | Para qué |
-|---|---|
-| [J1 · Julia esencial](j1-esencial/index.qmd) | Del primer arranque de Julia a un tipo propio que valida sus datos. |
-| [J2 · Datos y estadística](j2-datos/index.qmd) | Leer, limpiar, dibujar y analizar datos reales con criterio estadístico. |
-| [J3 · Computación científica](j3-computacion/index.qmd) | Métodos numéricos, rendimiento y paquetes, con los resultados verificados. |
+::: {.niveles}
+
+::: {.nivel .nivel-1}
+[J1]{.nivel-id} [Julia esencial](j1-esencial/index.qmd){.nivel-titulo}
+
+Del primer arranque de Julia a un tipo propio que valida sus datos: entorno,
+funciones, arrays, tablas y gráficas.
+
+[8 unidades · 10,5 h]{.nivel-meta}
+:::
+
+::: {.nivel .nivel-2}
+[J2]{.nivel-id} [Datos y estadística](j2-datos/index.qmd){.nivel-titulo}
+
+Leer, limpiar, dibujar y analizar datos reales con criterio estadístico, de la
+inferencia a la clasificación.
+
+[8 unidades · 12 h]{.nivel-meta}
+:::
+
+::: {.nivel .nivel-3}
+[J3]{.nivel-id} [Computación científica](j3-computacion/index.qmd){.nivel-titulo}
+
+Rendimiento, paquetes y métodos numéricos (álgebra lineal, raíces, EDO,
+optimización, señales), con los resultados verificados.
+
+[9 unidades, una opcional · 14,5 h]{.nivel-meta}
+:::
+
+:::
+
+## Cómo es cada unidad
+
+::: {.piezas}
+
+::: {.pieza}
+**Teoría breve.** Objetivos, prerrequisitos y los conceptos justos, en píldoras cortas.
+:::
+
+::: {.pieza}
+**Práctica guiada.** Código Julia que se ejecuta, con su resultado a la vista; en
+16 unidades, también en una pestaña de Python.
+:::
+
+::: {.pieza}
+**«Pídeselo a Claude».** Un encargo para un asistente de programación y cómo
+verificar lo que entrega.
+:::
+
+::: {.pieza}
+**Ejercicios.** 215 preguntas de autoevaluación dentro del texto; las respuestas se
+guardan solo en tu navegador.
+:::
+
+::: {.pieza}
+**Diapositivas.** Un resumen de cada unidad, enlazado desde su página.
+:::
+
+::: {.pieza}
+**Datos abiertos.** Registros sintéticos con semilla fija y ficha de metadatos, en
+[`datos/sinteticos`](https://github.com/me1catrr/juliado/tree/main/datos/sinteticos).
+:::
+
+:::
 
 ## Itinerarios
 
-- **Estudiante de ingeniería o ciencias.** J1, J2 y J3 en orden.
-- **Docente o investigador.** J1 a J3 según tu nivel de partida.
-- **Personal de planta.** J1 y J2, con la pestaña de Python como apoyo.
+::: {.entradas}
+
+::: {.entrada}
+**Estudiante de ingeniería o ciencias.** J1, J2 y J3 en orden.
+:::
+
+::: {.entrada}
+**Docente o investigador.** De J1 a J3 según tu nivel de partida; cada unidad
+indica sus prerrequisitos.
+:::
+
+::: {.entrada}
+**Personal de planta.** J1 y J2, con la pestaña de Python como apoyo.
+:::
+
+:::
 
 ## Todas las unidades
 
@@ -96,3 +173,22 @@ sirve para cualquier problema científico o técnico.
 :::
 
 <!-- INDICE:J3:fin -->
+
+## Sobre el proyecto
+
+**Autoría.** Rafael Castro Triguero, Universidad de Córdoba.
+
+**Repositorio.** Código, textos e historial de cambios en
+[github.com/me1catrr/juliado](https://github.com/me1catrr/juliado); los errores y
+sugerencias, en sus [issues](https://github.com/me1catrr/juliado/issues).
+
+**Recursos abiertos.** Textos, diapositivas y figuras con licencia CC BY-SA 4.0,
+código con licencia MIT y datos con la licencia de su ficha. Más detalles en
+[Acerca de](about.qmd).
+
+::: {.creditos}
+Material elaborado con apoyo de Claude Code (Anthropic) para programación, edición
+y producción de contenidos. La selección, revisión y responsabilidad de los
+materiales corresponden al autor; la fecha de la cabecera indica la última
+actualización de esta página.
+:::

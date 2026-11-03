@@ -54,8 +54,19 @@ publicado) y `verificado` (versión de Julia con la que se comprobó).
   `_freeze/`. No ignores `_freeze/` en `.gitignore`.
 
 ## Estilos
-`styles.css` es la base de estilos (web y diapositivas); los acentos propios (verde) van
-en `marca.scss`.
+- `marca.scss`: variables del tema (verde `#166136`, barra superior clara, colores de
+  los callouts). `styles.css`: tokens CSS (`--sitio-acento…`, `--julia-…`) y componentes;
+  se carga después del tema, así que los tokens se definen ahí y no en `marca.scss`.
+- Colores oficiales de Julia (verde, morado, rojo, azul) solo como acentos de bordes,
+  filetes y puntos; si llevan texto, sus variantes `--julia-…-texto` (≥ 4,5:1).
+  J1 verde, J2 morado, J3 rojo. Código Julia con filete morado; resultados con rótulo
+  «Resultado».
+- La portada (`index.qmd`) usa `.acciones`, `.niveles`/`.nivel`, `.piezas`, `.entradas`
+  y `.creditos`; sus estilos se activan con `body:has(.niveles)`. Las cifras de las
+  tarjetas (unidades, horas, ejercicios) salen de `temario.yml` y de las unidades: se
+  actualizan a mano si cambian.
+- `recursos/js/navbar-activo.html` marca en la barra superior el nivel de la página
+  (Quarto marcaba siempre «Inicio»).
 
 ## Figuras, cajas y bibliografía
 - **Reparto de figuras.** TikZ para esquemas y diagramas; Makie u OJS para datos y

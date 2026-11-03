@@ -1,15 +1,17 @@
 /*-- scss:defaults --*/
-// JuliaDo: acentos propios sobre la base de estilos (styles.css).
-// Este tema solo cambia el color principal (barra superior y enlaces) y los tokens de acento.
-// Acento verde #166136: contraste 7,5:1 sobre blanco.
+// JuliaDo: variables del tema (Bootstrap/Quarto). Los tokens CSS y los
+// componentes están en styles.css, que se carga después del tema.
+//
+// Verde JuliaDo #166136 (contraste 7,5:1 sobre blanco) como color principal;
+// los colores oficiales de Julia (verde #389826, morado #9558B2, rojo #CB3C33,
+// azul #4063D8) solo como acentos de bordes e iconos.
 $primary: #166136;
 
-/*-- scss:rules --*/
-:root {
-  --sitio-acento: #166136;
-  --sitio-acento-oscuro: #145a32;
-  --sitio-acento-suave: #ecf6ef;
+// Barra superior clara: logo y enlace activo en verde.
+$navbar-bg: #ffffff;
+$navbar-fg: #374151;
+$navbar-hl: #166136;
 
-  --indice-cabecera: var(--sitio-acento-suave);
-  --indice-fila-hover: var(--sitio-acento-suave);
-}
+// Callouts: nota en azul Julia y consejo en verde Julia (el aviso conserva el naranja).
+$callout-color-note: #4063d8;
+$callout-color-tip: #389826;
