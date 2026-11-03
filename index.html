@@ -6,6 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Rafael Castro Triguero">
+<meta name="description" content="Curso de autoformación en programación y computación científica con Julia, con ejemplos de ingeniería: escribir, comprobar y mantener código científico reproducible.">
 
 <title>JuliaDo</title>
 <style>
@@ -46,7 +48,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ea2dc0bc8ed90d9529665ce51a02bf70.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-b18382ccc856cb8d5233d2965eb1a67c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -82,7 +84,7 @@ ul.task-list li input[type="checkbox"] {
 <body class="nav-sidebar docked nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -145,7 +147,53 @@ ul.task-list li input[type="checkbox"] {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">JuliaDo</h1>
+            <p class="subtitle lead">Aprende Julia haciendo</p>
+                  <div>
+        <div class="description">
+          Curso de autoformación en programación y computación científica con Julia, con ejemplos de ingeniería: escribir, comprobar y mantener código científico reproducible.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">Julia</div>
+                <div class="quarto-category">Computación científica</div>
+                <div class="quarto-category">Autoformación</div>
+              </div>
+                  </div>
+  </div>
+    
+  <div class="quarto-title-meta-author">
+    <div class="quarto-title-meta-heading">Autor/a</div>
+    <div class="quarto-title-meta-heading">Afiliación</div>
+    
+      <div class="quarto-title-meta-contents">
+      <p class="author">Rafael Castro Triguero </p>
+    </div>
+    <div class="quarto-title-meta-contents">
+          <p class="affiliation">
+              Universidad de Córdoba
+            </p>
+        </div>
+    </div>
+
+  <div class="quarto-title-meta">
+
+        
+    
+      <div>
+      <div class="quarto-title-meta-heading">Fecha de última modificación</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">3 de noviembre de 2026</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="sidebar-menu-container"> 
@@ -350,6 +398,7 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#tres-niveles" id="toc-tres-niveles" class="nav-link active" data-scroll-target="#tres-niveles">Tres niveles</a></li>
+  <li><a href="#cómo-es-cada-unidad" id="toc-cómo-es-cada-unidad" class="nav-link" data-scroll-target="#cómo-es-cada-unidad">Cómo es cada unidad</a></li>
   <li><a href="#itinerarios" id="toc-itinerarios" class="nav-link" data-scroll-target="#itinerarios">Itinerarios</a></li>
   <li><a href="#todas-las-unidades" id="toc-todas-las-unidades" class="nav-link" data-scroll-target="#todas-las-unidades">Todas las unidades</a>
   <ul class="collapse">
@@ -357,67 +406,77 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#j2-datos-y-estadística" id="toc-j2-datos-y-estadística" class="nav-link" data-scroll-target="#j2-datos-y-estadística">J2 · Datos y estadística</a></li>
   <li><a href="#j3-computación-científica" id="toc-j3-computación-científica" class="nav-link" data-scroll-target="#j3-computación-científica">J3 · Computación científica</a></li>
   </ul></li>
+  <li><a href="#sobre-el-proyecto" id="toc-sobre-el-proyecto" class="nav-link" data-scroll-target="#sobre-el-proyecto">Sobre el proyecto</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/me1catrr/juliado/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Editar esta página</a></li><li><a href="https://github.com/me1catrr/juliado/issues/new" class="toc-action"><i class="bi empty"></i>Informar sobre problema</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">JuliaDo</h1>
-<p class="subtitle lead">Aprende Julia haciendo</p>
+
+
+
+
+<p>JuliaDo enseña Julia escribiendo código desde la primera unidad. Cada unidad plantea un problema técnico (una señal de vibración, un registro con huecos, un modelo que ajustar), lo resuelve paso a paso con código que se ejecuta y se comprueba, y termina con ejercicios para practicar lo aprendido.</p>
+<div class="acciones">
+<p><a href="./j1-esencial/j1-1-entorno/index.html" class="btn btn-primary">Empezar por J1.1</a> <a href="#todas-las-unidades" class="btn btn-outline-primary">Ver todas las unidades</a></p>
 </div>
-
-
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<p><img src="recursos/identidad/fig/banner.svg" class="img-fluid" style="width:100.0%" alt="JuliaDo: aprende Julia haciendo. Computación científica."></p>
-<p>JuliaDo es un curso independiente de autoformación en programación y computación científica con <a href="https://julialang.org/">Julia</a>. Se aprende escribiendo código desde la primera unidad: cada una tiene objetivos, una teoría breve, una práctica guiada con código que se ejecuta, un apartado «Pídeselo a Claude» con su comprobación, ejercicios de autoevaluación y diapositivas.</p>
-<p>Los ejemplos son problemas de ingeniería (vibraciones de estructuras, señales de sensores, datos de una planta industrial), pero lo que se aprende (datos, estadística, álgebra lineal, ecuaciones diferenciales, optimización, señales) sirve para cualquier problema científico o técnico.</p>
 <section id="tres-niveles" class="level2">
 <h2 class="anchored" data-anchor-id="tres-niveles">Tres niveles</h2>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Nivel</th>
-<th>Para qué</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="./j1-esencial/index.html">J1 · Julia esencial</a></td>
-<td>Del primer arranque de Julia a un tipo propio que valida sus datos.</td>
-</tr>
-<tr class="even">
-<td><a href="./j2-datos/index.html">J2 · Datos y estadística</a></td>
-<td>Leer, limpiar, dibujar y analizar datos reales con criterio estadístico.</td>
-</tr>
-<tr class="odd">
-<td><a href="./j3-computacion/index.html">J3 · Computación científica</a></td>
-<td>Métodos numéricos, rendimiento y paquetes, con los resultados verificados.</td>
-</tr>
-</tbody>
-</table>
+<div class="niveles">
+<div class="nivel nivel-1">
+<p><span class="nivel-id">J1</span> <a href="./j1-esencial/index.html" class="nivel-titulo">Julia esencial</a></p>
+<p>Del primer arranque de Julia a un tipo propio que valida sus datos: entorno, funciones, arrays, tablas y gráficas.</p>
+<p><span class="nivel-meta">8 unidades · 10,5 h</span></p>
+</div>
+<div class="nivel nivel-2">
+<p><span class="nivel-id">J2</span> <a href="./j2-datos/index.html" class="nivel-titulo">Datos y estadística</a></p>
+<p>Leer, limpiar, dibujar y analizar datos reales con criterio estadístico, de la inferencia a la clasificación.</p>
+<p><span class="nivel-meta">8 unidades · 12 h</span></p>
+</div>
+<div class="nivel nivel-3">
+<p><span class="nivel-id">J3</span> <a href="./j3-computacion/index.html" class="nivel-titulo">Computación científica</a></p>
+<p>Rendimiento, paquetes y métodos numéricos (álgebra lineal, raíces, EDO, optimización, señales), con los resultados verificados.</p>
+<p><span class="nivel-meta">9 unidades, una opcional · 14,5 h</span></p>
+</div>
+</div>
+</section>
+<section id="cómo-es-cada-unidad" class="level2">
+<h2 class="anchored" data-anchor-id="cómo-es-cada-unidad">Cómo es cada unidad</h2>
+<div class="piezas">
+<div class="pieza">
+<p><strong>Teoría breve.</strong> Objetivos, prerrequisitos y los conceptos justos, en píldoras cortas.</p>
+</div>
+<div class="pieza">
+<p><strong>Práctica guiada.</strong> Código Julia que se ejecuta, con su resultado a la vista; en 16 unidades, también en una pestaña de Python.</p>
+</div>
+<div class="pieza">
+<p><strong>«Pídeselo a Claude».</strong> Un encargo para un asistente de programación y cómo verificar lo que entrega.</p>
+</div>
+<div class="pieza">
+<p><strong>Ejercicios.</strong> 215 preguntas de autoevaluación dentro del texto; las respuestas se guardan solo en tu navegador.</p>
+</div>
+<div class="pieza">
+<p><strong>Diapositivas.</strong> Un resumen de cada unidad, enlazado desde su página.</p>
+</div>
+<div class="pieza">
+<p><strong>Datos abiertos.</strong> Registros sintéticos con semilla fija y ficha de metadatos, en <a href="https://github.com/me1catrr/juliado/tree/main/datos/sinteticos"><code>datos/sinteticos</code></a>.</p>
+</div>
+</div>
 </section>
 <section id="itinerarios" class="level2">
 <h2 class="anchored" data-anchor-id="itinerarios">Itinerarios</h2>
-<ul>
-<li><strong>Estudiante de ingeniería o ciencias.</strong> J1, J2 y J3 en orden.</li>
-<li><strong>Docente o investigador.</strong> J1 a J3 según tu nivel de partida.</li>
-<li><strong>Personal de planta.</strong> J1 y J2, con la pestaña de Python como apoyo.</li>
-</ul>
+<div class="entradas">
+<div class="entrada">
+<p><strong>Estudiante de ingeniería o ciencias.</strong> J1, J2 y J3 en orden.</p>
+</div>
+<div class="entrada">
+<p><strong>Docente o investigador.</strong> De J1 a J3 según tu nivel de partida; cada unidad indica sus prerrequisitos.</p>
+</div>
+<div class="entrada">
+<p><strong>Personal de planta.</strong> J1 y J2, con la pestaña de Python como apoyo.</p>
+</div>
+</div>
 </section>
 <section id="todas-las-unidades" class="level2">
 <h2 class="anchored" data-anchor-id="todas-las-unidades">Todas las unidades</h2>
@@ -599,12 +658,41 @@ ul.task-list li input[type="checkbox"] {
 </table>
 </div>
 <!-- INDICE:J3:fin -->
-
-
 </section>
+</section>
+<section id="sobre-el-proyecto" class="level2">
+<h2 class="anchored" data-anchor-id="sobre-el-proyecto">Sobre el proyecto</h2>
+<p><strong>Autoría.</strong> Rafael Castro Triguero, Universidad de Córdoba.</p>
+<p><strong>Repositorio.</strong> Código, textos e historial de cambios en <a href="https://github.com/me1catrr/juliado">github.com/me1catrr/juliado</a>; los errores y sugerencias, en sus <a href="https://github.com/me1catrr/juliado/issues">issues</a>.</p>
+<p><strong>Recursos abiertos.</strong> Textos, diapositivas y figuras con licencia CC BY-SA 4.0, código con licencia MIT y datos con la licencia de su ficha. Más detalles en <a href="./about.html">Acerca de</a>.</p>
+<div class="creditos">
+<p>Material elaborado con apoyo de Claude Code (Anthropic) para programación, edición y producción de contenidos. La selección, revisión y responsabilidad de los materiales corresponden al autor; la fecha de la cabecera indica la última actualización de esta página.</p>
+</div>
+
+
 </section>
 
 </main> <!-- /main -->
+<script>
+// Enlace activo de la barra superior. Quarto marca «Inicio» en todas las páginas porque
+// la barra lateral única empieza en index.qmd. Aquí se marca el nivel (J1, J2 o J3) cuya
+// carpeta contiene la página; en la portada y en «Acerca de» se deja lo que pone Quarto.
+(() => {
+  const enlaces = [...document.querySelectorAll(".navbar .navbar-nav .nav-link")];
+  const ruta = location.pathname;
+  const nivel = enlaces.find((a) => {
+    const u = new URL(a.href, location.href);
+    if (u.origin !== location.origin) return false;
+    const dir = u.pathname.replace(/index\.html$/, "");
+    return /\/j[123]-[^/]+\/$/.test(dir) && ruta.startsWith(dir);
+  });
+  if (!nivel) return;
+  for (const a of enlaces) { a.classList.remove("active"); a.removeAttribute("aria-current"); }
+  const dir = new URL(nivel.href, location.href).pathname.replace(/index\.html$/, "");
+  nivel.classList.add("active");
+  nivel.setAttribute("aria-current", ruta === dir || ruta === dir + "index.html" ? "page" : "true");
+})();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

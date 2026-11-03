@@ -46,7 +46,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-ea2dc0bc8ed90d9529665ce51a02bf70.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-b18382ccc856cb8d5233d2965eb1a67c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -506,6 +506,26 @@ ul.task-list li input[type="checkbox"] {
 </section>
 
 </main> <!-- /main -->
+<script>
+// Enlace activo de la barra superior. Quarto marca «Inicio» en todas las páginas porque
+// la barra lateral única empieza en index.qmd. Aquí se marca el nivel (J1, J2 o J3) cuya
+// carpeta contiene la página; en la portada y en «Acerca de» se deja lo que pone Quarto.
+(() => {
+  const enlaces = [...document.querySelectorAll(".navbar .navbar-nav .nav-link")];
+  const ruta = location.pathname;
+  const nivel = enlaces.find((a) => {
+    const u = new URL(a.href, location.href);
+    if (u.origin !== location.origin) return false;
+    const dir = u.pathname.replace(/index\.html$/, "");
+    return /\/j[123]-[^/]+\/$/.test(dir) && ruta.startsWith(dir);
+  });
+  if (!nivel) return;
+  for (const a of enlaces) { a.classList.remove("active"); a.removeAttribute("aria-current"); }
+  const dir = new URL(nivel.href, location.href).pathname.replace(/index\.html$/, "");
+  nivel.classList.add("active");
+  nivel.setAttribute("aria-current", ruta === dir || ruta === dir + "index.html" ? "page" : "true");
+})();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

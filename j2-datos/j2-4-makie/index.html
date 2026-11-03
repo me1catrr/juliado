@@ -100,7 +100,7 @@ div.csl-indent {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-ea2dc0bc8ed90d9529665ce51a02bf70.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-b18382ccc856cb8d5233d2965eb1a67c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -1048,6 +1048,26 @@ Figura&nbsp;3: Figura de publicación para el edificio de tres plantas, a tamañ
 </section>
 
 </main> <!-- /main -->
+<script>
+// Enlace activo de la barra superior. Quarto marca «Inicio» en todas las páginas porque
+// la barra lateral única empieza en index.qmd. Aquí se marca el nivel (J1, J2 o J3) cuya
+// carpeta contiene la página; en la portada y en «Acerca de» se deja lo que pone Quarto.
+(() => {
+  const enlaces = [...document.querySelectorAll(".navbar .navbar-nav .nav-link")];
+  const ruta = location.pathname;
+  const nivel = enlaces.find((a) => {
+    const u = new URL(a.href, location.href);
+    if (u.origin !== location.origin) return false;
+    const dir = u.pathname.replace(/index\.html$/, "");
+    return /\/j[123]-[^/]+\/$/.test(dir) && ruta.startsWith(dir);
+  });
+  if (!nivel) return;
+  for (const a of enlaces) { a.classList.remove("active"); a.removeAttribute("aria-current"); }
+  const dir = new URL(nivel.href, location.href).pathname.replace(/index\.html$/, "");
+  nivel.classList.add("active");
+  nivel.setAttribute("aria-current", ruta === dir || ruta === dir + "index.html" ? "page" : "true");
+})();
+</script>
 <script type="ojs-module-contents">
 eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiB6ZXRhID0gSW5wdXRzLnJhbmdlKFswLjAwNSwgMC41XSwge3ZhbHVlOiAwLjA1LCB0cmFuc2Zvcm06IE1hdGgubG9nLCBsYWJlbDogXCLOtiAoYWRpbS4pXCIsIHN0ZXA6IDAuMDAxfSlcbnZpZXdvZiBmbiA9IElucHV0cy5yYW5nZShbMC41LCA1XSwge3ZhbHVlOiAxLjEsIHN0ZXA6IDAuMDUsIGxhYmVsOiBcImbigpkgKEh6KVwifSlcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMiIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IkZSRiA9IGQzLnJhbmdlKDAuMDUsIDYsIDAuMDEpLm1hcChmID0+IHtjb25zdCByID0gZiAvIGZuOyByZXR1cm4gW2YsIDEgLyBNYXRoLnNxcnQoKDEgLSByKnIpKioyICsgKDIqemV0YSpyKSoqMildO30pXG5QbG90LnBsb3Qoe1xuICB3aWR0aDogNjQwLCBoZWlnaHQ6IDMyMCwgbWFyZ2luTGVmdDogNTUsIGdyaWQ6IHRydWUsXG4gIHg6IHtsYWJlbDogXCJmcmVjdWVuY2lhIChIeilcIn0sXG4gIHk6IHt0eXBlOiBcImxvZ1wiLCBsYWJlbDogXCJ8SHwgKGFkaW0uKVwiLCBkb21haW46IFswLjA1LCAxMDBdfSxcbiAgbWFya3M6IFtcbiAgICBQbG90LmxpbmUoRlJGLCB7c3Ryb2tlOiBcIiMxQjZDQThcIiwgc3Ryb2tlV2lkdGg6IDJ9KSxcbiAgICBQbG90LnJ1bGVYKFtmbl0sIHtzdHJva2U6IFwiI0Q5NUYwMlwiLCBzdHJva2VEYXNoYXJyYXk6IFwiNSw0XCJ9KSxcbiAgICBQbG90LmRvdChbW2ZuLCAxIC8gKDIqemV0YSpNYXRoLnNxcnQoMSAtIHpldGEqemV0YSkpXV0sIHtmaWxsOiBcIiNEOTVGMDJcIiwgcjogNX0pXG4gIF1cbn0pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTMiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJtZGBQaWNvIGRlIGFtcGxpdHVkOiAqKiR7KDEgLyAoMip6ZXRhKk1hdGguc3FydCgxIC0gemV0YSp6ZXRhKSkpLnRvRml4ZWQoMSl9KiogKGFkaW0uKSBlbiBmIOKJiCAkeyhmbiAqIE1hdGguc3FydCgxIC0gMip6ZXRhKnpldGEpKS50b0ZpeGVkKDMpfSBIei4gQW5jaG8gZGUgYmFuZGEgYSDiiJIzIGRCIGFwcm94aW1hZG86ICoqJHsoMip6ZXRhKmZuKS50b0ZpeGVkKDMpfSBIeioqLmBcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnemV0YScpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdmbicpIn1dfQ==
 </script>
