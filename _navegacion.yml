@@ -14,12 +14,6 @@ website:
     right:
       - text: Acerca de
         href: about.qmd
-      - text: "Resonancia"
-        href: https://me1catrr.github.io/resonancia/
-      - text: "matematicado"
-        href: https://me1catrr.github.io/matematicado/
-      - text: "ClaudeDo"
-        href: https://me1catrr.github.io/claudedo/
       - icon: github
         href: https://github.com/me1catrr/juliado
         aria-label: GitHub

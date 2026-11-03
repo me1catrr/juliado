@@ -1,4 +1,4 @@
-Licencia del contenido de Resonancia
+Licencia del contenido de JuliaDo
 
 Copyright (c) 2026 Rafael Castro Triguero
 
@@ -19,6 +19,6 @@ Resumen no vinculante:
 https://creativecommons.org/licenses/by-sa/4.0/deed.es
 
 Alcance:
-- El código fuente y el paquete Resonancia.jl se rigen por la licencia MIT
+- El código fuente y el paquete JuliaDo.jl se rigen por la licencia MIT
   (fichero LICENSE).
 - Cada conjunto de datos se rige por la licencia indicada en su ficha .meta.toml.

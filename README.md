@@ -6,11 +6,12 @@
 
 **Aprende Julia haciendo.**
 
-JuliaDo es una web de autoformación en programación y computación científica con
+JuliaDo es una web independiente de autoformación en programación y computación científica con
 [Julia](https://julialang.org/), en tres niveles. Cada unidad tiene teoría breve,
 práctica guiada con código que se ejecuta, ejercicios de autoevaluación, un
 apartado «Pídeselo a Claude» con su comprobación y diapositivas. Los ejemplos
-proceden de la ingeniería de vibraciones y de una planta termosolar.
+son problemas de ingeniería: vibraciones de estructuras, señales de sensores y datos
+de una planta industrial.
 
 Web: <https://me1catrr.github.io/juliado/>
 
@@ -26,20 +27,8 @@ Ficheros clave:
 
 - `temario.yml`: fuente de verdad de identificadores, títulos, carpetas, prerrequisitos, perfiles y duraciones.
 - `scripts/generar_estructura.jl`: genera `_navegacion.yml` y las tablas de índice a partir del temario.
-- `Resonancia.jl/`: copia del paquete de Resonancia (versión 0.9.0) que usan las unidades.
+- `JuliaDo.jl/`: paquete local con las funciones que reutilizan las unidades.
 - `datos/sinteticos/`: datos sintéticos del edificio de tres plantas y de los casos de empresa.
-
-## Origen
-
-JuliaDo era la vía J de [Resonancia](https://github.com/me1catrr/resonancia) y se separó
-en un repositorio propio en noviembre de 2026 (commit de origen `resonancia@f677c80`). El
-historial anterior de estos ficheros está en Resonancia. Detalles en `_migracion/`.
-
-**Copias compartidas con Resonancia.** `Resonancia.jl/` y `recursos/_tema.jl` son copias
-congeladas: la versión de referencia vive en Resonancia. `styles.css`,
-`recursos/tikz/resonancia.sty`, `recursos/js/ejercicios.js` y los filtros `scripts/*.lua`
-son la base común de Resonancia, JuliaDo y ClaudeDo; los acentos de este sitio están en
-`marca.scss`. Ninguna copia se descarga al compilar: el sitio es autónomo.
 
 ## Compilar en local
 
@@ -59,7 +48,7 @@ confirma también los cambios de `_freeze/`.
 ## Pruebas
 
 ```sh
-julia --project=. Resonancia.jl/test/runtests.jl            # paquete
+julia --project=. JuliaDo.jl/test/runtests.jl               # paquete
 uv run pytest j1-esencial j2-datos                           # pestañas Python
 julia --project=. scripts/compilar_tikz.jl --comprobar       # figuras TikZ
 julia --project=. scripts/generar_estructura.jl --comprobar  # cabeceras frente al temario
@@ -68,7 +57,7 @@ julia --project=. scripts/generar_bibliografia.jl --comprobar
 
 ## Licencias
 
-- **Código y Resonancia.jl:** MIT, véase [`LICENSE`](LICENSE).
+- **Código y JuliaDo.jl:** MIT, véase [`LICENSE`](LICENSE).
 - **Textos, diapositivas y figuras:** CC BY-SA 4.0, véase [`LICENSE-CONTENIDO`](LICENSE-CONTENIDO).
 - **Datos:** cada conjunto de datos lleva la licencia indicada en su ficha `.meta.toml`.
 

@@ -6,17 +6,13 @@
 # índice y _navegacion.yml) se genera a partir de él con
 # scripts/generar_estructura.jl.
 #
-# Procede de la vía J de Resonancia (https://github.com/me1catrr/resonancia),
-# separada en un sitio propio en noviembre de 2026. Los identificadores (J1.1…)
-# y los slugs se conservan.
-#
 # Convenciones:
 #   - El identificador llega a la unidad (J2.7); sus `contenidos` no llevan
 #     identificador propio.
 #   - `requiere`: identificadores de unidades de JuliaDo en los que se apoya.
-#   - `perfil`: itinerarios en los que aparece: mse (estudiante de la
-#     asignatura MSE de Resonancia), uco (PDI e investigación), planta
-#     (personal de planta).
+#   - `perfil`: itinerarios en los que aparece: estudiante (estudiante de
+#     ingeniería o ciencias), uco (PDI e investigación), planta (personal de
+#     planta).
 #   - `python: true`: la unidad lleva pestaña Python paralela al código Julia.
 #   - `duracion: {lectura: min, practica: min}`: estimación pedagógica en
 #     minutos (el reparto que declara cada unidad). No son datos oficiales.
@@ -30,14 +26,6 @@ curso:
   responsable: Rafael Castro Triguero
   repositorio: https://github.com/me1catrr/juliado
   web: https://me1catrr.github.io/juliado/
-  # Sitios hermanos (barra superior, a la derecha).
-  hermanos:
-    - texto: Resonancia
-      href: https://me1catrr.github.io/resonancia/
-    - texto: matematicado
-      href: https://me1catrr.github.io/matematicado/
-    - texto: ClaudeDo
-      href: https://me1catrr.github.io/claudedo/
 
 vias:
 
@@ -45,7 +33,7 @@ vias:
   - id: J
     titulo: Julia para ingeniería
     carpeta: "."
-    descripcion: Programación y computación científica con Julia. Los ejemplos proceden de las vibraciones y de la planta de Resonancia.
+    descripcion: Programación y computación científica con Julia, con ejemplos de ingeniería.
     niveles:
 
       - id: J1
@@ -55,56 +43,56 @@ vias:
           - id: J1.1
             titulo: Instalación y entorno
             slug: j1-1-entorno
-            perfil: [mse, uco, planta]
+            perfil: [estudiante, uco, planta]
             duracion: {lectura: 17, practica: 43}
             python: true
             contenidos: [juliaup, modos del REPL, VS Code con la extensión de Julia, Pluto.jl]
           - id: J1.2
             titulo: Paquetes y reproducibilidad
             slug: j1-2-paquetes
-            perfil: [mse, uco, planta]
+            perfil: [estudiante, uco, planta]
             duracion: {lectura: 17, practica: 43}
             python: true
-            contenidos: [Pkg, Project.toml y Manifest.toml, el entorno único del curso, Revise.jl, Resonancia.jl en modo desarrollo]
+            contenidos: [Pkg, Project.toml y Manifest.toml, el entorno único del curso, Revise.jl, JuliaDo.jl en modo desarrollo]
           - id: J1.3
             titulo: Tipos, variables y control de flujo
             slug: j1-3-tipos
-            perfil: [mse, uco, planta]
+            perfil: [estudiante, uco, planta]
             duracion: {lectura: 17, practica: 43}
             python: true
             contenidos: [tipos numéricos, precisión de máquina, condicionales, bucles, ámbito]
           - id: J1.4
             titulo: Funciones
             slug: j1-4-funciones
-            perfil: [mse, uco, planta]
+            perfil: [estudiante, uco, planta]
             duracion: {lectura: 17, practica: 43}
             python: true
             contenidos: [argumentos con nombre, retornos múltiples, docstrings, map/filter/reduce, comprensiones, composición con |> y ∘]
           - id: J1.5
             titulo: Arrays y álgebra lineal
             slug: j1-5-arrays
-            perfil: [mse, uco, planta]
+            perfil: [estudiante, uco, planta]
             duracion: {lectura: 35, practica: 85}
             python: true
             contenidos: [indexación y vistas, broadcasting, LinearAlgebra, "ejemplo: matrices M y K de un sistema de 3 GDL"]
           - id: J1.6
             titulo: Datos tabulares
             slug: j1-6-datos
-            perfil: [mse, uco, planta]
+            perfil: [estudiante, uco, planta]
             duracion: {lectura: 24, practica: 66}
             python: true
             contenidos: [CSV.jl, XLSX.jl, DataFrames básico, valores ausentes, "ejemplos: registro de acelerómetro y Excel de planta"]
           - id: J1.7
             titulo: Visualización
             slug: j1-7-visualizacion
-            perfil: [mse, uco, planta]
+            perfil: [estudiante, uco, planta]
             duracion: {lectura: 24, practica: 66}
             python: true
             contenidos: [Plots.jl para explorar, CairoMakie para la web, series temporales, espectros, paneles múltiples]
           - id: J1.8
             titulo: Tipos propios y despacho múltiple
             slug: j1-8-tipos-propios
-            perfil: [mse, uco]
+            perfil: [estudiante, uco]
             duracion: {lectura: 24, practica: 66}
             python: true
             contenidos: [struct y constructores, el tipo Registro, despacho múltiple, Unitful.jl]
@@ -116,49 +104,49 @@ vias:
           - id: J2.1
             titulo: Organización de proyectos de análisis
             slug: j2-1-proyectos
-            perfil: [mse, uco, planta]
+            perfil: [estudiante, uco, planta]
             duracion: {lectura: 17, practica: 43}
             python: true
             contenidos: [estructura de carpetas, scripts frente a cuadernos, trazabilidad]
           - id: J2.2
             titulo: DataFrames a fondo con fechas
             slug: j2-2-dataframes
-            perfil: [mse, uco, planta]
+            perfil: [estudiante, uco, planta]
             duracion: {lectura: 35, practica: 85}
             python: true
             contenidos: [agrupaciones, uniones, Dates, remuestreo temporal, datos minutales de planta]
           - id: J2.3
             titulo: Limpieza de datos
             slug: j2-3-limpieza
-            perfil: [mse, uco, planta]
+            perfil: [estudiante, uco, planta]
             duracion: {lectura: 24, practica: 66}
             python: true
             contenidos: [huecos, saltos, valores anómalos, validación de rangos]
           - id: J2.4
             titulo: Makie avanzado
             slug: j2-4-makie
-            perfil: [mse, uco, planta]
+            perfil: [estudiante, uco, planta]
             duracion: {lectura: 24, practica: 66}
             python: true
             contenidos: [figuras de publicación, figuras interactivas, temas]
           - id: J2.5
             titulo: Distribuciones y Monte Carlo
             slug: j2-5-montecarlo
-            perfil: [mse, uco]
+            perfil: [estudiante, uco]
             duracion: {lectura: 24, practica: 66}
             python: true
             contenidos: [Distributions.jl, semillas y reproducibilidad, propagación de incertidumbre en frecuencias identificadas]
           - id: J2.6
             titulo: Inferencia estadística
             slug: j2-6-inferencia
-            perfil: [mse, uco]
+            perfil: [estudiante, uco]
             duracion: {lectura: 24, practica: 66}
             python: true
             contenidos: [bootstrap, contrastes con HypothesisTests.jl, "¿ha cambiado la frecuencia?"]
           - id: J2.7
             titulo: Regresión
             slug: j2-7-regresion
-            perfil: [mse, uco, planta]
+            perfil: [estudiante, uco, planta]
             duracion: {lectura: 24, practica: 66}
             python: true
             contenidos: [GLM.jl, diagnóstico de residuos, frecuencia frente a temperatura]
@@ -166,7 +154,7 @@ vias:
             titulo: "Aprendizaje automático: clasificación de estados"
             slug: j2-8-ml
             duracion: {lectura: 24, practica: 66}
-            perfil: [mse, uco]
+            perfil: [estudiante, uco]
             python: true
             contenidos: [clasificación, validación cruzada, métricas, clasificación de eventos]
 
@@ -177,49 +165,49 @@ vias:
           - id: J3.1
             titulo: Rendimiento
             slug: j3-1-rendimiento
-            perfil: [mse, uco]
+            perfil: [estudiante, uco]
             duracion: {lectura: 24, practica: 66}
             contenidos: [estabilidad de tipos, BenchmarkTools, reducción de asignaciones, procesar meses de registros]
           - id: J3.2
             titulo: Módulos y paquetes
             slug: j3-2-paquetes
-            perfil: [mse, uco]
+            perfil: [estudiante, uco]
             duracion: {lectura: 17, practica: 43}
-            contenidos: [módulos, Resonancia.jl, Test, Documenter, integración continua]
+            contenidos: [módulos, JuliaDo.jl, Test, Documenter, integración continua]
           - id: J3.3
             titulo: Álgebra lineal numérica
             slug: j3-3-algebra-numerica
-            perfil: [mse, uco]
+            perfil: [estudiante, uco]
             duracion: {lectura: 35, practica: 85}
             contenidos: [LU, QR, Cholesky, SVD, autovalores generalizados, matrices dispersas]
           - id: J3.4
             titulo: Raíces e interpolación
             slug: j3-4-raices
             duracion: {lectura: 24, practica: 66}
-            perfil: [mse, uco]
+            perfil: [estudiante, uco]
             contenidos: [Roots.jl, Interpolations.jl, ecuación característica de una viga]
           - id: J3.5
             titulo: Integración numérica y diferenciación automática
             slug: j3-5-integracion-ad
             duracion: {lectura: 24, practica: 66}
-            perfil: [mse, uco]
+            perfil: [estudiante, uco]
             contenidos: [QuadGK, ForwardDiff, sensibilidades para model updating]
           - id: J3.6
             titulo: Ecuaciones diferenciales ordinarias
             slug: j3-6-edos
             duracion: {lectura: 36, practica: 84}
-            perfil: [mse, uco]
+            perfil: [estudiante, uco]
             contenidos: [Euler explícito e implícito, Runge–Kutta, estabilidad y orden, DifferentialEquations.jl, osciladores lineales y no lineales, respuesta a viento]
           - id: J3.7
             titulo: Optimización
             slug: j3-7-optimizacion
             duracion: {lectura: 45, practica: 75}
-            perfil: [mse, uco]
+            perfil: [estudiante, uco]
             contenidos: [Optim.jl, LsqFit.jl, ajuste de FRF, model updating, estrategia multi-start]
           - id: J3.8
             titulo: Señales
             slug: j3-8-senales
-            perfil: [mse, uco, planta]
+            perfil: [estudiante, uco, planta]
             duracion: {lectura: 35, practica: 85}
             contenidos: [FFTW.jl, DSP.jl, ventanas, Welch, filtros, espectrograma]
           - id: J3.9
@@ -232,9 +220,9 @@ vias:
 
 
 itinerarios:
-  mse:
-    titulo: Estudiante de MSE (Resonancia)
-    recorrido: [J1, y las unidades de J2 y J3 que piden las sesiones de MSE]
+  estudiante:
+    titulo: Estudiante de ingeniería o ciencias
+    recorrido: [J1, J2 y J3 en orden]
   uco:
     titulo: Docente o investigador UCO
     recorrido: [J1-J3 según nivel]

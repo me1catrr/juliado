@@ -6,12 +6,11 @@ computación científica con Julia. Responsable único: Rafael Castro Triguero
 (GitHub `me1catrr`). Se publica en https://me1catrr.github.io/juliado/.
 
 Tres niveles en la raíz: `j1-esencial/` (J1.1–J1.8), `j2-datos/` (J2.1–J2.8) y
-`j3-computacion/` (J3.1–J3.9). Procede de la vía J de Resonancia
-(https://github.com/me1catrr/resonancia), separada en noviembre de 2026; véase `_migracion/`.
+`j3-computacion/` (J3.1–J3.9).
 
-Sitios hermanos: Resonancia (vibraciones, señales y monitorización estructural: los
-conceptos que aquí se programan) y ClaudeDo (Claude y Claude Code). Se enlazan con su
-URL publicada; no se copian contenidos entre sitios.
+Es un proyecto independiente: las páginas hablan solo de JuliaDo y no enlazan ni remiten
+a otros cursos o sitios del autor (Resonancia, matematicado, ClaudeDo). Si una unidad
+necesita teoría, se resume en la propia unidad o se cita bibliografía.
 
 ## Fuente de verdad
 `temario.yml` define identificadores, títulos, carpetas, prerrequisitos, perfiles y
@@ -45,34 +44,30 @@ publicado) y `verificado` (versión de Julia con la que se comprobó).
 
 ## Código y entornos
 - Un único entorno Julia en la raíz (`Project.toml` + `Manifest.toml`).
-- `Resonancia.jl/` es una **copia congelada** (0.9.0) del paquete de Resonancia,
-  incorporada con `Pkg.develop` por ruta. La versión de referencia vive en Resonancia:
-  si una unidad necesita una función nueva, se añade allí con docstring y test y se
-  vuelve a copiar aquí. No copies funciones entre páginas.
+- `JuliaDo.jl/` es el paquete local del curso, incorporado con `Pkg.develop` por ruta.
+  Toda función que se reutiliza en varias páginas vive allí, con docstring y test
+  (`julia --project=. JuliaDo.jl/test/runtests.jl`). No copies funciones entre páginas.
 - Python: entorno gestionado con `uv` (`pyproject.toml`). No uses conda.
 - `_freeze/`: toda página con código Julia se commitea junto con su `_freeze/`. Tras
   editarla, `quarto render <fichero>` y, en el mismo commit, la página y los ficheros
   que cambien en `_freeze/`. La publicación en GitHub Actions no tiene Julia y lee
   `_freeze/`. No ignores `_freeze/` en `.gitignore`.
 
-## Base común con Resonancia y ClaudeDo
-`styles.css`, `recursos/tikz/resonancia.sty`, `recursos/js/ejercicios.js` (y sus tests),
-`scripts/ejercicios.lua`, `scripts/referencias.lua` y `scripts/no_publicar_docs.ts` son
-idénticos en los tres sitios. Un cambio en uno se copia a los otros dos. Los acentos
-propios (verde) van en `marca.scss`.
+## Estilos
+`styles.css` es la base de estilos (web y diapositivas); los acentos propios (verde) van
+en `marca.scss`.
 
 ## Figuras, cajas y bibliografía
 - **Reparto de figuras.** TikZ para esquemas y diagramas; Makie u OJS para datos y
   simulaciones. Nada de capturas de páginas como sustituto del texto.
 - **TikZ.** Fuente `fig/nombre.tex` (`\documentclass[tikz,border=4pt]{standalone}` y
-  `\usepackage{resonancia}`). Se compila con `julia --project=. scripts/compilar_tikz.jl`
+  `\usepackage{juliado}`). Se compila con `julia --project=. scripts/compilar_tikz.jl`
   y se commitean el `.tex` y el `.svg`. `--comprobar` detecta SVG ausentes o desactualizados.
 - **Figuras en la página.** Pie, `{#fig-…}` y `fig-alt` obligatorios. El color nunca es la única señal.
 - **Cajas** (`styles.css`): `{#def-…}`, `{#thm-…}`/`{#prp-…}`, `{#exm-…}`, demostración
   plegable, `.idea-clave`, `.callout-warning`, `.caso-real`, `.curiosidad`, `.reto`,
   `.historia` y `.noticia` (solo hechos comprobados con fuente enlazada).
-- **Bibliografía.** Una sola fuente, `recursos/bibliografia.bib` (subconjunto de la de
-  Resonancia), con `keywords` y `verificado`. Las páginas que citan llevan
+- **Bibliografía.** Una sola fuente, `recursos/bibliografia.bib`, con `keywords` y `verificado`. Las páginas que citan llevan
   `citation-location: margin`. El informe `recursos/_bibliografia.qmd` (no se publica) se
   regenera con `julia --project=. scripts/generar_bibliografia.jl` (`--comprobar` para verificar).
 - **Portada de cada unidad.** `fig/portada.tex` (TikZ) y `![](fig/portada.svg){.portada fig-alt="…"}`.
@@ -88,7 +83,7 @@ guarda en `localStorage`. Toda respuesta numérica se comprueba antes en Julia. 
 
 ## Datos
 - `datos/sinteticos/`: en git, públicos, con su ficha `.meta.toml`. Se regeneran con
-  `scripts/m02/generar_edificio.jl` y `scripts/datos/generar_casos.jl`.
+  `scripts/datos/generar_edificio.jl` y `scripts/datos/generar_casos.jl`.
 - `datos/privados/`: NUNCA lo leas, listes, copies ni menciones su contenido.
 
 ## Apuntes de consulta (solo locales)

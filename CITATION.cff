@@ -4,9 +4,7 @@ title: "JuliaDo: Aprende Julia haciendo"
 abstract: >-
   Web de autoformación en programación y computación científica con Julia, en
   tres niveles (Julia esencial, datos y estadística, computación científica),
-  con ejemplos de vibraciones y de una planta termosolar. Procede de la vía J
-  de Resonancia, el curso de monitorización de la salud estructural de la
-  Universidad de Córdoba.
+  con ejemplos de vibraciones, señales y datos de una planta industrial.
 authors:
   - family-names: Castro Triguero
     given-names: Rafael
@@ -15,7 +13,7 @@ authors:
 version: 0.1.0
 # date-released: añadir al publicar la primera versión (formato AAAA-MM-DD).
 # doi: añadir el DOI de Zenodo cuando exista la primera versión publicada.
-# Licencia del código y de la copia de Resonancia.jl. Los textos, diapositivas y figuras van
+# Licencia del código y del paquete JuliaDo.jl. Los textos, diapositivas y figuras van
 # bajo CC-BY-SA-4.0 (véase LICENSE-CONTENIDO); no se indica aquí porque en CFF
 # una lista de licencias se interpreta como alternativas.
 license: MIT

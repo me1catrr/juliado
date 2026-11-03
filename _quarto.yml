@@ -1,7 +1,7 @@
 project:
   type: website
   # docs/ contiene apuntes de consulta, no páginas ni descargas públicas.
-  # _migracion/ y _plan/ son notas de trabajo (el prefijo _ ya las excluye).
+  # _plan/ son notas de trabajo (el prefijo _ ya las excluye).
   render:
     - "*"
     - "!docs/**"
@@ -36,8 +36,8 @@ website:
 
 format:
   html:
-    # styles.css es la base común de Resonancia, JuliaDo y ClaudeDo;
-    # marca.scss solo cambia el color principal y los acentos de este sitio.
+    # styles.css es la base de estilos; marca.scss fija el color principal
+    # y los acentos del sitio.
     theme:
       - cosmo
       - marca.scss

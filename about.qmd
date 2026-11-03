@@ -14,27 +14,11 @@ científico reproducible, y que use un asistente de programación con criterio:
 delegando lo que conviene, verificando lo que entrega y sabiendo qué no puede
 hacer por él.
 
-## Origen y sitios hermanos
-
-JuliaDo nació como la vía J de [Resonancia](https://me1catrr.github.io/resonancia/),
-el curso de vibraciones, señales y monitorización estructural que acompaña a la
-asignatura *Monitorización de la Salud Estructural* (655023) del Máster
-Universitario en Ingeniería Industrial de la Universidad de Córdoba. En
-noviembre de 2026 se separó en un sitio propio; el historial anterior de sus
-ficheros sigue en el [repositorio de Resonancia](https://github.com/me1catrr/resonancia).
-
-- [Resonancia](https://me1catrr.github.io/resonancia/): monitorización de la salud
-  estructural, laboratorios y recursos. Explica los conceptos que aquí se
-  programan.
-- [matematicado](https://me1catrr.github.io/matematicado/): matemáticas aplicadas a
-  vibraciones y monitorización estructural (álgebra, señales, sistemas, estadística).
-- [ClaudeDo](https://me1catrr.github.io/claudedo/): autoformación con Claude y
-  Claude Code.
+## Materiales
 
 Los ejemplos de JuliaDo usan los datos sintéticos del edificio de tres plantas y
-los casos de empresa de `datos/sinteticos/`, y el paquete `Resonancia.jl`, del
-que este repositorio incluye una copia (versión 0.9.0) para compilar sin
-depender de Resonancia.
+los casos de empresa de `datos/sinteticos/`, y el paquete local `JuliaDo.jl`,
+que reúne las funciones que se reutilizan en varias unidades.
 
 ## Repositorio
 
@@ -51,7 +35,7 @@ comprobó.
 
 ## Licencias
 
-- **Código y Resonancia.jl:** licencia MIT (véase `LICENSE`).
+- **Código y JuliaDo.jl:** licencia MIT (véase `LICENSE`).
 - **Textos, diapositivas y figuras:** licencia
   [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.es)
   (véase `LICENSE-CONTENIDO`).

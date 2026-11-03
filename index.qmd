@@ -6,17 +6,16 @@ via: J
 
 ![](recursos/identidad/fig/banner.svg){fig-alt="JuliaDo: aprende Julia haciendo. Computación científica." width="100%"}
 
-JuliaDo es un curso de autoformación en programación y computación científica
-con [Julia](https://julialang.org/). Se aprende escribiendo código desde la
-primera unidad: cada una tiene objetivos, una teoría breve, una práctica guiada
-con código que se ejecuta, un apartado «Pídeselo a Claude» con su comprobación,
-ejercicios de autoevaluación y diapositivas.
+JuliaDo es un curso independiente de autoformación en programación y
+computación científica con [Julia](https://julialang.org/). Se aprende
+escribiendo código desde la primera unidad: cada una tiene objetivos, una teoría
+breve, una práctica guiada con código que se ejecuta, un apartado «Pídeselo a
+Claude» con su comprobación, ejercicios de autoevaluación y diapositivas.
 
-Los ejemplos proceden de la ingeniería de vibraciones y de una planta termosolar
-real, porque el curso nació como la vía J de
-[Resonancia](https://me1catrr.github.io/resonancia/), pero lo que se aprende
-(datos, estadística, álgebra lineal, ecuaciones diferenciales, optimización,
-señales) sirve para cualquier problema científico o técnico.
+Los ejemplos son problemas de ingeniería (vibraciones de estructuras, señales
+de sensores, datos de una planta industrial), pero lo que se aprende (datos,
+estadística, álgebra lineal, ecuaciones diferenciales, optimización, señales)
+sirve para cualquier problema científico o técnico.
 
 ## Tres niveles
 
@@ -28,13 +27,9 @@ señales) sirve para cualquier problema científico o técnico.
 
 ## Itinerarios
 
-- **Estudiante de la asignatura MSE.** J1 completo y las unidades de J2 y J3 que
-  piden las sesiones de [Resonancia](https://me1catrr.github.io/resonancia/).
+- **Estudiante de ingeniería o ciencias.** J1, J2 y J3 en orden.
 - **Docente o investigador.** J1 a J3 según tu nivel de partida.
 - **Personal de planta.** J1 y J2, con la pestaña de Python como apoyo.
-
-Para trabajar con un asistente de programación con criterio, el curso hermano
-[ClaudeDo](https://me1catrr.github.io/claudedo/) enseña a usar Claude y Claude Code.
 
 ## Todas las unidades
 

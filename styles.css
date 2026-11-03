@@ -1,5 +1,5 @@
 /* =============================================================================
-   Resonancia · JuliaDo · ClaudeDo: base común de estilos (web y diapositivas)
+   JuliaDo: base de estilos (web y diapositivas)
    Base común v1. Este fichero es idéntico en los tres sitios: los cambios se
    hacen en uno y se copian a los otros dos. Los acentos propios de cada sitio
    van en marca.scss (tokens --sitio-acento…).
@@ -38,7 +38,7 @@
   --caja-dem-borde: #6b7280;      --caja-dem-fondo: #f4f5f7;
   --caja-clave-borde: #6f42c1;    --caja-clave-fondo: #f4effb;
 
-  /* Acento del sitio: azul en Resonancia; cada sitio lo redefine en marca.scss. */
+  /* Acento del sitio: se redefine en marca.scss. */
   --sitio-acento: var(--r-azul);  --sitio-acento-oscuro: #14507d;
 
   --indice-borde: #d5dde6;        --indice-cabecera: #eef5fb;

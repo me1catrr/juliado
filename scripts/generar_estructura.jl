@@ -8,9 +8,6 @@
 # Crea carpetas, index.qmd y slides.qmd de cada unidad, los index.qmd de vía
 # y de nivel (J), recursos/bibliografia.bib y _navegacion.yml.
 #
-# `externos` (opcional) declara páginas de sitios hermanos que las unidades
-# pueden citar en `requiere`; sus prerrequisitos se enlazan con la URL publicada.
-#
 # Es idempotente: nunca sobrescribe un fichero .qmd o .bib existente. Solo
 # _navegacion.yml se regenera siempre, porque deriva por completo del temario,
 # y las tablas de unidades de los índices, que se reescriben entre los marcadores
@@ -40,7 +37,7 @@ const ETIQUETA_NAVBAR = Dict(
 const NOMBRE_LENGUAJE = Dict("c++" => "C++", "python" => "Python", "julia" => "Julia")
 
 # Las unidades de recursos (R) no declaran perfil en temario.yml.
-const PERFIL_R = ["mse", "uco", "planta"]
+const PERFIL_R = ["estudiante", "uco", "planta"]
 
 # ---------------------------------------------------------------------------
 # Utilidades de texto
@@ -114,36 +111,12 @@ function cargar_temario()
     return d, vias, niveles, unidades
 end
 
-# Páginas de los sitios hermanos (bloque `externos`), con su URL completa en "url".
-function cargar_externos(d)
-    ext = Dict{String,Any}[]
-    for s in get(d, "externos", [])
-        web = string(s["web"])
-        for p in s["paginas"]
-            e = Dict{String,Any}(p)
-            e["sitio"] = s["sitio"]
-            e["web"] = web
-            e["url"] = web * string(e["ruta"])
-            push!(ext, e)
-        end
-    end
-    return ext
-end
-
-function validar(vias, niveles, unidades, externos = Dict{String,Any}[])
+function validar(vias, niveles, unidades)
     errores = String[]
     indice = Dict{String,Dict{String,Any}}()
     for e in Iterators.flatten((niveles, unidades))
         haskey(indice, e["id"]) && push!(errores, "identificador repetido: $(e["id"])")
         indice[e["id"]] = e
-    end
-    for e in externos
-        endswith(e["web"], "/") || push!(errores, "externos: la web de $(e["sitio"]) debe acabar en «/»")
-        startswith(string(e["ruta"]), "/") && push!(errores, "externos: la ruta «$(e["ruta"])» debe ser relativa")
-        haskey(e, "id") || continue
-        id = string(e["id"])
-        haskey(indice, id) && push!(errores, "identificador repetido: $id (externo, de $(e["sitio"]))")
-        indice[id] = e
     end
     dirs = Dict{String,String}()
     for u in unidades
@@ -261,7 +234,7 @@ function prerrequisitos(u, indice)
     isempty(ids) && return "Ninguno declarado en `temario.yml`."
     enlaces = map(ids) do id
         e = indice[id]
-        destino = haskey(e, "url") ? e["url"] : ruta_relativa(u["dir"], e["ruta"])
+        destino = ruta_relativa(u["dir"], e["ruta"])
         "[$(etiqueta(e))]($destino)"
     end
     return join(enlaces, ", ")
@@ -497,10 +470,6 @@ function navegacion(d, vias, niveles, unidades)
     println(io, "    right:")
     println(io, "      - text: Acerca de")
     println(io, "        href: about.qmd")
-    for h in get(d["curso"], "hermanos", [])
-        println(io, "      - text: ", yq(h["texto"]))
-        println(io, "        href: ", h["href"])
-    end
     println(io, "      - icon: github")
     println(io, "        href: ", d["curso"]["repositorio"])
     println(io, "        aria-label: GitHub")
@@ -642,12 +611,12 @@ function main()
             exit(2)
         end
         d, vias, niveles, unidades = cargar_temario()
-        validar(vias, niveles, unidades, cargar_externos(d))
+        validar(vias, niveles, unidades)
         exit(comprobar(unidades) == 0 ? 0 : 1)
     end
 
     d, vias, niveles, unidades = cargar_temario()
-    indice = validar(vias, niveles, unidades, cargar_externos(d))
+    indice = validar(vias, niveles, unidades)
 
     generar_unidades(unidades, indice)
     generar_vias(vias, niveles, unidades)

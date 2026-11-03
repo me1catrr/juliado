@@ -11,20 +11,20 @@ Cada unidad: `index.qmd`, `slides.qmd`, `fig/*.tex` y `.svg`, `python/` con su p
 | Nivel | Estado |
 |---|---|
 | J1 (J1.1–J1.8) | redactado, `estado: borrador` |
-| J2 | redactadas J2.1–J2.8 (J2.8 sin MLJ: modelos propios en `Resonancia.jl`) |
+| J2 | redactadas J2.1–J2.8 (J2.8 sin MLJ: modelos propios en `JuliaDo.jl`) |
 | J3 | redactadas J3.1–J3.5, J3.7, J3.8 y J3.9; **pendiente J3.6 (EDO, requiere `OrdinaryDiffEq`)** |
 
 Todas con diapositivas, figuras TikZ, `_freeze/`, cuadro de historia con fuente, errores frecuentes y lecturas citadas
-(J2 con espejo Python probado). `Resonancia.jl` está en 0.6.0 (clasificación, raíces, viga, sensibilidades, optimización y grafos).
+(J2 con espejo Python probado). `JuliaDo.jl` está en 0.6.0 (clasificación, raíces, viga, sensibilidades, optimización y grafos).
 
 ## Orden previsto
-J1 → J3.8, J3.3, J3.1–J3.2 (los necesita M3/M4) → J2 → resto de J3.
+J1 → J3.8, J3.3, J3.1–J3.2 → J2 → resto de J3.
 
 ## Decisiones tomadas
 - Pluto, Plots.jl, Revise y Unitful se mencionan, pero **no están en el entorno del curso**;
   sus bloques de código no se ejecutan.
-- Entorno ampliado (2026-10-26, con aprobación): `FFTW` y `DSP` (J3.8). `Resonancia` 0.4.0 alineado en el Manifest.
-- El tipo `Registro` vive en J1.8; se moverá a `Resonancia.jl` (con docstring y test) cuando lo usen otras páginas.
+- Entorno ampliado (2026-10-26, con aprobación): `FFTW` y `DSP` (J3.8). `JuliaDo` 0.4.0 alineado en el Manifest.
+- El tipo `Registro` vive en J1.8; se moverá a `JuliaDo.jl` (con docstring y test) cuando lo usen otras páginas.
 - Datos de los ejemplos: `datos/sinteticos/edificio-3-plantas` y `datos/sinteticos/curso-claude`.
 - Convención de registro multicanal: matriz `N × c` (muestras × canales).
 
