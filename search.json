@@ -2043,7 +2043,7 @@
     "href": "index.html#sobre-el-proyecto",
     "title": "JuliaDo",
     "section": "Sobre el proyecto",
-    "text": "Sobre el proyecto\nAutoría. Rafael Castro Triguero, Universidad de Córdoba.\nRepositorio. Código, textos e historial de cambios en github.com/me1catrr/juliado; los errores y sugerencias, en sus issues.\nRecursos abiertos. Textos, diapositivas y figuras con licencia CC BY-SA 4.0, código con licencia MIT y datos con la licencia de su ficha. Más detalles en Acerca de.\n\nMaterial elaborado con apoyo de Claude Code (Anthropic) para programación, edición y producción de contenidos. La selección, revisión y responsabilidad de los materiales corresponden al autor; la fecha de la cabecera indica la última actualización de esta página.",
+    "text": "Sobre el proyecto\nAutoría. Rafael Castro Triguero, Universidad de Córdoba.\nRepositorio. Código, textos e historial de cambios en github.com/me1catrr/juliado; los errores y sugerencias, en sus issues.\nRecursos abiertos. Textos, diapositivas y figuras con licencia CC BY-SA 4.0, código con licencia MIT y datos con la licencia de su ficha. Más detalles en Acerca de.\n\nEste proyecto docente ha sido diseñado y desarrollado con apoyo de Claude Code (Anthropic), como herramienta de asistencia para programación, edición y producción de contenidos interactivos. La selección, revisión y responsabilidad académica de los materiales corresponden al autor. Revisión de la web: 3 de noviembre de 2026 · Claude Code, versión 2.1.304. Los modelos utilizados constan en el historial de commits del repositorio.",
     "crumbs": [
       "Inicio",
       "Vista general"
