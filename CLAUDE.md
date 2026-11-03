@@ -61,7 +61,7 @@ publicado) y `verificado` (versión de Julia con la que se comprobó).
   filetes y puntos; si llevan texto, sus variantes `--julia-…-texto` (≥ 4,5:1).
   J1 verde, J2 morado, J3 rojo. Código Julia con filete morado; resultados con rótulo
   «Resultado».
-- La portada (`index.qmd`) usa `.acciones`, `.niveles`/`.nivel`, `.piezas`, `.entradas`
+- La portada (`index.qmd`) usa `.acciones`, `.niveles`/`.nivel`, `.piezas`
   y `.creditos`; sus estilos se activan con `body:has(.niveles)`. Las cifras de las
   tarjetas (unidades, horas, ejercicios) salen de `temario.yml` y de las unidades: se
   actualizan a mano si cambian.

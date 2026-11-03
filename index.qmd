@@ -89,25 +89,6 @@ guardan solo en tu navegador.
 
 :::
 
-## Itinerarios
-
-::: {.entradas}
-
-::: {.entrada}
-**Estudiante de ingeniería o ciencias.** J1, J2 y J3 en orden.
-:::
-
-::: {.entrada}
-**Docente o investigador.** De J1 a J3 según tu nivel de partida; cada unidad
-indica sus prerrequisitos.
-:::
-
-::: {.entrada}
-**Personal de planta.** J1 y J2, con la pestaña de Python como apoyo.
-:::
-
-:::
-
 ## Todas las unidades
 
 ### [J1 · Julia esencial](j1-esencial/index.qmd)
