@@ -1,8 +1,18 @@
 # Variables del sitio, accesibles con {{< var … >}}.
 #
-# revision: colofón de la portada (index.qmd, bloque .creditos). Se actualiza en el
-# mismo commit cada vez que se revisa la web con Claude Code: la fecha de la revisión
-# y la versión que devuelve `claude --version`.
+# Colofón de la portada (index.qmd, bloque .creditos).
+#
+# creacion: periodo en que se redactó el material y versiones de Claude Code usadas.
+#   Datos de los registros de sesión: 2.1.300 el 20-10-2026 (inicio del proyecto),
+#   2.1.304 a 2.1.306 del 20 al 23-10 y 2.1.311 el 27 y 28-10. No se conservan los
+#   registros del 26-10 (redacción de las unidades J) ni del 1 y 2-11 (separación).
+#
+# revision: se actualiza en el mismo commit cada vez que se revisa la web con Claude
+#   Code: la fecha y la versión de la sesión (la que muestra /status). Ojo: en la
+#   extensión de VS Code puede no coincidir con `claude --version` de la terminal.
+creacion:
+  periodo: "octubre de 2026"
+  claude-code: "2.1.300 a 2.1.311"
 revision:
   fecha: "3 de noviembre de 2026"
-  claude-code: "2.1.304"
+  claude-code: "2.1.317"

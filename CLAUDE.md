@@ -109,8 +109,9 @@ cuando el usuario lo pida; cita título y página; no enlaces ni copies los PDF.
   la configuración de GitHub sin petición explícita.
 - Commits pequeños, mensaje en español en imperativo: «Añade unidad J3.10».
 - Créditos de IA: al cerrar una revisión de la web hecha con Claude Code, actualiza
-  `_variables.yml` (`revision.fecha` y `revision.claude-code`, con la salida de
-  `claude --version`) en el mismo commit. Los muestra el colofón de la portada.
+  `_variables.yml` (`revision.fecha` y `revision.claude-code`) en el mismo commit.
+  La versión es la de la sesión (`/status`), que en la extensión de VS Code puede no
+  coincidir con `claude --version`. `creacion` no se toca. Lo muestra el colofón de la portada.
 
 ## Comandos útiles
 - Vista previa: `quarto preview`

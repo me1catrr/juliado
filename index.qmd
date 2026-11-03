@@ -190,7 +190,8 @@ código con licencia MIT y datos con la licencia de su ficha. Más detalles en
 Este proyecto docente ha sido diseñado y desarrollado con apoyo de Claude Code
 (Anthropic), como herramienta de asistencia para programación, edición y producción
 de contenidos interactivos. La selección, revisión y responsabilidad académica de los
-materiales corresponden al autor. Revisión de la web: {{< var revision.fecha >}} ·
-Claude Code, versión {{< var revision.claude-code >}}. Los modelos utilizados constan
-en el historial de commits del repositorio.
+materiales corresponden al autor. Creación: {{< var creacion.periodo >}}, con
+Claude Code {{< var creacion.claude-code >}}. Última revisión de la web:
+{{< var revision.fecha >}}, con Claude Code {{< var revision.claude-code >}}. Los
+modelos utilizados constan en el historial de commits del repositorio.
 :::
