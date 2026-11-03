@@ -187,8 +187,10 @@ código con licencia MIT y datos con la licencia de su ficha. Más detalles en
 [Acerca de](about.qmd).
 
 ::: {.creditos}
-Material elaborado con apoyo de Claude Code (Anthropic) para programación, edición
-y producción de contenidos. La selección, revisión y responsabilidad de los
-materiales corresponden al autor; la fecha de la cabecera indica la última
-actualización de esta página.
+Este proyecto docente ha sido diseñado y desarrollado con apoyo de Claude Code
+(Anthropic), como herramienta de asistencia para programación, edición y producción
+de contenidos interactivos. La selección, revisión y responsabilidad académica de los
+materiales corresponden al autor. Revisión de la web: {{< var revision.fecha >}} ·
+Claude Code, versión {{< var revision.claude-code >}}. Los modelos utilizados constan
+en el historial de commits del repositorio.
 :::

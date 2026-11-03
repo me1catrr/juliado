@@ -108,6 +108,9 @@ cuando el usuario lo pida; cita título y página; no enlaces ni copies los PDF.
 - Nunca ejecutes `git push`, `quarto publish`, `gh repo create` ni cambies
   la configuración de GitHub sin petición explícita.
 - Commits pequeños, mensaje en español en imperativo: «Añade unidad J3.10».
+- Créditos de IA: al cerrar una revisión de la web hecha con Claude Code, actualiza
+  `_variables.yml` (`revision.fecha` y `revision.claude-code`, con la salida de
+  `claude --version`) en el mismo commit. Los muestra el colofón de la portada.
 
 ## Comandos útiles
 - Vista previa: `quarto preview`

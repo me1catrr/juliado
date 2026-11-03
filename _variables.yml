@@ -1,0 +1,8 @@
+# Variables del sitio, accesibles con {{< var … >}}.
+#
+# revision: colofón de la portada (index.qmd, bloque .creditos). Se actualiza en el
+# mismo commit cada vez que se revisa la web con Claude Code: la fecha de la revisión
+# y la versión que devuelve `claude --version`.
+revision:
+  fecha: "3 de noviembre de 2026"
+  claude-code: "2.1.304"
