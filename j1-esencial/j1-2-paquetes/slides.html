@@ -212,7 +212,7 @@
 <li>Usar el modo paquetes (<code>]</code>).</li>
 <li>Distinguir <code>Project.toml</code> y <code>Manifest.toml</code>.</li>
 <li>Reconstruir el entorno con <code>instantiate</code>.</li>
-<li>Usar <code>Resonancia.jl</code> y leer su ayuda.</li>
+<li>Usar <code>JuliaDo.jl</code> y leer su ayuda.</li>
 </ul>
 </section>
 <section id="el-modo-paquetes" class="slide level2">
@@ -249,24 +249,24 @@
 <section id="relación-entre-ficheros" class="slide level2">
 <h2>Relación entre ficheros</h2>
 
-<img data-src="fig/entorno.svg" alt="Project.toml, Manifest.toml, registro general y Resonancia.jl con sus flechas" class="r-stretch"></section>
+<img data-src="fig/entorno.svg" alt="Project.toml, Manifest.toml, registro general y JuliaDo.jl con sus flechas" class="r-stretch"></section>
 <section id="entorno-único-del-curso" class="slide level2">
 <h2>Entorno único del curso</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a aria-label="1"></a><span class="ex">julia</span> <span class="at">--project</span><span class="op">=</span>. <span class="at">-e</span> <span class="st">'using Pkg; Pkg.instantiate()'</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Equivale a <code>uv sync</code>.</p>
 </section>
-<section id="resonancia.jl-y-revise.jl" class="slide level2">
-<h2><code>Resonancia.jl</code> y <code>Revise.jl</code></h2>
+<section id="juliado.jl-y-revise.jl" class="slide level2">
+<h2><code>JuliaDo.jl</code> y <code>Revise.jl</code></h2>
 <ul>
 <li>Paquete local en modo desarrollo (<code>path</code> en el <code>Manifest.toml</code>).</li>
-<li><code>using Revise</code> <strong>antes</strong> de <code>using Resonancia</code>: los cambios se aplican sin reiniciar.</li>
+<li><code>using Revise</code> <strong>antes</strong> de <code>using JuliaDo</code>: los cambios se aplican sin reiniciar.</li>
 </ul>
 </section>
 <section id="práctica" class="slide level2">
 <h2>Práctica</h2>
 <ul>
 <li>Leer <code>Project.toml</code> con <code>TOML.parsefile</code>.</li>
-<li><code>pkgversion(Resonancia)</code>.</li>
+<li><code>pkgversion(JuliaDo)</code>.</li>
 <li><code>psd_welch</code> y <code>buscar_picos</code>: picos en 2,54 y 7,03 Hz.</li>
 </ul>
 </section>

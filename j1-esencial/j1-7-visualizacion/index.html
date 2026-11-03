@@ -186,18 +186,6 @@ window.Quarto = {
     <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">Acerca de</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/resonancia/"> 
-<span class="menu-text">Resonancia</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/matematicado/"> 
-<span class="menu-text">matematicado</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/claudedo/"> 
-<span class="menu-text">ClaudeDo</span></a>
-  </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/me1catrr/juliado"> <i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
@@ -477,7 +465,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Tiempo orientativo: 90 minutos.</strong> Objetivos (4), teoría en cinco píldoras (18), práctica guiada (40), «Pídeselo a Claude» (12), ejercicios (14) y cierre (2). La física de la comparación (por qué baja la frecuencia cuando baja la rigidez) está en <a href="https://me1catrr.github.io/resonancia/mse/m05-vibraciones-i/">M5</a> y el espectro de Welch, en M3.6.</p>
+<p><strong>Tiempo orientativo: 90 minutos.</strong> Objetivos (4), teoría en cinco píldoras (18), práctica guiada (40), «Pídeselo a Claude» (12), ejercicios (14) y cierre (2). El espectro de Welch se calcula con detalle en <a href="../../j3-computacion/j3-8-senales/index.html">J3.8</a>.</p>
 </div>
 </div>
 <section id="objetivos-y-prerrequisitos" class="level2">
@@ -560,7 +548,7 @@ Figura&nbsp;1: Estructura de una figura de Makie. La figura contiene ejes coloca
 </section>
 <section id="j1-7-4" class="level3">
 <h3 class="anchored" data-anchor-id="j1-7-4">J1.7.4 Espectros</h3>
-<p>El espectro, o más exactamente la <strong>densidad espectral de potencia</strong> (PSD), dice qué cantidad de energía hay a cada frecuencia y se calcula con <code>psd_welch</code> de <code>Resonancia.jl</code> (el método se explica en M3.6). Se dibuja frente a la frecuencia en Hz, con el eje vertical en <strong>escala logarítmica</strong> (<code>yscale=log10</code>) porque los picos y el ruido de fondo difieren en órdenes de magnitud, y con los picos marcados. <code>buscar_picos</code> devuelve los índices de los máximos locales más altos de un intervalo.</p>
+<p>El espectro, o más exactamente la <strong>densidad espectral de potencia</strong> (PSD), dice qué cantidad de energía hay a cada frecuencia y se calcula con <code>psd_welch</code> de <code>JuliaDo.jl</code> (el método se explica en <a href="../../j3-computacion/j3-8-senales/index.html">J3.8</a>). Se dibuja frente a la frecuencia en Hz, con el eje vertical en <strong>escala logarítmica</strong> (<code>yscale=log10</code>) porque los picos y el ruido de fondo difieren en órdenes de magnitud, y con los picos marcados. <code>buscar_picos</code> devuelve los índices de los máximos locales más altos de un intervalo.</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -650,7 +638,7 @@ Figura&nbsp;1: Estructura de una figura de Makie. La figura contiene ejes coloca
 <pre><code>(resolucion_Hz = 0.0244, picos_A_Hz = [1.099, 2.93, 4.395], picos_C_Hz = [1.074, 2.954, 4.248], variacion_pct = [-2.2, 0.8, -3.3])</code></pre>
 </div>
 </div>
-<p>Los picos primero y tercero del estado dañado bajan (un 2,2 % y un 3,3 %), más que la resolución del espectro (0,6 % a 4,4 Hz): al perder rigidez, bajan las frecuencias. El segundo apenas cambia: el modelo predice una variación de solo −0,25 %, menos que un intervalo de frecuencia, y en un espectro estimado el máximo puede caer en el intervalo vecino (aquí sube un intervalo, +0,8 %). <strong>Un cambio menor que la resolución no se puede interpretar</strong>: es una lección que se desarrolla en M7.</p>
+<p>Los picos primero y tercero del estado dañado bajan (un 2,2 % y un 3,3 %), más que la resolución del espectro (0,6 % a 4,4 Hz): al perder rigidez, bajan las frecuencias. El segundo apenas cambia: el modelo predice una variación de solo −0,25 %, menos que un intervalo de frecuencia, y en un espectro estimado el máximo puede caer en el intervalo vecino (aquí sube un intervalo, +0,8 %). <strong>Un cambio menor que la resolución no se puede interpretar</strong>.</p>
 <p><strong>Paso 2. La figura de cuatro elementos.</strong></p>
 <div id="cell-fig-comparacion" class="cell" data-execution_count="1">
 <details class="code-fold">
@@ -720,7 +708,7 @@ Figura&nbsp;2: Registro y espectro de la planta 3 del edificio. Arriba, los 10 p
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Una figura de cuatro elementos con series, espectros en escala logarítmica, picos marcados, curvas distinguibles sin color, unidades en los ejes y exportación comprobada. Y un primer resultado físico: <strong>el daño se ve como un descenso de algunas frecuencias propias, siempre que sea mayor que la resolución del espectro</strong>, que es el hilo de toda la vía M.</p>
+<p>Una figura de cuatro elementos con series, espectros en escala logarítmica, picos marcados, curvas distinguibles sin color, unidades en los ejes y exportación comprobada. Y un primer resultado físico: <strong>el daño se ve como un descenso de algunas frecuencias propias, siempre que sea mayor que la resolución del espectro</strong>.</p>
 </div>
 </div>
 </section>
@@ -736,7 +724,7 @@ Figura&nbsp;2: Registro y espectro de la planta 3 del edificio. Arriba, los 10 p
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>«Con Julia, <code>--project=.</code> y <code>CairoMakie</code>: lee <code>datos/sinteticos/edificio-3-plantas/escenario_A.csv</code> y <code>escenario_C.csv</code> (separador <code>;</code>, 100 Hz). Calcula con <code>psd_welch</code> de <code>Resonancia.jl</code> (<code>nseg=4096</code>) el espectro de <code>a3_ms2</code> en los dos escenarios y dibuja en una sola figura: arriba los 10 primeros segundos del escenario A, y abajo los dos espectros superpuestos entre 0 y 6 Hz, en escala logarítmica, con un estilo de línea distinto en cada uno y los ejes con unidades. Dime las frecuencias de los tres picos de cada escenario con <code>buscar_picos</code>. Guarda la figura en una carpeta temporal, no en <code>datos/</code>. No inventes valores: si algo no sale, dilo.»</p>
+<p>«Con Julia, <code>--project=.</code> y <code>CairoMakie</code>: lee <code>datos/sinteticos/edificio-3-plantas/escenario_A.csv</code> y <code>escenario_C.csv</code> (separador <code>;</code>, 100 Hz). Calcula con <code>psd_welch</code> de <code>JuliaDo.jl</code> (<code>nseg=4096</code>) el espectro de <code>a3_ms2</code> en los dos escenarios y dibuja en una sola figura: arriba los 10 primeros segundos del escenario A, y abajo los dos espectros superpuestos entre 0 y 6 Hz, en escala logarítmica, con un estilo de línea distinto en cada uno y los ejes con unidades. Dime las frecuencias de los tres picos de cada escenario con <code>buscar_picos</code>. Guarda la figura en una carpeta temporal, no en <code>datos/</code>. No inventes valores: si algo no sale, dilo.»</p>
 <p><strong>Verifica.</strong> (a) Que los picos del escenario A son 1,099, 2,930 y 4,395 Hz y los del C, 1,074, 2,954 y 4,248 Hz. (b) Que el eje horizontal del registro está en segundos (0 a 10 s, no en índices). (c) Que los ejes llevan unidades y que el espectro está en escala logarítmica. (d) Que las dos curvas se distinguen también en blanco y negro (<code>linestyle</code>). (e) Que no ha escrito la figura en el repositorio ni modificado los CSV.</p>
 </div>
 </div>
@@ -1271,7 +1259,8 @@ Figura&nbsp;2: Registro y espectro de la planta 3 del edificio. Arriba, los 10 p
   /* ------------------------------------------------------------------ */
   /* Almacenamiento local (con tolerancia a que no exista)               */
   /* ------------------------------------------------------------------ */
-  const PREFIJO = "resonancia:ej:" + (typeof location !== "undefined" ? location.pathname : "");
+  // Prefijo histórico de las claves: se conserva para no borrar las respuestas ya guardadas.
+  const PREFIJO = "resonancia:ej:" +(typeof location !== "undefined" ? location.pathname : "");
 
   function leer(id) {
     try {
@@ -1555,7 +1544,7 @@ Figura&nbsp;2: Registro y espectro de la planta 3 del edificio. Arriba, los 10 p
       el("div", { class: "ej-botones" },
         el("button", { type: "button", class: "ej-btn ej-btn-sec", text: "Descargar mis respuestas", onclick: () => {
           const blob = new Blob([JSON.stringify({ pagina: location.pathname, fecha: new Date().toISOString(), respuestas: todos() }, null, 2)], { type: "application/json" });
-          const a = el("a", { href: URL.createObjectURL(blob), download: "resonancia-respuestas.json" }); a.click();
+          const a = el("a", { href: URL.createObjectURL(blob), download: "juliado-respuestas.json" }); a.click();
         } }),
         el("button", { type: "button", class: "ej-btn ej-btn-sec", text: "Borrar mis respuestas", onclick: () => {
           if (confirm("¿Borrar todas tus respuestas y tu progreso en esta página?")) { borrarTodo(); location.reload(); }

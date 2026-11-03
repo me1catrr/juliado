@@ -176,18 +176,6 @@ div.csl-indent {
     <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">Acerca de</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/resonancia/"> 
-<span class="menu-text">Resonancia</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/matematicado/"> 
-<span class="menu-text">matematicado</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/claudedo/"> 
-<span class="menu-text">ClaudeDo</span></a>
-  </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/me1catrr/juliado"> <i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
@@ -457,7 +445,7 @@ div.csl-indent {
 
 
 <p><img src="fig/portada.svg" class="portada img-fluid" alt="A la izquierda, el árbol de carpetas de un paquete llamado Descriptores con Project.toml, una carpeta src con Descriptores.jl y una carpeta test con runtests.jl; a la derecha, el uso del paquete con using Descriptores y un resultado de pruebas con cuatro aciertos de cuatro"></p>
-<p>Mientras una función vive en una página, solo la usa esa página. En cuanto se reutiliza, hay que subirla un escalón: a un <strong>módulo</strong> (un espacio de nombres propio), después a un <strong>paquete</strong> (con su <code>Project.toml</code>) y, si importa, con <strong>pruebas</strong>, <strong>documentación</strong> e <strong>integración continua</strong>. Es lo que se hizo con <code>Resonancia.jl</code>, y es la regla del curso: <em>toda función reutilizable va al paquete con docstring y test</em>. En esta unidad se crea un paquete mínimo de verdad, con sus pruebas, y se ve cómo falla cuando algo está mal declarado.</p>
+<p>Mientras una función vive en una página, solo la usa esa página. En cuanto se reutiliza, hay que subirla un escalón: a un <strong>módulo</strong> (un espacio de nombres propio), después a un <strong>paquete</strong> (con su <code>Project.toml</code>) y, si importa, con <strong>pruebas</strong>, <strong>documentación</strong> e <strong>integración continua</strong>. Es lo que se hizo con <code>JuliaDo.jl</code>, y es la regla del curso: <em>toda función reutilizable va al paquete con docstring y test</em>. En esta unidad se crea un paquete mínimo de verdad, con sus pruebas, y se ve cómo falla cuando algo está mal declarado.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -481,8 +469,8 @@ div.csl-indent {
 <li>crear un paquete mínimo y ejecutar sus pruebas con <code>Pkg.test</code>;</li>
 <li>explicar qué aportan la documentación con <code>Documenter.jl</code> y la integración continua.</li>
 </ul>
-<p><strong>Prerrequisitos.</strong> El curso no los impone en el temario; conviene J1.2 (entorno y <code>Resonancia.jl</code>), J1.4 (funciones y docstrings) y J1.8 (tipos y métodos).</p>
-<p><strong>Reparto con otras unidades.</strong> Esta unidad explica el mecanismo. La política de qué entra en <code>Resonancia.jl</code> está en <code>CLAUDE.md</code> (función reutilizable, con docstring y test) y el control de versiones, en <a href="https://me1catrr.github.io/claudedo/">C3</a>.</p>
+<p><strong>Prerrequisitos.</strong> El curso no los impone en el temario; conviene J1.2 (entorno y <code>JuliaDo.jl</code>), J1.4 (funciones y docstrings) y J1.8 (tipos y métodos).</p>
+<p><strong>Reparto con otras unidades.</strong> Esta unidad explica el mecanismo. La política de qué entra en <code>JuliaDo.jl</code> está en <code>CLAUDE.md</code> (función reutilizable, con docstring y test).</p>
 </section>
 <section id="teoría-breve" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="teoría-breve">Teoría breve</h2>
@@ -546,18 +534,18 @@ div.csl-indent {
 </section>
 <section id="j3-2-2" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="j3-2-2">J3.2.2 Anatomía de un paquete</h3>
-<p>Un paquete es un módulo con la estructura que Pkg entiende: un <code>Project.toml</code> con <code>name</code>, <code>uuid</code> y <code>version</code>, y una carpeta <code>src/</code> con un fichero <code>NombreDelPaquete.jl</code> que define el módulo; las pruebas van en <code>test/runtests.jl</code> <span class="citation" data-cites="pkg-crear">(<a href="#ref-pkg-crear" role="doc-biblioref"><em>Creating Packages</em> 2026</a>)</span>. Así es <code>Resonancia.jl</code>, el paquete de este curso, que se puede inspeccionar por código:</p>
+<p>Un paquete es un módulo con la estructura que Pkg entiende: un <code>Project.toml</code> con <code>name</code>, <code>uuid</code> y <code>version</code>, y una carpeta <code>src/</code> con un fichero <code>NombreDelPaquete.jl</code> que define el módulo; las pruebas van en <code>test/runtests.jl</code> <span class="citation" data-cites="pkg-crear">(<a href="#ref-pkg-crear" role="doc-biblioref"><em>Creating Packages</em> 2026</a>)</span>. Así es <code>JuliaDo.jl</code>, el paquete de este curso, que se puede inspeccionar por código:</p>
 <div class="no-row-height column-margin column-container"></div><div id="6" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Ver el código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ruta <span class="op">=</span> <span class="st">"../../Resonancia.jl"</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ruta <span class="op">=</span> <span class="st">"../../JuliaDo.jl"</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>pt <span class="op">=</span> <span class="bu">TOML</span>.<span class="fu">parsefile</span>(<span class="fu">joinpath</span>(ruta, <span class="st">"Project.toml"</span>))</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>(carpeta <span class="op">=</span> <span class="fu">sort</span>(<span class="fu">readdir</span>(ruta)), ficheros_src <span class="op">=</span> <span class="fu">sort</span>(<span class="fu">readdir</span>(<span class="fu">joinpath</span>(ruta, <span class="st">"src"</span>))),</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a> nombre_y_version <span class="op">=</span> (pt[<span class="st">"name"</span>], pt[<span class="st">"version"</span>]), dependencias <span class="op">=</span> <span class="fu">sort</span>(<span class="fu">collect</span>(<span class="fu">keys</span>(pt[<span class="st">"deps"</span>]))),</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a> compat <span class="op">=</span> pt[<span class="st">"compat"</span>], testsets <span class="op">=</span> <span class="fu">count</span>(<span class="fu">contains</span>(<span class="st">"@testset"</span>), <span class="fu">readlines</span>(<span class="fu">joinpath</span>(ruta, <span class="st">"test"</span>, <span class="st">"runtests.jl"</span>))))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="1">
-<pre><code>(carpeta = ["Manifest.toml", "Project.toml", "src", "test"], ficheros_src = ["Resonancia.jl", "clasificacion.jl", "edos.jl", "espectral.jl", "espectro.jl", "estructuradas.jl", "fdd.jl", "grafos.jl", "lectura.jl", "lscf.jl", "modal.jl", "muestreo.jl", "optimizacion.jl", "raices.jl", "semiespectro.jl", "senales.jl", "sensibilidad.jl", "ssicov.jl", "viga.jl"], nombre_y_version = ("Resonancia", "0.9.0"), dependencias = ["LinearAlgebra", "SparseArrays"], compat = Dict{String, Any}("julia" =&gt; "1.10"), testsets = 36)</code></pre>
+<pre><code>(carpeta = ["Manifest.toml", "Project.toml", "src", "test"], ficheros_src = ["JuliaDo.jl", "clasificacion.jl", "edos.jl", "espectral.jl", "espectro.jl", "estructuradas.jl", "fdd.jl", "grafos.jl", "lectura.jl", "lscf.jl", "modal.jl", "muestreo.jl", "optimizacion.jl", "raices.jl", "semiespectro.jl", "senales.jl", "sensibilidad.jl", "ssicov.jl", "viga.jl"], nombre_y_version = ("JuliaDo", "0.9.0"), dependencias = ["LinearAlgebra", "SparseArrays"], compat = Dict{String, Any}("julia" =&gt; "1.10"), testsets = 36)</code></pre>
 </div>
 </div>
 <p>Tres detalles: (1) <code>uuid</code> identifica el paquete de forma única, aunque dos se llamen igual; (2) <code>[deps]</code> lista <strong>todo</strong> lo que el código carga con <code>using</code>, incluidas las bibliotecas estándar como <code>LinearAlgebra</code>; (3) <code>[compat]</code> indica con qué versiones de Julia y de las dependencias se garantiza que funciona (aquí, <code>julia = "1.10"</code>) <span class="citation" data-cites="pkg-crear">(<a href="#ref-pkg-crear" role="doc-biblioref"><em>Creating Packages</em> 2026</a>)</span>.</p>
@@ -580,7 +568,7 @@ div.csl-indent {
 <div class="cell-output cell-output-stdout">
 <div class="ansi-escaped-output">
 <pre><span class="ansi-bold">Test Summary: | </span><span class="ansi-green-fg ansi-bold">Pass  </span><span class="ansi-cyan-fg ansi-bold">Total  </span><span class="ansi-bold">Time</span>
-Estadisticos  | <span class="ansi-green-fg">   6  </span><span class="ansi-cyan-fg">    6  </span>0.2s
+Estadisticos  | <span class="ansi-green-fg">   6  </span><span class="ansi-cyan-fg">    6  </span>0.3s
 </pre>
 </div>
 </div>
@@ -621,7 +609,7 @@ Figura&nbsp;1: Del código suelto al paquete probado: cada escalón añade garan
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Un paquete sin pruebas es una promesa; con pruebas, es un contrato. Y una función de <code>Resonancia.jl</code> <strong>tiene</strong> pruebas porque otras páginas del curso se apoyan en ella: si cambia, hay que saberlo ya.</p>
+<p>Un paquete sin pruebas es una promesa; con pruebas, es un contrato. Y una función de <code>JuliaDo.jl</code> <strong>tiene</strong> pruebas porque otras páginas del curso se apoyan en ella: si cambia, hay que saberlo ya.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-warning callout-titled">
@@ -755,7 +743,7 @@ Figura&nbsp;1: Del código suelto al paquete probado: cada escalón añade garan
 <pre><code>(pasa = true, resumen = SubString{String}["Test Summary: | Pass  Total  Time", "Descriptores  |    4      4  0.1s"])</code></pre>
 </div>
 </div>
-<p>Cuatro pruebas, cuatro aciertos. Es el mismo mecanismo con el que se prueba <code>Resonancia.jl</code>: desde la raíz del repositorio, <code>julia --project=. -e 'using Pkg; Pkg.test("Resonancia")'</code> ejecuta sus pruebas (20 conjuntos <code>@testset</code>).</p>
+<p>Cuatro pruebas, cuatro aciertos. Es el mismo mecanismo con el que se prueba <code>JuliaDo.jl</code>: desde la raíz del repositorio, <code>julia --project=. -e 'using Pkg; Pkg.test("JuliaDo")'</code> ejecuta sus pruebas (20 conjuntos <code>@testset</code>).</p>
 <p><strong>Paso 4. Qué pasa cuando una prueba falla.</strong> Se cambia una afirmación a una incorrecta y se comprueba que el resumen lo dice con claridad:</p>
 <div id="16" class="cell" data-execution_count="1">
 <details class="code-fold">
@@ -765,7 +753,7 @@ Figura&nbsp;1: Del código suelto al paquete probado: cada escalón añade garan
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>(pasa <span class="op">=</span> <span class="fu">occursin</span>(<span class="st">"tests passed"</span>, s3), falla_detectada <span class="op">=</span> <span class="fu">occursin</span>(<span class="st">"Test Failed"</span>, s3), linea_resumen <span class="op">=</span> <span class="fu">strip</span>(<span class="fu">first</span>(<span class="fu">filter</span>(l <span class="op">-&gt;</span> <span class="fu">occursin</span>(<span class="st">"Descriptores  |"</span>, l), <span class="fu">split</span>(s3, <span class="ch">'\n'</span>)))))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="1">
-<pre><code>(pasa = false, falla_detectada = true, linea_resumen = "Descriptores  |    3     1      4  0.8s")</code></pre>
+<pre><code>(pasa = false, falla_detectada = true, linea_resumen = "Descriptores  |    3     1      4  1.0s")</code></pre>
 </div>
 </div>
 <p>Una prueba que falla es información valiosa: señala exactamente qué comportamiento ha cambiado. Por eso el paquete no se da por bueno hasta que todas pasan.</p>
@@ -790,7 +778,7 @@ Figura&nbsp;1: Del código suelto al paquete probado: cada escalón añade garan
 <section id="ejercicios" class="level2">
 <h2 class="anchored" data-anchor-id="ejercicios">Ejercicios</h2>
 <div id="j3-2-testsets" class="ejercicio" data-tipo="numerico" data-respuesta="20" data-tol="0%" data-unidad="conjuntos">
-<p>¿Cuántos <code>@testset</code> tiene <code>Resonancia.jl/test/runtests.jl</code>?</p>
+<p>¿Cuántos <code>@testset</code> tiene <code>JuliaDo.jl/test/runtests.jl</code>?</p>
 <div class="solucion">
 <p>20 (el valor <code>testsets</code> del paso de anatomía; puede crecer si se añaden pruebas).</p>
 </div>
@@ -811,8 +799,8 @@ Figura&nbsp;1: Del código suelto al paquete probado: cada escalón añade garan
 <p>Tienes una función <code>descriptores</code> en la página J1.4 y la quieres usar también en dos unidades de M. ¿Qué pasos das según las reglas del curso?</p>
 <div class="criterios">
 <ul>
-<li>La mueves a <code>Resonancia.jl</code> con docstring (con unidades) y un test, y no copias el código entre páginas.</li>
-<li>Las páginas la cargan con <code>using Resonancia</code>; si cambia la versión del paquete, se vuelve a renderizar lo que dependa de ella.</li>
+<li>La mueves a <code>JuliaDo.jl</code> con docstring (con unidades) y un test, y no copias el código entre páginas.</li>
+<li>Las páginas la cargan con <code>using JuliaDo</code>; si cambia la versión del paquete, se vuelve a renderizar lo que dependa de ella.</li>
 </ul>
 </div>
 </div>
@@ -1337,7 +1325,8 @@ Figura&nbsp;1: Del código suelto al paquete probado: cada escalón añade garan
   /* ------------------------------------------------------------------ */
   /* Almacenamiento local (con tolerancia a que no exista)               */
   /* ------------------------------------------------------------------ */
-  const PREFIJO = "resonancia:ej:" + (typeof location !== "undefined" ? location.pathname : "");
+  // Prefijo histórico de las claves: se conserva para no borrar las respuestas ya guardadas.
+  const PREFIJO = "resonancia:ej:" +(typeof location !== "undefined" ? location.pathname : "");
 
   function leer(id) {
     try {
@@ -1621,7 +1610,7 @@ Figura&nbsp;1: Del código suelto al paquete probado: cada escalón añade garan
       el("div", { class: "ej-botones" },
         el("button", { type: "button", class: "ej-btn ej-btn-sec", text: "Descargar mis respuestas", onclick: () => {
           const blob = new Blob([JSON.stringify({ pagina: location.pathname, fecha: new Date().toISOString(), respuestas: todos() }, null, 2)], { type: "application/json" });
-          const a = el("a", { href: URL.createObjectURL(blob), download: "resonancia-respuestas.json" }); a.click();
+          const a = el("a", { href: URL.createObjectURL(blob), download: "juliado-respuestas.json" }); a.click();
         } }),
         el("button", { type: "button", class: "ej-btn ej-btn-sec", text: "Borrar mis respuestas", onclick: () => {
           if (confirm("¿Borrar todas tus respuestas y tu progreso en esta página?")) { borrarTodo(); location.reload(); }

@@ -205,18 +205,6 @@ window.Quarto = {
     <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">Acerca de</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/resonancia/"> 
-<span class="menu-text">Resonancia</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/matematicado/"> 
-<span class="menu-text">matematicado</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/claudedo/"> 
-<span class="menu-text">ClaudeDo</span></a>
-  </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/me1catrr/juliado"> <i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
@@ -559,7 +547,7 @@ window.Quarto = {
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a> t_estable_ms <span class="op">=</span> <span class="fu">round</span>(<span class="fl">1e3</span> <span class="op">*</span> <span class="pp">@belapsed</span>(<span class="fu">suma_estable</span>(<span class="op">$</span>x)), digits<span class="op">=</span><span class="fl">3</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="1">
-<pre><code>(tipos_inestable = Any[Union{Float64, Int64}], tipos_estable = Any[Float64], t_inestable_ms = 0.484, t_estable_ms = 0.484)</code></pre>
+<pre><code>(tipos_inestable = Any[Union{Float64, Int64}], tipos_estable = Any[Float64], t_inestable_ms = 0.856, t_estable_ms = 0.856)</code></pre>
 </div>
 </div>
 <p>El tipo devuelto por la primera es <code>Union{Float64, Int64}</code>: <strong>inestable</strong>, y aun así, <strong>no es más lenta</strong>. Julia sabe manejar eficientemente uniones pequeñas de tipos, así que no toda inestabilidad cuesta lo mismo. Lo que sí cuesta es perder por completo la información de tipos, por ejemplo con un contenedor <code>Vector{Any}</code>:</p>
@@ -572,7 +560,7 @@ window.Quarto = {
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>(tipo_contenedor <span class="op">=</span> (<span class="fu">eltype</span>(x), <span class="fu">eltype</span>(xa)), veces_mas_lento <span class="op">=</span> <span class="fu">round</span>(t_any <span class="op">/</span> t_f64), bytes_asignados_Any <span class="op">=</span> <span class="pp">@allocated</span>(<span class="fu">suma_estable</span>(xa)))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="1">
-<pre><code>(tipo_contenedor = (Float64, Any), veces_mas_lento = 18.0, bytes_asignados_Any = 16000000)</code></pre>
+<pre><code>(tipo_contenedor = (Float64, Any), veces_mas_lento = 13.0, bytes_asignados_Any = 16000000)</code></pre>
 </div>
 </div>
 <p>Con <code>Vector{Any}</code> cada elemento es un objeto en memoria, hay que comprobar su tipo en cada iteración y se asigna memoria en el bucle: unas 20 veces más lento en esta medida (19). La herramienta para ver estos problemas es <code>@code_warntype f(x)</code>, que marca en rojo los tipos no concretos; <code>Base.return_types</code> da la misma información en una línea.</p>
@@ -612,7 +600,7 @@ window.Quarto = {
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a> veces_mas_lento <span class="op">=</span> <span class="fu">round</span>(t_global <span class="op">/</span> t_f64))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="1">
-<pre><code>(con_global_ms = 11.34, con_argumento_ms = 0.484, veces_mas_lento = 23.0)</code></pre>
+<pre><code>(con_global_ms = 14.24, con_argumento_ms = 0.856, veces_mas_lento = 17.0)</code></pre>
 </div>
 </div>
 <p>Es el motivo por el que en J1.3 se recomendaba meter los cálculos en funciones: no solo evita el problema de ámbito, sino que es mucho más rápido.</p>
@@ -665,26 +653,26 @@ Tabla&nbsp;1: Cuatro versiones de la misma suma sobre un vector de <span class="
 <tr class="odd">
 <td>cortes con copia</td>
 <td>24,0</td>
-<td>0,64</td>
+<td>0,66</td>
 <td>1,0</td>
 </tr>
 <tr class="even">
 <td>vistas</td>
 <td>8,0</td>
-<td>0,25</td>
-<td>2,6</td>
+<td>0,30</td>
+<td>2,2</td>
 </tr>
 <tr class="odd">
 <td>bucle</td>
 <td>0,0</td>
-<td>0,56</td>
-<td>1,1</td>
+<td>0,86</td>
+<td>0,8</td>
 </tr>
 <tr class="even">
 <td>bucle con <code>@simd</code></td>
 <td>0,0</td>
-<td>0,12</td>
-<td>5,4</td>
+<td>0,14</td>
+<td>4,6</td>
 </tr>
 </tbody>
 </table>
@@ -777,7 +765,7 @@ Knuth, Donald E. 1974. <span>«Structured Programming with go to Statements»</s
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>(mediciones <span class="op">=</span> med,)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="1">
-<pre><code>(mediciones = [(nombre = "copias", bytes = 70789376, ms = 2.677833), (nombre = "vistas", bytes = 1280, ms = 0.944916), (nombre = "bucle @simd", bytes = 1280, ms = 0.970458), (nombre = "rms_por_ventana (paquete)", bytes = 2560, ms = 0.949459)],)</code></pre>
+<pre><code>(mediciones = [(nombre = "copias", bytes = 70789376, ms = 3.293416), (nombre = "vistas", bytes = 1280, ms = 1.1532090000000002), (nombre = "bucle @simd", bytes = 1280, ms = 1.268667), (nombre = "rms_por_ventana (paquete)", bytes = 2560, ms = 1.153)],)</code></pre>
 </div>
 </div>
 <div id="cell-fig-dia" class="cell" data-execution_count="1">
@@ -1404,7 +1392,8 @@ Figura&nbsp;2: Procesar un día de registros (8,64 millones de muestras) con cua
   /* ------------------------------------------------------------------ */
   /* Almacenamiento local (con tolerancia a que no exista)               */
   /* ------------------------------------------------------------------ */
-  const PREFIJO = "resonancia:ej:" + (typeof location !== "undefined" ? location.pathname : "");
+  // Prefijo histórico de las claves: se conserva para no borrar las respuestas ya guardadas.
+  const PREFIJO = "resonancia:ej:" +(typeof location !== "undefined" ? location.pathname : "");
 
   function leer(id) {
     try {
@@ -1688,7 +1677,7 @@ Figura&nbsp;2: Procesar un día de registros (8,64 millones de muestras) con cua
       el("div", { class: "ej-botones" },
         el("button", { type: "button", class: "ej-btn ej-btn-sec", text: "Descargar mis respuestas", onclick: () => {
           const blob = new Blob([JSON.stringify({ pagina: location.pathname, fecha: new Date().toISOString(), respuestas: todos() }, null, 2)], { type: "application/json" });
-          const a = el("a", { href: URL.createObjectURL(blob), download: "resonancia-respuestas.json" }); a.click();
+          const a = el("a", { href: URL.createObjectURL(blob), download: "juliado-respuestas.json" }); a.click();
         } }),
         el("button", { type: "button", class: "ej-btn ej-btn-sec", text: "Borrar mis respuestas", onclick: () => {
           if (confirm("¿Borrar todas tus respuestas y tu progreso en esta página?")) { borrarTodo(); location.reload(); }

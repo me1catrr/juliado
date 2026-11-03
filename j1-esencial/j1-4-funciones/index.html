@@ -205,18 +205,6 @@ window.Quarto = {
     <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">Acerca de</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/resonancia/"> 
-<span class="menu-text">Resonancia</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/matematicado/"> 
-<span class="menu-text">matematicado</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/claudedo/"> 
-<span class="menu-text">ClaudeDo</span></a>
-  </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/me1catrr/juliado"> <i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
@@ -487,7 +475,7 @@ window.Quarto = {
 
 
 <p><img src="fig/portada.svg" class="portada img-fluid" alt="Una señal con dos frecuencias entra por la izquierda en una caja etiquetada descriptores(x) y de ella sale a la derecha una lista con cuatro valores: rms, pico, cresta y curtosis"></p>
-<p>Una función es la unidad mínima de trabajo reutilizable: recibe datos, hace un cálculo y devuelve un resultado. En el curso, todo análisis de una señal acaba siendo una cadena de funciones: quitar la media, calcular un espectro, buscar picos. Aquí se aprende a escribirlas bien (con argumentos con nombre, varios valores de retorno y documentación) y a combinarlas. Como ejemplo se construyen los <strong>descriptores temporales</strong> que se usarán en <a href="https://me1catrr.github.io/resonancia/mse/m03-senales-i/">M3.2</a>: RMS, pico, factor de cresta y curtosis.</p>
+<p>Una función es la unidad mínima de trabajo reutilizable: recibe datos, hace un cálculo y devuelve un resultado. En el curso, todo análisis de una señal acaba siendo una cadena de funciones: quitar la media, calcular un espectro, buscar picos. Aquí se aprende a escribirlas bien (con argumentos con nombre, varios valores de retorno y documentación) y a combinarlas. Como ejemplo se construyen los <strong>descriptores temporales</strong> que se usarán en el resto del curso: RMS, pico, factor de cresta y curtosis.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -512,7 +500,7 @@ window.Quarto = {
 <li>encadenar funciones con <code>|&gt;</code> y con <code>∘</code>.</li>
 </ul>
 <p><strong>Prerrequisitos.</strong> <a href="../../j1-esencial/j1-3-tipos/index.html">J1.3</a>: tipos, bucles y ámbito.</p>
-<p><strong>Reparto con otras unidades.</strong> Aquí se trata la sintaxis de las funciones; el despacho múltiple (varios métodos con el mismo nombre) está en <a href="../../j1-esencial/j1-8-tipos-propios/index.html">J1.8</a>, y el significado físico de los descriptores, en M3.2.</p>
+<p><strong>Reparto con otras unidades.</strong> Aquí se trata la sintaxis de las funciones; el despacho múltiple (varios métodos con el mismo nombre) está en <a href="../../j1-esencial/j1-8-tipos-propios/index.html">J1.8</a>.</p>
 </section>
 <section id="teoría-breve" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="teoría-breve">Teoría breve</h2>
@@ -574,7 +562,7 @@ window.Quarto = {
 </section>
 <section id="j1-4-3" class="level3">
 <h3 class="anchored" data-anchor-id="j1-4-3">J1.4.3 Docstrings</h3>
-<p>Un <strong>docstring</strong> es una cadena de texto justo antes de la función. Es lo que muestra <code>?descriptores</code> en el REPL y lo que usa la documentación del paquete. En el curso se sigue la convención de <code>Resonancia.jl</code>: primera línea con la firma, una frase que explica qué hace, los argumentos con sus <strong>unidades</strong> y, si ayuda, un ejemplo.</p>
+<p>Un <strong>docstring</strong> es una cadena de texto justo antes de la función. Es lo que muestra <code>?descriptores</code> en el REPL y lo que usa la documentación del paquete. En el curso se sigue la convención de <code>JuliaDo.jl</code>: primera línea con la firma, una frase que explica qué hace, los argumentos con sus <strong>unidades</strong> y, si ayuda, un ejemplo.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="st">    rms(x) -&gt; Float64</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -598,7 +586,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Una función sin documentar es una función que dentro de un mes nadie, tampoco quien la escribió, sabrá si usar. Y una función que sirve en varias páginas no se copia: se mueve a <code>Resonancia.jl</code> con su docstring y su test (regla del curso).</p>
+<p>Una función sin documentar es una función que dentro de un mes nadie, tampoco quien la escribió, sabrá si usar. Y una función que sirve en varias páginas no se copia: se mueve a <code>JuliaDo.jl</code> con su docstring y su test (regla del curso).</p>
 </div>
 </div>
 </section>
@@ -728,7 +716,7 @@ Lauwens, Ben, y Allen B. Downey. 2019. <em>Think Julia: How to Think Like a Comp
 </div>
 </div>
 <p>La curtosis de una distribución normal vale 3; una senoide pura, 1,5. Esta señal, suma de dos senoides con algo de ruido, queda en 2,03: cerca de lo sinusoidal. Más adelante, una curtosis alta delatará impactos o defectos.</p>
-<p><strong>Paso 2. Por ventanas.</strong> Una comprensión recorre la señal en trozos de 200 muestras (2 s) y aplica la función a cada uno. Se comprueba contra <code>rms_por_ventana</code> de <code>Resonancia.jl</code>.</p>
+<p><strong>Paso 2. Por ventanas.</strong> Una comprensión recorre la señal en trozos de 200 muestras (2 s) y aplica la función a cada uno. Se comprueba contra <code>rms_por_ventana</code> de <code>JuliaDo.jl</code>.</p>
 <div id="14" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Ver el código</summary>
@@ -805,7 +793,7 @@ Figura&nbsp;2: RMS y pico del valor absoluto de la señal de J1.1 en ventanas co
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Una función con argumento con nombre, que devuelve cuatro valores, documentada, contrastada con la del paquete y aplicada por ventanas con una comprensión. Es el esqueleto de cualquier análisis por tramos que se verá en M3 y M7.</p>
+<p>Una función con argumento con nombre, que devuelve cuatro valores, documentada, contrastada con la del paquete y aplicada por ventanas con una comprensión. Es el esqueleto de cualquier análisis por tramos, como los de <a href="../../j2-datos/j2-4-makie/index.html">J2.4</a> y <a href="../../j3-computacion/j3-8-senales/index.html">J3.8</a>.</p>
 </div>
 </div>
 </section>
@@ -1364,7 +1352,8 @@ Figura&nbsp;2: RMS y pico del valor absoluto de la señal de J1.1 en ventanas co
   /* ------------------------------------------------------------------ */
   /* Almacenamiento local (con tolerancia a que no exista)               */
   /* ------------------------------------------------------------------ */
-  const PREFIJO = "resonancia:ej:" + (typeof location !== "undefined" ? location.pathname : "");
+  // Prefijo histórico de las claves: se conserva para no borrar las respuestas ya guardadas.
+  const PREFIJO = "resonancia:ej:" +(typeof location !== "undefined" ? location.pathname : "");
 
   function leer(id) {
     try {
@@ -1648,7 +1637,7 @@ Figura&nbsp;2: RMS y pico del valor absoluto de la señal de J1.1 en ventanas co
       el("div", { class: "ej-botones" },
         el("button", { type: "button", class: "ej-btn ej-btn-sec", text: "Descargar mis respuestas", onclick: () => {
           const blob = new Blob([JSON.stringify({ pagina: location.pathname, fecha: new Date().toISOString(), respuestas: todos() }, null, 2)], { type: "application/json" });
-          const a = el("a", { href: URL.createObjectURL(blob), download: "resonancia-respuestas.json" }); a.click();
+          const a = el("a", { href: URL.createObjectURL(blob), download: "juliado-respuestas.json" }); a.click();
         } }),
         el("button", { type: "button", class: "ej-btn ej-btn-sec", text: "Borrar mis respuestas", onclick: () => {
           if (confirm("¿Borrar todas tus respuestas y tu progreso en esta página?")) { borrarTodo(); location.reload(); }

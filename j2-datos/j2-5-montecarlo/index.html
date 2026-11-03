@@ -208,18 +208,6 @@ window.Quarto = {
     <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">Acerca de</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/resonancia/"> 
-<span class="menu-text">Resonancia</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/matematicado/"> 
-<span class="menu-text">matematicado</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/claudedo/"> 
-<span class="menu-text">ClaudeDo</span></a>
-  </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/me1catrr/juliado"> <i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
@@ -1009,7 +997,7 @@ Figura&nbsp;3: Distribución de las tres frecuencias propias con rigideces del 5
 </div>
 </div>
 <p>Asimetrías muy pequeñas y curtosis casi nula: la normal describe bien el resultado, y entonces «media ± 1,96 desviaciones» es una buena forma de dar el intervalo del 95 %.</p>
-<p><strong>Paso 6. Para qué sirve.</strong> En J1.7 y J2.4, un daño del 10 % en el entrepiso 2 bajaba la tercera frecuencia unos 0,14 Hz (de 4,390 a 4,254 Hz). Con las incertidumbres de este modelo, la frecuencia del tercer modo del edificio <strong>sano</strong> tiene un intervalo del 95 % de ±0,16 Hz: <strong>mayor que el efecto del daño</strong>. Por eso no se puede detectar el daño comparando una frecuencia medida con la de un modelo con parámetros inciertos; se compara <strong>el edificio consigo mismo</strong> en dos momentos (de ahí los contrastes de J2.6 y el seguimiento de M7).</p>
+<p><strong>Paso 6. Para qué sirve.</strong> En J1.7 y J2.4, un daño del 10 % en el entrepiso 2 bajaba la tercera frecuencia unos 0,14 Hz (de 4,390 a 4,254 Hz). Con las incertidumbres de este modelo, la frecuencia del tercer modo del edificio <strong>sano</strong> tiene un intervalo del 95 % de ±0,16 Hz: <strong>mayor que el efecto del daño</strong>. Por eso no se puede detectar el daño comparando una frecuencia medida con la de un modelo con parámetros inciertos; se compara <strong>el edificio consigo mismo</strong> en dos momentos (de ahí los contrastes de J2.6).</p>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <p>La versión probada con <code>pytest</code> está en <code>python/montecarlo.py</code> (<code>frecuencias</code>, <code>propagacion</code>, <code>sigma_lineal</code>). Los generadores de NumPy y Julia son distintos, así que <strong>no se comparan muestras sino estadísticos</strong>: la prueba comprueba que la desviación de la simulación de Python coincide con la propagación lineal dentro del 5 %, y que esta coincide con la de Julia.</p>
@@ -1050,7 +1038,7 @@ Figura&nbsp;3: Distribución de las tres frecuencias propias con rigideces del 5
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>«Con Julia, <code>--project=.</code>, <code>Distributions.jl</code> y <code>Resonancia.jl</code>: para el edificio de tres plantas (masas de 2·10⁵ kg y rigideces de 5·10⁷, 5·10⁷ y 4·10⁷ N/m; modelo con <code>edificio_cortante</code> y <code>modos_propios</code>), sortea 20 000 muestras de las rigideces con incertidumbre normal del 5 % y de las masas del 2 % (independientes), con un generador local <code>Xoshiro(2026)</code>. Calcula con cada muestra las tres frecuencias propias y dame la media, la desviación típica y el intervalo del 95 % de cada una. Contrasta la desviación típica con la propagación lineal (derivadas por diferencias centrales) y dime qué parámetro aporta más varianza a cada frecuencia. No inventes cifras: si algo no sale, dilo. Indica la versión de Julia y la semilla.»</p>
+<p>«Con Julia, <code>--project=.</code>, <code>Distributions.jl</code> y <code>JuliaDo.jl</code>: para el edificio de tres plantas (masas de 2·10⁵ kg y rigideces de 5·10⁷, 5·10⁷ y 4·10⁷ N/m; modelo con <code>edificio_cortante</code> y <code>modos_propios</code>), sortea 20 000 muestras de las rigideces con incertidumbre normal del 5 % y de las masas del 2 % (independientes), con un generador local <code>Xoshiro(2026)</code>. Calcula con cada muestra las tres frecuencias propias y dame la media, la desviación típica y el intervalo del 95 % de cada una. Contrasta la desviación típica con la propagación lineal (derivadas por diferencias centrales) y dime qué parámetro aporta más varianza a cada frecuencia. No inventes cifras: si algo no sale, dilo. Indica la versión de Julia y la semilla.»</p>
 <p><strong>Verifica.</strong> (a) Que las desviaciones típicas son del orden de 0,019, 0,055 y 0,080 Hz (1,8 % de coeficiente de variación) y que la media coincide con el valor nominal (1,105, 2,939 y 4,390 Hz). (b) Que la propagación lineal da valores a menos de un 2 % de los de Monte Carlo. (c) Que el primer modo depende sobre todo de <span class="math inline">\(k_1\)</span>, el segundo de <span class="math inline">\(k_3\)</span> y el tercero de <span class="math inline">\(k_2\)</span>. (d) Que usa un generador local con semilla y anota la versión de Julia. (e) Que no concluye «hay daño» de una diferencia menor que el intervalo del 95 %.</p>
 </div>
 </div>
@@ -1605,7 +1593,8 @@ Figura&nbsp;3: Distribución de las tres frecuencias propias con rigideces del 5
   /* ------------------------------------------------------------------ */
   /* Almacenamiento local (con tolerancia a que no exista)               */
   /* ------------------------------------------------------------------ */
-  const PREFIJO = "resonancia:ej:" + (typeof location !== "undefined" ? location.pathname : "");
+  // Prefijo histórico de las claves: se conserva para no borrar las respuestas ya guardadas.
+  const PREFIJO = "resonancia:ej:" +(typeof location !== "undefined" ? location.pathname : "");
 
   function leer(id) {
     try {
@@ -1889,7 +1878,7 @@ Figura&nbsp;3: Distribución de las tres frecuencias propias con rigideces del 5
       el("div", { class: "ej-botones" },
         el("button", { type: "button", class: "ej-btn ej-btn-sec", text: "Descargar mis respuestas", onclick: () => {
           const blob = new Blob([JSON.stringify({ pagina: location.pathname, fecha: new Date().toISOString(), respuestas: todos() }, null, 2)], { type: "application/json" });
-          const a = el("a", { href: URL.createObjectURL(blob), download: "resonancia-respuestas.json" }); a.click();
+          const a = el("a", { href: URL.createObjectURL(blob), download: "juliado-respuestas.json" }); a.click();
         } }),
         el("button", { type: "button", class: "ej-btn ej-btn-sec", text: "Borrar mis respuestas", onclick: () => {
           if (confirm("¿Borrar todas tus respuestas y tu progreso en esta página?")) { borrarTodo(); location.reload(); }

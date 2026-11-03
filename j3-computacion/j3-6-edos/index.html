@@ -205,18 +205,6 @@ window.Quarto = {
     <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">Acerca de</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/resonancia/"> 
-<span class="menu-text">Resonancia</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/matematicado/"> 
-<span class="menu-text">matematicado</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/claudedo/"> 
-<span class="menu-text">ClaudeDo</span></a>
-  </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/me1catrr/juliado"> <i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
@@ -503,7 +491,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Tiempo orientativo: 120 minutos.</strong> Objetivos (4), teoría en ocho píldoras (30), práctica guiada (40), «Pídeselo a Claude» (12), ejercicios (32) y cierre (2). <strong>Todos los datos se generan en la página</strong> (parámetros declarados y, donde hay azar, semilla fija), así que se conoce la respuesta correcta. El oscilador de 1 GDL es el del edificio de la vía M (masa <span class="math inline">\(2\cdot10^{5}\)</span> kg, <span class="math inline">\(f_0=2{,}94\)</span> Hz, <span class="math inline">\(\zeta=2\ \%\)</span>); el edificio es el de tres plantas de M2; <strong>el mástil del viento es un ejemplo ilustrativo inventado</strong>, sin relación con ninguna estructura real ni con una norma. Se usan <code>OrdinaryDiffEq.jl</code> y las funciones de <code>Resonancia.jl</code>.</p>
+<p><strong>Tiempo orientativo: 120 minutos.</strong> Objetivos (4), teoría en ocho píldoras (30), práctica guiada (40), «Pídeselo a Claude» (12), ejercicios (32) y cierre (2). <strong>Todos los datos se generan en la página</strong> (parámetros declarados y, donde hay azar, semilla fija), así que se conoce la respuesta correcta. El oscilador de 1 GDL es el del edificio del curso (masa <span class="math inline">\(2\cdot10^{5}\)</span> kg, <span class="math inline">\(f_0=2{,}94\)</span> Hz, <span class="math inline">\(\zeta=2\ \%\)</span>); el edificio es el de tres plantas; <strong>el mástil del viento es un ejemplo ilustrativo inventado</strong>, sin relación con ninguna estructura real ni con una norma. Se usan <code>OrdinaryDiffEq.jl</code> y las funciones de <code>JuliaDo.jl</code>.</p>
 </div>
 </div>
 <section id="objetivos-y-prerrequisitos" class="level2">
@@ -516,8 +504,8 @@ window.Quarto = {
 <li>reconocer un sistema rígido y elegir entre <code>Tsit5</code> y un método para sistemas rígidos (<code>Rodas5P</code>, <code>FBDF</code>) con un argumento numérico;</li>
 <li>simular un oscilador forzado, uno no lineal (Duffing) y la respuesta de un mástil al viento, y detectar sucesos con una función de <em>callback</em>.</li>
 </ul>
-<p><strong>Prerrequisitos.</strong> El curso no los impone en el temario; conviene <a href="../../j3-computacion/j3-3-algebra-numerica/index.html">J3.3</a> (valores propios y matriz exponencial), <a href="../../j3-computacion/j3-5-integracion-ad/index.html">J3.5</a> (error y tolerancias) y, de la vía M, el oscilador de 1 GDL (<a href="https://me1catrr.github.io/resonancia/mse/m05-vibraciones-i/">M5</a>) y sus sistemas de varios grados de libertad (<a href="https://me1catrr.github.io/resonancia/mse/m06-vibraciones-ii/">M6</a>).</p>
-<p><strong>Reparto con otras unidades.</strong> La teoría de vibraciones está en M5 y M6; la respuesta en frecuencia, en M7 y J3.7. Aquí se <strong>integra en el tiempo</strong> y se contrasta con esas soluciones.</p>
+<p><strong>Prerrequisitos.</strong> El curso no los impone en el temario; conviene <a href="../../j3-computacion/j3-3-algebra-numerica/index.html">J3.3</a> (valores propios y matriz exponencial) y <a href="../../j3-computacion/j3-5-integracion-ad/index.html">J3.5</a> (error y tolerancias).</p>
+<p><strong>Reparto con otras unidades.</strong> La respuesta en frecuencia se trata en <a href="../../j3-computacion/j3-7-optimizacion/index.html">J3.7</a>. Aquí se <strong>integra en el tiempo</strong> y se contrasta con esas soluciones.</p>
 </section>
 <section id="teoría-breve" class="level2">
 <h2 class="anchored" data-anchor-id="teoría-breve">Teoría breve</h2>
@@ -528,7 +516,7 @@ window.Quarto = {
 \ddot x+2\zeta\omega_0\dot x+\omega_0^2x=0\quad\Longrightarrow\quad
 \begin{cases}\dot x=v\\ \dot v=-2\zeta\omega_0\,v-\omega_0^2\,x\end{cases},\qquad \mathbf u=\begin{bmatrix}x\\v\end{bmatrix}.
 \tag{1}\]</span></span></p>
-<p>Es un sistema <strong>lineal</strong>, <span class="math inline">\(\dot{\mathbf u}=\mathbf A\mathbf u\)</span> con <span class="math inline">\(\mathbf A=\begin{bmatrix}0&amp;1\\-\omega_0^2&amp;-2\zeta\omega_0\end{bmatrix}\)</span>, y su solución exacta se conoce (<code>respuesta_libre_1gdl</code>, de <code>Resonancia.jl</code>): por eso sirve para <strong>medir</strong> el error de cualquier integrador. El oscilador es el del edificio de la vía M, con masa <span class="math inline">\(2\cdot10^{5}\)</span> kg, <span class="math inline">\(f_0=2{,}94\)</span> Hz (periodo <span class="math inline">\(T=0{,}340\)</span> s) y <span class="math inline">\(\zeta=2\ \%\)</span>; se parte de un desplazamiento de 1 mm sin velocidad.</p>
+<p>Es un sistema <strong>lineal</strong>, <span class="math inline">\(\dot{\mathbf u}=\mathbf A\mathbf u\)</span> con <span class="math inline">\(\mathbf A=\begin{bmatrix}0&amp;1\\-\omega_0^2&amp;-2\zeta\omega_0\end{bmatrix}\)</span>, y su solución exacta se conoce (<code>respuesta_libre_1gdl</code>, de <code>JuliaDo.jl</code>): por eso sirve para <strong>medir</strong> el error de cualquier integrador. El oscilador es el del edificio del curso, con masa <span class="math inline">\(2\cdot10^{5}\)</span> kg, <span class="math inline">\(f_0=2{,}94\)</span> Hz (periodo <span class="math inline">\(T=0{,}340\)</span> s) y <span class="math inline">\(\zeta=2\ \%\)</span>; se parte de un desplazamiento de 1 mm sin velocidad.</p>
 <p>Integrar es avanzar con un paso <span class="math inline">\(h\)</span>. <strong>Euler explícito</strong> usa la pendiente del principio del paso:</p>
 <p><span id="eq-euler-explicito"><span class="math display">\[
 \mathbf u_{n+1}=\mathbf u_n+h\,\mathbf f(\mathbf u_n)=(\mathbf I+h\mathbf A)\,\mathbf u_n.
@@ -1165,7 +1153,7 @@ Figura&nbsp;6: Oscilador forzado con F₀ = 10 kN. (a) A la frecuencia natural, 
 <section id="j3-6-7" class="level3">
 <h3 class="anchored" data-anchor-id="j3-6-7">J3.6.7 Sistemas rígidos: cuando el paso lo manda el modo más rápido</h3>
 <p>Un sistema es <strong>rígido</strong> (<em>stiff</em>) cuando tiene dinámicas con escalas de tiempo muy distintas: una muy rápida, que se amortigua enseguida y ya no interesa, y otra lenta, que es la que se quiere seguir. Un método explícito como <code>Tsit5</code> debe mantener el paso <strong>estable</strong> respecto al modo rápido aunque su efecto haya desaparecido, y el paso queda limitado por la estabilidad, no por la precisión. La medida habitual es la <strong>razón de rigidez</strong>: el cociente entre el mayor y el menor <span class="math inline">\(\lvert\mathrm{Re}\,\lambda\rvert\)</span> de los autovalores de la matriz del sistema.</p>
-<p>Ejemplo: el edificio de tres plantas de M2 con un sensor ficticio (masa de 1 kg) montado en la planta 3 con una rigidez de <span class="math inline">\(10^{9}\)</span> N/m y un amortiguamiento crítico por la mitad (<span class="math inline">\(\zeta_s=0{,}5\)</span>): un modo rápido de 5 kHz que se amortigua en décimas de milisegundo, junto a los modos del edificio (1,1 a 4,4 Hz). Se integran 20 s desde un desplazamiento de 1 mm en la planta 3 con tres métodos y la <strong>misma tolerancia</strong> (<span class="math inline">\(10^{-8}\)</span>), y se compara con la solución exacta <span class="math inline">\(\mathbf u(t)=e^{\mathbf At}\mathbf u_0\)</span> (<code>expm</code>):</p>
+<p>Ejemplo: el edificio de tres plantas con un sensor ficticio (masa de 1 kg) montado en la planta 3 con una rigidez de <span class="math inline">\(10^{9}\)</span> N/m y un amortiguamiento crítico por la mitad (<span class="math inline">\(\zeta_s=0{,}5\)</span>): un modo rápido de 5 kHz que se amortigua en décimas de milisegundo, junto a los modos del edificio (1,1 a 4,4 Hz). Se integran 20 s desde un desplazamiento de 1 mm en la planta 3 con tres métodos y la <strong>misma tolerancia</strong> (<span class="math inline">\(10^{-8}\)</span>), y se compara con la solución exacta <span class="math inline">\(\mathbf u(t)=e^{\mathbf At}\mathbf u_0\)</span> (<code>expm</code>):</p>
 <div id="34" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Ver el código</summary>
@@ -1561,7 +1549,7 @@ Figura&nbsp;9: Mástil bajo desprendimiento de vórtices (datos ilustrativos). (
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>«Con Julia, <code>--project=.</code>, <code>OrdinaryDiffEq</code> y <code>Resonancia.jl</code>: (1) integra con <code>Tsit5</code> el oscilador forzado <code>m x'' + c x' + k x = F0 cos(2π fe t)</code> con <code>m = 5000 kg</code>, <code>f0 = 2 Hz</code>, <code>ζ = 0,005</code>, <code>F0 = 64,8 N</code> y <code>fe = 2 Hz</code> durante 300 s desde el reposo, y dime la amplitud de los últimos 50 s; (2) compárala con <code>F0 * abs(frf_1gdl(fe, f0, ζ, 1/k))</code>; (3) repite con <code>reltol</code> de <code>1e-3</code>, <code>1e-6</code> y <code>1e-9</code> y dime el número de pasos y el error respecto a la solución teórica; (4) con un <code>ContinuousCallback</code>, dime el instante en que |x| supera 5 mm. Explica qué tolerancias has usado y por qué.»</p>
+<p>«Con Julia, <code>--project=.</code>, <code>OrdinaryDiffEq</code> y <code>JuliaDo.jl</code>: (1) integra con <code>Tsit5</code> el oscilador forzado <code>m x'' + c x' + k x = F0 cos(2π fe t)</code> con <code>m = 5000 kg</code>, <code>f0 = 2 Hz</code>, <code>ζ = 0,005</code>, <code>F0 = 64,8 N</code> y <code>fe = 2 Hz</code> durante 300 s desde el reposo, y dime la amplitud de los últimos 50 s; (2) compárala con <code>F0 * abs(frf_1gdl(fe, f0, ζ, 1/k))</code>; (3) repite con <code>reltol</code> de <code>1e-3</code>, <code>1e-6</code> y <code>1e-9</code> y dime el número de pasos y el error respecto a la solución teórica; (4) con un <code>ContinuousCallback</code>, dime el instante en que |x| supera 5 mm. Explica qué tolerancias has usado y por qué.»</p>
 <p><strong>Verifica.</strong> (a) Que la amplitud permanente es <span class="math inline">\(8{,}207\)</span> mm y que coincide con la fórmula en al menos cuatro cifras. (b) Que el número de pasos <strong>aumenta</strong> al bajar la tolerancia y el error <strong>baja</strong>, y que Claude ha medido el error contra una solución conocida, no solo con el número de pasos. (c) Que el instante en que se supera 5 mm es cercano a 15,0 s y que no ha sido leído de una malla de tiempos. (d) Que ha medido la amplitud <strong>después</strong> del transitorio (la constante de tiempo es 15,9 s). (e) Que no ha cambiado de método o de tolerancia sin decirlo ni ha elegido el mejor de varias ejecuciones. (f) Que <code>sol.stats</code> y no el reloj ha dado el coste, y que las unidades son SI.</p>
 </div>
 </div>
@@ -2137,7 +2125,8 @@ Ewins, David J. 2000. <em>Modal Testing: Theory, Practice and Application</em>. 
   /* ------------------------------------------------------------------ */
   /* Almacenamiento local (con tolerancia a que no exista)               */
   /* ------------------------------------------------------------------ */
-  const PREFIJO = "resonancia:ej:" + (typeof location !== "undefined" ? location.pathname : "");
+  // Prefijo histórico de las claves: se conserva para no borrar las respuestas ya guardadas.
+  const PREFIJO = "resonancia:ej:" +(typeof location !== "undefined" ? location.pathname : "");
 
   function leer(id) {
     try {
@@ -2421,7 +2410,7 @@ Ewins, David J. 2000. <em>Modal Testing: Theory, Practice and Application</em>. 
       el("div", { class: "ej-botones" },
         el("button", { type: "button", class: "ej-btn ej-btn-sec", text: "Descargar mis respuestas", onclick: () => {
           const blob = new Blob([JSON.stringify({ pagina: location.pathname, fecha: new Date().toISOString(), respuestas: todos() }, null, 2)], { type: "application/json" });
-          const a = el("a", { href: URL.createObjectURL(blob), download: "resonancia-respuestas.json" }); a.click();
+          const a = el("a", { href: URL.createObjectURL(blob), download: "juliado-respuestas.json" }); a.click();
         } }),
         el("button", { type: "button", class: "ej-btn ej-btn-sec", text: "Borrar mis respuestas", onclick: () => {
           if (confirm("¿Borrar todas tus respuestas y tu progreso en esta página?")) { borrarTodo(); location.reload(); }

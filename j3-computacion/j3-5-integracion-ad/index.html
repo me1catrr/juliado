@@ -208,18 +208,6 @@ window.Quarto = {
     <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">Acerca de</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/resonancia/"> 
-<span class="menu-text">Resonancia</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/matematicado/"> 
-<span class="menu-text">matematicado</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/claudedo/"> 
-<span class="menu-text">ClaudeDo</span></a>
-  </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/me1catrr/juliado"> <i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
@@ -501,7 +489,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Tiempo orientativo: 90 minutos.</strong> Objetivos (4), teoría en cinco píldoras (18), práctica guiada (40), «Pídeselo a Claude» (12), ejercicios (14) y cierre (2). La viga y el edificio son los de la vía M, con datos <strong>sintéticos</strong>: las derivadas se contrastan con fórmulas exactas, de modo que se conoce la respuesta correcta.</p>
+<p><strong>Tiempo orientativo: 90 minutos.</strong> Objetivos (4), teoría en cinco píldoras (18), práctica guiada (40), «Pídeselo a Claude» (12), ejercicios (14) y cierre (2). La viga y el edificio son ejemplos de vibraciones, con datos <strong>sintéticos</strong>: las derivadas se contrastan con fórmulas exactas, de modo que se conoce la respuesta correcta.</p>
 </div>
 </div>
 <section id="objetivos-y-prerrequisitos" class="level2">
@@ -513,8 +501,8 @@ window.Quarto = {
 <li>derivar con <code>ForwardDiff.derivative</code>, <code>gradient</code> y <code>jacobian</code>, y combinar la derivación con una integral;</li>
 <li>obtener la matriz de sensibilidades de las frecuencias de un edificio respecto de sus rigideces por tres vías (fórmula, diferencias finitas, diferenciación automática), y usarla para ajustar el modelo a unas frecuencias medidas.</li>
 </ul>
-<p><strong>Prerrequisitos.</strong> El curso no los impone en el temario; conviene J3.3 (problema de valores propios generalizado), J3.4 (viga y raíces) y, para la teoría de las frecuencias y la matriz de rigidez, M5 y M6.</p>
-<p><strong>Reparto con otras unidades.</strong> La teoría de la sensibilidad modal y del <em>model updating</em> está en M12 y en L7; el ajuste por mínimos cuadrados no lineales con <code>LsqFit</code> y <code>Optim</code>, en J3.7. Aquí se calculan las derivadas que esos métodos consumen.</p>
+<p><strong>Prerrequisitos.</strong> El curso no los impone en el temario; conviene J3.3 (problema de valores propios generalizado) y J3.4 (viga y raíces).</p>
+<p><strong>Reparto con otras unidades.</strong> El ajuste por mínimos cuadrados no lineales con <code>LsqFit</code> y <code>Optim</code> está en <a href="../../j3-computacion/j3-7-optimizacion/index.html">J3.7</a>. Aquí se calculan las derivadas que esos métodos consumen.</p>
 </section>
 <section id="teoría-breve" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="teoría-breve">Teoría breve</h2>
@@ -685,7 +673,7 @@ Figura&nbsp;1: Error relativo de la derivada de la primera frecuencia de la viga
 <pre><code>(parametros = ["E", "I", "ρ", "A", "L"], elasticidades = [0.5, 0.5, -0.5, -0.5, -2.0])</code></pre>
 </div>
 </div>
-<p>Sale <span class="math inline">\((0{,}5;\ 0{,}5;\ -0{,}5;\ -0{,}5;\ -2)\)</span> con el redondeo a diez decimales: la longitud es el parámetro más influyente (un 1 % más de longitud baja la frecuencia un 2 %), seguida a la par por la rigidez y la masa. La derivación automática también atraviesa funciones que no son una fórmula, siempre que estén escritas con operaciones genéricas. El segundo ejemplo es la <strong>curvatura</strong> <span class="math inline">\(\varphi''\)</span> de un modo, que se necesita para la energía de deformación (J3.5.4) y que se obtiene derivando dos veces <strong>la propia función</strong> <code>forma_modal_viga</code> de <code>Resonancia.jl</code>, sin calcular su segunda derivada a mano:</p>
+<p>Sale <span class="math inline">\((0{,}5;\ 0{,}5;\ -0{,}5;\ -0{,}5;\ -2)\)</span> con el redondeo a diez decimales: la longitud es el parámetro más influyente (un 1 % más de longitud baja la frecuencia un 2 %), seguida a la par por la rigidez y la masa. La derivación automática también atraviesa funciones que no son una fórmula, siempre que estén escritas con operaciones genéricas. El segundo ejemplo es la <strong>curvatura</strong> <span class="math inline">\(\varphi''\)</span> de un modo, que se necesita para la energía de deformación (J3.5.4) y que se obtiene derivando dos veces <strong>la propia función</strong> <code>forma_modal_viga</code> de <code>JuliaDo.jl</code>, sin calcular su segunda derivada a mano:</p>
 <div id="14" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Ver el código</summary>
@@ -861,7 +849,7 @@ Figura&nbsp;2: Sensibilidad relativa de la frecuencia a una pérdida local de ri
 <section id="j3-5-5" class="level3">
 <h3 class="anchored" data-anchor-id="j3-5-5">J3.5.5 Sensibilidades para el ajuste de modelos (<em>model updating</em>)</h3>
 <p>Un modelo de elementos finitos tiene parámetros inciertos <span class="math inline">\(\boldsymbol\theta\)</span> (rigideces, masas) y se quiere ajustar a las frecuencias medidas <span class="math inline">\(\hat f_i\)</span>. Se linealiza: <span class="math inline">\(f_i(\boldsymbol\theta+\Delta\boldsymbol\theta)\approx f_i(\boldsymbol\theta)+\sum_jS_{ij}\Delta\theta_j\)</span>, con la <strong>matriz de sensibilidades</strong> <span class="math inline">\(S_{ij}=\partial f_i/\partial\theta_j\)</span>. Resolver <span class="math inline">\(\mathbf S\,\Delta\boldsymbol\theta=\hat{\mathbf f}-\mathbf f\)</span> y repetir es el método de Gauss–Newton. Para el problema <span class="math inline">\(\mathbf K\boldsymbol\varphi=\omega^2\mathbf M\boldsymbol\varphi\)</span> con modos normalizados a masa unidad, la sensibilidad de una frecuencia tiene una fórmula cerrada: <span class="math inline">\(\partial(\omega_i^2)/\partial\theta=\boldsymbol\varphi_i^{\mathsf T}(\partial\mathbf K/\partial\theta-\omega_i^2\,\partial\mathbf M/\partial\theta)\boldsymbol\varphi_i\)</span> y <span class="math inline">\(\partial f_i/\partial\theta=\partial(\omega_i^2)/\partial\theta\,/\,(8\pi^2f_i)\)</span>.</p>
-<p>El edificio de tres plantas (masas de <span class="math inline">\(2\cdot10^5\)</span> kg y rigideces de entrepiso <span class="math inline">\(5\cdot10^7\)</span>, <span class="math inline">\(5\cdot10^7\)</span> y <span class="math inline">\(4\cdot10^7\)</span> N/m) da, con la función <code>jacobiana_frecuencias_cortante</code> de <code>Resonancia.jl</code>, la matriz <span class="math inline">\(3\times3\)</span> de <span class="math inline">\(\partial f_i/\partial k_j\)</span>. Se compara con diferencias centradas y con la diferenciación automática. Como <code>eigen</code> no admite duales, se deriva el <strong>cociente de Rayleigh con el modo congelado</strong>, <span class="math inline">\(R(\mathbf k)=\boldsymbol\varphi_i^{\mathsf T}\mathbf K(\mathbf k)\boldsymbol\varphi_i/\boldsymbol\varphi_i^{\mathsf T}\mathbf M\boldsymbol\varphi_i\)</span>, que es estacionario en el modo propio y por eso su derivada <strong>es</strong> la del valor propio:</p>
+<p>El edificio de tres plantas (masas de <span class="math inline">\(2\cdot10^5\)</span> kg y rigideces de entrepiso <span class="math inline">\(5\cdot10^7\)</span>, <span class="math inline">\(5\cdot10^7\)</span> y <span class="math inline">\(4\cdot10^7\)</span> N/m) da, con la función <code>jacobiana_frecuencias_cortante</code> de <code>JuliaDo.jl</code>, la matriz <span class="math inline">\(3\times3\)</span> de <span class="math inline">\(\partial f_i/\partial k_j\)</span>. Se compara con diferencias centradas y con la diferenciación automática. Como <code>eigen</code> no admite duales, se deriva el <strong>cociente de Rayleigh con el modo congelado</strong>, <span class="math inline">\(R(\mathbf k)=\boldsymbol\varphi_i^{\mathsf T}\mathbf K(\mathbf k)\boldsymbol\varphi_i/\boldsymbol\varphi_i^{\mathsf T}\mathbf M\boldsymbol\varphi_i\)</span>, que es estacionario en el modo propio y por eso su derivada <strong>es</strong> la del valor propio:</p>
 <div id="22" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Ver el código</summary>
@@ -882,7 +870,7 @@ Figura&nbsp;2: Sensibilidad relativa de la frecuencia a una pérdida local de ri
 </div>
 </div>
 <p>La matriz de <strong>sensibilidades relativas</strong> <span class="math inline">\(\dfrac{k_j}{f_i}\dfrac{\partial f_i}{\partial k_j}\)</span> dice, por ejemplo, que el primer modo es sobre todo sensible a la rigidez del primer entrepiso (0,26), el segundo a la del tercero (0,31) y el tercero, a la del segundo (0,31). <strong>Cada fila suma 0,5</strong>: si todas las rigideces suben un 1 %, todas las frecuencias suben un 0,5 %. Es una comprobación gratuita, y la cumplen las tres. Las diferencias centradas coinciden con la fórmula hasta <span class="math inline">\(6\cdot10^{-10}\)</span> y la diferenciación automática, hasta el redondeo.</p>
-<p>Con la matriz se ajusta el modelo a unas frecuencias medidas. Se usa el estado C de M2 (un daño del 10 % en la rigidez del entrepiso 2) y las estimaciones por ventana de J2.8: media de 30 ventanas de 20 s (con errores típicos). Para no arrastrar el sesgo del estimador (que da 4,418 Hz para el estado A donde el modelo da 4,390), se ajustan las <strong>diferencias</strong> respecto del estado A: frecuencia objetivo = modelo de A + (media de C − media de A). <code>actualizar_rigideces</code> aplica Gauss–Newton con las sensibilidades de arriba, y la propagación de la incertidumbre usa la misma <span class="math inline">\(\mathbf S\)</span>: <span class="math inline">\(\operatorname{cov}(\hat{\mathbf k})=\mathbf S^{-1}\operatorname{cov}(\hat{\mathbf f})\,\mathbf S^{-\mathsf T}\)</span>.</p>
+<p>Con la matriz se ajusta el modelo a unas frecuencias medidas. Se usa el estado C del edificio (un daño del 10 % en la rigidez del entrepiso 2) y las estimaciones por ventana de J2.8: media de 30 ventanas de 20 s (con errores típicos). Para no arrastrar el sesgo del estimador (que da 4,418 Hz para el estado A donde el modelo da 4,390), se ajustan las <strong>diferencias</strong> respecto del estado A: frecuencia objetivo = modelo de A + (media de C − media de A). <code>actualizar_rigideces</code> aplica Gauss–Newton con las sensibilidades de arriba, y la propagación de la incertidumbre usa la misma <span class="math inline">\(\mathbf S\)</span>: <span class="math inline">\(\operatorname{cov}(\hat{\mathbf k})=\mathbf S^{-1}\operatorname{cov}(\hat{\mathbf f})\,\mathbf S^{-\mathsf T}\)</span>.</p>
 <div id="24" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Ver el código</summary>
@@ -1080,7 +1068,7 @@ Inman, Daniel J. 2017. <em>Vibration with Control</em>. 2.ª ed. Wiley.
 <span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>(microsegundos_por_jacobiana <span class="op">=</span> <span class="fu">round</span>.(<span class="fl">1e6</span> <span class="op">.*</span> [t_fd, t_formula, t_ad] <span class="op">./</span> <span class="fl">200</span>), orden <span class="op">=</span> [<span class="st">"diferencias centradas"</span>, <span class="st">"fórmula cerrada"</span>, <span class="st">"ForwardDiff"</span>])</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="1">
-<pre><code>(microsegundos_por_jacobiana = [85.0, 4.0, 4.0], orden = ["diferencias centradas", "fórmula cerrada", "ForwardDiff"])</code></pre>
+<pre><code>(microsegundos_por_jacobiana = [96.0, 5.0, 4.0], orden = ["diferencias centradas", "fórmula cerrada", "ForwardDiff"])</code></pre>
 </div>
 </div>
 <p>Los tiempos dependen del ordenador y de la compilación de la primera llamada (por eso se miden 200 repeticiones, tras una primera pasada). Lo habitual es que la fórmula cerrada sea la más rápida y que la diferenciación automática compita con las diferencias finitas, con la ventaja de ser exacta y de no necesitar elegir un paso. La conclusión es práctica: con una fórmula cerrada, úsala; si no la hay, <strong>la diferenciación automática es exacta y cuesta lo mismo</strong> que las diferencias finitas.</p>
@@ -1097,7 +1085,7 @@ Inman, Daniel J. 2017. <em>Vibration with Control</em>. 2.ª ed. Wiley.
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>«Con Julia, <code>--project=.</code>, <code>QuadGK.jl</code>, <code>ForwardDiff.jl</code> y <code>Resonancia.jl</code> (sin instalar paquetes nuevos): para el edificio de tres plantas de <code>edificio_tres_plantas()</code> (masas 2·10⁵ kg y rigideces 5·10⁷, 5·10⁷ y 4·10⁷ N/m, ya cargadas en <code>edificio_cortante</code>), calcula la matriz de sensibilidades ∂fᵢ/∂kⱼ de las tres frecuencias respecto de las tres rigideces de entrepiso de tres formas: con <code>jacobiana_frecuencias_cortante</code>, con diferencias centradas (paso de 10³ N/m) y con <code>ForwardDiff</code> derivando el cociente de Rayleigh con el modo fijo, porque <code>eigen</code> no admite números duales. Dame las sensibilidades relativas (kⱼ/fᵢ)∂fᵢ/∂kⱼ, comprueba que cada fila suma 0,5 y dime el error relativo máximo entre las tres. Después, con <code>actualizar_rigideces</code>, recupera las rigideces del estado C del edificio (el entrepiso 2 con un 10 % menos) a partir de sus tres frecuencias exactas. No inventes cifras: si algo no sale, dilo. Di que son datos sintéticos.»</p>
+<p>«Con Julia, <code>--project=.</code>, <code>QuadGK.jl</code>, <code>ForwardDiff.jl</code> y <code>JuliaDo.jl</code> (sin instalar paquetes nuevos): para el edificio de tres plantas de <code>edificio_tres_plantas()</code> (masas 2·10⁵ kg y rigideces 5·10⁷, 5·10⁷ y 4·10⁷ N/m, ya cargadas en <code>edificio_cortante</code>), calcula la matriz de sensibilidades ∂fᵢ/∂kⱼ de las tres frecuencias respecto de las tres rigideces de entrepiso de tres formas: con <code>jacobiana_frecuencias_cortante</code>, con diferencias centradas (paso de 10³ N/m) y con <code>ForwardDiff</code> derivando el cociente de Rayleigh con el modo fijo, porque <code>eigen</code> no admite números duales. Dame las sensibilidades relativas (kⱼ/fᵢ)∂fᵢ/∂kⱼ, comprueba que cada fila suma 0,5 y dime el error relativo máximo entre las tres. Después, con <code>actualizar_rigideces</code>, recupera las rigideces del estado C del edificio (el entrepiso 2 con un 10 % menos) a partir de sus tres frecuencias exactas. No inventes cifras: si algo no sale, dilo. Di que son datos sintéticos.»</p>
 <p><strong>Verifica.</strong> (a) Que usa <code>ForwardDiff</code> solo sobre funciones genéricas (el cociente de Rayleigh con el modo congelado) y que explica por qué no deriva a través de <code>eigen</code>. (b) Que las sensibilidades relativas son [0,261 0,170 0,069; 0,165 0,022 0,313; 0,074 0,308 0,118] y que cada fila suma 0,5. (c) Que el error relativo máximo entre la fórmula y las diferencias centradas es del orden de <span class="math inline">\(10^{-10}\)</span> y el de ForwardDiff, del redondeo. (d) Que la actualización converge en pocas iteraciones y devuelve <span class="math inline">\(k_2/k_{2,0}=0{,}9\)</span> (con las otras dos rigideces en 1). (e) Que no presenta ningún ajuste sin su error típico ni extrapola un resultado local.</p>
 </div>
 </div>
@@ -1653,7 +1641,8 @@ Inman, Daniel J. 2017. <em>Vibration with Control</em>. 2.ª ed. Wiley.
   /* ------------------------------------------------------------------ */
   /* Almacenamiento local (con tolerancia a que no exista)               */
   /* ------------------------------------------------------------------ */
-  const PREFIJO = "resonancia:ej:" + (typeof location !== "undefined" ? location.pathname : "");
+  // Prefijo histórico de las claves: se conserva para no borrar las respuestas ya guardadas.
+  const PREFIJO = "resonancia:ej:" +(typeof location !== "undefined" ? location.pathname : "");
 
   function leer(id) {
     try {
@@ -1937,7 +1926,7 @@ Inman, Daniel J. 2017. <em>Vibration with Control</em>. 2.ª ed. Wiley.
       el("div", { class: "ej-botones" },
         el("button", { type: "button", class: "ej-btn ej-btn-sec", text: "Descargar mis respuestas", onclick: () => {
           const blob = new Blob([JSON.stringify({ pagina: location.pathname, fecha: new Date().toISOString(), respuestas: todos() }, null, 2)], { type: "application/json" });
-          const a = el("a", { href: URL.createObjectURL(blob), download: "resonancia-respuestas.json" }); a.click();
+          const a = el("a", { href: URL.createObjectURL(blob), download: "juliado-respuestas.json" }); a.click();
         } }),
         el("button", { type: "button", class: "ej-btn ej-btn-sec", text: "Borrar mis respuestas", onclick: () => {
           if (confirm("¿Borrar todas tus respuestas y tu progreso en esta página?")) { borrarTodo(); location.reload(); }

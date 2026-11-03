@@ -205,18 +205,6 @@ window.Quarto = {
     <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">Acerca de</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/resonancia/"> 
-<span class="menu-text">Resonancia</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/matematicado/"> 
-<span class="menu-text">matematicado</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/claudedo/"> 
-<span class="menu-text">ClaudeDo</span></a>
-  </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/me1catrr/juliado"> <i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
@@ -450,7 +438,7 @@ window.Quarto = {
   <li><a href="#j1-2-1" id="toc-j1-2-1" class="nav-link" data-scroll-target="#j1-2-1">J1.2.1 El modo paquetes</a></li>
   <li><a href="#j1-2-2" id="toc-j1-2-2" class="nav-link" data-scroll-target="#j1-2-2">J1.2.2 <code>Project.toml</code> y <code>Manifest.toml</code></a></li>
   <li><a href="#j1-2-3" id="toc-j1-2-3" class="nav-link" data-scroll-target="#j1-2-3">J1.2.3 El entorno único del curso</a></li>
-  <li><a href="#j1-2-4" id="toc-j1-2-4" class="nav-link" data-scroll-target="#j1-2-4">J1.2.4 <code>Resonancia.jl</code>, el paquete local</a></li>
+  <li><a href="#j1-2-4" id="toc-j1-2-4" class="nav-link" data-scroll-target="#j1-2-4">J1.2.4 <code>JuliaDo.jl</code>, el paquete local</a></li>
   <li><a href="#j1-2-5" id="toc-j1-2-5" class="nav-link" data-scroll-target="#j1-2-5">J1.2.5 <code>Revise.jl</code></a></li>
   <li><a href="#j1-2-mas" id="toc-j1-2-mas" class="nav-link" data-scroll-target="#j1-2-mas">Para saber más</a></li>
   </ul></li>
@@ -487,7 +475,7 @@ window.Quarto = {
 
 
 <p><img src="fig/portada.svg" class="portada img-fluid" alt="A la izquierda, un fichero Project.toml con una lista de nombres de paquetes; una flecha etiquetada resolver lleva a la derecha, a un fichero Manifest.toml con la versión exacta de cada paquete"></p>
-<p>Un análisis de vibraciones que da un resultado hoy y otro distinto dentro de seis meses, o en el ordenador de un compañero, no sirve para vigilar una estructura. La causa más frecuente no es el algoritmo sino el <strong>entorno</strong>: una versión distinta de un paquete. Esta unidad explica cómo Julia fija el entorno, cómo se usa el entorno único del curso y cómo se trabaja con <code>Resonancia.jl</code>, el paquete local con las funciones reutilizables.</p>
+<p>Un análisis de vibraciones que da un resultado hoy y otro distinto dentro de seis meses, o en el ordenador de un compañero, no sirve para vigilar una estructura. La causa más frecuente no es el algoritmo sino el <strong>entorno</strong>: una versión distinta de un paquete. Esta unidad explica cómo Julia fija el entorno, cómo se usa el entorno único del curso y cómo se trabaja con <code>JuliaDo.jl</code>, el paquete local con las funciones reutilizables.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -508,11 +496,11 @@ window.Quarto = {
 <li>usar el modo paquetes (<code>]</code>) para ver, añadir y quitar paquetes;</li>
 <li>explicar la diferencia entre <code>Project.toml</code> y <code>Manifest.toml</code> y por qué se commitean los dos;</li>
 <li>reconstruir en otro ordenador el entorno del curso con <code>instantiate</code>;</li>
-<li>cargar <code>Resonancia.jl</code> y consultar la documentación de sus funciones;</li>
+<li>cargar <code>JuliaDo.jl</code> y consultar la documentación de sus funciones;</li>
 <li>explicar para qué sirve <code>Revise.jl</code> al desarrollar un paquete.</li>
 </ul>
 <p><strong>Prerrequisitos.</strong> <a href="../../j1-esencial/j1-1-entorno/index.html">J1.1</a>: REPL y <code>julia --project=.</code>.</p>
-<p><strong>Reparto con otras unidades.</strong> Aquí se aprende a <em>usar</em> el entorno. Crear un paquete propio, con módulos, tests y documentación, es el tema de <a href="../../j3-computacion/j3-2-paquetes/index.html">J3.2</a>. El control de versiones con Git está en <a href="https://me1catrr.github.io/claudedo/">C3</a>.</p>
+<p><strong>Reparto con otras unidades.</strong> Aquí se aprende a <em>usar</em> el entorno. Crear un paquete propio, con módulos, tests y documentación, es el tema de <a href="../../j3-computacion/j3-2-paquetes/index.html">J3.2</a>.</p>
 </section>
 <section id="teoría-breve" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="teoría-breve">Teoría breve</h2>
@@ -601,13 +589,13 @@ window.Quarto = {
 </tbody>
 </table>
 <p>La analogía con Python es directa: <code>pyproject.toml</code> hace de <code>Project.toml</code> y <code>uv.lock</code> hace de <code>Manifest.toml</code>. Los dos ficheros se <strong>commitean</strong>. El <code>Project.toml</code> dice qué se necesita; el <code>Manifest.toml</code> garantiza que quien lo reconstruya obtiene <em>las mismas versiones</em> que tú.</p>
-<div id="fig-entorno" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Cuatro cajas. Project.toml envía una flecha a Manifest.toml etiquetada Pkg resuelve. El registro general envía otra flecha a Manifest.toml etiquetada versiones. Resonancia.jl envía una flecha a Project.toml etiquetada develop y otra discontinua a Manifest.toml etiquetada path.">
+<div id="fig-entorno" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Cuatro cajas. Project.toml envía una flecha a Manifest.toml etiquetada Pkg resuelve. El registro general envía otra flecha a Manifest.toml etiquetada versiones. JuliaDo.jl envía una flecha a Project.toml etiquetada develop y otra discontinua a Manifest.toml etiquetada path.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-entorno-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="fig/entorno.svg" class="img-fluid figure-img" alt="Cuatro cajas. Project.toml envía una flecha a Manifest.toml etiquetada Pkg resuelve. El registro general envía otra flecha a Manifest.toml etiquetada versiones. Resonancia.jl envía una flecha a Project.toml etiquetada develop y otra discontinua a Manifest.toml etiquetada path.">
+<img src="fig/entorno.svg" class="img-fluid figure-img" alt="Cuatro cajas. Project.toml envía una flecha a Manifest.toml etiquetada Pkg resuelve. El registro general envía otra flecha a Manifest.toml etiquetada versiones. JuliaDo.jl envía una flecha a Project.toml etiquetada develop y otra discontinua a Manifest.toml etiquetada path.">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-entorno-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;1: Relación entre los ficheros del entorno. <code>Project.toml</code> lista lo que se pide; <code>Pkg</code> lo resuelve con el registro de paquetes y escribe en <code>Manifest.toml</code> las versiones exactas. <code>Resonancia.jl</code> es un paquete local que se incorpora con <code>develop</code>.
+Figura&nbsp;1: Relación entre los ficheros del entorno. <code>Project.toml</code> lista lo que se pide; <code>Pkg</code> lo resuelve con el registro de paquetes y escribe en <code>Manifest.toml</code> las versiones exactas. <code>JuliaDo.jl</code> es un paquete local que se incorpora con <code>develop</code>.
 </figcaption>
 </figure>
 </div>
@@ -632,16 +620,16 @@ Figura&nbsp;1: Relación entre los ficheros del entorno. <code>Project.toml</cod
 <p><code>instantiate</code> lee el <code>Manifest.toml</code> y descarga exactamente esas versiones. Es el equivalente de <code>uv sync</code> en Python.</p>
 </section>
 <section id="j1-2-4" class="level3">
-<h3 class="anchored" data-anchor-id="j1-2-4">J1.2.4 <code>Resonancia.jl</code>, el paquete local</h3>
-<p>Toda función que se reutiliza en varias páginas vive en el paquete <code>Resonancia.jl</code>, con su docstring y su test, y no se copia de una página a otra. El paquete está en la carpeta <code>Resonancia.jl/</code> del repositorio y se incorporó al entorno en <strong>modo desarrollo</strong> (<code>] develop ./Resonancia.jl</code>): Julia no lo copia, lo lee directamente de la carpeta, y en <code>Manifest.toml</code> queda su ruta (<code>path = "Resonancia.jl"</code>). Desde cualquier página:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Resonancia</span></span>
+<h3 class="anchored" data-anchor-id="j1-2-4">J1.2.4 <code>JuliaDo.jl</code>, el paquete local</h3>
+<p>Toda función que se reutiliza en varias páginas vive en el paquete <code>JuliaDo.jl</code>, con su docstring y su test, y no se copia de una página a otra. El paquete está en la carpeta <code>JuliaDo.jl/</code> del repositorio y se incorporó al entorno en <strong>modo desarrollo</strong> (<code>] develop ./JuliaDo.jl</code>): Julia no lo copia, lo lee directamente de la carpeta, y en <code>Manifest.toml</code> queda su ruta (<code>path = "JuliaDo.jl"</code>). Desde cualquier página:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">JuliaDo</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>?psd_welch          <span class="co"># documentación de una función del paquete</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="j1-2-5" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="j1-2-5">J1.2.5 <code>Revise.jl</code></h3>
 <p>Cuando se edita un paquete en desarrollo, Julia no se entera hasta que se reinicia el REPL, y reiniciar significa volver a compilar. <strong><code>Revise.jl</code></strong> vigila los ficheros y aplica los cambios al vuelo, de modo que se edita una función y se prueba de inmediato. Se instala una sola vez en el entorno personal (no en el del curso) y se carga <strong>antes</strong> del paquete:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Revise</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Resonancia</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">JuliaDo</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="idea-clave callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -656,7 +644,7 @@ Figura&nbsp;1: Relación entre los ficheros del entorno. <code>Project.toml</cod
 </div>
 </div>
 <div id="j1-2-5-revise" class="ejercicio" data-tipo="abierta">
-<p>Explica en dos frases qué problema resuelve <code>Revise.jl</code> y por qué se carga antes de <code>using Resonancia</code>.</p>
+<p>Explica en dos frases qué problema resuelve <code>Revise.jl</code> y por qué se carga antes de <code>using JuliaDo</code>.</p>
 <div class="criterios">
 <ul>
 <li>Dice que permite probar cambios en el código sin reiniciar Julia.</li>
@@ -674,7 +662,7 @@ Figura&nbsp;1: Relación entre los ficheros del entorno. <code>Project.toml</cod
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Si <code>using Resonancia</code> falla con «Package Resonancia not found», casi siempre se ha arrancado Julia sin <code>--project=.</code> o fuera de la carpeta del repositorio. Se comprueba con <code>] status</code>: la primera línea dice qué entorno está activo. Otro clásico es editar <code>Manifest.toml</code> a mano: lo escribe <code>Pkg</code>, y la documentación de Pkg indica que no debe editarse <span class="citation" data-cites="pkg-toml">(<a href="#ref-pkg-toml" role="doc-biblioref"><em>TOML Files</em> 2026</a>)</span>.</p>
+<p>Si <code>using JuliaDo</code> falla con «Package JuliaDo not found», casi siempre se ha arrancado Julia sin <code>--project=.</code> o fuera de la carpeta del repositorio. Se comprueba con <code>] status</code>: la primera línea dice qué entorno está activo. Otro clásico es editar <code>Manifest.toml</code> a mano: lo escribe <code>Pkg</code>, y la documentación de Pkg indica que no debe editarse <span class="citation" data-cites="pkg-toml">(<a href="#ref-pkg-toml" role="doc-biblioref"><em>TOML Files</em> 2026</a>)</span>.</p>
 </div>
 </div>
 <div class="no-row-height column-margin column-container"></div></section>
@@ -692,7 +680,7 @@ The Julia Project. 2018. <em>Announcing Julia 1.0</em>. Blog de Julia, 08-08-201
 </section>
 <section id="práctica-guiada" class="level2">
 <h2 class="anchored" data-anchor-id="práctica-guiada">Práctica guiada</h2>
-<p>Vamos a <strong>leer</strong> el entorno del curso y a usar <code>Resonancia.jl</code> sobre la señal de J1.1, sin modificar nada.</p>
+<p>Vamos a <strong>leer</strong> el entorno del curso y a usar <code>JuliaDo.jl</code> sobre la señal de J1.1, sin modificar nada.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Julia</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Python</a></li></ul>
 <div class="tab-content">
@@ -717,28 +705,28 @@ The Julia Project. 2018. <em>Announcing Julia 1.0</em>. Blog de Julia, 08-08-201
  "ForwardDiff"
  "GLM"
  ⋮
+ "JuliaDo"
  "LsqFit"
  "Optim"
  "OrdinaryDiffEq"
  "QuadGK"
- "Resonancia"
  "Roots"
  "StatsBase"
  "XLSX"
  "YAML"</code></pre>
 </div>
 </div>
-<p><strong>Paso 2. ¿Qué versión de <code>Resonancia.jl</code> se está usando?</strong></p>
+<p><strong>Paso 2. ¿Qué versión de <code>JuliaDo.jl</code> se está usando?</strong></p>
 <div id="6" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Ver el código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>(paquete <span class="op">=</span> <span class="st">"Resonancia"</span>, version <span class="op">=</span> <span class="fu">string</span>(<span class="fu">pkgversion</span>(Resonancia)))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>(paquete <span class="op">=</span> <span class="st">"JuliaDo"</span>, version <span class="op">=</span> <span class="fu">string</span>(<span class="fu">pkgversion</span>(JuliaDo)))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="1">
-<pre><code>(paquete = "Resonancia", version = "0.9.0")</code></pre>
+<pre><code>(paquete = "JuliaDo", version = "0.9.0")</code></pre>
 </div>
 </div>
-<p><strong>Paso 3. Usar una función del paquete.</strong> Se regenera la señal de J1.1 (semilla 1) y se calculan dos cosas con funciones de <code>Resonancia.jl</code>: el valor eficaz cada 2 s y los picos del espectro de Welch.</p>
+<p><strong>Paso 3. Usar una función del paquete.</strong> Se regenera la señal de J1.1 (semilla 1) y se calculan dos cosas con funciones de <code>JuliaDo.jl</code>: el valor eficaz cada 2 s y los picos del espectro de Welch.</p>
 <div id="8" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Ver el código</summary>
@@ -756,7 +744,7 @@ The Julia Project. 2018. <em>Announcing Julia 1.0</em>. Blog de Julia, 08-08-201
 <pre><code>(rms_cada_2s = [0.791, 0.76, 0.76, 0.78, 0.773], picos_Hz = [2.54, 7.03])</code></pre>
 </div>
 </div>
-<p>Los dos picos caen en 2,54 Hz y 7,03 Hz: las frecuencias reales (2,5 y 7 Hz) con la resolución del espectro, que aquí es <span class="math inline">\(f_s/n_{seg}=100/512\approx0{,}195\)</span> Hz. El método de Welch se explica en M3.6; ahora solo interesa ver que una función del paquete se usa con <code>using Resonancia</code>, sin copiar código.</p>
+<p>Los dos picos caen en 2,54 Hz y 7,03 Hz: las frecuencias reales (2,5 y 7 Hz) con la resolución del espectro, que aquí es <span class="math inline">\(f_s/n_{seg}=100/512\approx0{,}195\)</span> Hz. El método de Welch se explica en <a href="../../j3-computacion/j3-8-senales/index.html">J3.8</a>; ahora solo interesa ver que una función del paquete se usa con <code>using JuliaDo</code>, sin copiar código.</p>
 <div id="cell-fig-psd" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Ver el código</summary>
@@ -774,7 +762,7 @@ The Julia Project. 2018. <em>Announcing Julia 1.0</em>. Blog de Julia, 08-08-201
 <img src="index_files/figure-html/fig-psd-output-1.svg" class="img-fluid figure-img" alt="Gráfica de densidad espectral de potencia frente a la frecuencia entre 0 y 15 hertz, con dos picos claros cerca de 2,5 y 7 hertz y un nivel de ruido bajo en el resto.">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-psd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;2: Densidad espectral de potencia de la señal de J1.1 calculada con <code>psd_welch</code> de <code>Resonancia.jl</code>. Los dos picos corresponden a los dos modos, de 2,5 y 7 Hz.
+Figura&nbsp;2: Densidad espectral de potencia de la señal de J1.1 calculada con <code>psd_welch</code> de <code>JuliaDo.jl</code>. Los dos picos corresponden a los dos modos, de 2,5 y 7 Hz.
 </figcaption>
 </figure>
 </div>
@@ -806,7 +794,7 @@ Figura&nbsp;2: Densidad espectral de potencia de la señal de J1.1 calculada con
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Se ha leído el entorno sin tocarlo, se ha comprobado qué versión de <code>Resonancia.jl</code> se usa y se han aplicado tres funciones del paquete. Lo importante es la rutina: <strong>primero se mira el entorno, después se usa el paquete, y el entorno solo se cambia a propósito.</strong></p>
+<p>Se ha leído el entorno sin tocarlo, se ha comprobado qué versión de <code>JuliaDo.jl</code> se usa y se han aplicado tres funciones del paquete. Lo importante es la rutina: <strong>primero se mira el entorno, después se usa el paquete, y el entorno solo se cambia a propósito.</strong></p>
 </div>
 </div>
 </section>
@@ -822,8 +810,8 @@ Figura&nbsp;2: Densidad espectral de potencia de la señal de J1.1 calculada con
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>«En la raíz del repositorio <code>resonancia</code>: (1) lista los paquetes que declara <code>Project.toml</code> y la versión exacta de cada uno que fija <code>Manifest.toml</code>; (2) dime qué versión de <code>Resonancia.jl</code> se carga con <code>using Resonancia</code> y de dónde (ruta); (3) explica la diferencia entre <code>Project.toml</code> y <code>Manifest.toml</code>. No ejecutes ninguna orden que modifique el entorno (<code>add</code>, <code>rm</code>, <code>update</code>) ni edites esos ficheros. Si no puedes comprobar algo, dilo.»</p>
-<p><strong>Verifica.</strong> (a) Que las versiones que da coinciden con las que ves tú en <code>Manifest.toml</code> (<code>grep -A3 'deps.CSV' Manifest.toml</code>). (b) Que no ha ejecutado <code>Pkg.add</code> ni <code>Pkg.update</code>: <code>git status</code> debe mostrar <code>Project.toml</code> y <code>Manifest.toml</code> sin cambios. (c) Que la ruta de <code>Resonancia</code> apunta a la carpeta <code>Resonancia.jl/</code> del repositorio y no a una copia. (d) Que no inventa versiones de paquetes que no están en el <code>Manifest.toml</code>.</p>
+<p>«En la raíz del repositorio <code>juliado</code>: (1) lista los paquetes que declara <code>Project.toml</code> y la versión exacta de cada uno que fija <code>Manifest.toml</code>; (2) dime qué versión de <code>JuliaDo.jl</code> se carga con <code>using JuliaDo</code> y de dónde (ruta); (3) explica la diferencia entre <code>Project.toml</code> y <code>Manifest.toml</code>. No ejecutes ninguna orden que modifique el entorno (<code>add</code>, <code>rm</code>, <code>update</code>) ni edites esos ficheros. Si no puedes comprobar algo, dilo.»</p>
+<p><strong>Verifica.</strong> (a) Que las versiones que da coinciden con las que ves tú en <code>Manifest.toml</code> (<code>grep -A3 'deps.CSV' Manifest.toml</code>). (b) Que no ha ejecutado <code>Pkg.add</code> ni <code>Pkg.update</code>: <code>git status</code> debe mostrar <code>Project.toml</code> y <code>Manifest.toml</code> sin cambios. (c) Que la ruta de <code>JuliaDo</code> apunta a la carpeta <code>JuliaDo.jl/</code> del repositorio y no a una copia. (d) Que no inventa versiones de paquetes que no están en el <code>Manifest.toml</code>.</p>
 </div>
 </div>
 </section>
@@ -832,7 +820,7 @@ Figura&nbsp;2: Densidad espectral de potencia de la señal de J1.1 calculada con
 <div id="j1-2-deps" class="ejercicio" data-tipo="numerico" data-respuesta="8" data-tol="0%" data-unidad="paquetes">
 <p>¿Cuántos paquetes pide directamente el <code>Project.toml</code> del curso? (Se obtiene con <code>length(proyecto["deps"])</code>.)</p>
 <div class="solucion">
-<p>Ocho: CSV, CairoMakie, DSP, DataFrames, FFTW, Resonancia, XLSX y YAML. Las dependencias de estos, que son muchas más, solo aparecen en <code>Manifest.toml</code>. (Si tu copia del repositorio es anterior a la incorporación de <code>DSP</code> y <code>FFTW</code>, saldrán seis.)</p>
+<p>Ocho: CSV, CairoMakie, DSP, DataFrames, FFTW, JuliaDo, XLSX y YAML. Las dependencias de estos, que son muchas más, solo aparecen en <code>Manifest.toml</code>. (Si tu copia del repositorio es anterior a la incorporación de <code>DSP</code> y <code>FFTW</code>, saldrán seis.)</p>
 </div>
 </div>
 <div id="j1-2-picos" class="ejercicio" data-tipo="programacion" data-respuesta="2">
@@ -861,7 +849,7 @@ Figura&nbsp;2: Densidad espectral de potencia de la señal de J1.1 calculada con
 <li>Sé listar los paquetes de un entorno y distinguir lo que se pide de lo que se instala.</li>
 <li>Explico por qué se commitean <code>Project.toml</code> y <code>Manifest.toml</code>.</li>
 <li>Sé reconstruir el entorno en otro ordenador con <code>instantiate</code>.</li>
-<li>Cargo <code>Resonancia.jl</code>, uso una de sus funciones y leo su documentación.</li>
+<li>Cargo <code>JuliaDo.jl</code>, uso una de sus funciones y leo su documentación.</li>
 <li>Sé para qué sirve <code>Revise.jl</code> y por qué <code>add</code>, <code>rm</code> y <code>update</code> se ejecutan solo a propósito.</li>
 </ul>
 <p><strong>Cierre.</strong> Escribe tres líneas: qué he entendido, qué todavía no domino y cuál es mi siguiente paso pequeño. Si Claude ha tocado algo, revisa <code>git diff</code> antes de aceptarlo.</p>
@@ -1372,7 +1360,8 @@ Figura&nbsp;2: Densidad espectral de potencia de la señal de J1.1 calculada con
   /* ------------------------------------------------------------------ */
   /* Almacenamiento local (con tolerancia a que no exista)               */
   /* ------------------------------------------------------------------ */
-  const PREFIJO = "resonancia:ej:" + (typeof location !== "undefined" ? location.pathname : "");
+  // Prefijo histórico de las claves: se conserva para no borrar las respuestas ya guardadas.
+  const PREFIJO = "resonancia:ej:" +(typeof location !== "undefined" ? location.pathname : "");
 
   function leer(id) {
     try {
@@ -1656,7 +1645,7 @@ Figura&nbsp;2: Densidad espectral de potencia de la señal de J1.1 calculada con
       el("div", { class: "ej-botones" },
         el("button", { type: "button", class: "ej-btn ej-btn-sec", text: "Descargar mis respuestas", onclick: () => {
           const blob = new Blob([JSON.stringify({ pagina: location.pathname, fecha: new Date().toISOString(), respuestas: todos() }, null, 2)], { type: "application/json" });
-          const a = el("a", { href: URL.createObjectURL(blob), download: "resonancia-respuestas.json" }); a.click();
+          const a = el("a", { href: URL.createObjectURL(blob), download: "juliado-respuestas.json" }); a.click();
         } }),
         el("button", { type: "button", class: "ej-btn ej-btn-sec", text: "Borrar mis respuestas", onclick: () => {
           if (confirm("¿Borrar todas tus respuestas y tu progreso en esta página?")) { borrarTodo(); location.reload(); }

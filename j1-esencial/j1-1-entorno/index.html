@@ -205,18 +205,6 @@ window.Quarto = {
     <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">Acerca de</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/resonancia/"> 
-<span class="menu-text">Resonancia</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/matematicado/"> 
-<span class="menu-text">matematicado</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/claudedo/"> 
-<span class="menu-text">ClaudeDo</span></a>
-  </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/me1catrr/juliado"> <i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
@@ -511,7 +499,7 @@ window.Quarto = {
 <li>decidir si una tarea va al REPL, a un script, a un cuaderno Pluto o a una página de Quarto;</li>
 <li>generar y dibujar una señal sintética con semilla fija.</li>
 </ul>
-<p><strong>Prerrequisitos.</strong> Ninguno. Conviene haber usado una terminal alguna vez; si no, <a href="https://me1catrr.github.io/claudedo/">C2</a> la explica desde cero.</p>
+<p><strong>Prerrequisitos.</strong> Ninguno. Conviene haber usado una terminal alguna vez.</p>
 <p><strong>Reparto con otras unidades.</strong> Aquí se instala y se explora. El gestor de paquetes y los ficheros <code>Project.toml</code> y <code>Manifest.toml</code> se explican en <a href="../../j1-esencial/j1-2-paquetes/index.html">J1.2</a>; el lenguaje en sí empieza en <a href="../../j1-esencial/j1-3-tipos/index.html">J1.3</a>.</p>
 </section>
 <section id="teoría-breve" class="level2 page-columns page-full">
@@ -727,7 +715,7 @@ Lauwens, Ben, y Allen B. Downey. 2019. <em>Think Julia: How to Think Like a Comp
 </section>
 <section id="práctica-guiada" class="level2">
 <h2 class="anchored" data-anchor-id="práctica-guiada">Práctica guiada</h2>
-<p>Vamos a generar la señal que un acelerómetro mediría en un edificio con dos modos: uno de 2,5 Hz y otro, más débil, de 7 Hz, con algo de ruido. Es el mismo tipo de señal que se analizará en <a href="https://me1catrr.github.io/resonancia/mse/m03-senales-i/">M3</a>. Se fija la semilla para que cualquiera obtenga exactamente los mismos números.</p>
+<p>Vamos a generar la señal que un acelerómetro mediría en un edificio con dos modos: uno de 2,5 Hz y otro, más débil, de 7 Hz, con algo de ruido. Es el mismo tipo de señal que se analizará en <a href="../../j3-computacion/j3-8-senales/index.html">J3.8</a>. Se fija la semilla para que cualquiera obtenga exactamente los mismos números.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Julia</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Python</a></li></ul>
 <div class="tab-content">
@@ -814,7 +802,7 @@ Figura&nbsp;2: Señal sintética de un acelerómetro: dos modos (2,5 Hz y 7 Hz) 
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>«Estoy en la raíz del repositorio <code>resonancia</code>. Con Julia y <code>--project=.</code>: (1) dime qué versión de Julia hay y si coincide con la de <code>juliaup status</code>; (2) crea <code>scripts/primera_senal.jl</code> que genere una señal de 10 s a 100 Hz con dos senoides de 2,5 Hz y 7 Hz (amplitudes 1 y 0,4) y ruido gaussiano de desviación 0,2 con semilla 1, e imprima su RMS; (3) ejecútalo y dime el resultado. No instales ni actualices ningún paquete. Si algo falla, dímelo en vez de inventar el resultado.»</p>
+<p>«Estoy en la raíz del repositorio <code>juliado</code>. Con Julia y <code>--project=.</code>: (1) dime qué versión de Julia hay y si coincide con la de <code>juliaup status</code>; (2) crea <code>scripts/primera_senal.jl</code> que genere una señal de 10 s a 100 Hz con dos senoides de 2,5 Hz y 7 Hz (amplitudes 1 y 0,4) y ruido gaussiano de desviación 0,2 con semilla 1, e imprima su RMS; (3) ejecútalo y dime el resultado. No instales ni actualices ningún paquete. Si algo falla, dímelo en vez de inventar el resultado.»</p>
 <p><strong>Verifica.</strong> (a) Que el comando usa <code>--project=.</code>. (b) Que el RMS de la señal sin ruido sale <span class="math inline">\(0{,}7616\)</span>, que es lo que se calcula a mano con <span class="math inline">\(\sqrt{(1+0{,}16)/2}\)</span>. (c) Que la semilla está fijada antes de <code>randn</code>. (d) Que no ha modificado <code>Project.toml</code> ni <code>Manifest.toml</code> (míralo con <code>git diff</code>). (e) Que el tiempo está en segundos y que el eje de la figura, si la hace, lleva unidades.</p>
 </div>
 </div>
@@ -1363,7 +1351,8 @@ Figura&nbsp;2: Señal sintética de un acelerómetro: dos modos (2,5 Hz y 7 Hz) 
   /* ------------------------------------------------------------------ */
   /* Almacenamiento local (con tolerancia a que no exista)               */
   /* ------------------------------------------------------------------ */
-  const PREFIJO = "resonancia:ej:" + (typeof location !== "undefined" ? location.pathname : "");
+  // Prefijo histórico de las claves: se conserva para no borrar las respuestas ya guardadas.
+  const PREFIJO = "resonancia:ej:" +(typeof location !== "undefined" ? location.pathname : "");
 
   function leer(id) {
     try {
@@ -1647,7 +1636,7 @@ Figura&nbsp;2: Señal sintética de un acelerómetro: dos modos (2,5 Hz y 7 Hz) 
       el("div", { class: "ej-botones" },
         el("button", { type: "button", class: "ej-btn ej-btn-sec", text: "Descargar mis respuestas", onclick: () => {
           const blob = new Blob([JSON.stringify({ pagina: location.pathname, fecha: new Date().toISOString(), respuestas: todos() }, null, 2)], { type: "application/json" });
-          const a = el("a", { href: URL.createObjectURL(blob), download: "resonancia-respuestas.json" }); a.click();
+          const a = el("a", { href: URL.createObjectURL(blob), download: "juliado-respuestas.json" }); a.click();
         } }),
         el("button", { type: "button", class: "ej-btn ej-btn-sec", text: "Borrar mis respuestas", onclick: () => {
           if (confirm("¿Borrar todas tus respuestas y tu progreso en esta página?")) { borrarTodo(); location.reload(); }

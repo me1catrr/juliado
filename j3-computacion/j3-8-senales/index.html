@@ -186,18 +186,6 @@ window.Quarto = {
     <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">Acerca de</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/resonancia/"> 
-<span class="menu-text">Resonancia</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/matematicado/"> 
-<span class="menu-text">matematicado</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/claudedo/"> 
-<span class="menu-text">ClaudeDo</span></a>
-  </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/me1catrr/juliado"> <i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
@@ -466,7 +454,7 @@ window.Quarto = {
 
 
 <p><img src="fig/portada.svg" class="portada img-fluid" alt="De izquierda a derecha: una señal en el tiempo, su espectro con dos picos, un espectrograma en forma de mosaico de celdas de intensidad variable, y debajo la respuesta de un filtro pasa-banda"></p>
-<p>Las unidades de procesado de señales de la vía M (<a href="https://me1catrr.github.io/resonancia/mse/m03-senales-i/">M3</a> y <a href="https://me1catrr.github.io/resonancia/mse/m04-senales-ii/">M4</a>) explican <em>qué</em> es un espectro, una ventana o un filtro. Esta unidad enseña <em>cómo se calculan</em> con los paquetes <code>FFTW.jl</code> y <code>DSP.jl</code>, comprobando cada resultado contra una cuenta a mano o contra las funciones de <code>Resonancia.jl</code>. Se recomienda haber hecho antes J1.4 a J1.7.</p>
+<p>Esta unidad enseña <em>cómo se calculan</em> un espectro, una ventana o un filtro con los paquetes <code>FFTW.jl</code> y <code>DSP.jl</code>, comprobando cada resultado contra una cuenta a mano o contra las funciones de <code>JuliaDo.jl</code>. Se recomienda haber hecho antes J1.4 a J1.7.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -491,7 +479,7 @@ window.Quarto = {
 <li>diseñar y aplicar un filtro Butterworth, causal y de fase cero, y calcular un espectrograma.</li>
 </ul>
 <p><strong>Prerrequisitos.</strong> El curso no impone ninguno en el temario; conviene J1.4 a J1.7 (funciones, arrays y figuras).</p>
-<p><strong>Reparto con otras unidades.</strong> La teoría (teorema de Nyquist, resolución, leakage, diseño de filtros) está en M3 y M4. Aquí se implementa y se verifica; no se repite la demostración.</p>
+<p><strong>Reparto con otras unidades.</strong> La teoría (teorema de Nyquist, resolución, leakage, diseño de filtros) se resume sin demostraciones: aquí se implementa y se verifica.</p>
 </section>
 <section id="teoría-breve" class="level2">
 <h2 class="anchored" data-anchor-id="teoría-breve">Teoría breve</h2>
@@ -542,7 +530,7 @@ Figura&nbsp;1: Aliasing. Una senoide de 7 Hz (línea azul, muestreada a 100 Hz) 
 </div>
 </div>
 </div>
-<p>La senoide aparente tiene la fase invertida (<code>-sin</code>), que es lo que da <a href="#eq-alias" class="quarto-xref">ecuación&nbsp;1</a> cuando <span class="math inline">\(f_s/2&lt;f&lt;f_s\)</span>. En la práctica, el aliasing no se corrige después: se evita con un filtro antialiasing <strong>antes</strong> de muestrear (M3.4).</p>
+<p>La senoide aparente tiene la fase invertida (<code>-sin</code>), que es lo que da <a href="#eq-alias" class="quarto-xref">ecuación&nbsp;1</a> cuando <span class="math inline">\(f_s/2&lt;f&lt;f_s\)</span>. En la práctica, el aliasing no se corrige después: se evita con un filtro antialiasing <strong>antes</strong> de muestrear.</p>
 <div id="j3-8-1-alias" class="ejercicio" data-tipo="numerico" data-respuesta="20" data-tol="0%" data-unidad="Hz">
 <p>Una vibración de 80 Hz se muestrea a 100 Hz. ¿A qué frecuencia aparece en el espectro?</p>
 <div class="solucion">
@@ -552,7 +540,7 @@ Figura&nbsp;1: Aliasing. Una senoide de 7 Hz (línea azul, muestreada a 100 Hz) 
 </section>
 <section id="j3-8-2" class="level3">
 <h3 class="anchored" data-anchor-id="j3-8-2">J3.8.2 La FFT con <code>FFTW.jl</code></h3>
-<p><code>FFTW.jl</code> calcula la transformada rápida de Fourier para <strong>cualquier longitud</strong> (la FFT propia de <code>Resonancia.jl</code> solo admite potencias de 2). Para una señal real se usa <code>rfft</code>, que devuelve solo las frecuencias de 0 a <span class="math inline">\(f_N\)</span>, y <code>rfftfreq(N, fs)</code>, que da el eje en Hz. Para pasar a un espectro de <strong>amplitud</strong> hay que escalar: una senoide de amplitud <span class="math inline">\(A\)</span> da un módulo <span class="math inline">\(A\,N/2\)</span> en su bin, así que</p>
+<p><code>FFTW.jl</code> calcula la transformada rápida de Fourier para <strong>cualquier longitud</strong> (la FFT propia de <code>JuliaDo.jl</code> solo admite potencias de 2). Para una señal real se usa <code>rfft</code>, que devuelve solo las frecuencias de 0 a <span class="math inline">\(f_N\)</span>, y <code>rfftfreq(N, fs)</code>, que da el eje en Hz. Para pasar a un espectro de <strong>amplitud</strong> hay que escalar: una senoide de amplitud <span class="math inline">\(A\)</span> da un módulo <span class="math inline">\(A\,N/2\)</span> en su bin, así que</p>
 <p><span id="eq-amp"><span class="math display">\[
 \text{amplitud}[k]=\frac{2\,|X[k]|}{N}\qquad(k\ne0,\ N/2).
 \tag{2}\]</span></span></p>
@@ -633,7 +621,7 @@ Figura&nbsp;2: Fuga espectral de una senoide de 2,55 Hz (amplitud 1) que no ocup
 </div>
 </div>
 </div>
-<p>Queda un residuo: aun con ventana, el pico (0,85) no llega a 1 porque 2,55 Hz no cae justo en un bin (la rejilla es de 0,1 Hz): es la <strong>pérdida por escalonamiento</strong> (<em>scalloping</em>), que M4.1 cuantifica y que se corrige con la ventana <em>flat-top</em>.</p>
+<p>Queda un residuo: aun con ventana, el pico (0,85) no llega a 1 porque 2,55 Hz no cae justo en un bin (la rejilla es de 0,1 Hz): es la <strong>pérdida por escalonamiento</strong> (<em>scalloping</em>), que se corrige con la ventana <em>flat-top</em>.</p>
 <div id="j3-8-3-ventana" class="ejercicio" data-tipo="vf" data-respuesta="falso">
 <p>Una ventana de Hann elimina por completo la fuga espectral y deja el pico con su amplitud exacta.</p>
 <div class="solucion">
@@ -650,7 +638,7 @@ Figura&nbsp;2: Fuga espectral de una senoide de 2,55 Hz (amplitud 1) que no ocup
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> CSV.<span class="fu">read</span>(RAIZ <span class="op">*</span> <span class="st">"datos/sinteticos/edificio-3-plantas/escenario_A.csv"</span>, DataFrame; delim<span class="op">=</span><span class="ch">';'</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> a.a3_ms2</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="fu">welch_pgram</span>(y, <span class="fl">4096</span>, <span class="fl">2048</span>; fs<span class="op">=</span><span class="fl">100.0</span>, window<span class="op">=</span>DSP.hanning)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>fw, Pw <span class="op">=</span> <span class="fu">psd_welch</span>(y, <span class="fl">100.0</span>; nseg<span class="op">=</span><span class="fl">4096</span>)         <span class="co"># versión de Resonancia.jl</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>fw, Pw <span class="op">=</span> <span class="fu">psd_welch</span>(y, <span class="fl">100.0</span>; nseg<span class="op">=</span><span class="fl">4096</span>)         <span class="co"># versión de JuliaDo.jl</span></span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> fw <span class="op">.&gt;</span> <span class="fl">0.5</span></span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>(bins <span class="op">=</span> <span class="fu">length</span>(p.freq), pico_Hz <span class="op">=</span> p.freq[<span class="fu">argmax</span>(p.power)],</span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a> diferencia_relativa_maxima <span class="op">=</span> <span class="fu">round</span>(<span class="fu">maximum</span>(<span class="fu">abs</span>.(p.power[m] <span class="op">.-</span> Pw[m]) <span class="op">./</span> Pw[m]), digits<span class="op">=</span><span class="fl">5</span>),</span>
@@ -936,7 +924,7 @@ Figura&nbsp;5: Cadena de análisis espectral y funciones de <code>DSP.jl</code> 
 <li>Diseño un filtro Butterworth, sé cuándo usar <code>filt</code> o <code>filtfilt</code> y calculo un espectrograma.</li>
 </ul>
 <p><strong>Cierre.</strong> Escribe tres líneas: qué he entendido, qué todavía no domino y cuál es mi siguiente paso pequeño. Anota siempre <code>fs</code>, <code>nseg</code>, solape y ventana junto a cada espectro.</p>
-<p><strong>Siguiente:</strong> <a href="../../j3-computacion/j3-1-rendimiento/index.html">J3.1 · Rendimiento</a>, o las unidades de <a href="https://me1catrr.github.io/resonancia/mse/m03-senales-i/">M3</a> y <a href="https://me1catrr.github.io/resonancia/mse/m04-senales-ii/">M4</a>, que usan lo de aquí.</p>
+<p><strong>Siguiente:</strong> <a href="../../j3-computacion/j3-1-rendimiento/index.html">J3.1 · Rendimiento</a>.</p>
 
 
 </section>
@@ -1426,7 +1414,8 @@ Figura&nbsp;5: Cadena de análisis espectral y funciones de <code>DSP.jl</code> 
   /* ------------------------------------------------------------------ */
   /* Almacenamiento local (con tolerancia a que no exista)               */
   /* ------------------------------------------------------------------ */
-  const PREFIJO = "resonancia:ej:" + (typeof location !== "undefined" ? location.pathname : "");
+  // Prefijo histórico de las claves: se conserva para no borrar las respuestas ya guardadas.
+  const PREFIJO = "resonancia:ej:" +(typeof location !== "undefined" ? location.pathname : "");
 
   function leer(id) {
     try {
@@ -1710,7 +1699,7 @@ Figura&nbsp;5: Cadena de análisis espectral y funciones de <code>DSP.jl</code> 
       el("div", { class: "ej-botones" },
         el("button", { type: "button", class: "ej-btn ej-btn-sec", text: "Descargar mis respuestas", onclick: () => {
           const blob = new Blob([JSON.stringify({ pagina: location.pathname, fecha: new Date().toISOString(), respuestas: todos() }, null, 2)], { type: "application/json" });
-          const a = el("a", { href: URL.createObjectURL(blob), download: "resonancia-respuestas.json" }); a.click();
+          const a = el("a", { href: URL.createObjectURL(blob), download: "juliado-respuestas.json" }); a.click();
         } }),
         el("button", { type: "button", class: "ej-btn ej-btn-sec", text: "Borrar mis respuestas", onclick: () => {
           if (confirm("¿Borrar todas tus respuestas y tu progreso en esta página?")) { borrarTodo(); location.reload(); }

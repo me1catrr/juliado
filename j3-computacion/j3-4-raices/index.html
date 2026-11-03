@@ -208,18 +208,6 @@ window.Quarto = {
     <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">Acerca de</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/resonancia/"> 
-<span class="menu-text">Resonancia</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/matematicado/"> 
-<span class="menu-text">matematicado</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/claudedo/"> 
-<span class="menu-text">ClaudeDo</span></a>
-  </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/me1catrr/juliado"> <i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
@@ -501,7 +489,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Tiempo orientativo: 90 minutos.</strong> Objetivos (4), teoría en cinco píldoras (18), práctica guiada (40), «Pídeselo a Claude» (12), ejercicios (14) y cierre (2). La viga y el edificio son los de la vía M, con datos <strong>sintéticos</strong>: las raíces se comparan con valores que se pueden comprobar a mano, y la resonancia que se interpola se genera con el modelo del edificio de tres plantas, de modo que se conoce la respuesta correcta.</p>
+<p><strong>Tiempo orientativo: 90 minutos.</strong> Objetivos (4), teoría en cinco píldoras (18), práctica guiada (40), «Pídeselo a Claude» (12), ejercicios (14) y cierre (2). La viga y el edificio son ejemplos de vibraciones, con datos <strong>sintéticos</strong>: las raíces se comparan con valores que se pueden comprobar a mano, y la resonancia que se interpola se genera con el modelo del edificio de tres plantas, de modo que se conoce la respuesta correcta.</p>
 </div>
 </div>
 <section id="objetivos-y-prerrequisitos" class="level2">
@@ -513,8 +501,8 @@ window.Quarto = {
 <li>interpolar con <code>linear_interpolation</code> y <code>cubic_spline_interpolation</code>, medir el error y reconocer cuándo no se debe extrapolar;</li>
 <li>combinar ambas herramientas para estimar el amortiguamiento de un modo por el método de la banda de media potencia.</li>
 </ul>
-<p><strong>Prerrequisitos.</strong> El curso no los impone en el temario; conviene J1.5 (funciones y arrays), J3.3 (álgebra lineal numérica, para los modos del edificio) y, para la física de la viga, M5 y M6.</p>
-<p><strong>Reparto con otras unidades.</strong> Las ecuaciones de la viga y sus condiciones de contorno se justifican en M5. Aquí se resuelven numéricamente. La derivación automática, que da la derivada que necesita Newton sin escribirla a mano, está en <a href="../../j3-computacion/j3-5-integracion-ad/index.html">J3.5</a>; el ajuste de curvas de FRF, en J3.7.</p>
+<p><strong>Prerrequisitos.</strong> El curso no los impone en el temario; conviene J1.5 (funciones y arrays) y J3.3 (álgebra lineal numérica, para los modos del edificio).</p>
+<p><strong>Reparto con otras unidades.</strong> Las ecuaciones de la viga y sus condiciones de contorno se dan sin demostrar; aquí se resuelven numéricamente. La derivación automática, que da la derivada que necesita Newton sin escribirla a mano, está en <a href="../../j3-computacion/j3-5-integracion-ad/index.html">J3.5</a>; el ajuste de curvas de FRF, en J3.7.</p>
 </section>
 <section id="teoría-breve" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="teoría-breve">Teoría breve</h2>
@@ -527,13 +515,13 @@ window.Quarto = {
 <li><strong>Secante.</strong> Igual que Newton, con la pendiente de la recta por los dos últimos puntos, así que no necesita la derivada; converge con orden <span class="math inline">\(\approx1{,}62\)</span>.</li>
 <li><strong>Brent</strong> (y variantes como <code>A42</code>) combina bisección con interpolación para tener la seguridad del corchete y casi la velocidad de la secante: es la elección razonable por defecto cuando se dispone de un intervalo.</li>
 </ul>
-<p><code>Roots.jl</code> los ofrece con una interfaz común: <code>find_zero(f, (a, b))</code> con corchete, <code>find_zero(f, x0)</code> con un punto, <code>find_zero((f, f′), x0, Roots.Newton())</code> con la derivada y <code>find_zeros(f, a, b)</code> para <strong>todas</strong> las raíces de un intervalo. Se prueban con la ecuación del primer modo de una viga empotrada–libre, <span class="math inline">\(\cos x+1/\cosh x=0\)</span> (J3.4.2), de la que <code>Resonancia.jl</code> da la forma estable <code>ecuacion_viga(:voladizo, x)</code>:</p>
+<p><code>Roots.jl</code> los ofrece con una interfaz común: <code>find_zero(f, (a, b))</code> con corchete, <code>find_zero(f, x0)</code> con un punto, <code>find_zero((f, f′), x0, Roots.Newton())</code> con la derivada y <code>find_zeros(f, a, b)</code> para <strong>todas</strong> las raíces de un intervalo. Se prueban con la ecuación del primer modo de una viga empotrada–libre, <span class="math inline">\(\cos x+1/\cosh x=0\)</span> (J3.4.2), de la que <code>JuliaDo.jl</code> da la forma estable <code>ecuacion_viga(:voladizo, x)</code>:</p>
 <div id="4" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Ver el código</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(x) <span class="op">=</span> <span class="fu">ecuacion_viga</span>(<span class="op">:</span>voladizo, x)                  <span class="co"># cos x + 1/cosh x</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">df</span>(x) <span class="op">=</span> <span class="fu">-sin</span>(x) <span class="op">-</span> <span class="fu">tanh</span>(x) <span class="op">/</span> <span class="fu">cosh</span>(x)                 <span class="co"># su derivada, calculada a mano</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>x_ref <span class="op">=</span> <span class="fu">raices_viga</span>(<span class="op">:</span>voladizo, <span class="fl">1</span>)[<span class="fl">1</span>]                <span class="co"># valor de Resonancia.jl</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>x_ref <span class="op">=</span> <span class="fu">raices_viga</span>(<span class="op">:</span>voladizo, <span class="fl">1</span>)[<span class="fl">1</span>]                <span class="co"># valor de JuliaDo.jl</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>hallazgos <span class="op">=</span> (corchete <span class="op">=</span> <span class="fu">find_zero</span>(f, (<span class="fl">1.0</span>, <span class="fl">3.0</span>)), Brent <span class="op">=</span> <span class="fu">find_zero</span>(f, (<span class="fl">1.0</span>, <span class="fl">3.0</span>), Roots.<span class="fu">Brent</span>()),</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>             Newton <span class="op">=</span> <span class="fu">find_zero</span>((f, df), <span class="fl">2.0</span>, Roots.<span class="fu">Newton</span>()), solo_un_punto <span class="op">=</span> <span class="fu">find_zero</span>(f, <span class="fl">2.0</span>))</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>(primera_raiz <span class="op">=</span> x_ref, coinciden_a_1e12 <span class="op">=</span> <span class="fu">all</span>(<span class="fu">abs</span>(r <span class="op">-</span> x_ref) <span class="op">&lt;</span> <span class="fl">1e-12</span> <span class="cf">for</span> r <span class="kw">in</span> <span class="fu">values</span>(hallazgos)))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
@@ -542,7 +530,7 @@ window.Quarto = {
 <pre><code>(primera_raiz = 1.8751040687119618, coinciden_a_1e12 = true)</code></pre>
 </div>
 </div>
-<p>Los cuatro métodos dan <span class="math inline">\(1{,}8751\)</span>. Para <strong>ver</strong> la diferencia de velocidad se usan las versiones didácticas de <code>Resonancia.jl</code>, que devuelven la lista de iteradas:</p>
+<p>Los cuatro métodos dan <span class="math inline">\(1{,}8751\)</span>. Para <strong>ver</strong> la diferencia de velocidad se usan las versiones didácticas de <code>JuliaDo.jl</code>, que devuelven la lista de iteradas:</p>
 <div id="6" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Ver el código</summary>
@@ -578,7 +566,7 @@ window.Quarto = {
 <img src="index_files/figure-html/fig-convergencia-output-1.svg" class="img-fluid figure-img" alt="Gráfica con el número de iteraciones de 0 a 48 en el eje horizontal y el error de 10 elevado a menos 16 a 1 en el vertical, en escala logarítmica. La línea azul de la bisección baja de forma regular, casi recta, durante 48 pasos. La línea naranja de la secante cae en unos 8 pasos con curvatura creciente. La línea verde de Newton cae en 5 pasos, la más empinada.">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-convergencia-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;1: Error absoluto de cada iterada frente al número de iteraciones al calcular la primera raíz de cos x + 1/cosh x = 0, con los tres métodos de Resonancia.jl (eje vertical logarítmico). La bisección gana un bit por paso; la secante y Newton aceleran.
+Figura&nbsp;1: Error absoluto de cada iterada frente al número de iteraciones al calcular la primera raíz de cos x + 1/cosh x = 0, con los tres métodos de JuliaDo.jl (eje vertical logarítmico). La bisección gana un bit por paso; la secante y Newton aceleran.
 </figcaption>
 </figure>
 </div>
@@ -615,7 +603,7 @@ Figura&nbsp;2: Condiciones de contorno de la viga, ecuación característica de 
 </figcaption>
 </figure>
 </div>
-<p>Se escriben en forma <strong>estable</strong> (divididas por <span class="math inline">\(\cosh x\)</span>, que crece como <span class="math inline">\(e^x/2\)</span> y desbordaría la aritmética para <span class="math inline">\(x\gtrsim710\)</span>) y se resuelven con <code>Resonancia.jl</code> para tener un valor de referencia. La tabla da las cuatro primeras raíces de cada caso:</p>
+<p>Se escriben en forma <strong>estable</strong> (divididas por <span class="math inline">\(\cosh x\)</span>, que crece como <span class="math inline">\(e^x/2\)</span> y desbordaría la aritmética para <span class="math inline">\(x\gtrsim710\)</span>) y se resuelven con <code>JuliaDo.jl</code> para tener un valor de referencia. La tabla da las cuatro primeras raíces de cada caso:</p>
 <div id="10" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Ver el código</summary>
@@ -689,13 +677,13 @@ Figura&nbsp;2: Condiciones de contorno de la viga, ecuación característica de 
 <summary>Ver el código</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>r6 <span class="op">=</span> <span class="fu">find_zeros</span>(f, <span class="fl">0.5</span>, <span class="fl">18.0</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>(n_raices <span class="op">=</span> <span class="fu">length</span>(r6), primeras <span class="op">=</span> <span class="fu">round</span>.(r6[<span class="fl">1</span><span class="op">:</span><span class="fl">3</span>], digits<span class="op">=</span><span class="fl">4</span>),</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a> coinciden_con_Resonancia_a_1e10 <span class="op">=</span> <span class="fu">maximum</span>(<span class="fu">abs</span>.(r6 <span class="op">.-</span> <span class="fu">raices_viga</span>(<span class="op">:</span>voladizo, <span class="fl">6</span>))) <span class="op">&lt;</span> <span class="fl">1e-10</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a> coinciden_con_JuliaDo_a_1e10 <span class="op">=</span> <span class="fu">maximum</span>(<span class="fu">abs</span>.(r6 <span class="op">.-</span> <span class="fu">raices_viga</span>(<span class="op">:</span>voladizo, <span class="fl">6</span>))) <span class="op">&lt;</span> <span class="fl">1e-10</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="1">
-<pre><code>(n_raices = 6, primeras = [1.8751, 4.6941, 7.8548], coinciden_con_Resonancia_a_1e10 = true)</code></pre>
+<pre><code>(n_raices = 6, primeras = [1.8751, 4.6941, 7.8548], coinciden_con_JuliaDo_a_1e10 = true)</code></pre>
 </div>
 </div>
-<p>Salen las seis raíces del intervalo, que coinciden con las de <code>Resonancia.jl</code>; a partir de la tercera, <span class="math inline">\(x_n\approx(n-\tfrac12)\pi\)</span> (porque <span class="math inline">\(1/\cosh x\to0\)</span> y queda <span class="math inline">\(\cos x=0\)</span>). Con la <a href="#eq-viga" class="quarto-xref">ecuación&nbsp;1</a> se calcula la viga de acero de una regla de laboratorio: sección de 40 mm × 10 mm (flexión en el sentido del espesor), <span class="math inline">\(L=1\)</span> m, <span class="math inline">\(E=210\)</span> GPa y <span class="math inline">\(\rho=7850\)</span> kg/m³.</p>
+<p>Salen las seis raíces del intervalo, que coinciden con las de <code>JuliaDo.jl</code>; a partir de la tercera, <span class="math inline">\(x_n\approx(n-\tfrac12)\pi\)</span> (porque <span class="math inline">\(1/\cosh x\to0\)</span> y queda <span class="math inline">\(\cos x=0\)</span>). Con la <a href="#eq-viga" class="quarto-xref">ecuación&nbsp;1</a> se calcula la viga de acero de una regla de laboratorio: sección de 40 mm × 10 mm (flexión en el sentido del espesor), <span class="math inline">\(L=1\)</span> m, <span class="math inline">\(E=210\)</span> GPa y <span class="math inline">\(\rho=7850\)</span> kg/m³.</p>
 <div id="14" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Ver el código</summary>
@@ -1137,7 +1125,7 @@ Figura&nbsp;5: (a) Pico del tercer modo muestreado cada 0,1 Hz (puntos): amplifi
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><code>scipy.optimize.brentq(f, 1, 3)</code> es el equivalente de <code>find_zero</code> con corchete y da el mismo valor, 1,8751040687119611, que <code>Resonancia.jl</code>; <code>scipy.optimize.newton</code> es Newton o secante. <code>scipy.interpolate.CubicSpline(x, y, bc_type="natural")</code> construye el spline natural (con 9 sensores el error máximo del primer modo del voladizo es el mismo, 0,0026970737, que el de esta unidad) y <code>numpy.interp</code> hace la interpolación lineal.</p>
+<p><code>scipy.optimize.brentq(f, 1, 3)</code> es el equivalente de <code>find_zero</code> con corchete y da el mismo valor, 1,8751040687119611, que <code>JuliaDo.jl</code>; <code>scipy.optimize.newton</code> es Newton o secante. <code>scipy.interpolate.CubicSpline(x, y, bc_type="natural")</code> construye el spline natural (con 9 sensores el error máximo del primer modo del voladizo es el mismo, 0,0026970737, que el de esta unidad) y <code>numpy.interp</code> hace la interpolación lineal.</p>
 </div>
 </div>
 <div class="idea-clave callout callout-style-default callout-note callout-titled">
@@ -1183,7 +1171,7 @@ Inman, Daniel J. 2017. <em>Vibration with Control</em>. 2.ª ed. Wiley.
 <pre><code>(f1_Hz = [8.144, 8.25, 8.355, 8.459, 8.561], variacion_relativa = [-0.0253, -0.0126, 0.0, 0.0124, 0.0247], raiz_del_cociente = [-0.0253, -0.0126, 0.0, 0.0124, 0.0247])</code></pre>
 </div>
 </div>
-<p>Un ±5 % en <span class="math inline">\(E\)</span> da un −2,5 % y un +2,5 % en <span class="math inline">\(f_1\)</span> (de 8,14 a 8,56 Hz), exactamente <span class="math inline">\(\sqrt{E/E_0}-1\)</span>. Esa banda es del tamaño de un daño moderado: un cambio de frecuencia solo se interpreta frente a la incertidumbre del modelo (J2.7, M12).</p>
+<p>Un ±5 % en <span class="math inline">\(E\)</span> da un −2,5 % y un +2,5 % en <span class="math inline">\(f_1\)</span> (de 8,14 a 8,56 Hz), exactamente <span class="math inline">\(\sqrt{E/E_0}-1\)</span>. Esa banda es del tamaño de un daño moderado: un cambio de frecuencia solo se interpreta frente a la incertidumbre del modelo (J2.7).</p>
 <p><strong>Paso 2. Mínimo número de sensores.</strong> ¿Cuántos sensores equiespaciados hacen falta para reconstruir los tres primeros modos del voladizo con un error máximo inferior a 0,01 (un 1 % de la amplitud en la punta) con cada interpolador?</p>
 <div id="34" class="cell" data-execution_count="1">
 <details class="code-fold">
@@ -1241,7 +1229,7 @@ Inman, Daniel J. 2017. <em>Vibration with Control</em>. 2.ª ed. Wiley.
 </div>
 </div>
 </div>
-<p>El modo 1 necesita 8 sensores con interpolación lineal y 6 con spline natural; el modo 2, 17 y 12; el modo 3, cuyas oscilaciones son más rápidas, 27 y 19. Cuantos más modos se quieren reconstruir, más sensores hacen falta, y es la razón por la que la selección de sensores es un problema de diseño del ensayo (M7).</p>
+<p>El modo 1 necesita 8 sensores con interpolación lineal y 6 con spline natural; el modo 2, 17 y 12; el modo 3, cuyas oscilaciones son más rápidas, 27 y 19. Cuantos más modos se quieren reconstruir, más sensores hacen falta, y es la razón por la que la selección de sensores es un problema de diseño del ensayo.</p>
 <p><strong>Paso 3. Un cambio de frecuencia como raíz.</strong> Dada la frecuencia <span class="math inline">\(f_1\)</span> medida de la viga con una masa añadida, ¿qué masa tiene? Se invierte la relación con <code>find_zero</code>, como en J3.4.2: para <span class="math inline">\(f_1=7{,}9\)</span> Hz,</p>
 <div id="36" class="cell" data-execution_count="1">
 <details class="code-fold">
@@ -1270,7 +1258,7 @@ Inman, Daniel J. 2017. <em>Vibration with Control</em>. 2.ª ed. Wiley.
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>«Con Julia, <code>--project=.</code>, <code>Roots.jl</code>, <code>Interpolations.jl</code> y <code>Resonancia.jl</code> (sin instalar paquetes nuevos): calcula con <code>find_zeros</code> las cuatro primeras raíces de la ecuación característica de la viga empotrada–libre <code>cos x + 1/cosh x = 0</code> (escríbela en la forma dividida por <code>cosh x</code>) y compáralas con <code>raices_viga(:voladizo, 4)</code>. Con ellas y con una viga de acero de 1 m de longitud, 40 mm × 10 mm de sección, E = 210 GPa y ρ = 7850 kg/m³, dame las cuatro primeras frecuencias propias en Hz. Después interpola el primer modo medido en 5, 9 y 17 sensores equiespaciados con <code>linear_interpolation</code> y con <code>cubic_spline_interpolation</code>, y dame el error máximo sobre 2001 puntos y la pendiente log-log del error frente al paso. Explica por qué el spline no llega al orden 4 en el voladizo. No inventes cifras: si algo no sale, dilo. Di que son cálculos sin datos medidos.»</p>
+<p>«Con Julia, <code>--project=.</code>, <code>Roots.jl</code>, <code>Interpolations.jl</code> y <code>JuliaDo.jl</code> (sin instalar paquetes nuevos): calcula con <code>find_zeros</code> las cuatro primeras raíces de la ecuación característica de la viga empotrada–libre <code>cos x + 1/cosh x = 0</code> (escríbela en la forma dividida por <code>cosh x</code>) y compáralas con <code>raices_viga(:voladizo, 4)</code>. Con ellas y con una viga de acero de 1 m de longitud, 40 mm × 10 mm de sección, E = 210 GPa y ρ = 7850 kg/m³, dame las cuatro primeras frecuencias propias en Hz. Después interpola el primer modo medido en 5, 9 y 17 sensores equiespaciados con <code>linear_interpolation</code> y con <code>cubic_spline_interpolation</code>, y dame el error máximo sobre 2001 puntos y la pendiente log-log del error frente al paso. Explica por qué el spline no llega al orden 4 en el voladizo. No inventes cifras: si algo no sale, dilo. Di que son cálculos sin datos medidos.»</p>
 <p><strong>Verifica.</strong> (a) Que las raíces son 1,8751, 4,6941, 7,8548 y 10,9955 y que usa la forma estable de la ecuación. (b) Que las frecuencias son 8,36; 52,36; 146,61 y 287,30 Hz. (c) Que el error de la interpolación lineal con 5 sensores es de 0,023 y baja con pendiente cercana a 2. (d) Que explica la pérdida de orden del spline por la condición natural (segunda derivada nula) en el empotramiento, y no «por un error del paquete». (e) Que no extrapola fuera del rango de los sensores ni da cifras que el código no haya calculado.</p>
 </div>
 </div>
@@ -1826,7 +1814,8 @@ Inman, Daniel J. 2017. <em>Vibration with Control</em>. 2.ª ed. Wiley.
   /* ------------------------------------------------------------------ */
   /* Almacenamiento local (con tolerancia a que no exista)               */
   /* ------------------------------------------------------------------ */
-  const PREFIJO = "resonancia:ej:" + (typeof location !== "undefined" ? location.pathname : "");
+  // Prefijo histórico de las claves: se conserva para no borrar las respuestas ya guardadas.
+  const PREFIJO = "resonancia:ej:" +(typeof location !== "undefined" ? location.pathname : "");
 
   function leer(id) {
     try {
@@ -2110,7 +2099,7 @@ Inman, Daniel J. 2017. <em>Vibration with Control</em>. 2.ª ed. Wiley.
       el("div", { class: "ej-botones" },
         el("button", { type: "button", class: "ej-btn ej-btn-sec", text: "Descargar mis respuestas", onclick: () => {
           const blob = new Blob([JSON.stringify({ pagina: location.pathname, fecha: new Date().toISOString(), respuestas: todos() }, null, 2)], { type: "application/json" });
-          const a = el("a", { href: URL.createObjectURL(blob), download: "resonancia-respuestas.json" }); a.click();
+          const a = el("a", { href: URL.createObjectURL(blob), download: "juliado-respuestas.json" }); a.click();
         } }),
         el("button", { type: "button", class: "ej-btn ej-btn-sec", text: "Borrar mis respuestas", onclick: () => {
           if (confirm("¿Borrar todas tus respuestas y tu progreso en esta página?")) { borrarTodo(); location.reload(); }

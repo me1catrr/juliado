@@ -122,18 +122,6 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link active" href="./about.html" aria-current="page"> 
 <span class="menu-text">Acerca de</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/resonancia/"> 
-<span class="menu-text">Resonancia</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/matematicado/"> 
-<span class="menu-text">matematicado</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/claudedo/"> 
-<span class="menu-text">ClaudeDo</span></a>
-  </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/me1catrr/juliado"> <i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
@@ -157,7 +145,7 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#responsable" id="toc-responsable" class="nav-link active" data-scroll-target="#responsable">Responsable</a></li>
   <li><a href="#propósito-del-curso" id="toc-propósito-del-curso" class="nav-link" data-scroll-target="#propósito-del-curso">Propósito del curso</a></li>
-  <li><a href="#origen-y-sitios-hermanos" id="toc-origen-y-sitios-hermanos" class="nav-link" data-scroll-target="#origen-y-sitios-hermanos">Origen y sitios hermanos</a></li>
+  <li><a href="#materiales" id="toc-materiales" class="nav-link" data-scroll-target="#materiales">Materiales</a></li>
   <li><a href="#repositorio" id="toc-repositorio" class="nav-link" data-scroll-target="#repositorio">Repositorio</a></li>
   <li><a href="#uso-de-claude-code" id="toc-uso-de-claude-code" class="nav-link" data-scroll-target="#uso-de-claude-code">Uso de Claude Code</a></li>
   <li><a href="#licencias" id="toc-licencias" class="nav-link" data-scroll-target="#licencias">Licencias</a></li>
@@ -197,15 +185,9 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="propósito-del-curso">Propósito del curso</h2>
 <p>JuliaDo es una web de autoformación en programación y computación científica con Julia. Busca que quien la recorra sepa escribir, comprobar y mantener código científico reproducible, y que use un asistente de programación con criterio: delegando lo que conviene, verificando lo que entrega y sabiendo qué no puede hacer por él.</p>
 </section>
-<section id="origen-y-sitios-hermanos" class="level2">
-<h2 class="anchored" data-anchor-id="origen-y-sitios-hermanos">Origen y sitios hermanos</h2>
-<p>JuliaDo nació como la vía J de <a href="https://me1catrr.github.io/resonancia/">Resonancia</a>, el curso de vibraciones, señales y monitorización estructural que acompaña a la asignatura <em>Monitorización de la Salud Estructural</em> (655023) del Máster Universitario en Ingeniería Industrial de la Universidad de Córdoba. En noviembre de 2026 se separó en un sitio propio; el historial anterior de sus ficheros sigue en el <a href="https://github.com/me1catrr/resonancia">repositorio de Resonancia</a>.</p>
-<ul>
-<li><a href="https://me1catrr.github.io/resonancia/">Resonancia</a>: monitorización de la salud estructural, laboratorios y recursos. Explica los conceptos que aquí se programan.</li>
-<li><a href="https://me1catrr.github.io/matematicado/">matematicado</a>: matemáticas aplicadas a vibraciones y monitorización estructural (álgebra, señales, sistemas, estadística).</li>
-<li><a href="https://me1catrr.github.io/claudedo/">ClaudeDo</a>: autoformación con Claude y Claude Code.</li>
-</ul>
-<p>Los ejemplos de JuliaDo usan los datos sintéticos del edificio de tres plantas y los casos de empresa de <code>datos/sinteticos/</code>, y el paquete <code>Resonancia.jl</code>, del que este repositorio incluye una copia (versión 0.9.0) para compilar sin depender de Resonancia.</p>
+<section id="materiales" class="level2">
+<h2 class="anchored" data-anchor-id="materiales">Materiales</h2>
+<p>Los ejemplos de JuliaDo usan los datos sintéticos del edificio de tres plantas y los casos de empresa de <code>datos/sinteticos/</code>, y el paquete local <code>JuliaDo.jl</code>, que reúne las funciones que se reutilizan en varias unidades.</p>
 </section>
 <section id="repositorio" class="level2">
 <h2 class="anchored" data-anchor-id="repositorio">Repositorio</h2>
@@ -218,7 +200,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="licencias" class="level2">
 <h2 class="anchored" data-anchor-id="licencias">Licencias</h2>
 <ul>
-<li><strong>Código y Resonancia.jl:</strong> licencia MIT (véase <code>LICENSE</code>).</li>
+<li><strong>Código y JuliaDo.jl:</strong> licencia MIT (véase <code>LICENSE</code>).</li>
 <li><strong>Textos, diapositivas y figuras:</strong> licencia <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es">CC BY-SA 4.0</a> (véase <code>LICENSE-CONTENIDO</code>).</li>
 <li><strong>Datos:</strong> cada conjunto de datos se distribuye con la licencia indicada en su ficha de metadatos (<code>.meta.toml</code>).</li>
 </ul>

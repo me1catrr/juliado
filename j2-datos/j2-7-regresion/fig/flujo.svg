@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- fuente-sha256: b8a34fa05ee234262cf82d70e6f8d81684ce4b059e1b07c79924b4b718b2e254 -->
+<!-- fuente-sha256: 3bdc5ebc580360aee1244cc7e9c83b3133ec003249ed05d4eda4eaa9afaaeef1 -->
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="386.658pt" height="59.675pt" viewBox="0 0 386.658 59.675">
 <defs>
 <g>
@@ -352,11 +352,11 @@
 <use xlink:href="#glyph-2-7" x="254.328281" y="24.71639"/>
 </g>
 <g fill="rgb(12.156677%, 16.07666%, 21.569824%)" fill-opacity="1">
-<use xlink:href="#glyph-1-4" x="258.735654" y="24.71639"/>
-<use xlink:href="#glyph-1-12" x="262.945646" y="24.71639"/>
-<use xlink:href="#glyph-1-13" x="267.155637" y="24.71639"/>
-<use xlink:href="#glyph-1-14" x="271.365629" y="24.71639"/>
-<use xlink:href="#glyph-1-12" x="275.575621" y="24.71639"/>
+<use xlink:href="#glyph-1-4" x="258.734789" y="24.71639"/>
+<use xlink:href="#glyph-1-12" x="262.944781" y="24.71639"/>
+<use xlink:href="#glyph-1-13" x="267.154773" y="24.71639"/>
+<use xlink:href="#glyph-1-14" x="271.364765" y="24.71639"/>
+<use xlink:href="#glyph-1-12" x="275.574756" y="24.71639"/>
 </g>
 <path fill-rule="nonzero" fill="rgb(95.481873%, 94.068909%, 98.054504%)" fill-opacity="1" stroke-width="0.89664" stroke-linecap="round" stroke-linejoin="round" stroke="rgb(43.528748%, 25.881958%, 75.686646%)" stroke-opacity="1" stroke-miterlimit="10" d="M 335.091181 12.754825 L 260.193296 12.754825 C 259.093589 12.754825 258.202041 11.863277 258.202041 10.763571 L 258.202041 -10.763189 C 258.202041 -11.862896 259.093589 -12.754444 260.193296 -12.754444 L 335.091181 -12.754444 C 336.190887 -12.754444 337.082435 -11.862896 337.082435 -10.763189 L 337.082435 10.763571 C 337.082435 11.863277 336.190887 12.754825 335.091181 12.754825 Z M 335.091181 12.754825 " transform="matrix(0.994583, 0, 0, -0.994583, 45.778584, 17.095893)"/>
 <g fill="rgb(12.156677%, 16.07666%, 21.569824%)" fill-opacity="1">

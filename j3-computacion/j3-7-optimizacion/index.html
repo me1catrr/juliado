@@ -205,18 +205,6 @@ window.Quarto = {
     <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">Acerca de</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/resonancia/"> 
-<span class="menu-text">Resonancia</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/matematicado/"> 
-<span class="menu-text">matematicado</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/claudedo/"> 
-<span class="menu-text">ClaudeDo</span></a>
-  </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/me1catrr/juliado"> <i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
@@ -487,7 +475,7 @@ window.Quarto = {
 
 
 <p><img src="fig/portada.svg" class="portada img-fluid" alt="A la izquierda, puntos azules con ruido alrededor de un pico de resonancia y la curva naranja ajustada, junto a una curva gris discontinua del punto de partida; una flecha verde con la palabra mín lleva a la derecha, donde elipses concéntricas azules son las curvas de nivel de una función de coste y una línea naranja quebrada baja por el valle hasta un punto verde en el mínimo"></p>
-<p>Casi todo lo que se hace con datos de vibraciones acaba en la misma pregunta: <strong>¿qué valores de los parámetros del modelo hacen que este se parezca más a lo medido?</strong> El amortiguamiento de un modo, la rigidez de un entrepiso, la masa de una planta no se miden directamente: se <strong>estiman</strong> minimizando una función de coste que mide la distancia entre modelo y datos. Esta unidad enseña a plantear ese problema, a resolverlo con <code>Optim.jl</code> y <code>LsqFit.jl</code>, a elegir el método, a no caer en un mínimo local, y a <strong>cuantificar la incertidumbre</strong> del resultado, con dos aplicaciones de la vía M: el ajuste de la FRF de un oscilador de 1 GDL (M7) y la actualización de un modelo de edificio con frecuencias medidas (M6.7).</p>
+<p>Casi todo lo que se hace con datos de vibraciones acaba en la misma pregunta: <strong>¿qué valores de los parámetros del modelo hacen que este se parezca más a lo medido?</strong> El amortiguamiento de un modo, la rigidez de un entrepiso, la masa de una planta no se miden directamente: se <strong>estiman</strong> minimizando una función de coste que mide la distancia entre modelo y datos. Esta unidad enseña a plantear ese problema, a resolverlo con <code>Optim.jl</code> y <code>LsqFit.jl</code>, a elegir el método, a no caer en un mínimo local, y a <strong>cuantificar la incertidumbre</strong> del resultado, con dos aplicaciones de vibraciones: el ajuste de la FRF de un oscilador de 1 GDL y la actualización de un modelo de edificio con frecuencias medidas (<em>model updating</em>).</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -498,7 +486,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Tiempo orientativo: 120 minutos.</strong> Objetivos (5), teoría en cinco píldoras (35), práctica guiada (45), «Pídeselo a Claude» (15), ejercicios (15) y cierre (5). <strong>Los datos de la FRF son sintéticos</strong> (se generan en la página, con semilla fija y un ruido conocido, para saber la respuesta correcta); los de la actualización del modelo son los registros sintéticos del edificio de tres plantas de <code>datos/sinteticos/</code>. Ninguno es una medida de una estructura real. Se usan <code>Optim.jl</code>, <code>LsqFit.jl</code> y las funciones de <code>Resonancia.jl</code>.</p>
+<p><strong>Tiempo orientativo: 120 minutos.</strong> Objetivos (5), teoría en cinco píldoras (35), práctica guiada (45), «Pídeselo a Claude» (15), ejercicios (15) y cierre (5). <strong>Los datos de la FRF son sintéticos</strong> (se generan en la página, con semilla fija y un ruido conocido, para saber la respuesta correcta); los de la actualización del modelo son los registros sintéticos del edificio de tres plantas de <code>datos/sinteticos/</code>. Ninguno es una medida de una estructura real. Se usan <code>Optim.jl</code>, <code>LsqFit.jl</code> y las funciones de <code>JuliaDo.jl</code>.</p>
 </div>
 </div>
 <section id="objetivos-y-prerrequisitos" class="level2">
@@ -511,8 +499,8 @@ window.Quarto = {
 <li>detectar mínimos locales con una estrategia multi-start, imponer cotas y comprobar la sensibilidad a la inicialización;</li>
 <li>actualizar la rigidez de un modelo de edificio con frecuencias medidas y dar el resultado con su incertidumbre.</li>
 </ul>
-<p><strong>Prerrequisitos.</strong> El curso no los impone en el temario; conviene <a href="../../j3-computacion/j3-3-algebra-numerica/index.html">J3.3</a> (mínimos cuadrados lineales y condicionamiento) y <a href="../../j3-computacion/j3-5-integracion-ad/index.html">J3.5</a> (diferenciación automática), y haber visto en <a href="https://me1catrr.github.io/resonancia/mse/m06-vibraciones-ii/">M6.7</a> la idea de <em>model updating</em>.</p>
-<p><strong>Reparto con otras unidades.</strong> La teoría de la identificación modal está en <a href="https://me1catrr.github.io/resonancia/mse/m07-identificacion/">M7</a> y la del <em>model updating</em>, en M6.7. Aquí se implementa y se comprueba con cifras.</p>
+<p><strong>Prerrequisitos.</strong> El curso no los impone en el temario; conviene <a href="../../j3-computacion/j3-3-algebra-numerica/index.html">J3.3</a> (mínimos cuadrados lineales y condicionamiento) y <a href="../../j3-computacion/j3-5-integracion-ad/index.html">J3.5</a> (diferenciación automática).</p>
+<p><strong>Reparto con otras unidades.</strong> La teoría de la identificación modal y del <em>model updating</em> no se desarrolla aquí: se implementa y se comprueba con cifras.</p>
 </section>
 <section id="teoría-breve" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="teoría-breve">Teoría breve</h2>
@@ -541,7 +529,7 @@ J(\boldsymbol\theta)=\sum_{i=1}^{N}r_i(\boldsymbol\theta)^2=\lVert\mathbf r(\bol
 <p><span id="eq-frf"><span class="math display">\[
 H(f)=\frac{A}{1-(f/f_0)^2+2\mathrm{i}\,\zeta\,f/f_0},\qquad A=\frac1k ,
 \tag{2}\]</span></span></p>
-<p>implementada en <code>frf_1gdl</code> de <code>Resonancia.jl</code>. Se simulan 201 frecuencias entre 2 y 4 Hz con ruido gaussiano de 5 µm/kN en la parte real y en la imaginaria, y se minimiza <a href="#eq-coste" class="quarto-xref">ecuación&nbsp;1</a> con Optim.jl:</p>
+<p>implementada en <code>frf_1gdl</code> de <code>JuliaDo.jl</code>. Se simulan 201 frecuencias entre 2 y 4 Hz con ruido gaussiano de 5 µm/kN en la parte real y en la imaginaria, y se minimiza <a href="#eq-coste" class="quarto-xref">ecuación&nbsp;1</a> con Optim.jl:</p>
 <div id="4" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Ver el código</summary>
@@ -673,7 +661,7 @@ Tabla&nbsp;1: Ajuste de la FRF por Levenberg–Marquardt con <code>curve_fit</co
 <img src="index_files/figure-html/fig-frf-output-1.svg" class="img-fluid figure-img" alt="Dos paneles. El panel a muestra el módulo de la FRF en micrómetros por kilonewton frente a la frecuencia de 2 a 4 hercios: puntos grises dispersos alrededor de un pico alto en 2,94 hercios, una curva gris discontinua con un pico más bajo y desplazado, y una curva naranja que pasa por los puntos. El panel b muestra la parte real frente a la imaginaria: los puntos dibujan una circunferencia con ruido y la curva naranja es una circunferencia que los ajusta.">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-frf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;1: Ajuste de la FRF de un oscilador de 1 GDL. (a) Módulo de los 201 datos (gris), curva del punto de partida (discontinua) y curva ajustada (naranja). (b) Los mismos datos en el plano de Argand (parte real frente a imaginaria): la FRF de 1 GDL traza una circunferencia, que es lo que ajusta el método <em>circle-fit</em> de M7.2.
+Figura&nbsp;1: Ajuste de la FRF de un oscilador de 1 GDL. (a) Módulo de los 201 datos (gris), curva del punto de partida (discontinua) y curva ajustada (naranja). (b) Los mismos datos en el plano de Argand (parte real frente a imaginaria): la FRF de 1 GDL traza una circunferencia, que es lo que ajusta el método <em>circle-fit</em> de la identificación modal.
 </figcaption>
 </figure>
 </div>
@@ -861,7 +849,7 @@ Figura&nbsp;2: Curvas de nivel del coste (en log₁₀) en el plano (f₀, ζ), 
 </section>
 <section id="j3-7-4" class="level3">
 <h3 class="anchored" data-anchor-id="j3-7-4">J3.7.4 Mínimos locales, multi-start y cotas</h3>
-<p>Un método de descenso termina en el mínimo local que le toca según el punto de partida. La defensa estándar es la <strong>estrategia multi-start</strong>: lanzar el ajuste desde muchos puntos iniciales repartidos por la región admisible y quedarse con el de menor coste, comprobando <strong>cuántos</strong> alcanzan ese mismo valor. Si lo alcanzan casi todos, el mínimo es fiable; si solo uno, hay que desconfiar. <code>puntos_iniciales(lo, hi, n)</code> de <code>Resonancia.jl</code> los reparte con una secuencia determinista (de Halton), de modo que el resultado se repite exactamente. Con la FRF compleja, un mínimo local es raro:</p>
+<p>Un método de descenso termina en el mínimo local que le toca según el punto de partida. La defensa estándar es la <strong>estrategia multi-start</strong>: lanzar el ajuste desde muchos puntos iniciales repartidos por la región admisible y quedarse con el de menor coste, comprobando <strong>cuántos</strong> alcanzan ese mismo valor. Si lo alcanzan casi todos, el mínimo es fiable; si solo uno, hay que desconfiar. <code>puntos_iniciales(lo, hi, n)</code> de <code>JuliaDo.jl</code> los reparte con una secuencia determinista (de Halton), de modo que el resultado se repite exactamente. Con la FRF compleja, un mínimo local es raro:</p>
 <div id="16" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Ver el código</summary>
@@ -1181,7 +1169,7 @@ Figura&nbsp;5: Factores de rigidez actualizados de los tres entrepisos en los tr
 <pre><code>(soluciones_cercanas_a_nominal = 25, otra_solucion = [1.971, 0.623, 0.737], frecuencias_de_la_otra = [1.089, 2.928, 4.252], frecuencias_medidas = [1.089, 2.928, 4.252])</code></pre>
 </div>
 </div>
-<p>Hay <strong>dos</strong> soluciones con coste prácticamente nulo: la buena, <span class="math inline">\(\boldsymbol\theta\approx(1{,}02;\,0{,}90;\,0{,}98)\)</span> (25 de los 30 arranques), y otra, <span class="math inline">\((1{,}97;\,0{,}62;\,0{,}74)\)</span> (los otros 5), con las <strong>mismas</strong> tres frecuencias pero con un entrepiso 1 de rigidez casi doble. Solo se descarta con información adicional: un prior físico (cotas <span class="math inline">\(0{,}5\le\theta\le1{,}5\)</span>), las formas modales (MAC, M6.7) o más sensores. La covarianza de LsqFit, que solo describe el entorno de <strong>una</strong> solución, no lo habría avisado.</p>
+<p>Hay <strong>dos</strong> soluciones con coste prácticamente nulo: la buena, <span class="math inline">\(\boldsymbol\theta\approx(1{,}02;\,0{,}90;\,0{,}98)\)</span> (25 de los 30 arranques), y otra, <span class="math inline">\((1{,}97;\,0{,}62;\,0{,}74)\)</span> (los otros 5), con las <strong>mismas</strong> tres frecuencias pero con un entrepiso 1 de rigidez casi doble. Solo se descarta con información adicional: un prior físico (cotas <span class="math inline">\(0{,}5\le\theta\le1{,}5\)</span>), las formas modales (MAC) o más sensores. La covarianza de LsqFit, que solo describe el entorno de <strong>una</strong> solución, no lo habría avisado.</p>
 <div class="nota-python callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1208,7 +1196,7 @@ Figura&nbsp;5: Factores de rigidez actualizados de los tres entrepisos en los tr
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>«Con Julia, <code>--project=.</code>, <code>Optim</code>, <code>LsqFit</code> y <code>Resonancia.jl</code>: (1) genera los datos de la FRF de un oscilador de 1 GDL (<code>frf_1gdl</code>) con <code>f0 = 2,94 Hz</code>, <code>ζ = 0,02</code>, <code>A = 14,65 µm/kN</code>, 201 frecuencias entre 2 y 4 Hz y ruido gaussiano de 5 µm/kN en parte real e imaginaria con <code>MersenneTwister(7)</code>; (2) ajústala con <code>curve_fit</code> (modelo <code>frf_1gdl_ri</code>) desde <code>[2,7; 0,05; 20]</code> y dame los parámetros con su error típico y el intervalo del 95 %; (3) repite desde 30 puntos de <code>puntos_iniciales([1,0,005,1],[5,0,3,100],30)</code> con cotas y di cuántos llegan al mismo coste; (4) compara el número de evaluaciones del coste de Nelder–Mead, BFGS y Levenberg–Marquardt con los parámetros reescalados. No cambies los métodos para que salga mejor. No inventes valores: si algo no converge, dilo.»</p>
+<p>«Con Julia, <code>--project=.</code>, <code>Optim</code>, <code>LsqFit</code> y <code>JuliaDo.jl</code>: (1) genera los datos de la FRF de un oscilador de 1 GDL (<code>frf_1gdl</code>) con <code>f0 = 2,94 Hz</code>, <code>ζ = 0,02</code>, <code>A = 14,65 µm/kN</code>, 201 frecuencias entre 2 y 4 Hz y ruido gaussiano de 5 µm/kN en parte real e imaginaria con <code>MersenneTwister(7)</code>; (2) ajústala con <code>curve_fit</code> (modelo <code>frf_1gdl_ri</code>) desde <code>[2,7; 0,05; 20]</code> y dame los parámetros con su error típico y el intervalo del 95 %; (3) repite desde 30 puntos de <code>puntos_iniciales([1,0,005,1],[5,0,3,100],30)</code> con cotas y di cuántos llegan al mismo coste; (4) compara el número de evaluaciones del coste de Nelder–Mead, BFGS y Levenberg–Marquardt con los parámetros reescalados. No cambies los métodos para que salga mejor. No inventes valores: si algo no converge, dilo.»</p>
 <p><strong>Verifica.</strong> (a) Que el ajuste da <span class="math inline">\(f_0\approx2{,}9404\)</span>, <span class="math inline">\(\zeta\approx0{,}01994\)</span> y <span class="math inline">\(A\approx14{,}63\)</span>, con el valor verdadero dentro de cada intervalo del 95 %. (b) Que el residuo <span class="math inline">\(\hat\sigma\)</span> es <span class="math inline">\(\approx4{,}9\)</span> (cerca del ruido de 5). (c) Que los 30 arranques con cotas dan el mismo coste (9 491,1). (d) Que cuenta <strong>evaluaciones</strong>, no segundos, y que LM necesita bastantes menos que Nelder–Mead. (e) Que no ha escogido el mejor de varios resultados sin decirlo ni ha cambiado la semilla. (f) Que no da por buena una fila con <code>converged = true</code> y un coste mucho mayor que el mínimo.</p>
 </div>
 </div>
@@ -1767,7 +1755,8 @@ Figura&nbsp;5: Factores de rigidez actualizados de los tres entrepisos en los tr
   /* ------------------------------------------------------------------ */
   /* Almacenamiento local (con tolerancia a que no exista)               */
   /* ------------------------------------------------------------------ */
-  const PREFIJO = "resonancia:ej:" + (typeof location !== "undefined" ? location.pathname : "");
+  // Prefijo histórico de las claves: se conserva para no borrar las respuestas ya guardadas.
+  const PREFIJO = "resonancia:ej:" +(typeof location !== "undefined" ? location.pathname : "");
 
   function leer(id) {
     try {
@@ -2051,7 +2040,7 @@ Figura&nbsp;5: Factores de rigidez actualizados de los tres entrepisos en los tr
       el("div", { class: "ej-botones" },
         el("button", { type: "button", class: "ej-btn ej-btn-sec", text: "Descargar mis respuestas", onclick: () => {
           const blob = new Blob([JSON.stringify({ pagina: location.pathname, fecha: new Date().toISOString(), respuestas: todos() }, null, 2)], { type: "application/json" });
-          const a = el("a", { href: URL.createObjectURL(blob), download: "resonancia-respuestas.json" }); a.click();
+          const a = el("a", { href: URL.createObjectURL(blob), download: "juliado-respuestas.json" }); a.click();
         } }),
         el("button", { type: "button", class: "ej-btn ej-btn-sec", text: "Borrar mis respuestas", onclick: () => {
           if (confirm("¿Borrar todas tus respuestas y tu progreso en esta página?")) { borrarTodo(); location.reload(); }

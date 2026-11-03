@@ -205,18 +205,6 @@ window.Quarto = {
     <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">Acerca de</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/resonancia/"> 
-<span class="menu-text">Resonancia</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/matematicado/"> 
-<span class="menu-text">matematicado</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/claudedo/"> 
-<span class="menu-text">ClaudeDo</span></a>
-  </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/me1catrr/juliado"> <i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
@@ -498,7 +486,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Tiempo orientativo: 120 minutos.</strong> Objetivos (5), teoría en cinco píldoras (25), práctica guiada (55), «Pídeselo a Claude» (15), ejercicios (15) y cierre (5). El concepto matemático de los modos y los valores propios se explica en <a href="https://me1catrr.github.io/resonancia/mse/m02-matematicas/">M2</a> y <a href="https://me1catrr.github.io/resonancia/mse/m05-vibraciones-i/">M5</a>; aquí interesa <strong>cómo se programa</strong>.</p>
+<p><strong>Tiempo orientativo: 120 minutos.</strong> Objetivos (5), teoría en cinco píldoras (25), práctica guiada (55), «Pídeselo a Claude» (15), ejercicios (15) y cierre (5). Aquí no se desarrolla la teoría de los modos y los valores propios: interesa <strong>cómo se programa</strong>.</p>
 </div>
 </div>
 <section id="objetivos-y-prerrequisitos" class="level2">
@@ -512,7 +500,7 @@ window.Quarto = {
 <li>construir las matrices <strong>M</strong> y <strong>K</strong> de un sistema de 3 grados de libertad y obtener sus frecuencias naturales.</li>
 </ul>
 <p><strong>Prerrequisitos.</strong> <a href="../../j1-esencial/j1-4-funciones/index.html">J1.4</a>: funciones y comprensiones.</p>
-<p><strong>Reparto con otras unidades.</strong> Las matrices con estructura (Toeplitz, Hankel, dispersas) y la SVD se tratan en matematicado (<a href="https://me1catrr.github.io/matematicado/algebra/matrices/a1-3.html">A1</a> y <a href="https://me1catrr.github.io/matematicado/algebra/svd/index.html">A3</a>) y en <a href="../../j3-computacion/j3-3-algebra-numerica/index.html">J3.3</a>. Leer y trocear tablas con <code>DataFrames</code> es el tema de <a href="../../j1-esencial/j1-6-datos/index.html">J1.6</a>.</p>
+<p><strong>Reparto con otras unidades.</strong> Las matrices con estructura (Toeplitz, Hankel, dispersas) y la SVD se tratan en <a href="../../j3-computacion/j3-3-algebra-numerica/index.html">J3.3</a>. Leer y trocear tablas con <code>DataFrames</code> es el tema de <a href="../../j1-esencial/j1-6-datos/index.html">J1.6</a>.</p>
 </section>
 <section id="teoría-breve" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="teoría-breve">Teoría breve</h2>
@@ -532,7 +520,7 @@ window.Quarto = {
 <pre><code>((2, 2), 3, (3, 2), [0.0, 0.25, 0.5, 0.75, 1.0])</code></pre>
 </div>
 </div>
-<p><strong>Convención del curso para un registro multicanal:</strong> una <strong>matriz <code>N × c</code></strong>, con las muestras en filas y los canales en columnas. Así <code>X[:, j]</code> es el registro completo del canal <code>j</code> y es contiguo en memoria, porque Julia almacena las matrices <strong>por columnas</strong> (<em>column-major</em>, igual que MATLAB y Fortran, y al revés que NumPy). Es lo que devuelven las funciones de lectura de <code>Resonancia.jl</code> (<code>leer_torroja</code> da una matriz <code>N × 3</code>).</p>
+<p><strong>Convención del curso para un registro multicanal:</strong> una <strong>matriz <code>N × c</code></strong>, con las muestras en filas y los canales en columnas. Así <code>X[:, j]</code> es el registro completo del canal <code>j</code> y es contiguo en memoria, porque Julia almacena las matrices <strong>por columnas</strong> (<em>column-major</em>, igual que MATLAB y Fortran, y al revés que NumPy). Es lo que devuelven las funciones de lectura de <code>JuliaDo.jl</code> (<code>leer_torroja</code> da una matriz <code>N × 3</code>).</p>
 <div id="j1-5-1-tam" class="ejercicio" data-tipo="numerico" data-respuesta="24000" data-tol="0%" data-unidad="bytes">
 <p>Un registro de 3 canales y 1000 muestras en <code>Float64</code> (8 bytes por número), ¿cuántos bytes ocupa?</p>
 <div class="solucion">
@@ -669,7 +657,7 @@ window.Quarto = {
 <pre><code>(solucion = [0.0909, 0.6364], residuo = true, cond = 1.939, valores_propios = [2.382, 4.618])</code></pre>
 </div>
 </div>
-<p>La regla de oro: <strong>resolver con <code>A \ b</code></strong>, que usa una factorización estable, y no calcular <code>inv(A)</code>, que es más lento y menos preciso. El condicionamiento mide cuánto se amplifica un error en los datos; si <code>cond(A)</code> es 10ⁿ, se pierden unas <em>n</em> cifras decimales (se justifica en <a href="https://me1catrr.github.io/matematicado/algebra/matrices/a1-1.html">A1.1 de matematicado</a>).</p>
+<p>La regla de oro: <strong>resolver con <code>A \ b</code></strong>, que usa una factorización estable, y no calcular <code>inv(A)</code>, que es más lento y menos preciso. El condicionamiento mide cuánto se amplifica un error en los datos; si <code>cond(A)</code> es 10ⁿ, se pierden unas <em>n</em> cifras decimales (se ve con más detalle en <a href="../../j3-computacion/j3-3-algebra-numerica/index.html">J3.3</a>).</p>
 <div id="j1-5-4-inv" class="ejercicio" data-tipo="vf" data-respuesta="falso">
 <p>Para resolver <span class="math inline">\(\mathbf A\mathbf x=\mathbf b\)</span> es mejor calcular primero <code>inv(A)</code> y multiplicar por <code>b</code>.</p>
 <div class="solucion">
@@ -726,7 +714,7 @@ Driscoll, Tobin A., y Richard J. Braun. 2022. <em>Fundamentals of Numerical Comp
 </section>
 <section id="práctica-guiada" class="level2">
 <h2 class="anchored" data-anchor-id="práctica-guiada">Práctica guiada</h2>
-<p>Vamos a construir las matrices del edificio de la <a href="#fig-edificio" class="quarto-xref">Figura&nbsp;1</a>, calcular sus frecuencias naturales y formas modales y comprobarlas con <code>Resonancia.jl</code>. Los datos son los del caso transversal de M2: <span class="math inline">\(m=2\cdot10^5\)</span> kg por planta y <span class="math inline">\(k_1=k_2=5\cdot10^7\)</span> N/m, <span class="math inline">\(k_3=4\cdot10^7\)</span> N/m.</p>
+<p>Vamos a construir las matrices del edificio de la <a href="#fig-edificio" class="quarto-xref">Figura&nbsp;1</a>, calcular sus frecuencias naturales y formas modales y comprobarlas con <code>JuliaDo.jl</code>. Los datos son los del edificio de tres plantas del curso: <span class="math inline">\(m=2\cdot10^5\)</span> kg por planta y <span class="math inline">\(k_1=k_2=5\cdot10^7\)</span> N/m, <span class="math inline">\(k_3=4\cdot10^7\)</span> N/m.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Julia</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Python</a></li></ul>
 <div class="tab-content">
@@ -760,7 +748,7 @@ Driscoll, Tobin A., y Richard J. Braun. 2022. <em>Fundamentals of Numerical Comp
 </div>
 </div>
 <p>Las tres frecuencias son 1,105 Hz, 2,939 Hz y 4,390 Hz. Es lo habitual en un edificio: el primer modo, con todas las plantas moviéndose en el mismo sentido, es el de menor frecuencia, y cada modo superior añade un cambio de signo en la forma.</p>
-<p><strong>Paso 3. Comprobar con el paquete.</strong> <code>Resonancia.jl</code> tiene el mismo modelo y la misma función. Se verifica que los resultados coinciden y que los modos son ortogonales respecto de M.</p>
+<p><strong>Paso 3. Comprobar con el paquete.</strong> <code>JuliaDo.jl</code> tiene el mismo modelo y la misma función. Se verifica que los resultados coinciden y que los modos son ortogonales respecto de M.</p>
 <div id="18" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Ver el código</summary>
@@ -828,7 +816,7 @@ Figura&nbsp;2: Formas modales del edificio de tres plantas. En cada panel se dib
 <pre><code>(covarianza = [0.503 0.4 -0.002; 0.4 0.384 0.044; -0.002 0.044 0.055], correlacion = [1.0 0.911 -0.014; 0.911 1.0 0.305; -0.014 0.305 1.0])</code></pre>
 </div>
 </div>
-<p>Los canales 1 y 2 están muy correlacionados (0,91) porque comparten el modo de 2,5 Hz; los canales 2 y 3 (0,31), solo parcialmente, por el de 7 Hz; y los canales 1 y 3 casi nada. La matriz de covarianza es simétrica y sus valores propios (0,010, 0,082 y 0,849) dicen cuánta varianza hay en cada dirección: es el punto de partida de la descomposición en valores singulares que se estudia en <a href="https://me1catrr.github.io/matematicado/algebra/svd/index.html">A3 de matematicado</a>.</p>
+<p>Los canales 1 y 2 están muy correlacionados (0,91) porque comparten el modo de 2,5 Hz; los canales 2 y 3 (0,31), solo parcialmente, por el de 7 Hz; y los canales 1 y 3 casi nada. La matriz de covarianza es simétrica y sus valores propios (0,010, 0,082 y 0,849) dicen cuánta varianza hay en cada dirección: es el punto de partida de la descomposición en valores singulares que se estudia en <a href="../../j3-computacion/j3-3-algebra-numerica/index.html">J3.3</a>.</p>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <p>La versión probada con <code>pytest</code>, con las frecuencias contrastadas con las de Julia, está en <code>python/arrays.py</code>. Con NumPy y SciPy:</p>
@@ -854,7 +842,7 @@ Figura&nbsp;2: Formas modales del edificio de tres plantas. En cada panel se dib
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Se han construido M y K de un sistema real, se han obtenido sus tres frecuencias naturales (1,105, 2,939 y 4,390 Hz) y se han contrastado con el paquete del curso, se han dibujado los modos y se ha centrado un registro multicanal sin bucles. Con estas piezas empieza M5.</p>
+<p>Se han construido M y K de un sistema real, se han obtenido sus tres frecuencias naturales (1,105, 2,939 y 4,390 Hz) y se han contrastado con el paquete del curso, se han dibujado los modos y se ha centrado un registro multicanal sin bucles.</p>
 </div>
 </div>
 </section>
@@ -870,7 +858,7 @@ Figura&nbsp;2: Formas modales del edificio de tres plantas. En cada panel se dib
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>«Con Julia y <code>--project=.</code>: (1) construye las matrices de masa y rigidez de un edificio de cortante de tres plantas con masas de 2·10⁵ kg y rigideces de entrepiso de 5·10⁷, 5·10⁷ y 4·10⁷ N/m; (2) calcula sus frecuencias naturales en Hz y las formas modales con <code>eigen(Symmetric(K), Symmetric(M))</code>; (3) compara con <code>edificio_tres_plantas</code> y <code>modos_propios</code> de <code>Resonancia.jl</code>; (4) comprueba que <code>Phi' * M * Phi</code> es la identidad. Resuelve con <code>\</code> y no uses <code>inv</code>. Dime los valores. No inventes resultados: si algo no coincide, dilo.»</p>
+<p>«Con Julia y <code>--project=.</code>: (1) construye las matrices de masa y rigidez de un edificio de cortante de tres plantas con masas de 2·10⁵ kg y rigideces de entrepiso de 5·10⁷, 5·10⁷ y 4·10⁷ N/m; (2) calcula sus frecuencias naturales en Hz y las formas modales con <code>eigen(Symmetric(K), Symmetric(M))</code>; (3) compara con <code>edificio_tres_plantas</code> y <code>modos_propios</code> de <code>JuliaDo.jl</code>; (4) comprueba que <code>Phi' * M * Phi</code> es la identidad. Resuelve con <code>\</code> y no uses <code>inv</code>. Dime los valores. No inventes resultados: si algo no coincide, dilo.»</p>
 <p><strong>Verifica.</strong> (a) Que las frecuencias son 1,105, 2,939 y 4,390 Hz, y que el orden de magnitud es razonable: una sola planta de las mismas <span class="math inline">\(m\)</span> y <span class="math inline">\(k\)</span> daría <span class="math inline">\(\sqrt{k/m}/2\pi\approx2{,}5\)</span> Hz. (b) Que <code>K</code> es simétrica y que la fila 1 suma <span class="math inline">\(k_1\)</span> y las filas 2 y 3 suman cero (una estructura sin apoyos no tendría rigidez para el movimiento de sólido rígido). (c) Que usa <code>Symmetric</code> y que no calcula <code>inv(K)</code>. (d) Que las unidades son kg, N/m y Hz, y que divide por <span class="math inline">\(2\pi\)</span> al pasar de rad/s a Hz. (e) Que no sobrescribe <code>M</code> o <code>K</code> con operaciones que modifican en sitio sin avisarlo.</p>
 </div>
 </div>
@@ -915,7 +903,7 @@ Figura&nbsp;2: Formas modales del edificio de tres plantas. En cada panel se dib
 <li>Distingo copia, vista y alias, y sé cuándo <code>B = A</code> es peligroso.</li>
 <li>Centro un registro canal a canal con <code>X .- mean(X, dims=1)</code>.</li>
 <li>Resuelvo <code>A \ b</code> y calculo <code>cond</code>, <code>norm</code> y <code>eigen</code>.</li>
-<li>Construyo M y K de un sistema de 3 GDL, obtengo sus frecuencias y las contrasto con <code>Resonancia.jl</code>.</li>
+<li>Construyo M y K de un sistema de 3 GDL, obtengo sus frecuencias y las contrasto con <code>JuliaDo.jl</code>.</li>
 </ul>
 <p><strong>Cierre.</strong> Escribe tres líneas: qué he entendido, qué todavía no domino y cuál es mi siguiente paso pequeño. Revisa con <code>git diff</code> lo que haya escrito Claude antes de aceptarlo.</p>
 <p><strong>Siguiente:</strong> <a href="../../j1-esencial/j1-6-datos/index.html">J1.6 · Datos tabulares</a>.</p>
@@ -1422,7 +1410,8 @@ Figura&nbsp;2: Formas modales del edificio de tres plantas. En cada panel se dib
   /* ------------------------------------------------------------------ */
   /* Almacenamiento local (con tolerancia a que no exista)               */
   /* ------------------------------------------------------------------ */
-  const PREFIJO = "resonancia:ej:" + (typeof location !== "undefined" ? location.pathname : "");
+  // Prefijo histórico de las claves: se conserva para no borrar las respuestas ya guardadas.
+  const PREFIJO = "resonancia:ej:" +(typeof location !== "undefined" ? location.pathname : "");
 
   function leer(id) {
     try {
@@ -1706,7 +1695,7 @@ Figura&nbsp;2: Formas modales del edificio de tres plantas. En cada panel se dib
       el("div", { class: "ej-botones" },
         el("button", { type: "button", class: "ej-btn ej-btn-sec", text: "Descargar mis respuestas", onclick: () => {
           const blob = new Blob([JSON.stringify({ pagina: location.pathname, fecha: new Date().toISOString(), respuestas: todos() }, null, 2)], { type: "application/json" });
-          const a = el("a", { href: URL.createObjectURL(blob), download: "resonancia-respuestas.json" }); a.click();
+          const a = el("a", { href: URL.createObjectURL(blob), download: "juliado-respuestas.json" }); a.click();
         } }),
         el("button", { type: "button", class: "ej-btn ej-btn-sec", text: "Borrar mis respuestas", onclick: () => {
           if (confirm("¿Borrar todas tus respuestas y tu progreso en esta página?")) { borrarTodo(); location.reload(); }

@@ -208,18 +208,6 @@ window.Quarto = {
     <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">Acerca de</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/resonancia/"> 
-<span class="menu-text">Resonancia</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/matematicado/"> 
-<span class="menu-text">matematicado</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/claudedo/"> 
-<span class="menu-text">ClaudeDo</span></a>
-  </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/me1catrr/juliado"> <i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
@@ -501,7 +489,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Tiempo orientativo: 90 minutos.</strong> Objetivos (4), teoría en cinco píldoras (18), práctica guiada (40), «Pídeselo a Claude» (12), ejercicios (14) y cierre (2). <strong>Los datos son sintéticos</strong>: son los registros del edificio de tres plantas de <code>datos/sinteticos/edificio-3-plantas</code> (estados A, B y C de M2) y, para los eventos, impactos añadidos a propósito con una semilla fija; así se conoce la respuesta correcta. No son medidas de ninguna estructura real.</p>
+<p><strong>Tiempo orientativo: 90 minutos.</strong> Objetivos (4), teoría en cinco píldoras (18), práctica guiada (40), «Pídeselo a Claude» (12), ejercicios (14) y cierre (2). <strong>Los datos son sintéticos</strong>: son los registros del edificio de tres plantas de <code>datos/sinteticos/edificio-3-plantas</code> (estados A, B y C) y, para los eventos, impactos añadidos a propósito con una semilla fija; así se conoce la respuesta correcta. No son medidas de ninguna estructura real.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Sobre MLJ: por qué esta unidad no lo usa">
@@ -514,7 +502,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>El temario anuncia esta unidad «con MLJ», el entorno de aprendizaje automático de Julia, que ofrece una interfaz común (<code>machine</code>, <code>fit!</code>, <code>evaluate</code>) a decenas de modelos de otros paquetes. <strong>No se usa aquí</strong>, por una razón práctica de reproducibilidad: al probar la instalación de MLJ y de los paquetes de modelos que necesitaría (árboles de decisión, regresión regularizada, vecinos próximos), el gestor de paquetes degradaba <code>CSV</code> y <code>Parsers</code> a versiones anteriores, lo que afectaba a las unidades que ya leen datos con ellos. Para no romper el entorno único del curso, los modelos de esta unidad (k vecinos, discriminante lineal y regresión logística), la validación cruzada y las métricas son <strong>implementaciones propias, breves y con pruebas</strong>, en <code>Resonancia.jl</code>. Tienen una ventaja didáctica: se ve qué hace cada paso.</p>
+<p>El temario anuncia esta unidad «con MLJ», el entorno de aprendizaje automático de Julia, que ofrece una interfaz común (<code>machine</code>, <code>fit!</code>, <code>evaluate</code>) a decenas de modelos de otros paquetes. <strong>No se usa aquí</strong>, por una razón práctica de reproducibilidad: al probar la instalación de MLJ y de los paquetes de modelos que necesitaría (árboles de decisión, regresión regularizada, vecinos próximos), el gestor de paquetes degradaba <code>CSV</code> y <code>Parsers</code> a versiones anteriores, lo que afectaba a las unidades que ya leen datos con ellos. Para no romper el entorno único del curso, los modelos de esta unidad (k vecinos, discriminante lineal y regresión logística), la validación cruzada y las métricas son <strong>implementaciones propias, breves y con pruebas</strong>, en <code>JuliaDo.jl</code>. Tienen una ventaja didáctica: se ve qué hace cada paso.</p>
 <p><strong>Qué cambiaría con MLJ.</strong> La lógica de la unidad es la misma. Con MLJ se declararía un modelo (<code>KNNClassifier(K=5)</code>), se evaluaría con <code>evaluate(modelo, X, y; resampling=CV(nfolds=5, shuffle=true, rng=1), measure=[accuracy, ...])</code> y se podrían probar con la misma interfaz árboles, bosques o máquinas de vectores soporte, además de ajustar hiperparámetros y encadenar el escalado con el modelo (<em>pipelines</em>). Una vez entendido lo que sigue, pasar a MLJ es cuestión de aprender su sintaxis y de resolver la compatibilidad del entorno. Documentación: <a href="https://juliaai.github.io/MLJ.jl/stable/">MLJ</a> (consultada el 27-10-2026).</p>
 </div>
 </div>
@@ -527,8 +515,8 @@ window.Quarto = {
 <li>estimar con <strong>validación cruzada</strong> (estratificada y repetida) el rendimiento que tendrá un modelo con datos nuevos, y reconocer el sobreajuste y la fuga de información;</li>
 <li>leer una <strong>matriz de confusión</strong> y las métricas de precisión, exhaustividad, F1 y AUC, y elegir un umbral según el coste de una falsa alarma frente a un evento perdido.</li>
 </ul>
-<p><strong>Prerrequisitos.</strong> El curso no los impone en el temario; conviene J2.4 (frecuencia de los modos por segmentos), J2.5 y J2.6 (azar e inferencia) y J2.7 (regresión, de la que la logística es el equivalente para clases). La teoría del espectro está en M3 y la del edificio de tres plantas, en M2.</p>
-<p><strong>Reparto con otras unidades.</strong> Aquí se aprende a clasificar y a evaluar. La detección de novedad sin etiquetas de daño (PCA, distancia de Mahalanobis) se trata en M12 y en L7; el análisis de datos reales de una campaña, también en M12.</p>
+<p><strong>Prerrequisitos.</strong> El curso no los impone en el temario; conviene J2.4 (frecuencia de los modos por segmentos), J2.5 y J2.6 (azar e inferencia) y J2.7 (regresión, de la que la logística es el equivalente para clases). El cálculo del espectro se trata en <a href="../../j3-computacion/j3-8-senales/index.html">J3.8</a>.</p>
+<p><strong>Reparto con otras unidades.</strong> Aquí se aprende a clasificar y a evaluar. La detección de novedad sin etiquetas de daño (PCA, distancia de Mahalanobis) queda fuera de esta unidad.</p>
 </section>
 <section id="teoría-breve" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="teoría-breve">Teoría breve</h2>
@@ -1105,7 +1093,6 @@ Figura&nbsp;7: De la señal a la alarma: el modelo da una probabilidad y el umbr
 <ul>
 <li>Farrar y Worden, el planteamiento de la monitorización estructural como aprendizaje automático <span class="citation" data-cites="farrar2012">(<a href="#ref-farrar2012" role="doc-biblioref">Farrar y Worden 2012</a>)</span>, y su introducción más breve <span class="citation" data-cites="farrar2007">(<a href="#ref-farrar2007" role="doc-biblioref">Farrar y Worden 2007</a>)</span>.</li>
 <li>La documentación de <a href="https://juliaai.github.io/MLJ.jl/stable/">MLJ</a> muestra la interfaz común a decenas de modelos, y la de <a href="https://juliastats.org/GLM.jl/stable/">GLM.jl</a> incluye la regresión logística (<code>Binomial()</code> con enlace logit).</li>
-<li>La detección de novedad sin ejemplos de daño (PCA, Mahalanobis) se ve en M12 y L7.</li>
 </ul>
 <div class="no-row-height column-margin column-container"><div id="ref-farrar2012" class="csl-entry" role="listitem">
 Farrar, Charles R., y Keith Worden. 2012. <em>Structural Health Monitoring: A Machine Learning Perspective</em>. Wiley.
@@ -1192,7 +1179,7 @@ Farrar, Charles R., y Keith Worden. 2007. <span>«An introduction to structural 
 <p>El AUC cae a 0,719 y la exhaustividad a 0,095 (4 eventos de 42), pero la <strong>exactitud sube a 0,892, mejor que el 0,883 de «no avisar nunca»</strong>. Es la trampa de la exactitud en estado puro: un modelo casi inútil parece mejorar. Para eventos tan débiles hace falta otra característica (por ejemplo, la energía en banda en torno a los modos) o un sensor más sensible.</p>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<p>La versión probada con <code>pytest</code> está en <code>python/clasificacion.py</code>: las mismas funciones (k-NN, LDA, regresión logística por IRLS, pliegues estratificados, matriz de confusión, métricas y ROC) con <code>numpy</code>, y <code>scipy.signal.welch</code> para el espectro. Como el espectro de <code>scipy</code> y el de <code>Resonancia.jl</code> no coinciden en el último decimal, las pruebas comprueban las <strong>identidades</strong> (el gradiente de la logística se anula, el AUC coincide con el estadístico <span class="math inline">\(U\)</span> de Mann–Whitney) y la <strong>recuperación de los resultados</strong> de la página (medias por estado, exactitud de LDA entre 0,65 y 0,85, AUC de eventos por encima de 0,9).</p>
+<p>La versión probada con <code>pytest</code> está en <code>python/clasificacion.py</code>: las mismas funciones (k-NN, LDA, regresión logística por IRLS, pliegues estratificados, matriz de confusión, métricas y ROC) con <code>numpy</code>, y <code>scipy.signal.welch</code> para el espectro. Como el espectro de <code>scipy</code> y el de <code>JuliaDo.jl</code> no coinciden en el último decimal, las pruebas comprueban las <strong>identidades</strong> (el gradiente de la logística se anula, el AUC coincide con el estadístico <span class="math inline">\(U\)</span> de Mann–Whitney) y la <strong>recuperación de los resultados</strong> de la página (medias por estado, exactitud de LDA entre 0,65 y 0,85, AUC de eventos por encima de 0,9).</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np, pandas <span class="im">as</span> pd</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> clasificacion <span class="im">as</span> cl</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1241,7 +1228,7 @@ Farrar, Charles R., y Keith Worden. 2007. <span>«An introduction to structural 
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>«Con Julia, <code>--project=.</code> y <code>Resonancia.jl</code> (sin instalar paquetes nuevos: MLJ no está en el entorno): lee <code>escenario_A.csv</code>, <code>escenario_B.csv</code> y <code>escenario_C.csv</code> de <code>datos/sinteticos/edificio-3-plantas</code> (separador <code>;</code>, 100 Hz, columna <code>a3_ms2</code>). Divide cada registro en ventanas de 20 s y calcula con <code>frecuencias_modales</code> (<code>nseg=1024</code>, bandas 0,8–1,5, 2,5–3,4 y 3,8–5,0 Hz) las tres frecuencias de cada una. Clasifica el estado A/B/C con k-NN (k = 5) y con LDA, estandarizando <strong>dentro</strong> de cada pliegue (<code>ajustar_escalado</code>), con validación cruzada estratificada de 5 pliegues y la permutación <code>randperm(Xoshiro(2026), 90)</code>. Dame la matriz de confusión, la exactitud y la precisión, exhaustividad y F1 de cada estado, y repite la validación con 20 barajados (semillas 1 a 20) para darme media y desviación típica. Explica qué estados se confunden y por qué. No inventes cifras: si algo no sale, dilo. Di claramente que los datos son sintéticos.»</p>
+<p>«Con Julia, <code>--project=.</code> y <code>JuliaDo.jl</code> (sin instalar paquetes nuevos: MLJ no está en el entorno): lee <code>escenario_A.csv</code>, <code>escenario_B.csv</code> y <code>escenario_C.csv</code> de <code>datos/sinteticos/edificio-3-plantas</code> (separador <code>;</code>, 100 Hz, columna <code>a3_ms2</code>). Divide cada registro en ventanas de 20 s y calcula con <code>frecuencias_modales</code> (<code>nseg=1024</code>, bandas 0,8–1,5, 2,5–3,4 y 3,8–5,0 Hz) las tres frecuencias de cada una. Clasifica el estado A/B/C con k-NN (k = 5) y con LDA, estandarizando <strong>dentro</strong> de cada pliegue (<code>ajustar_escalado</code>), con validación cruzada estratificada de 5 pliegues y la permutación <code>randperm(Xoshiro(2026), 90)</code>. Dame la matriz de confusión, la exactitud y la precisión, exhaustividad y F1 de cada estado, y repite la validación con 20 barajados (semillas 1 a 20) para darme media y desviación típica. Explica qué estados se confunden y por qué. No inventes cifras: si algo no sale, dilo. Di claramente que los datos son sintéticos.»</p>
 <p><strong>Verifica.</strong> (a) Que ha estandarizado dentro de cada pliegue y no con todos los datos, y que los pliegues son estratificados. (b) Que la matriz de LDA es [20 10 0; 6 22 2; 0 2 28] (exactitud 0,778) y que la de k-NN es parecida, con A y B confundidos y C bien reconocido (exhaustividad ≈ 0,93). (c) Que la media con 20 barajados es de unos 0,74 (LDA) y 0,71 (k-NN), con desviación de unos 0,02–0,03, y que <strong>no declara un ganador</strong> con esa diferencia. (d) Que no informa de la exactitud sobre los datos de entrenamiento como si fuera la del modelo. (e) Que presenta los datos como sintéticos y que no ha añadido paquetes.</p>
 </div>
 </div>
@@ -1798,7 +1785,8 @@ Farrar, Charles R., y Keith Worden. 2007. <span>«An introduction to structural 
   /* ------------------------------------------------------------------ */
   /* Almacenamiento local (con tolerancia a que no exista)               */
   /* ------------------------------------------------------------------ */
-  const PREFIJO = "resonancia:ej:" + (typeof location !== "undefined" ? location.pathname : "");
+  // Prefijo histórico de las claves: se conserva para no borrar las respuestas ya guardadas.
+  const PREFIJO = "resonancia:ej:" +(typeof location !== "undefined" ? location.pathname : "");
 
   function leer(id) {
     try {
@@ -2082,7 +2070,7 @@ Farrar, Charles R., y Keith Worden. 2007. <span>«An introduction to structural 
       el("div", { class: "ej-botones" },
         el("button", { type: "button", class: "ej-btn ej-btn-sec", text: "Descargar mis respuestas", onclick: () => {
           const blob = new Blob([JSON.stringify({ pagina: location.pathname, fecha: new Date().toISOString(), respuestas: todos() }, null, 2)], { type: "application/json" });
-          const a = el("a", { href: URL.createObjectURL(blob), download: "resonancia-respuestas.json" }); a.click();
+          const a = el("a", { href: URL.createObjectURL(blob), download: "juliado-respuestas.json" }); a.click();
         } }),
         el("button", { type: "button", class: "ej-btn ej-btn-sec", text: "Borrar mis respuestas", onclick: () => {
           if (confirm("¿Borrar todas tus respuestas y tu progreso en esta página?")) { borrarTodo(); location.reload(); }

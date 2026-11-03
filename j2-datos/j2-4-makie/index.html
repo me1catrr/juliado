@@ -210,18 +210,6 @@ window.Quarto = {
     <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">Acerca de</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/resonancia/"> 
-<span class="menu-text">Resonancia</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/matematicado/"> 
-<span class="menu-text">matematicado</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/claudedo/"> 
-<span class="menu-text">ClaudeDo</span></a>
-  </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/me1catrr/juliado"> <i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
@@ -492,7 +480,7 @@ window.Quarto = {
 
 
 <p><img src="fig/portada.svg" class="portada img-fluid" alt="Una figura de tres paneles rotulados a, b y c: una serie temporal, un espectro con picos marcados y un diagrama de barras; debajo, seis cuadrados de la paleta de colores del curso y la leyenda ejes con unidades, pie y texto alternativo"></p>
-<p>Una figura de un informe o de un artículo se lee en pocos segundos y se juzga por ella. En J1.7 se aprendió a dibujar series y espectros. Esta unidad da el salto a la <strong>figura de publicación</strong>: varios paneles con rotulado, una paleta que se distingue también en blanco y negro y para personas daltónicas, un tamaño pensado para una columna de revista, varios formatos de exportación y, cuando la web lo permite, un control <strong>interactivo</strong> para explorar un parámetro. El ejemplo conduce a una pregunta de la vía M: <em>¿han cambiado las frecuencias del edificio, o es solo variabilidad entre estimaciones?</em></p>
+<p>Una figura de un informe o de un artículo se lee en pocos segundos y se juzga por ella. En J1.7 se aprendió a dibujar series y espectros. Esta unidad da el salto a la <strong>figura de publicación</strong>: varios paneles con rotulado, una paleta que se distingue también en blanco y negro y para personas daltónicas, un tamaño pensado para una columna de revista, varios formatos de exportación y, cuando la web lo permite, un control <strong>interactivo</strong> para explorar un parámetro. El ejemplo conduce a una pregunta clásica de la monitorización de estructuras: <em>¿han cambiado las frecuencias del edificio, o es solo variabilidad entre estimaciones?</em></p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -807,7 +795,7 @@ W3C. 2018. <em>Web Content Accessibility Guidelines (WCAG) 2.1</em>. Recomendaci
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Julia</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Python</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<p><strong>Paso 1. Estimaciones por segmentos.</strong> El registro de 600 s de cada estado se divide en 10 segmentos de 60 s; en cada uno se calcula el espectro de Welch y se toma la frecuencia del pico cercano a cada modo (con <code>frecuencia_pico_por_segmentos</code>, de <code>Resonancia.jl</code>). Se compara con la frecuencia del modelo (la de <code>edificio_tres_plantas</code>).</p>
+<p><strong>Paso 1. Estimaciones por segmentos.</strong> El registro de 600 s de cada estado se divide en 10 segmentos de 60 s; en cada uno se calcula el espectro de Welch y se toma la frecuencia del pico cercano a cada modo (con <code>frecuencia_pico_por_segmentos</code>, de <code>JuliaDo.jl</code>). Se compara con la frecuencia del modelo (la de <code>edificio_tres_plantas</code>).</p>
 <div id="8" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Ver el código</summary>
@@ -988,7 +976,7 @@ Figura&nbsp;3: Figura de publicación para el edificio de tres plantas, a tamañ
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>«Con Julia, <code>--project=.</code> y <code>CairoMakie</code> (con el tema de <code>recursos/_tema.jl</code>), y <code>Resonancia.jl</code>: para los registros <code>escenario_A.csv</code>, <code>escenario_B.csv</code> y <code>escenario_C.csv</code> del edificio (separador <code>;</code>, 100 Hz, columna <code>a3_ms2</code>), divide cada uno en 10 segmentos de 60 s, calcula en cada uno el espectro de Welch (<code>nseg=2048</code>) y la frecuencia del pico entre 3,8 y 5 Hz. Haz una figura de dos paneles de 504 × 210 pt: (a) los tres espectros de 3,8 a 5 Hz, con tipos de línea distintos además del color; (b) un diagrama de cajas con los puntos individuales de las 10 estimaciones por estado y una línea con la frecuencia del tercer modo del modelo. Rotula los paneles (a) y (b), pon unidades en los ejes y guárdala en SVG y PDF en una carpeta temporal. Dime la media y la desviación típica de cada estado. No inventes cifras.»</p>
+<p>«Con Julia, <code>--project=.</code> y <code>CairoMakie</code> (con el tema de <code>recursos/_tema.jl</code>), y <code>JuliaDo.jl</code>: para los registros <code>escenario_A.csv</code>, <code>escenario_B.csv</code> y <code>escenario_C.csv</code> del edificio (separador <code>;</code>, 100 Hz, columna <code>a3_ms2</code>), divide cada uno en 10 segmentos de 60 s, calcula en cada uno el espectro de Welch (<code>nseg=2048</code>) y la frecuencia del pico entre 3,8 y 5 Hz. Haz una figura de dos paneles de 504 × 210 pt: (a) los tres espectros de 3,8 a 5 Hz, con tipos de línea distintos además del color; (b) un diagrama de cajas con los puntos individuales de las 10 estimaciones por estado y una línea con la frecuencia del tercer modo del modelo. Rotula los paneles (a) y (b), pon unidades en los ejes y guárdala en SVG y PDF en una carpeta temporal. Dime la media y la desviación típica de cada estado. No inventes cifras.»</p>
 <p><strong>Verifica.</strong> (a) Que las medias son 4,419 (A), 4,375 (B) y 4,273 Hz (C), con desviaciones de unos 0,03–0,04 Hz. (b) Que las curvas se distinguen por tipo de línea y no solo por color. (c) Que los ejes llevan unidades y los paneles, rotulado. (d) Que el tamaño de la figura es de 504 × 210 pt y que los ficheros se han escrito fuera del repositorio. (e) Que no concluye «hay daño» a partir de A frente a B: B es variabilidad ambiental (−1 % de rigidez), no un daño, y la diferencia es pequeña.</p>
 </div>
 </div>
@@ -1555,7 +1543,8 @@ window._ojs.runtime.interpretFromScriptTags();
   /* ------------------------------------------------------------------ */
   /* Almacenamiento local (con tolerancia a que no exista)               */
   /* ------------------------------------------------------------------ */
-  const PREFIJO = "resonancia:ej:" + (typeof location !== "undefined" ? location.pathname : "");
+  // Prefijo histórico de las claves: se conserva para no borrar las respuestas ya guardadas.
+  const PREFIJO = "resonancia:ej:" +(typeof location !== "undefined" ? location.pathname : "");
 
   function leer(id) {
     try {
@@ -1839,7 +1828,7 @@ window._ojs.runtime.interpretFromScriptTags();
       el("div", { class: "ej-botones" },
         el("button", { type: "button", class: "ej-btn ej-btn-sec", text: "Descargar mis respuestas", onclick: () => {
           const blob = new Blob([JSON.stringify({ pagina: location.pathname, fecha: new Date().toISOString(), respuestas: todos() }, null, 2)], { type: "application/json" });
-          const a = el("a", { href: URL.createObjectURL(blob), download: "resonancia-respuestas.json" }); a.click();
+          const a = el("a", { href: URL.createObjectURL(blob), download: "juliado-respuestas.json" }); a.click();
         } }),
         el("button", { type: "button", class: "ej-btn ej-btn-sec", text: "Borrar mis respuestas", onclick: () => {
           if (confirm("¿Borrar todas tus respuestas y tu progreso en esta página?")) { borrarTodo(); location.reload(); }

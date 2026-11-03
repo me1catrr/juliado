@@ -186,18 +186,6 @@ window.Quarto = {
     <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">Acerca de</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/resonancia/"> 
-<span class="menu-text">Resonancia</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/matematicado/"> 
-<span class="menu-text">matematicado</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://me1catrr.github.io/claudedo/"> 
-<span class="menu-text">ClaudeDo</span></a>
-  </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/me1catrr/juliado"> <i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
@@ -477,7 +465,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Tiempo orientativo: 60 minutos.</strong> Objetivos (3), teoría en cinco píldoras (15), práctica guiada (22), «Pídeselo a Claude» (8), ejercicios (10) y cierre (2). Unidad <strong>opcional</strong> del perfil uco; la red de sensores se usa en <a href="https://me1catrr.github.io/resonancia/mse/m09-redes-sensores/">M9</a>. <strong>Los datos son sintéticos</strong>: la posición de los 16 nodos de un puente se genera en la página con semilla fija. Se usan <code>Graphs.jl</code> y las funciones de <code>Resonancia.jl</code> (<code>red_sensores</code>, <code>reticulado_plano</code>, <code>adyacencia_barras</code>, <code>grafo_de_matriz</code>, <code>laplaciana</code>).</p>
+<p><strong>Tiempo orientativo: 60 minutos.</strong> Objetivos (3), teoría en cinco píldoras (15), práctica guiada (22), «Pídeselo a Claude» (8), ejercicios (10) y cierre (2). Unidad <strong>opcional</strong> del perfil uco. <strong>Los datos son sintéticos</strong>: la posición de los 16 nodos de un puente se genera en la página con semilla fija. Se usan <code>Graphs.jl</code> y las funciones de <code>JuliaDo.jl</code> (<code>red_sensores</code>, <code>reticulado_plano</code>, <code>adyacencia_barras</code>, <code>grafo_de_matriz</code>, <code>laplaciana</code>).</p>
 </div>
 </div>
 <section id="objetivos-y-prerrequisitos" class="level2">
@@ -489,7 +477,7 @@ window.Quarto = {
 <li>analizar la conectividad de una red de sensores y de una estructura reticulada: nodos críticos, alcance mínimo y subestructuras.</li>
 </ul>
 <p><strong>Prerrequisitos.</strong> El curso no los impone en el temario; conviene J1.5 (arrays) y J3.3 (matrices dispersas y valores propios).</p>
-<p><strong>Reparto con otras unidades.</strong> El diseño y la planificación de redes de sensores se tratan en <a href="https://me1catrr.github.io/resonancia/mse/m09-redes-sensores/">M9</a>; aquí se aprende la herramienta.</p>
+<p><strong>Reparto con otras unidades.</strong> El diseño de redes de sensores no se trata aquí; se aprende la herramienta.</p>
 </section>
 <section id="teoría-breve" class="level2">
 <h2 class="anchored" data-anchor-id="teoría-breve">Teoría breve</h2>
@@ -525,7 +513,7 @@ window.Quarto = {
 </div>
 </div>
 <p>La suma de una fila de <span class="math inline">\(\mathbf A\)</span> es el <strong>grado</strong> del nodo (cuántos enlaces tiene), y la suma de todos los grados es <span class="math inline">\(2|E|\)</span> (cada arista se cuenta dos veces).</p>
-<p>El ejemplo de la unidad es una red inalámbrica de 16 sensores en un puente de 70 m: dos filas de 8 nodos separadas 6 m, con una variación aleatoria de la posición (semilla fija). Dos nodos pueden comunicarse si están a menos del <strong>alcance</strong> <span class="math inline">\(r\)</span> de la radio (<a href="#fig-red" class="quarto-xref">Figura&nbsp;1</a>). <code>red_sensores</code> de <code>Resonancia.jl</code> devuelve la matriz de adyacencia <strong>ponderada</strong> (con las distancias) y <code>SimpleGraph(W)</code> la convierte en grafo:</p>
+<p>El ejemplo de la unidad es una red inalámbrica de 16 sensores en un puente de 70 m: dos filas de 8 nodos separadas 6 m, con una variación aleatoria de la posición (semilla fija). Dos nodos pueden comunicarse si están a menos del <strong>alcance</strong> <span class="math inline">\(r\)</span> de la radio (<a href="#fig-red" class="quarto-xref">Figura&nbsp;1</a>). <code>red_sensores</code> de <code>JuliaDo.jl</code> devuelve la matriz de adyacencia <strong>ponderada</strong> (con las distancias) y <code>SimpleGraph(W)</code> la convierte en grafo:</p>
 <div id="fig-red" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A la izquierda, cinco nodos A a E dibujados con un círculo discontinuo de radio igual al alcance de 12 metros alrededor de A: B y C están dentro, D queda fuera, y la línea A a D se marca como fuera de alcance. A la derecha, el grafo equivalente con las mismas posiciones y las aristas con sus distancias: A-B 9,4; A-C 10,3; B-C 10,1; B-D 11,0; C-D 10,5 y D-E 9,2 metros; A es el nodo base.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-red-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -885,7 +873,7 @@ Tabla&nbsp;3: Barras retiradas del módulo central del reticulado de 14 nudos (c
 </div>
 </figure>
 </div>
-<p>Dos avisos. (1) La conectividad es una condición <strong>necesaria</strong> para que una estructura sea estable, <strong>no suficiente</strong>: quitar una sola barra del reticulado (<a href="#tbl-reticulado" class="quarto-xref">Tabla&nbsp;3</a>) lo deja conexo pero ya sin <span class="math inline">\(b+r\ge2j\)</span>, es decir, <strong>hipostático</strong> (un mecanismo); eso lo detecta el conteo de Maxwell y la rigidez, no solo el grafo. (2) La unión con la vía M es directa: el patrón de ceros de la matriz de rigidez <em>es</em> un grafo (<code>grafo_de_matriz</code>), y sus componentes conexas son bloques desacoplados que se pueden resolver por separado (J3.3). Para el edificio de tres plantas, el grafo es un camino 1–2–3 (cada planta solo se acopla con la contigua).</p>
+<p>Dos avisos. (1) La conectividad es una condición <strong>necesaria</strong> para que una estructura sea estable, <strong>no suficiente</strong>: quitar una sola barra del reticulado (<a href="#tbl-reticulado" class="quarto-xref">Tabla&nbsp;3</a>) lo deja conexo pero ya sin <span class="math inline">\(b+r\ge2j\)</span>, es decir, <strong>hipostático</strong> (un mecanismo); eso lo detecta el conteo de Maxwell y la rigidez, no solo el grafo. (2) La unión con las vibraciones es directa: el patrón de ceros de la matriz de rigidez <em>es</em> un grafo (<code>grafo_de_matriz</code>), y sus componentes conexas son bloques desacoplados que se pueden resolver por separado (J3.3). Para el edificio de tres plantas, el grafo es un camino 1–2–3 (cada planta solo se acopla con la contigua).</p>
 <div id="cell-fig-reticulado" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Ver el código</summary>
@@ -1014,7 +1002,7 @@ Figura&nbsp;4: Reticulado de 6 módulos (14 nudos y 25 barras). (a) Intacto, con
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>«Con Julia, <code>--project=.</code>, <code>Graphs</code> y <code>Resonancia.jl</code>: genera las 16 posiciones de sensores del puente con <code>MersenneTwister(9)</code> (dos filas, x = 10 i + 3(u−0,5), y ∈ {0; 6} + 2(u−0,5)), construye la red con <code>red_sensores(pos; alcance=12.0)</code> y (1) dime el número de enlaces, los puntos de articulación y los puentes; (2) calcula con <code>dijkstra_shortest_paths</code> la ruta del nodo 1 al 16 de mínima energía (peso <code>W .^ 2</code>) con alcance de 20 m y compárala con la de mínimo número de saltos; (3) halla el alcance mínimo de conexión con <code>kruskal_mst</code>. Comprueba cada resultado con una segunda vía (por ejemplo, la conectividad con los valores propios de la laplaciana). No inventes valores: si algo no sale, dilo.»</p>
+<p>«Con Julia, <code>--project=.</code>, <code>Graphs</code> y <code>JuliaDo.jl</code>: genera las 16 posiciones de sensores del puente con <code>MersenneTwister(9)</code> (dos filas, x = 10 i + 3(u−0,5), y ∈ {0; 6} + 2(u−0,5)), construye la red con <code>red_sensores(pos; alcance=12.0)</code> y (1) dime el número de enlaces, los puntos de articulación y los puentes; (2) calcula con <code>dijkstra_shortest_paths</code> la ruta del nodo 1 al 16 de mínima energía (peso <code>W .^ 2</code>) con alcance de 20 m y compárala con la de mínimo número de saltos; (3) halla el alcance mínimo de conexión con <code>kruskal_mst</code>. Comprueba cada resultado con una segunda vía (por ejemplo, la conectividad con los valores propios de la laplaciana). No inventes valores: si algo no sale, dilo.»</p>
 <p><strong>Verifica.</strong> (a) Que hay 28 enlaces, puntos de articulación 12 y 14, y un puente 12–14. (b) Que la ruta de mínima energía tiene 8 saltos y 747 m², y la de mínimo número de saltos, 5 y 1 195 m². (c) Que el alcance mínimo es 11,35 m. (d) Que la segunda vía coincide (el número de valores propios nulos de la laplaciana es el de componentes). (e) Que no ha usado pesos cero para «sin enlace» donde sí había enlace. (f) Que no ha ordenado nodos por índice dando por hecho que son contiguos tras quitar uno.</p>
 </div>
 </div>
@@ -1060,7 +1048,7 @@ Figura&nbsp;4: Reticulado de 6 módulos (14 nudos y 25 barras). (a) Intacto, con
 <li>Represento un reticulado como grafo y explico por qué la conexión no basta para la estabilidad.</li>
 </ul>
 <p><strong>Cierre.</strong> Escribe tres líneas: qué he entendido, qué todavía no domino y cuál es mi siguiente paso pequeño. Antes de aceptar una «ruta óptima» de Claude, pregunta por el criterio de peso.</p>
-<p><strong>Siguiente:</strong> <a href="https://me1catrr.github.io/resonancia/mse/m09-redes-sensores/">M9 · Nodos embebidos y redes de sensores</a>, donde se usa la red de sensores, o el <a href="../../j3-computacion/index.html">índice de J3</a>.</p>
+<p><strong>Siguiente:</strong> vuelve al <a href="../../j3-computacion/index.html">índice de J3</a>.</p>
 
 
 </section>
@@ -1550,7 +1538,8 @@ Figura&nbsp;4: Reticulado de 6 módulos (14 nudos y 25 barras). (a) Intacto, con
   /* ------------------------------------------------------------------ */
   /* Almacenamiento local (con tolerancia a que no exista)               */
   /* ------------------------------------------------------------------ */
-  const PREFIJO = "resonancia:ej:" + (typeof location !== "undefined" ? location.pathname : "");
+  // Prefijo histórico de las claves: se conserva para no borrar las respuestas ya guardadas.
+  const PREFIJO = "resonancia:ej:" +(typeof location !== "undefined" ? location.pathname : "");
 
   function leer(id) {
     try {
@@ -1834,7 +1823,7 @@ Figura&nbsp;4: Reticulado de 6 módulos (14 nudos y 25 barras). (a) Intacto, con
       el("div", { class: "ej-botones" },
         el("button", { type: "button", class: "ej-btn ej-btn-sec", text: "Descargar mis respuestas", onclick: () => {
           const blob = new Blob([JSON.stringify({ pagina: location.pathname, fecha: new Date().toISOString(), respuestas: todos() }, null, 2)], { type: "application/json" });
-          const a = el("a", { href: URL.createObjectURL(blob), download: "resonancia-respuestas.json" }); a.click();
+          const a = el("a", { href: URL.createObjectURL(blob), download: "juliado-respuestas.json" }); a.click();
         } }),
         el("button", { type: "button", class: "ej-btn ej-btn-sec", text: "Borrar mis respuestas", onclick: () => {
           if (confirm("¿Borrar todas tus respuestas y tu progreso en esta página?")) { borrarTodo(); location.reload(); }
