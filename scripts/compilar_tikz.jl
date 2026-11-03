@@ -8,7 +8,7 @@
 # Busca ficheros fig/*.tex (documentclass standalone) en j1-esencial/, j2-datos/, j3-computacion/
 # y recursos/, los compila con pdflatex y los convierte a SVG con
 # pdftocairo (el texto queda como trazos: no depende de fuentes del lector).
-# El estilo común está en recursos/tikz/resonancia.sty.
+# El estilo común está en recursos/tikz/juliado.sty.
 #
 #   (sin opciones)  compila todas las figuras cuyo SVG falte o esté
 #                   desactualizado, y las que se indiquen explícitamente.
@@ -24,7 +24,7 @@
 using SHA
 
 const RAIZ = normpath(joinpath(@__DIR__, ".."))
-const ESTILO = joinpath(RAIZ, "recursos", "tikz", "resonancia.sty")
+const ESTILO = joinpath(RAIZ, "recursos", "tikz", "juliado.sty")
 const CARPETAS = ["j1-esencial", "j2-datos", "j3-computacion", "recursos"]
 const COMPROBAR = "--comprobar" in ARGS
 const EXPLICITAS = filter(a -> !startswith(a, "--"), ARGS)

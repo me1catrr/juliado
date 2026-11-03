@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- fuente-sha256: 7259f45b66a11c94e8d90efb88f3df7a4e0f7bb87876c6e20970d37c19831fb2 -->
+<!-- fuente-sha256: 6a94b9d9f3d9821922799ab2e810ab87a1d4ff9612952cddba5f788e5be38c2a -->
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="468.5pt" height="58.464pt" viewBox="0 0 468.5 58.464">
 <defs>
 <g>
@@ -275,15 +275,15 @@
 <use xlink:href="#glyph-2-5" x="129.091696" y="24.443897"/>
 </g>
 <g fill="rgb(12.156677%, 16.07666%, 21.569824%)" fill-opacity="1">
-<use xlink:href="#glyph-1-8" x="133.286161" y="24.443897"/>
+<use xlink:href="#glyph-1-8" x="133.286636" y="24.443897"/>
 </g>
 <g fill="rgb(12.156677%, 16.07666%, 21.569824%)" fill-opacity="1">
-<use xlink:href="#glyph-2-5" x="137.677278" y="24.443897"/>
-<use xlink:href="#glyph-2-6" x="141.871743" y="24.443897"/>
-<use xlink:href="#glyph-2-7" x="146.066209" y="24.443897"/>
-<use xlink:href="#glyph-2-1" x="150.260674" y="24.443897"/>
-<use xlink:href="#glyph-2-8" x="154.455139" y="24.443897"/>
-<use xlink:href="#glyph-2-9" x="158.649604" y="24.443897"/>
+<use xlink:href="#glyph-2-5" x="137.677381" y="24.443897"/>
+<use xlink:href="#glyph-2-6" x="141.871846" y="24.443897"/>
+<use xlink:href="#glyph-2-7" x="146.066311" y="24.443897"/>
+<use xlink:href="#glyph-2-1" x="150.260776" y="24.443897"/>
+<use xlink:href="#glyph-2-8" x="154.455242" y="24.443897"/>
+<use xlink:href="#glyph-2-9" x="158.649707" y="24.443897"/>
 </g>
 <path fill-rule="nonzero" fill="rgb(98.50769%, 93.725586%, 90.078735%)" fill-opacity="1" stroke-width="0.89664" stroke-linecap="round" stroke-linejoin="round" stroke="rgb(85.096741%, 37.255859%, 0.782776%)" stroke-opacity="1" stroke-miterlimit="10" d="M 224.780752 12.75518 L 160.734061 12.75518 C 159.634225 12.75518 158.743319 11.864273 158.743319 10.764438 L 158.743319 -10.763166 C 158.743319 -11.863002 159.634225 -12.75785 160.734061 -12.75785 L 224.780752 -12.75785 C 225.880588 -12.75785 226.775436 -11.863002 226.775436 -10.763166 L 226.775436 10.764438 C 226.775436 11.864273 225.880588 12.75518 224.780752 12.75518 Z M 224.780752 12.75518 " transform="matrix(0.990915, 0, 0, -0.990915, 39.980073, 17.033833)"/>
 <g fill="rgb(12.156677%, 16.07666%, 21.569824%)" fill-opacity="1">

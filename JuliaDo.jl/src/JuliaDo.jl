@@ -1,18 +1,18 @@
 """
-    Resonancia
+    JuliaDo
 
-Funciones reutilizables del curso Resonancia: lectura de registros reales de
+Funciones reutilizables del curso JuliaDo: lectura de registros reales de
 `datos/reales-publicables/` y análisis espectral básico (FFT y densidad
 espectral de potencia por el método de Welch).
 
 Solo usa las bibliotecas estándar de Julia (`LinearAlgebra` y `SparseArrays`): la FFT es propia
 (radix-2) y está comprobada con pruebas frente a la DFT directa. Incluye también las matrices
-estructuradas de M02 (Toeplitz, Hankel, circulantes), la autocorrelación, Yule–Walker, SSA, los
-modelos de masas y muelles y de edificio de cortante, los modos propios y el MAC. Para M3, la DFT de longitud arbitraria (Bluestein), el periodograma, el
+estructuradas (Toeplitz, Hankel, circulantes), la autocorrelación, Yule–Walker, SSA, los
+modelos de masas y muelles y de edificio de cortante, los modos propios y el MAC; la DFT de longitud arbitraria (Bluestein), el periodograma, el
 espectro de amplitud, la potencia por bandas, la PSD normalizada (NPSD/ANPSD), los descriptores
 temporales, un convertidor ideal y la frecuencia aparente por aliasing.
 """
-module Resonancia
+module JuliaDo
 
 using LinearAlgebra, SparseArrays
 

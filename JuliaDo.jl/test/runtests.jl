@@ -1,5 +1,5 @@
 using Test
-using Resonancia
+using JuliaDo
 
 @testset "fft_radix2" begin
     x = [1.0, 2.0, 0.5, -1.0, 3.0, 0.0, -2.0, 1.5]
@@ -398,7 +398,7 @@ end
 
     # cada muestra se predice con un modelo que no la vio: un modelo que devuelve la media de y de entrenamiento
     struct MediaModelo; m::Float64; end
-    Resonancia.predecir(m::MediaModelo, X) = fill(m.m, size(X, 1))
+    JuliaDo.predecir(m::MediaModelo, X) = fill(m.m, size(X, 1))
     X = reshape(Float64.(1:n), :, 1)
     yv = Float64.(1:n)
     pr = validacion_cruzada((Xt, yt) -> MediaModelo(sum(yt) / length(yt)), X, yv; k=n, estratificada=false)   # dejar uno fuera
@@ -648,7 +648,7 @@ end
         @test dft(x) ≈ directa atol = 1e-9 * max(1, N)
     end
     @test dft([1.0, 2.0, 3.0, 4.0]) ≈ fft_radix2([1.0, 2.0, 3.0, 4.0])
-    @test dft([1.0, 0.0, -1.0, 0.0]) ≈ [0, 2, 0, 2]   # ejercicio a mano de M3.5
+    @test dft([1.0, 0.0, -1.0, 0.0]) ≈ [0, 2, 0, 2]   # cuenta a mano
 end
 
 @testset "periodograma y espectro_amplitud" begin

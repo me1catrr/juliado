@@ -108,7 +108,7 @@ end
 """
     edificio_tres_plantas(; escenario=:A) -> (M, C, K)
 
-Edificio de cortante de tres plantas del caso transversal de M02. Masas de 2·10⁵ kg por planta y
+Edificio de cortante de tres plantas del curso. Masas de 2·10⁵ kg por planta y
 rigideces de entrepiso de 5·10⁷ N/m (entrepisos 1 y 2) y 4·10⁷ N/m (entrepiso 3); el amortiguamiento es
 proporcional con ζ = 1 % en las dos primeras frecuencias. Escenarios: `:A` (referencia), `:B` (variabilidad
 ambiental: las tres rigideces un 1 % menores, p. ej. por temperatura) y `:C` (daño: el entrepiso 2 pierde un 10 %).

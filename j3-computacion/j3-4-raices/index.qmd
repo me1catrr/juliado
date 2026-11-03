@@ -5,7 +5,7 @@ subtitle: "J3.4 · Nivel J3 · Computación científica"
 via: J
 nivel: J3
 requiere: []
-perfil: [mse, uco]
+perfil: [estudiante, uco]
 estado: borrador
 verificado: "Julia 1.12.3"
 engine: julia
@@ -27,12 +27,12 @@ Dos preguntas aparecen una y otra vez en vibraciones. **¿Para qué valores de u
 
 ::: {.callout-note}
 ## Cómo se lee esta unidad
-**Tiempo orientativo: 90 minutos.** Objetivos (4), teoría en cinco píldoras (18), práctica guiada (40), «Pídeselo a Claude» (12), ejercicios (14) y cierre (2). La viga y el edificio son los de la vía M, con datos **sintéticos**: las raíces se comparan con valores que se pueden comprobar a mano, y la resonancia que se interpola se genera con el modelo del edificio de tres plantas, de modo que se conoce la respuesta correcta.
+**Tiempo orientativo: 90 minutos.** Objetivos (4), teoría en cinco píldoras (18), práctica guiada (40), «Pídeselo a Claude» (12), ejercicios (14) y cierre (2). La viga y el edificio son ejemplos de vibraciones, con datos **sintéticos**: las raíces se comparan con valores que se pueden comprobar a mano, y la resonancia que se interpola se genera con el modelo del edificio de tres plantas, de modo que se conoce la respuesta correcta.
 :::
 
 ```{julia}
 #| include: false
-using Roots, Interpolations, LinearAlgebra, Statistics, DataFrames, Resonancia
+using Roots, Interpolations, LinearAlgebra, Statistics, DataFrames, JuliaDo
 include("../../recursos/_tema.jl")
 ```
 
@@ -45,9 +45,9 @@ include("../../recursos/_tema.jl")
 - interpolar con `linear_interpolation` y `cubic_spline_interpolation`, medir el error y reconocer cuándo no se debe extrapolar;
 - combinar ambas herramientas para estimar el amortiguamiento de un modo por el método de la banda de media potencia.
 
-**Prerrequisitos.** El curso no los impone en el temario; conviene J1.5 (funciones y arrays), J3.3 (álgebra lineal numérica, para los modos del edificio) y, para la física de la viga, M5 y M6.
+**Prerrequisitos.** El curso no los impone en el temario; conviene J1.5 (funciones y arrays) y J3.3 (álgebra lineal numérica, para los modos del edificio).
 
-**Reparto con otras unidades.** Las ecuaciones de la viga y sus condiciones de contorno se justifican en M5. Aquí se resuelven numéricamente. La derivación automática, que da la derivada que necesita Newton sin escribirla a mano, está en [J3.5](../j3-5-integracion-ad/index.qmd); el ajuste de curvas de FRF, en J3.7.
+**Reparto con otras unidades.** Las ecuaciones de la viga y sus condiciones de contorno se dan sin demostrar; aquí se resuelven numéricamente. La derivación automática, que da la derivada que necesita Newton sin escribirla a mano, está en [J3.5](../j3-5-integracion-ad/index.qmd); el ajuste de curvas de FRF, en J3.7.
 
 ## Teoría breve
 
@@ -60,18 +60,18 @@ Una **raíz** de $f$ es un $x$ con $f(x)=0$. Los métodos se dividen en dos fami
 - **Secante.** Igual que Newton, con la pendiente de la recta por los dos últimos puntos, así que no necesita la derivada; converge con orden $\approx1{,}62$.
 - **Brent** (y variantes como `A42`) combina bisección con interpolación para tener la seguridad del corchete y casi la velocidad de la secante: es la elección razonable por defecto cuando se dispone de un intervalo.
 
-`Roots.jl` los ofrece con una interfaz común: `find_zero(f, (a, b))` con corchete, `find_zero(f, x0)` con un punto, `find_zero((f, f′), x0, Roots.Newton())` con la derivada y `find_zeros(f, a, b)` para **todas** las raíces de un intervalo. Se prueban con la ecuación del primer modo de una viga empotrada–libre, $\cos x+1/\cosh x=0$ (J3.4.2), de la que `Resonancia.jl` da la forma estable `ecuacion_viga(:voladizo, x)`:
+`Roots.jl` los ofrece con una interfaz común: `find_zero(f, (a, b))` con corchete, `find_zero(f, x0)` con un punto, `find_zero((f, f′), x0, Roots.Newton())` con la derivada y `find_zeros(f, a, b)` para **todas** las raíces de un intervalo. Se prueban con la ecuación del primer modo de una viga empotrada–libre, $\cos x+1/\cosh x=0$ (J3.4.2), de la que `JuliaDo.jl` da la forma estable `ecuacion_viga(:voladizo, x)`:
 
 ```{julia}
 f(x) = ecuacion_viga(:voladizo, x)                  # cos x + 1/cosh x
 df(x) = -sin(x) - tanh(x) / cosh(x)                 # su derivada, calculada a mano
-x_ref = raices_viga(:voladizo, 1)[1]                # valor de Resonancia.jl
+x_ref = raices_viga(:voladizo, 1)[1]                # valor de JuliaDo.jl
 hallazgos = (corchete = find_zero(f, (1.0, 3.0)), Brent = find_zero(f, (1.0, 3.0), Roots.Brent()),
              Newton = find_zero((f, df), 2.0, Roots.Newton()), solo_un_punto = find_zero(f, 2.0))
 (primera_raiz = x_ref, coinciden_a_1e12 = all(abs(r - x_ref) < 1e-12 for r in values(hallazgos)))
 ```
 
-Los cuatro métodos dan $1{,}8751$. Para **ver** la diferencia de velocidad se usan las versiones didácticas de `Resonancia.jl`, que devuelven la lista de iteradas:
+Los cuatro métodos dan $1{,}8751$. Para **ver** la diferencia de velocidad se usan las versiones didácticas de `JuliaDo.jl`, que devuelven la lista de iteradas:
 
 ```{julia}
 xb, hb = raiz_biseccion(f, 1.0, 3.0)
@@ -85,7 +85,7 @@ La bisección necesita 48 iteraciones para llegar a $10^{-14}$; la secante, 8; N
 
 ```{julia}
 #| label: fig-convergencia
-#| fig-cap: "Error absoluto de cada iterada frente al número de iteraciones al calcular la primera raíz de cos x + 1/cosh x = 0, con los tres métodos de Resonancia.jl (eje vertical logarítmico). La bisección gana un bit por paso; la secante y Newton aceleran."
+#| fig-cap: "Error absoluto de cada iterada frente al número de iteraciones al calcular la primera raíz de cos x + 1/cosh x = 0, con los tres métodos de JuliaDo.jl (eje vertical logarítmico). La bisección gana un bit por paso; la secante y Newton aceleran."
 #| fig-alt: "Gráfica con el número de iteraciones de 0 a 48 en el eje horizontal y el error de 10 elevado a menos 16 a 1 en el vertical, en escala logarítmica. La línea azul de la bisección baja de forma regular, casi recta, durante 48 pasos. La línea naranja de la secante cae en unos 8 pasos con curvatura creciente. La línea verde de Newton cae en 5 pasos, la más empinada."
 let
     piso(e) = max.(e, 1e-16)
@@ -128,7 +128,7 @@ $$ {#eq-viga}
 
 ![Condiciones de contorno de la viga, ecuación característica de cada una y primera raíz $x_1=\beta_1L$.](fig/viga.svg){#fig-viga-cc fig-alt="Cuatro vigas horizontales azules con sus apoyos: empotrada en la izquierda y libre en la derecha, con la ecuación coseno de x más uno partido por coseno hiperbólico de x igual a cero y primera raíz 1,875; apoyada en los dos extremos, con seno de x igual a cero y primera raíz pi; empotrada a la izquierda y apoyada a la derecha, con primera raíz 3,927; y libre en los dos extremos, con primera raíz 4,730. Debajo, la fórmula de la frecuencia en función de la raíz."}
 
-Se escriben en forma **estable** (divididas por $\cosh x$, que crece como $e^x/2$ y desbordaría la aritmética para $x\gtrsim710$) y se resuelven con `Resonancia.jl` para tener un valor de referencia. La tabla da las cuatro primeras raíces de cada caso:
+Se escriben en forma **estable** (divididas por $\cosh x$, que crece como $e^x/2$ y desbordaría la aritmética para $x\gtrsim710$) y se resuelven con `JuliaDo.jl` para tener un valor de referencia. La tabla da las cuatro primeras raíces de cada caso:
 
 ```{julia}
 tipos = [:voladizo, :biapoyada, :empotrada_apoyada, :libre_libre]
@@ -142,10 +142,10 @@ Para obtener **todas** las raíces de un intervalo sin saber dónde están, `fin
 ```{julia}
 r6 = find_zeros(f, 0.5, 18.0)
 (n_raices = length(r6), primeras = round.(r6[1:3], digits=4),
- coinciden_con_Resonancia_a_1e10 = maximum(abs.(r6 .- raices_viga(:voladizo, 6))) < 1e-10)
+ coinciden_con_JuliaDo_a_1e10 = maximum(abs.(r6 .- raices_viga(:voladizo, 6))) < 1e-10)
 ```
 
-Salen las seis raíces del intervalo, que coinciden con las de `Resonancia.jl`; a partir de la tercera, $x_n\approx(n-\tfrac12)\pi$ (porque $1/\cosh x\to0$ y queda $\cos x=0$). Con la @eq-viga se calcula la viga de acero de una regla de laboratorio: sección de 40 mm × 10 mm (flexión en el sentido del espesor), $L=1$ m, $E=210$ GPa y $\rho=7850$ kg/m³.
+Salen las seis raíces del intervalo, que coinciden con las de `JuliaDo.jl`; a partir de la tercera, $x_n\approx(n-\tfrac12)\pi$ (porque $1/\cosh x\to0$ y queda $\cos x=0$). Con la @eq-viga se calcula la viga de acero de una regla de laboratorio: sección de 40 mm × 10 mm (flexión en el sentido del espesor), $L=1$ m, $E=210$ GPa y $\rho=7850$ kg/m³.
 
 ```{julia}
 E, rho, L, b, h = 210e9, 7850.0, 1.0, 0.04, 0.01
@@ -405,7 +405,7 @@ Tras 30 iteraciones el residuo vale $1{,}4\cdot10^{-16}$, del orden del error de
 
 ::: {.callout-note}
 ## ¿Y en Python?
-`scipy.optimize.brentq(f, 1, 3)` es el equivalente de `find_zero` con corchete y da el mismo valor, 1,8751040687119611, que `Resonancia.jl`; `scipy.optimize.newton` es Newton o secante. `scipy.interpolate.CubicSpline(x, y, bc_type="natural")` construye el spline natural (con 9 sensores el error máximo del primer modo del voladizo es el mismo, 0,0026970737, que el de esta unidad) y `numpy.interp` hace la interpolación lineal.
+`scipy.optimize.brentq(f, 1, 3)` es el equivalente de `find_zero` con corchete y da el mismo valor, 1,8751040687119611, que `JuliaDo.jl`; `scipy.optimize.newton` es Newton o secante. `scipy.interpolate.CubicSpline(x, y, bc_type="natural")` construye el spline natural (con 9 sensores el error máximo del primer modo del voladizo es el mismo, 0,0026970737, que el de esta unidad) y `numpy.interp` hace la interpolación lineal.
 :::
 
 ::: {.callout-note .idea-clave}
@@ -432,7 +432,7 @@ f1_barrido = [frecuencias_viga(:voladizo; E=Ei, I=I, rho=rho, A=A, L=L, n=1)[1] 
  raiz_del_cociente = round.(sqrt.(Es ./ E) .- 1, digits=4))
 ```
 
-Un ±5 % en $E$ da un −2,5 % y un +2,5 % en $f_1$ (de 8,14 a 8,56 Hz), exactamente $\sqrt{E/E_0}-1$. Esa banda es del tamaño de un daño moderado: un cambio de frecuencia solo se interpreta frente a la incertidumbre del modelo (J2.7, M12).
+Un ±5 % en $E$ da un −2,5 % y un +2,5 % en $f_1$ (de 8,14 a 8,56 Hz), exactamente $\sqrt{E/E_0}-1$. Esa banda es del tamaño de un daño moderado: un cambio de frecuencia solo se interpreta frente a la incertidumbre del modelo (J2.7).
 
 **Paso 2. Mínimo número de sensores.** ¿Cuántos sensores equiespaciados hacen falta para reconstruir los tres primeros modos del voladizo con un error máximo inferior a 0,01 (un 1 % de la amplitud en la punta) con cada interpolador?
 
@@ -450,7 +450,7 @@ end
 DataFrame(modo=1:3, sensores_lineal=[sensores_minimos(:lineal, m) for m in 1:3], sensores_spline=[sensores_minimos(:spline, m) for m in 1:3])
 ```
 
-El modo 1 necesita 8 sensores con interpolación lineal y 6 con spline natural; el modo 2, 17 y 12; el modo 3, cuyas oscilaciones son más rápidas, 27 y 19. Cuantos más modos se quieren reconstruir, más sensores hacen falta, y es la razón por la que la selección de sensores es un problema de diseño del ensayo (M7).
+El modo 1 necesita 8 sensores con interpolación lineal y 6 con spline natural; el modo 2, 17 y 12; el modo 3, cuyas oscilaciones son más rápidas, 27 y 19. Cuantos más modos se quieren reconstruir, más sensores hacen falta, y es la razón por la que la selección de sensores es un problema de diseño del ensayo.
 
 **Paso 3. Un cambio de frecuencia como raíz.** Dada la frecuencia $f_1$ medida de la viga con una masa añadida, ¿qué masa tiene? Se invierte la relación con `find_zero`, como en J3.4.2: para $f_1=7{,}9$ Hz,
 
@@ -468,7 +468,7 @@ Una frecuencia de 7,9 Hz (un 5,4 % por debajo de la de la viga sin masa) corresp
 
 ::: {.callout-tip}
 ## Prompt
-«Con Julia, `--project=.`, `Roots.jl`, `Interpolations.jl` y `Resonancia.jl` (sin instalar paquetes nuevos): calcula con `find_zeros` las cuatro primeras raíces de la ecuación característica de la viga empotrada–libre `cos x + 1/cosh x = 0` (escríbela en la forma dividida por `cosh x`) y compáralas con `raices_viga(:voladizo, 4)`. Con ellas y con una viga de acero de 1 m de longitud, 40 mm × 10 mm de sección, E = 210 GPa y ρ = 7850 kg/m³, dame las cuatro primeras frecuencias propias en Hz. Después interpola el primer modo medido en 5, 9 y 17 sensores equiespaciados con `linear_interpolation` y con `cubic_spline_interpolation`, y dame el error máximo sobre 2001 puntos y la pendiente log-log del error frente al paso. Explica por qué el spline no llega al orden 4 en el voladizo. No inventes cifras: si algo no sale, dilo. Di que son cálculos sin datos medidos.»
+«Con Julia, `--project=.`, `Roots.jl`, `Interpolations.jl` y `JuliaDo.jl` (sin instalar paquetes nuevos): calcula con `find_zeros` las cuatro primeras raíces de la ecuación característica de la viga empotrada–libre `cos x + 1/cosh x = 0` (escríbela en la forma dividida por `cosh x`) y compáralas con `raices_viga(:voladizo, 4)`. Con ellas y con una viga de acero de 1 m de longitud, 40 mm × 10 mm de sección, E = 210 GPa y ρ = 7850 kg/m³, dame las cuatro primeras frecuencias propias en Hz. Después interpola el primer modo medido en 5, 9 y 17 sensores equiespaciados con `linear_interpolation` y con `cubic_spline_interpolation`, y dame el error máximo sobre 2001 puntos y la pendiente log-log del error frente al paso. Explica por qué el spline no llega al orden 4 en el voladizo. No inventes cifras: si algo no sale, dilo. Di que son cálculos sin datos medidos.»
 
 **Verifica.** (a) Que las raíces son 1,8751, 4,6941, 7,8548 y 10,9955 y que usa la forma estable de la ecuación. (b) Que las frecuencias son 8,36; 52,36; 146,61 y 287,30 Hz. (c) Que el error de la interpolación lineal con 5 sensores es de 0,023 y baja con pendiente cercana a 2. (d) Que explica la pérdida de orden del spline por la condición natural (segunda derivada nula) en el empotramiento, y no «por un error del paquete». (e) Que no extrapola fuera del rango de los sensores ni da cifras que el código no haya calculado.
 :::

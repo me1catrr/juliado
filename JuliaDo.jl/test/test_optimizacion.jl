@@ -1,4 +1,4 @@
-# Pruebas de src/optimizacion.jl (J3.7). Las incluye runtests.jl dentro de su `using Test` y `using Resonancia`.
+# Pruebas de src/optimizacion.jl (J3.7). Las incluye runtests.jl dentro de su `using Test` y `using JuliaDo`.
 
 @testset "frf_1gdl" begin
     f0, z, A = 2.5, 0.02, 3.0

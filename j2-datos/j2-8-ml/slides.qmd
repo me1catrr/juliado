@@ -80,7 +80,7 @@ Impactos débiles (0,08–0,3 m/s²): AUC 0,72, exhaustividad 0,095.
 
 ## Sobre MLJ
 
-No se usa: su instalación degradaba `CSV` y `Parsers`. Implementaciones propias en `Resonancia.jl`.
+No se usa: su instalación degradaba `CSV` y `Parsers`. Implementaciones propias en `JuliaDo.jl`.
 
 Con MLJ: `machine`, `evaluate`, `CV`, pipelines y más modelos.
 

@@ -1,4 +1,4 @@
-# Ajuste de una FRF escalar por fracción racional en el dominio z (M7.3, ampliación PolyMAX).
+# Ajuste de una FRF escalar por fracción racional en el dominio z (ampliación PolyMAX).
 # Versión de una entrada y una salida (SISO) del método de mínimos cuadrados en frecuencia
 # con base polinómica z^r, z = e^{jωΔt}: es el caso particular m = ℓ = 1 del método descrito en
 # Peeters et al. (2004), con coeficientes reales. Está pensada para comprobar la teoría, no para

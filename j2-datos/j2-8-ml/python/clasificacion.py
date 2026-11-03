@@ -1,6 +1,6 @@
 """Versión Python de J2.8: clasificación de estados y de eventos con numpy.
 
-Réplica de las funciones de ``Resonancia.jl`` (k-NN, LDA, regresión logística, validación cruzada
+Réplica de las funciones de ``JuliaDo.jl`` (k-NN, LDA, regresión logística, validación cruzada
 estratificada, matriz de confusión, métricas y curva ROC) para ver qué hay debajo de una biblioteca
 como scikit-learn. Los registros del edificio son sintéticos (``datos/sinteticos/edificio-3-plantas``).
 """

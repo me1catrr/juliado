@@ -1,4 +1,4 @@
-# Identificación estocástica por subespacios dirigida por covarianzas (SSI-COV), M7.8.
+# Identificación estocástica por subespacios dirigida por covarianzas (SSI-COV).
 # Redactado a partir de la descripción del método en Peeters y De Roeck (1999) tal y como la resume el tutorial
 # de Magalhães y Cunha (2011); la implementación es propia (sin matrices de ponderación).
 

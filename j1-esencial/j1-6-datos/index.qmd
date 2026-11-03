@@ -5,7 +5,7 @@ subtitle: "J1.6 · Nivel J1 · Julia esencial"
 via: J
 nivel: J1
 requiere: [J1.5]
-perfil: [mse, uco, planta]
+perfil: [estudiante, uco, planta]
 python: true
 estado: borrador
 verificado: "Julia 1.12.3"
@@ -296,7 +296,7 @@ Tres (`count(ismissing, ot.coste_eur)`), de 180 filas; las tres son órdenes pre
 `Matrix(a[:, 2:4])` da una matriz de 60 000 × 3 en la que cada columna es el registro de una planta.
 
 ::: {.solucion}
-Verdadero. Es la matriz `N × c` (muestras × canales) que se usa en el curso, y la que esperan las funciones de `Resonancia.jl`.
+Verdadero. Es la matriz `N × c` (muestras × canales) que se usa en el curso, y la que esperan las funciones de `JuliaDo.jl`.
 :::
 :::
 

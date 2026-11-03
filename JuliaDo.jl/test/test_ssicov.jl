@@ -1,4 +1,4 @@
-# Pruebas de src/ssicov.jl (M7.8: SSI-COV). Las incluye runtests.jl.
+# Pruebas de src/ssicov.jl (SSI-COV). Las incluye runtests.jl.
 using LinearAlgebra, Random, Statistics
 
 @testset "correlaciones_salidas: definición y referencias" begin

@@ -1,4 +1,4 @@
-# Semiespectro (espectro de retardos positivos) por correlograma con ventana exponencial, M7.1 y M7.9.
+# Semiespectro (espectro de retardos positivos) por correlograma con ventana exponencial.
 # Redactado a partir de la descripción de Magalhães y Cunha (2011); la implementación y la corrección del
 # amortiguamiento son propias.
 

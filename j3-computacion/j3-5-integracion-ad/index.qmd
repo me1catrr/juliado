@@ -5,7 +5,7 @@ subtitle: "J3.5 · Nivel J3 · Computación científica"
 via: J
 nivel: J3
 requiere: []
-perfil: [mse, uco]
+perfil: [estudiante, uco]
 estado: borrador
 verificado: "Julia 1.12.3"
 engine: julia
@@ -27,12 +27,12 @@ Dos operaciones del cálculo aparecen en todo el análisis estructural. La **int
 
 ::: {.callout-note}
 ## Cómo se lee esta unidad
-**Tiempo orientativo: 90 minutos.** Objetivos (4), teoría en cinco píldoras (18), práctica guiada (40), «Pídeselo a Claude» (12), ejercicios (14) y cierre (2). La viga y el edificio son los de la vía M, con datos **sintéticos**: las derivadas se contrastan con fórmulas exactas, de modo que se conoce la respuesta correcta.
+**Tiempo orientativo: 90 minutos.** Objetivos (4), teoría en cinco píldoras (18), práctica guiada (40), «Pídeselo a Claude» (12), ejercicios (14) y cierre (2). La viga y el edificio son ejemplos de vibraciones, con datos **sintéticos**: las derivadas se contrastan con fórmulas exactas, de modo que se conoce la respuesta correcta.
 :::
 
 ```{julia}
 #| include: false
-using QuadGK, ForwardDiff, LinearAlgebra, Statistics, DataFrames, CSV, Resonancia
+using QuadGK, ForwardDiff, LinearAlgebra, Statistics, DataFrames, CSV, JuliaDo
 include("../../recursos/_tema.jl")
 RAIZ = "../../"
 ```
@@ -46,9 +46,9 @@ RAIZ = "../../"
 - derivar con `ForwardDiff.derivative`, `gradient` y `jacobian`, y combinar la derivación con una integral;
 - obtener la matriz de sensibilidades de las frecuencias de un edificio respecto de sus rigideces por tres vías (fórmula, diferencias finitas, diferenciación automática), y usarla para ajustar el modelo a unas frecuencias medidas.
 
-**Prerrequisitos.** El curso no los impone en el temario; conviene J3.3 (problema de valores propios generalizado), J3.4 (viga y raíces) y, para la teoría de las frecuencias y la matriz de rigidez, M5 y M6.
+**Prerrequisitos.** El curso no los impone en el temario; conviene J3.3 (problema de valores propios generalizado) y J3.4 (viga y raíces).
 
-**Reparto con otras unidades.** La teoría de la sensibilidad modal y del *model updating* está en M12 y en L7; el ajuste por mínimos cuadrados no lineales con `LsqFit` y `Optim`, en J3.7. Aquí se calculan las derivadas que esos métodos consumen.
+**Reparto con otras unidades.** El ajuste por mínimos cuadrados no lineales con `LsqFit` y `Optim` está en [J3.7](../j3-7-optimizacion/index.qmd). Aquí se calculan las derivadas que esos métodos consumen.
 
 ## Teoría breve
 
@@ -195,7 +195,7 @@ grad = ForwardDiff.gradient(f1_viga, p0)
 (parametros = ["E", "I", "ρ", "A", "L"], elasticidades = round.(grad .* p0 ./ f1_viga(p0), digits=10))
 ```
 
-Sale $(0{,}5;\ 0{,}5;\ -0{,}5;\ -0{,}5;\ -2)$ con el redondeo a diez decimales: la longitud es el parámetro más influyente (un 1 % más de longitud baja la frecuencia un 2 %), seguida a la par por la rigidez y la masa. La derivación automática también atraviesa funciones que no son una fórmula, siempre que estén escritas con operaciones genéricas. El segundo ejemplo es la **curvatura** $\varphi''$ de un modo, que se necesita para la energía de deformación (J3.5.4) y que se obtiene derivando dos veces **la propia función** `forma_modal_viga` de `Resonancia.jl`, sin calcular su segunda derivada a mano:
+Sale $(0{,}5;\ 0{,}5;\ -0{,}5;\ -0{,}5;\ -2)$ con el redondeo a diez decimales: la longitud es el parámetro más influyente (un 1 % más de longitud baja la frecuencia un 2 %), seguida a la par por la rigidez y la masa. La derivación automática también atraviesa funciones que no son una fórmula, siempre que estén escritas con operaciones genéricas. El segundo ejemplo es la **curvatura** $\varphi''$ de un modo, que se necesita para la energía de deformación (J3.5.4) y que se obtiene derivando dos veces **la propia función** `forma_modal_viga` de `JuliaDo.jl`, sin calcular su segunda derivada a mano:
 
 ```{julia}
 phi1(ξ) = forma_modal_viga(:voladizo, x1, ξ)
@@ -300,7 +300,7 @@ $\int_0^{0{,}1}\varphi''^2\,/\int_0^1\varphi''^2$, con `quadgk`.
 
 Un modelo de elementos finitos tiene parámetros inciertos $\boldsymbol\theta$ (rigideces, masas) y se quiere ajustar a las frecuencias medidas $\hat f_i$. Se linealiza: $f_i(\boldsymbol\theta+\Delta\boldsymbol\theta)\approx f_i(\boldsymbol\theta)+\sum_jS_{ij}\Delta\theta_j$, con la **matriz de sensibilidades** $S_{ij}=\partial f_i/\partial\theta_j$. Resolver $\mathbf S\,\Delta\boldsymbol\theta=\hat{\mathbf f}-\mathbf f$ y repetir es el método de Gauss–Newton. Para el problema $\mathbf K\boldsymbol\varphi=\omega^2\mathbf M\boldsymbol\varphi$ con modos normalizados a masa unidad, la sensibilidad de una frecuencia tiene una fórmula cerrada: $\partial(\omega_i^2)/\partial\theta=\boldsymbol\varphi_i^{\mathsf T}(\partial\mathbf K/\partial\theta-\omega_i^2\,\partial\mathbf M/\partial\theta)\boldsymbol\varphi_i$ y $\partial f_i/\partial\theta=\partial(\omega_i^2)/\partial\theta\,/\,(8\pi^2f_i)$.
 
-El edificio de tres plantas (masas de $2\cdot10^5$ kg y rigideces de entrepiso $5\cdot10^7$, $5\cdot10^7$ y $4\cdot10^7$ N/m) da, con la función `jacobiana_frecuencias_cortante` de `Resonancia.jl`, la matriz $3\times3$ de $\partial f_i/\partial k_j$. Se compara con diferencias centradas y con la diferenciación automática. Como `eigen` no admite duales, se deriva el **cociente de Rayleigh con el modo congelado**, $R(\mathbf k)=\boldsymbol\varphi_i^{\mathsf T}\mathbf K(\mathbf k)\boldsymbol\varphi_i/\boldsymbol\varphi_i^{\mathsf T}\mathbf M\boldsymbol\varphi_i$, que es estacionario en el modo propio y por eso su derivada **es** la del valor propio:
+El edificio de tres plantas (masas de $2\cdot10^5$ kg y rigideces de entrepiso $5\cdot10^7$, $5\cdot10^7$ y $4\cdot10^7$ N/m) da, con la función `jacobiana_frecuencias_cortante` de `JuliaDo.jl`, la matriz $3\times3$ de $\partial f_i/\partial k_j$. Se compara con diferencias centradas y con la diferenciación automática. Como `eigen` no admite duales, se deriva el **cociente de Rayleigh con el modo congelado**, $R(\mathbf k)=\boldsymbol\varphi_i^{\mathsf T}\mathbf K(\mathbf k)\boldsymbol\varphi_i/\boldsymbol\varphi_i^{\mathsf T}\mathbf M\boldsymbol\varphi_i$, que es estacionario en el modo propio y por eso su derivada **es** la del valor propio:
 
 ```{julia}
 m = fill(2.0e5, 3); k0 = [5.0e7, 5.0e7, 4.0e7]
@@ -318,7 +318,7 @@ S_rel = S .* k0' ./ f0
 
 La matriz de **sensibilidades relativas** $\dfrac{k_j}{f_i}\dfrac{\partial f_i}{\partial k_j}$ dice, por ejemplo, que el primer modo es sobre todo sensible a la rigidez del primer entrepiso (0,26), el segundo a la del tercero (0,31) y el tercero, a la del segundo (0,31). **Cada fila suma 0,5**: si todas las rigideces suben un 1 %, todas las frecuencias suben un 0,5 %. Es una comprobación gratuita, y la cumplen las tres. Las diferencias centradas coinciden con la fórmula hasta $6\cdot10^{-10}$ y la diferenciación automática, hasta el redondeo.
 
-Con la matriz se ajusta el modelo a unas frecuencias medidas. Se usa el estado C de M2 (un daño del 10 % en la rigidez del entrepiso 2) y las estimaciones por ventana de J2.8: media de 30 ventanas de 20 s (con errores típicos). Para no arrastrar el sesgo del estimador (que da 4,418 Hz para el estado A donde el modelo da 4,390), se ajustan las **diferencias** respecto del estado A: frecuencia objetivo = modelo de A + (media de C − media de A). `actualizar_rigideces` aplica Gauss–Newton con las sensibilidades de arriba, y la propagación de la incertidumbre usa la misma $\mathbf S$: $\operatorname{cov}(\hat{\mathbf k})=\mathbf S^{-1}\operatorname{cov}(\hat{\mathbf f})\,\mathbf S^{-\mathsf T}$.
+Con la matriz se ajusta el modelo a unas frecuencias medidas. Se usa el estado C del edificio (un daño del 10 % en la rigidez del entrepiso 2) y las estimaciones por ventana de J2.8: media de 30 ventanas de 20 s (con errores típicos). Para no arrastrar el sesgo del estimador (que da 4,418 Hz para el estado A donde el modelo da 4,390), se ajustan las **diferencias** respecto del estado A: frecuencia objetivo = modelo de A + (media de C − media de A). `actualizar_rigideces` aplica Gauss–Newton con las sensibilidades de arriba, y la propagación de la incertidumbre usa la misma $\mathbf S$: $\operatorname{cov}(\hat{\mathbf k})=\mathbf S^{-1}\operatorname{cov}(\hat{\mathbf f})\,\mathbf S^{-\mathsf T}$.
 
 ```{julia}
 bandas = ((0.8, 1.5), (2.5, 3.4), (3.8, 5.0))
@@ -428,7 +428,7 @@ Los tiempos dependen del ordenador y de la compilación de la primera llamada (p
 
 ::: {.callout-tip}
 ## Prompt
-«Con Julia, `--project=.`, `QuadGK.jl`, `ForwardDiff.jl` y `Resonancia.jl` (sin instalar paquetes nuevos): para el edificio de tres plantas de `edificio_tres_plantas()` (masas 2·10⁵ kg y rigideces 5·10⁷, 5·10⁷ y 4·10⁷ N/m, ya cargadas en `edificio_cortante`), calcula la matriz de sensibilidades ∂fᵢ/∂kⱼ de las tres frecuencias respecto de las tres rigideces de entrepiso de tres formas: con `jacobiana_frecuencias_cortante`, con diferencias centradas (paso de 10³ N/m) y con `ForwardDiff` derivando el cociente de Rayleigh con el modo fijo, porque `eigen` no admite números duales. Dame las sensibilidades relativas (kⱼ/fᵢ)∂fᵢ/∂kⱼ, comprueba que cada fila suma 0,5 y dime el error relativo máximo entre las tres. Después, con `actualizar_rigideces`, recupera las rigideces del estado C del edificio (el entrepiso 2 con un 10 % menos) a partir de sus tres frecuencias exactas. No inventes cifras: si algo no sale, dilo. Di que son datos sintéticos.»
+«Con Julia, `--project=.`, `QuadGK.jl`, `ForwardDiff.jl` y `JuliaDo.jl` (sin instalar paquetes nuevos): para el edificio de tres plantas de `edificio_tres_plantas()` (masas 2·10⁵ kg y rigideces 5·10⁷, 5·10⁷ y 4·10⁷ N/m, ya cargadas en `edificio_cortante`), calcula la matriz de sensibilidades ∂fᵢ/∂kⱼ de las tres frecuencias respecto de las tres rigideces de entrepiso de tres formas: con `jacobiana_frecuencias_cortante`, con diferencias centradas (paso de 10³ N/m) y con `ForwardDiff` derivando el cociente de Rayleigh con el modo fijo, porque `eigen` no admite números duales. Dame las sensibilidades relativas (kⱼ/fᵢ)∂fᵢ/∂kⱼ, comprueba que cada fila suma 0,5 y dime el error relativo máximo entre las tres. Después, con `actualizar_rigideces`, recupera las rigideces del estado C del edificio (el entrepiso 2 con un 10 % menos) a partir de sus tres frecuencias exactas. No inventes cifras: si algo no sale, dilo. Di que son datos sintéticos.»
 
 **Verifica.** (a) Que usa `ForwardDiff` solo sobre funciones genéricas (el cociente de Rayleigh con el modo congelado) y que explica por qué no deriva a través de `eigen`. (b) Que las sensibilidades relativas son [0,261 0,170 0,069; 0,165 0,022 0,313; 0,074 0,308 0,118] y que cada fila suma 0,5. (c) Que el error relativo máximo entre la fórmula y las diferencias centradas es del orden de $10^{-10}$ y el de ForwardDiff, del redondeo. (d) Que la actualización converge en pocas iteraciones y devuelve $k_2/k_{2,0}=0{,}9$ (con las otras dos rigideces en 1). (e) Que no presenta ningún ajuste sin su error típico ni extrapola un resultado local.
 :::

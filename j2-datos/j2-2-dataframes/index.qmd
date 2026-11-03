@@ -5,7 +5,7 @@ subtitle: "J2.2 · Nivel J2 · Datos y estadística"
 via: J
 nivel: J2
 requiere: []
-perfil: [mse, uco, planta]
+perfil: [estudiante, uco, planta]
 python: true
 estado: borrador
 verificado: "Julia 1.12.3"

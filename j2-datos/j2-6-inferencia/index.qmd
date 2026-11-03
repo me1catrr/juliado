@@ -5,7 +5,7 @@ subtitle: "J2.6 · Nivel J2 · Datos y estadística"
 via: J
 nivel: J2
 requiere: []
-perfil: [mse, uco]
+perfil: [estudiante, uco]
 python: true
 estado: borrador
 verificado: "Julia 1.12.3"
@@ -24,7 +24,7 @@ format:
 
 ![](fig/portada.svg){.portada fig-alt="Dos campanas de Gauss parcialmente solapadas, una azul para el estado A y otra naranja para el estado C, con la cola de la segunda sombreada; a la derecha, un recuadro con un valor de p, un intervalo de confianza del 95 por ciento y un tamaño de efecto, y la pregunta si es relevante"}
 
-*«La frecuencia del tercer modo ha bajado 0,04 Hz respecto del mes pasado.»* ¿Y qué? Si la frecuencia estimada fluctúa 0,03 Hz de un tramo de registro a otro, esa bajada puede ser puro ruido. La **inferencia estadística** es la forma disciplinada de contestar: ¿es esta diferencia mayor de lo que cabría esperar por azar?, ¿entre qué valores está el cambio real?, ¿es lo bastante grande como para importar?, ¿y cuántos datos habría hecho falta tener para verlo? Esta unidad responde con el caso de la vía M: *¿ha cambiado la frecuencia del edificio?*
+*«La frecuencia del tercer modo ha bajado 0,04 Hz respecto del mes pasado.»* ¿Y qué? Si la frecuencia estimada fluctúa 0,03 Hz de un tramo de registro a otro, esa bajada puede ser puro ruido. La **inferencia estadística** es la forma disciplinada de contestar: ¿es esta diferencia mayor de lo que cabría esperar por azar?, ¿entre qué valores está el cambio real?, ¿es lo bastante grande como para importar?, ¿y cuántos datos habría hecho falta tener para verlo? Esta unidad responde con el caso del edificio de tres plantas: *¿ha cambiado la frecuencia del edificio?*
 
 ::: {.callout-note}
 ## Cómo se lee esta unidad
@@ -33,7 +33,7 @@ format:
 
 ```{julia}
 #| include: false
-using CSV, DataFrames, Statistics, Random, HypothesisTests, Distributions, StatsBase, Resonancia
+using CSV, DataFrames, Statistics, Random, HypothesisTests, Distributions, StatsBase, JuliaDo
 include("../../recursos/_tema.jl")
 RAIZ = "../../"
 ```
@@ -50,7 +50,7 @@ RAIZ = "../../"
 
 **Prerrequisitos.** El curso no los impone en el temario; conviene J2.4 (las estimaciones por segmentos) y J2.5 (distribuciones, simulación y semillas).
 
-**Reparto con otras unidades.** Aquí se aprende el contraste y su interpretación. La regresión está en [J2.7](../j2-7-regresion/index.qmd) y el seguimiento continuo de frecuencias con control estadístico, en M7.
+**Reparto con otras unidades.** Aquí se aprende el contraste y su interpretación. La regresión está en [J2.7](../j2-7-regresion/index.qmd).
 
 ## Teoría breve
 
@@ -300,7 +300,7 @@ Un protocolo completo para decidir si ha cambiado una frecuencia: plan declarado
 
 ::: {.callout-tip}
 ## Prompt
-«Con Julia, `--project=.`, `HypothesisTests.jl` y `Resonancia.jl`: para los registros `escenario_A.csv`, `escenario_B.csv` y `escenario_C.csv` del edificio (separador `;`, 100 Hz, columna `a3_ms2`), estima con `frecuencia_pico_por_segmentos` (segmentos de 6000 muestras, banda 3,8–5,0 Hz) la frecuencia del tercer modo en 10 segmentos por estado. Compara A con B y A con C con el contraste t de Welch y con Mann–Whitney, y da en cada caso la diferencia de medias, el intervalo de confianza del 95 %, el *p*-valor, la *d* de Cohen y un intervalo bootstrap (10 000 remuestreos, semilla 1). Corrige los *p*-valores por Bonferroni suponiendo 6 comparaciones. Dime cuántos segmentos por estado harían falta para detectar con un 80 % de potencia un cambio de 0,022 Hz con σ = 0,035 Hz. No concluyas «daño» solo por un *p*-valor pequeño. No inventes cifras.»
+«Con Julia, `--project=.`, `HypothesisTests.jl` y `JuliaDo.jl`: para los registros `escenario_A.csv`, `escenario_B.csv` y `escenario_C.csv` del edificio (separador `;`, 100 Hz, columna `a3_ms2`), estima con `frecuencia_pico_por_segmentos` (segmentos de 6000 muestras, banda 3,8–5,0 Hz) la frecuencia del tercer modo en 10 segmentos por estado. Compara A con B y A con C con el contraste t de Welch y con Mann–Whitney, y da en cada caso la diferencia de medias, el intervalo de confianza del 95 %, el *p*-valor, la *d* de Cohen y un intervalo bootstrap (10 000 remuestreos, semilla 1). Corrige los *p*-valores por Bonferroni suponiendo 6 comparaciones. Dime cuántos segmentos por estado harían falta para detectar con un 80 % de potencia un cambio de 0,022 Hz con σ = 0,035 Hz. No concluyas «daño» solo por un *p*-valor pequeño. No inventes cifras.»
 
 **Verifica.** (a) Que A − C da $t\approx8{,}58$, $p\approx10^{-7}$ y un intervalo de 0,11 a 0,18 Hz. (b) Que A − B da $p\approx0{,}010$ (sin corregir) y 0,062 corregido, con $d\approx1{,}3$. (c) Que los intervalos bootstrap y teórico son parecidos. (d) Que el número de segmentos para 0,022 Hz es de unos 40. (e) Que la conclusión distingue lo estadísticamente detectable de lo relevante, y que B no se presenta como daño.
 :::

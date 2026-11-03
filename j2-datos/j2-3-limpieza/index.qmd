@@ -5,7 +5,7 @@ subtitle: "J2.3 · Nivel J2 · Datos y estadística"
 via: J
 nivel: J2
 requiere: []
-perfil: [mse, uco, planta]
+perfil: [estudiante, uco, planta]
 python: true
 estado: borrador
 verificado: "Julia 1.12.3"
@@ -33,7 +33,7 @@ Los datos reales traen defectos: el sensor se cae un rato, un cable da un pico, 
 
 ```{julia}
 #| include: false
-using CSV, DataFrames, Dates, Statistics, Random, Resonancia
+using CSV, DataFrames, Dates, Statistics, Random, JuliaDo
 include("../../recursos/_tema.jl")
 RAIZ = "../../"
 ```
@@ -50,7 +50,7 @@ RAIZ = "../../"
 
 **Prerrequisitos.** El curso no los impone en el temario; conviene J1.6 (ausentes), J2.1 (registro de decisiones) y J2.2 (huecos en series temporales).
 
-**Reparto con otras unidades.** Aquí se detecta y se trata. El efecto de los defectos en el espectro y el diseño de filtros están en [J3.8](../../j3-computacion/j3-8-senales/index.qmd) y M3–M4.
+**Reparto con otras unidades.** Aquí se detecta y se trata. El efecto de los defectos en el espectro y el diseño de filtros están en [J3.8](../../j3-computacion/j3-8-senales/index.qmd).
 
 ## Teoría breve
 

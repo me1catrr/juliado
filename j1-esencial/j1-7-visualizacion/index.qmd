@@ -5,7 +5,7 @@ subtitle: "J1.7 · Nivel J1 · Julia esencial"
 via: J
 nivel: J1
 requiere: [J1.6]
-perfil: [mse, uco, planta]
+perfil: [estudiante, uco, planta]
 python: true
 estado: borrador
 verificado: "Julia 1.12.3"
@@ -28,12 +28,12 @@ Una figura bien hecha es un resultado; una mal hecha es una fuente de errores. E
 
 ::: {.callout-note}
 ## Cómo se lee esta unidad
-**Tiempo orientativo: 90 minutos.** Objetivos (4), teoría en cinco píldoras (18), práctica guiada (40), «Pídeselo a Claude» (12), ejercicios (14) y cierre (2). La física de la comparación (por qué baja la frecuencia cuando baja la rigidez) está en [M5](https://me1catrr.github.io/resonancia/mse/m05-vibraciones-i/) y el espectro de Welch, en M3.6.
+**Tiempo orientativo: 90 minutos.** Objetivos (4), teoría en cinco píldoras (18), práctica guiada (40), «Pídeselo a Claude» (12), ejercicios (14) y cierre (2). El espectro de Welch se calcula con detalle en [J3.8](../../j3-computacion/j3-8-senales/index.qmd).
 :::
 
 ```{julia}
 #| include: false
-using CSV, DataFrames, Statistics, Resonancia
+using CSV, DataFrames, Statistics, JuliaDo
 include("../../recursos/_tema.jl")
 RAIZ = "../../"
 ```
@@ -112,7 +112,7 @@ $10\cdot100=1000$ muestras (`x[1:1000]`).
 
 ### J1.7.4 Espectros {#j1-7-4}
 
-El espectro, o más exactamente la **densidad espectral de potencia** (PSD), dice qué cantidad de energía hay a cada frecuencia y se calcula con `psd_welch` de `Resonancia.jl` (el método se explica en M3.6). Se dibuja frente a la frecuencia en Hz, con el eje vertical en **escala logarítmica** (`yscale=log10`) porque los picos y el ruido de fondo difieren en órdenes de magnitud, y con los picos marcados. `buscar_picos` devuelve los índices de los máximos locales más altos de un intervalo.
+El espectro, o más exactamente la **densidad espectral de potencia** (PSD), dice qué cantidad de energía hay a cada frecuencia y se calcula con `psd_welch` de `JuliaDo.jl` (el método se explica en [J3.8](../../j3-computacion/j3-8-senales/index.qmd)). Se dibuja frente a la frecuencia en Hz, con el eje vertical en **escala logarítmica** (`yscale=log10`) porque los picos y el ruido de fondo difieren en órdenes de magnitud, y con los picos marcados. `buscar_picos` devuelve los índices de los máximos locales más altos de un intervalo.
 
 ::: {.callout-warning}
 ## Errores frecuentes
@@ -169,7 +169,7 @@ iC = buscar_picos(fC, PC; fmin=0.5, fmax=6.0, n=3)
  variacion_pct = round.(100 .* (fC[iC] .- fA[iA]) ./ fA[iA], digits=1))
 ```
 
-Los picos primero y tercero del estado dañado bajan (un 2,2 % y un 3,3 %), más que la resolución del espectro (0,6 % a 4,4 Hz): al perder rigidez, bajan las frecuencias. El segundo apenas cambia: el modelo predice una variación de solo −0,25 %, menos que un intervalo de frecuencia, y en un espectro estimado el máximo puede caer en el intervalo vecino (aquí sube un intervalo, +0,8 %). **Un cambio menor que la resolución no se puede interpretar**: es una lección que se desarrolla en M7.
+Los picos primero y tercero del estado dañado bajan (un 2,2 % y un 3,3 %), más que la resolución del espectro (0,6 % a 4,4 Hz): al perder rigidez, bajan las frecuencias. El segundo apenas cambia: el modelo predice una variación de solo −0,25 %, menos que un intervalo de frecuencia, y en un espectro estimado el máximo puede caer en el intervalo vecino (aquí sube un intervalo, +0,8 %). **Un cambio menor que la resolución no se puede interpretar**.
 
 **Paso 2. La figura de cuatro elementos.**
 
@@ -221,14 +221,14 @@ Diferencias de enfoque: `matplotlib` trabaja con el objeto de eje (`ax.plot`, `a
 
 ::: {.callout-note}
 ## Qué se ha conseguido
-Una figura de cuatro elementos con series, espectros en escala logarítmica, picos marcados, curvas distinguibles sin color, unidades en los ejes y exportación comprobada. Y un primer resultado físico: **el daño se ve como un descenso de algunas frecuencias propias, siempre que sea mayor que la resolución del espectro**, que es el hilo de toda la vía M.
+Una figura de cuatro elementos con series, espectros en escala logarítmica, picos marcados, curvas distinguibles sin color, unidades en los ejes y exportación comprobada. Y un primer resultado físico: **el daño se ve como un descenso de algunas frecuencias propias, siempre que sea mayor que la resolución del espectro**.
 :::
 
 ## «Pídeselo a Claude» {#pideselo}
 
 ::: {.callout-tip}
 ## Prompt
-«Con Julia, `--project=.` y `CairoMakie`: lee `datos/sinteticos/edificio-3-plantas/escenario_A.csv` y `escenario_C.csv` (separador `;`, 100 Hz). Calcula con `psd_welch` de `Resonancia.jl` (`nseg=4096`) el espectro de `a3_ms2` en los dos escenarios y dibuja en una sola figura: arriba los 10 primeros segundos del escenario A, y abajo los dos espectros superpuestos entre 0 y 6 Hz, en escala logarítmica, con un estilo de línea distinto en cada uno y los ejes con unidades. Dime las frecuencias de los tres picos de cada escenario con `buscar_picos`. Guarda la figura en una carpeta temporal, no en `datos/`. No inventes valores: si algo no sale, dilo.»
+«Con Julia, `--project=.` y `CairoMakie`: lee `datos/sinteticos/edificio-3-plantas/escenario_A.csv` y `escenario_C.csv` (separador `;`, 100 Hz). Calcula con `psd_welch` de `JuliaDo.jl` (`nseg=4096`) el espectro de `a3_ms2` en los dos escenarios y dibuja en una sola figura: arriba los 10 primeros segundos del escenario A, y abajo los dos espectros superpuestos entre 0 y 6 Hz, en escala logarítmica, con un estilo de línea distinto en cada uno y los ejes con unidades. Dime las frecuencias de los tres picos de cada escenario con `buscar_picos`. Guarda la figura en una carpeta temporal, no en `datos/`. No inventes valores: si algo no sale, dilo.»
 
 **Verifica.** (a) Que los picos del escenario A son 1,099, 2,930 y 4,395 Hz y los del C, 1,074, 2,954 y 4,248 Hz. (b) Que el eje horizontal del registro está en segundos (0 a 10 s, no en índices). (c) Que los ejes llevan unidades y que el espectro está en escala logarítmica. (d) Que las dos curvas se distinguen también en blanco y negro (`linestyle`). (e) Que no ha escrito la figura en el repositorio ni modificado los CSV.
 :::

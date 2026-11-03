@@ -5,7 +5,7 @@ subtitle: "J3.2 · Nivel J3 · Computación científica"
 via: J
 nivel: J3
 requiere: []
-perfil: [mse, uco]
+perfil: [estudiante, uco]
 estado: borrador
 verificado: "Julia 1.12.3"
 engine: julia
@@ -23,7 +23,7 @@ format:
 
 ![](fig/portada.svg){.portada fig-alt="A la izquierda, el árbol de carpetas de un paquete llamado Descriptores con Project.toml, una carpeta src con Descriptores.jl y una carpeta test con runtests.jl; a la derecha, el uso del paquete con using Descriptores y un resultado de pruebas con cuatro aciertos de cuatro"}
 
-Mientras una función vive en una página, solo la usa esa página. En cuanto se reutiliza, hay que subirla un escalón: a un **módulo** (un espacio de nombres propio), después a un **paquete** (con su `Project.toml`) y, si importa, con **pruebas**, **documentación** e **integración continua**. Es lo que se hizo con `Resonancia.jl`, y es la regla del curso: *toda función reutilizable va al paquete con docstring y test*. En esta unidad se crea un paquete mínimo de verdad, con sus pruebas, y se ve cómo falla cuando algo está mal declarado.
+Mientras una función vive en una página, solo la usa esa página. En cuanto se reutiliza, hay que subirla un escalón: a un **módulo** (un espacio de nombres propio), después a un **paquete** (con su `Project.toml`) y, si importa, con **pruebas**, **documentación** e **integración continua**. Es lo que se hizo con `JuliaDo.jl`, y es la regla del curso: *toda función reutilizable va al paquete con docstring y test*. En esta unidad se crea un paquete mínimo de verdad, con sus pruebas, y se ve cómo falla cuando algo está mal declarado.
 
 ::: {.callout-note}
 ## Cómo se lee esta unidad
@@ -32,7 +32,7 @@ Mientras una función vive en una página, solo la usa esa página. En cuanto se
 
 ```{julia}
 #| include: false
-using Test, TOML, Statistics, Resonancia
+using Test, TOML, Statistics, JuliaDo
 include("../../recursos/_tema.jl")
 ```
 
@@ -46,9 +46,9 @@ include("../../recursos/_tema.jl")
 - crear un paquete mínimo y ejecutar sus pruebas con `Pkg.test`;
 - explicar qué aportan la documentación con `Documenter.jl` y la integración continua.
 
-**Prerrequisitos.** El curso no los impone en el temario; conviene J1.2 (entorno y `Resonancia.jl`), J1.4 (funciones y docstrings) y J1.8 (tipos y métodos).
+**Prerrequisitos.** El curso no los impone en el temario; conviene J1.2 (entorno y `JuliaDo.jl`), J1.4 (funciones y docstrings) y J1.8 (tipos y métodos).
 
-**Reparto con otras unidades.** Esta unidad explica el mecanismo. La política de qué entra en `Resonancia.jl` está en `CLAUDE.md` (función reutilizable, con docstring y test) y el control de versiones, en [C3](https://me1catrr.github.io/claudedo/).
+**Reparto con otras unidades.** Esta unidad explica el mecanismo. La política de qué entra en `JuliaDo.jl` está en `CLAUDE.md` (función reutilizable, con docstring y test).
 
 ## Teoría breve
 
@@ -102,10 +102,10 @@ Falso. Se puede acceder cualificándolo (`Modulo._ayuda(x)`). `export` solo deci
 
 ### J3.2.2 Anatomía de un paquete {#j3-2-2}
 
-Un paquete es un módulo con la estructura que Pkg entiende: un `Project.toml` con `name`, `uuid` y `version`, y una carpeta `src/` con un fichero `NombreDelPaquete.jl` que define el módulo; las pruebas van en `test/runtests.jl` [@pkg-crear]. Así es `Resonancia.jl`, el paquete de este curso, que se puede inspeccionar por código:
+Un paquete es un módulo con la estructura que Pkg entiende: un `Project.toml` con `name`, `uuid` y `version`, y una carpeta `src/` con un fichero `NombreDelPaquete.jl` que define el módulo; las pruebas van en `test/runtests.jl` [@pkg-crear]. Así es `JuliaDo.jl`, el paquete de este curso, que se puede inspeccionar por código:
 
 ```{julia}
-ruta = "../../Resonancia.jl"
+ruta = "../../JuliaDo.jl"
 pt = TOML.parsefile(joinpath(ruta, "Project.toml"))
 (carpeta = sort(readdir(ruta)), ficheros_src = sort(readdir(joinpath(ruta, "src"))),
  nombre_y_version = (pt["name"], pt["version"]), dependencias = sort(collect(keys(pt["deps"]))),
@@ -151,7 +151,7 @@ La **integración continua** (CI) ejecuta las pruebas automáticamente en un ser
 
 ::: {.callout-note .idea-clave}
 ## Idea clave
-Un paquete sin pruebas es una promesa; con pruebas, es un contrato. Y una función de `Resonancia.jl` **tiene** pruebas porque otras páginas del curso se apoyan en ella: si cambia, hay que saberlo ya.
+Un paquete sin pruebas es una promesa; con pruebas, es un contrato. Y una función de `JuliaDo.jl` **tiene** pruebas porque otras páginas del curso se apoyan en ella: si cambia, hay que saberlo ya.
 :::
 
 ::: {.callout-warning}
@@ -253,7 +253,7 @@ i = findfirst(contains("Test Summary"), lineas)
 (pasa = occursin("tests passed", s2), resumen = strip.(lineas[i:i+1]))
 ```
 
-Cuatro pruebas, cuatro aciertos. Es el mismo mecanismo con el que se prueba `Resonancia.jl`: desde la raíz del repositorio, `julia --project=. -e 'using Pkg; Pkg.test("Resonancia")'` ejecuta sus pruebas (20 conjuntos `@testset`).
+Cuatro pruebas, cuatro aciertos. Es el mismo mecanismo con el que se prueba `JuliaDo.jl`: desde la raíz del repositorio, `julia --project=. -e 'using Pkg; Pkg.test("JuliaDo")'` ejecuta sus pruebas (20 conjuntos `@testset`).
 
 **Paso 4. Qué pasa cuando una prueba falla.** Se cambia una afirmación a una incorrecta y se comprueba que el resumen lo dice con claridad:
 
@@ -277,7 +277,7 @@ Una prueba que falla es información valiosa: señala exactamente qué comportam
 ## Ejercicios
 
 ::: {.ejercicio tipo="numerico" id="j3-2-testsets" respuesta="20" tol="0%" unidad="conjuntos"}
-¿Cuántos `@testset` tiene `Resonancia.jl/test/runtests.jl`?
+¿Cuántos `@testset` tiene `JuliaDo.jl/test/runtests.jl`?
 
 ::: {.solucion}
 20 (el valor `testsets` del paso de anatomía; puede crecer si se añaden pruebas).
@@ -304,8 +304,8 @@ Falso. Con reales, la igualdad exacta falla por diferencias de redondeo entre m�
 Tienes una función `descriptores` en la página J1.4 y la quieres usar también en dos unidades de M. ¿Qué pasos das según las reglas del curso?
 
 ::: {.criterios}
-- La mueves a `Resonancia.jl` con docstring (con unidades) y un test, y no copias el código entre páginas.
-- Las páginas la cargan con `using Resonancia`; si cambia la versión del paquete, se vuelve a renderizar lo que dependa de ella.
+- La mueves a `JuliaDo.jl` con docstring (con unidades) y un test, y no copias el código entre páginas.
+- Las páginas la cargan con `using JuliaDo`; si cambia la versión del paquete, se vuelve a renderizar lo que dependa de ella.
 :::
 :::
 

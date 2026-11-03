@@ -5,7 +5,7 @@ subtitle: "J2.5 · Nivel J2 · Datos y estadística"
 via: J
 nivel: J2
 requiere: []
-perfil: [mse, uco]
+perfil: [estudiante, uco]
 python: true
 estado: borrador
 verificado: "Julia 1.12.3"
@@ -33,7 +33,7 @@ Toda cifra que sale de un modelo hereda la incertidumbre de lo que se le dio: un
 
 ```{julia}
 #| include: false
-using Distributions, StatsBase, Random, Statistics, DataFrames, Resonancia
+using Distributions, StatsBase, Random, Statistics, DataFrames, JuliaDo
 include("../../recursos/_tema.jl")
 ```
 
@@ -290,7 +290,7 @@ end
 
 Asimetrías muy pequeñas y curtosis casi nula: la normal describe bien el resultado, y entonces «media ± 1,96 desviaciones» es una buena forma de dar el intervalo del 95 %.
 
-**Paso 6. Para qué sirve.** En J1.7 y J2.4, un daño del 10 % en el entrepiso 2 bajaba la tercera frecuencia unos 0,14 Hz (de 4,390 a 4,254 Hz). Con las incertidumbres de este modelo, la frecuencia del tercer modo del edificio **sano** tiene un intervalo del 95 % de ±0,16 Hz: **mayor que el efecto del daño**. Por eso no se puede detectar el daño comparando una frecuencia medida con la de un modelo con parámetros inciertos; se compara **el edificio consigo mismo** en dos momentos (de ahí los contrastes de J2.6 y el seguimiento de M7).
+**Paso 6. Para qué sirve.** En J1.7 y J2.4, un daño del 10 % en el entrepiso 2 bajaba la tercera frecuencia unos 0,14 Hz (de 4,390 a 4,254 Hz). Con las incertidumbres de este modelo, la frecuencia del tercer modo del edificio **sano** tiene un intervalo del 95 % de ±0,16 Hz: **mayor que el efecto del daño**. Por eso no se puede detectar el daño comparando una frecuencia medida con la de un modelo con parámetros inciertos; se compara **el edificio consigo mismo** en dos momentos (de ahí los contrastes de J2.6).
 
 ## Python
 
@@ -318,7 +318,7 @@ Una distribución de las tres frecuencias propias a partir de incertidumbres de 
 
 ::: {.callout-tip}
 ## Prompt
-«Con Julia, `--project=.`, `Distributions.jl` y `Resonancia.jl`: para el edificio de tres plantas (masas de 2·10⁵ kg y rigideces de 5·10⁷, 5·10⁷ y 4·10⁷ N/m; modelo con `edificio_cortante` y `modos_propios`), sortea 20 000 muestras de las rigideces con incertidumbre normal del 5 % y de las masas del 2 % (independientes), con un generador local `Xoshiro(2026)`. Calcula con cada muestra las tres frecuencias propias y dame la media, la desviación típica y el intervalo del 95 % de cada una. Contrasta la desviación típica con la propagación lineal (derivadas por diferencias centrales) y dime qué parámetro aporta más varianza a cada frecuencia. No inventes cifras: si algo no sale, dilo. Indica la versión de Julia y la semilla.»
+«Con Julia, `--project=.`, `Distributions.jl` y `JuliaDo.jl`: para el edificio de tres plantas (masas de 2·10⁵ kg y rigideces de 5·10⁷, 5·10⁷ y 4·10⁷ N/m; modelo con `edificio_cortante` y `modos_propios`), sortea 20 000 muestras de las rigideces con incertidumbre normal del 5 % y de las masas del 2 % (independientes), con un generador local `Xoshiro(2026)`. Calcula con cada muestra las tres frecuencias propias y dame la media, la desviación típica y el intervalo del 95 % de cada una. Contrasta la desviación típica con la propagación lineal (derivadas por diferencias centrales) y dime qué parámetro aporta más varianza a cada frecuencia. No inventes cifras: si algo no sale, dilo. Indica la versión de Julia y la semilla.»
 
 **Verifica.** (a) Que las desviaciones típicas son del orden de 0,019, 0,055 y 0,080 Hz (1,8 % de coeficiente de variación) y que la media coincide con el valor nominal (1,105, 2,939 y 4,390 Hz). (b) Que la propagación lineal da valores a menos de un 2 % de los de Monte Carlo. (c) Que el primer modo depende sobre todo de $k_1$, el segundo de $k_3$ y el tercero de $k_2$. (d) Que usa un generador local con semilla y anota la versión de Julia. (e) Que no concluye «hay daño» de una diferencia menor que el intervalo del 95 %.
 :::

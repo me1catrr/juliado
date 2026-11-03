@@ -5,7 +5,7 @@ subtitle: "J3.8 · Nivel J3 · Computación científica"
 via: J
 nivel: J3
 requiere: []
-perfil: [mse, uco, planta]
+perfil: [estudiante, uco, planta]
 estado: borrador
 verificado: "Julia 1.12.3"
 engine: julia
@@ -22,7 +22,7 @@ format:
 
 ![](fig/portada.svg){.portada fig-alt="De izquierda a derecha: una señal en el tiempo, su espectro con dos picos, un espectrograma en forma de mosaico de celdas de intensidad variable, y debajo la respuesta de un filtro pasa-banda"}
 
-Las unidades de procesado de señales de la vía M ([M3](https://me1catrr.github.io/resonancia/mse/m03-senales-i/) y [M4](https://me1catrr.github.io/resonancia/mse/m04-senales-ii/)) explican *qué* es un espectro, una ventana o un filtro. Esta unidad enseña *cómo se calculan* con los paquetes `FFTW.jl` y `DSP.jl`, comprobando cada resultado contra una cuenta a mano o contra las funciones de `Resonancia.jl`. Se recomienda haber hecho antes J1.4 a J1.7.
+Esta unidad enseña *cómo se calculan* un espectro, una ventana o un filtro con los paquetes `FFTW.jl` y `DSP.jl`, comprobando cada resultado contra una cuenta a mano o contra las funciones de `JuliaDo.jl`. Se recomienda haber hecho antes J1.4 a J1.7.
 
 ::: {.callout-note}
 ## Cómo se lee esta unidad
@@ -31,7 +31,7 @@ Las unidades de procesado de señales de la vía M ([M3](https://me1catrr.github
 
 ```{julia}
 #| include: false
-using CSV, DataFrames, Statistics, Random, FFTW, DSP, Resonancia
+using CSV, DataFrames, Statistics, Random, FFTW, DSP, JuliaDo
 include("../../recursos/_tema.jl")
 RAIZ = "../../"
 ```
@@ -48,7 +48,7 @@ RAIZ = "../../"
 
 **Prerrequisitos.** El curso no impone ninguno en el temario; conviene J1.4 a J1.7 (funciones, arrays y figuras).
 
-**Reparto con otras unidades.** La teoría (teorema de Nyquist, resolución, leakage, diseño de filtros) está en M3 y M4. Aquí se implementa y se verifica; no se repite la demostración.
+**Reparto con otras unidades.** La teoría (teorema de Nyquist, resolución, leakage, diseño de filtros) se resume sin demostraciones: aquí se implementa y se verifica.
 
 ## Teoría breve
 
@@ -86,7 +86,7 @@ let
 end
 ```
 
-La senoide aparente tiene la fase invertida (`-sin`), que es lo que da @eq-alias cuando $f_s/2<f<f_s$. En la práctica, el aliasing no se corrige después: se evita con un filtro antialiasing **antes** de muestrear (M3.4).
+La senoide aparente tiene la fase invertida (`-sin`), que es lo que da @eq-alias cuando $f_s/2<f<f_s$. En la práctica, el aliasing no se corrige después: se evita con un filtro antialiasing **antes** de muestrear.
 
 ::: {.ejercicio tipo="numerico" id="j3-8-1-alias" respuesta="20" tol="0%" unidad="Hz"}
 Una vibración de 80 Hz se muestrea a 100 Hz. ¿A qué frecuencia aparece en el espectro?
@@ -98,7 +98,7 @@ $f_{ap}=|80-\operatorname{round}(0{,}8)\cdot100|=|80-100|=20$ Hz.
 
 ### J3.8.2 La FFT con `FFTW.jl` {#j3-8-2}
 
-`FFTW.jl` calcula la transformada rápida de Fourier para **cualquier longitud** (la FFT propia de `Resonancia.jl` solo admite potencias de 2). Para una señal real se usa `rfft`, que devuelve solo las frecuencias de 0 a $f_N$, y `rfftfreq(N, fs)`, que da el eje en Hz. Para pasar a un espectro de **amplitud** hay que escalar: una senoide de amplitud $A$ da un módulo $A\,N/2$ en su bin, así que
+`FFTW.jl` calcula la transformada rápida de Fourier para **cualquier longitud** (la FFT propia de `JuliaDo.jl` solo admite potencias de 2). Para una señal real se usa `rfft`, que devuelve solo las frecuencias de 0 a $f_N$, y `rfftfreq(N, fs)`, que da el eje en Hz. Para pasar a un espectro de **amplitud** hay que escalar: una senoide de amplitud $A$ da un módulo $A\,N/2$ en su bin, así que
 
 $$
 \text{amplitud}[k]=\frac{2\,|X[k]|}{N}\qquad(k\ne0,\ N/2).
@@ -158,7 +158,7 @@ let
 end
 ```
 
-Queda un residuo: aun con ventana, el pico (0,85) no llega a 1 porque 2,55 Hz no cae justo en un bin (la rejilla es de 0,1 Hz): es la **pérdida por escalonamiento** (*scalloping*), que M4.1 cuantifica y que se corrige con la ventana *flat-top*.
+Queda un residuo: aun con ventana, el pico (0,85) no llega a 1 porque 2,55 Hz no cae justo en un bin (la rejilla es de 0,1 Hz): es la **pérdida por escalonamiento** (*scalloping*), que se corrige con la ventana *flat-top*.
 
 ::: {.ejercicio tipo="vf" id="j3-8-3-ventana" respuesta="falso"}
 Una ventana de Hann elimina por completo la fuga espectral y deja el pico con su amplitud exacta.
@@ -176,7 +176,7 @@ Para señales aleatorias (el ruido ambiental de una estructura) un solo periodog
 a = CSV.read(RAIZ * "datos/sinteticos/edificio-3-plantas/escenario_A.csv", DataFrame; delim=';')
 y = a.a3_ms2
 p = welch_pgram(y, 4096, 2048; fs=100.0, window=DSP.hanning)
-fw, Pw = psd_welch(y, 100.0; nseg=4096)         # versión de Resonancia.jl
+fw, Pw = psd_welch(y, 100.0; nseg=4096)         # versión de JuliaDo.jl
 m = fw .> 0.5
 (bins = length(p.freq), pico_Hz = p.freq[argmax(p.power)],
  diferencia_relativa_maxima = round(maximum(abs.(p.power[m] .- Pw[m]) ./ Pw[m]), digits=5),
@@ -388,4 +388,4 @@ Un compañero te entrega una figura de PSD sin más datos. ¿Qué cuatro paráme
 
 **Cierre.** Escribe tres líneas: qué he entendido, qué todavía no domino y cuál es mi siguiente paso pequeño. Anota siempre `fs`, `nseg`, solape y ventana junto a cada espectro.
 
-**Siguiente:** [J3.1 · Rendimiento](../j3-1-rendimiento/index.qmd), o las unidades de [M3](https://me1catrr.github.io/resonancia/mse/m03-senales-i/) y [M4](https://me1catrr.github.io/resonancia/mse/m04-senales-ii/), que usan lo de aquí.
+**Siguiente:** [J3.1 · Rendimiento](../j3-1-rendimiento/index.qmd).

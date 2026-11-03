@@ -49,7 +49,7 @@ end
 """
     periodograma(x, fs; ventana=:rectangular, nfft=length(x), quitar_media=true) -> (f, P)
 
-Densidad espectral de potencia (PSD) unilateral de `x` estimada con un único periodograma (M3.6):
+Densidad espectral de potencia (PSD) unilateral de `x` estimada con un único periodograma:
 `P[k] = c_k |X[k]|² / (fs Σw²)`, con `X` la DFT de `x·w` rellenada con ceros hasta `nfft` puntos,
 `Σw²` la energía de la ventana y `c_k = 2` salvo en DC y en Nyquist (`c_k = 1`). Unidades: las de
 `x` al cuadrado por hercio. Con cualquier ventana se cumple `sum(P)·Δf = Σ(x w)² / Σw²` (con
@@ -67,7 +67,7 @@ end
 """
     espectro_amplitud(x, fs; ventana=:rectangular, nfft=length(x), quitar_media=false) -> (f, A, fase)
 
-Espectro de amplitud unilateral de `x` (M3.5): `A[k] = c_k |X[k]| / Σw`, con `c_k = 2` salvo en DC y
+Espectro de amplitud unilateral de `x`: `A[k] = c_k |X[k]| / Σw`, con `c_k = 2` salvo en DC y
 Nyquist. Una sinusoide `a·cos(2π f₀ t + φ)` con `f₀` en el centro de un bin da `A = a` y `fase = φ`
 (rad) en ese bin. Unidades: las de `x` (amplitud de pico). El relleno con ceros (`nfft > length(x)`)
 interpola el espectro pero no añade información.
@@ -97,7 +97,7 @@ end
 """
     psd_normalizada(f, P; banda=(f[1], f[end])) -> (fb, Pn)
 
-PSD normalizada (NPSD) en la convención declarada en M3.6: se toman los bins con `fa ≤ f ≤ fb` y se
+PSD normalizada (NPSD) en la convención habitual: se toman los bins con `fa ≤ f ≤ fb` y se
 dividen por su suma, de modo que `sum(Pn) = 1`. `Pn[k]` es la **fracción de la potencia de la banda que
 cae en el bin k** (adimensional); no es una densidad por hercio. Para obtener una densidad normalizada
 (1/Hz) habría que dividir además por `Δf` (normalizar por la integral en lugar de por la suma).
@@ -113,7 +113,7 @@ end
 """
     anpsd(f, Ps; banda=(f[1], f[end])) -> (fb, A)
 
-Promedio de PSD normalizadas (ANPSD) de varios canales, en la convención declarada en M3.6: cada
+Promedio de PSD normalizadas (ANPSD) de varios canales, en la convención habitual: cada
 columna de `Ps` (una PSD por canal, todas sobre la misma rejilla `f`) se normaliza con
 `psd_normalizada` en la misma `banda` y después se promedian los canales bin a bin. El resultado
 suma 1 y es adimensional: conserva **dónde** está la potencia, no cuánta hay; un canal débil o
@@ -128,7 +128,7 @@ end
 """
     colorear(r, α) -> Vector{Float64}
 
-Ruido «de color» a partir de un ruido blanco `r` (M3.1): multiplica la DFT de `r` por `|k|^(-α/2)` (con `k`
+Ruido «de color» a partir de un ruido blanco `r`: multiplica la DFT de `r` por `|k|^(-α/2)` (con `k`
 el índice de frecuencia con signo y el bin de DC anulado), vuelve al tiempo y escala el resultado a media 0
 y desviación típica 1. La PSD queda proporcional a `1/f^α`: `α = 0` blanco, `α = 1` rosa (1/f),
 `α = 2` marrón (1/f²). Es determinista dado `r`, de modo que las versiones en Julia, JavaScript y Python

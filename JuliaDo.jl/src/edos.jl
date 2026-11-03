@@ -63,8 +63,8 @@ discretización exacta con retenedor de orden cero: es exacta si `u` es constant
 ejemplo) y, en otro caso, el error es del orden de `(ω/fs)²`. El elemento `k` devuelto es la aceleración en el instante
 `(k-1)/fs`, con `u[k]` ya aplicada.
 
-Sirve para fabricar registros sintéticos de un modo con respuesta conocida (p. ej. el paso de un tren por un puente en
-la actividad de M3). Exige `0 ≤ zeta < 1`, `f0 > 0` y `fs > 0`.
+Sirve para fabricar registros sintéticos de un modo con respuesta conocida (p. ej. el paso de un tren por un
+puente). Exige `0 ≤ zeta < 1`, `f0 > 0` y `fs > 0`.
 """
 function aceleracion_1gdl(u::AbstractVector{<:Real}, f0::Real, zeta::Real, fs::Real)
     0 <= zeta < 1 || throw(ArgumentError("zeta debe estar en [0, 1)"))

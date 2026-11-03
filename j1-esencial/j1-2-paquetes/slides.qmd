@@ -11,7 +11,7 @@ format:
 - Usar el modo paquetes (`]`).
 - Distinguir `Project.toml` y `Manifest.toml`.
 - Reconstruir el entorno con `instantiate`.
-- Usar `Resonancia.jl` y leer su ayuda.
+- Usar `JuliaDo.jl` y leer su ayuda.
 
 ## El modo paquetes
 
@@ -36,7 +36,7 @@ Se commitean los dos. Python: `pyproject.toml` y `uv.lock`.
 
 ## Relación entre ficheros
 
-![](fig/entorno.svg){fig-alt="Project.toml, Manifest.toml, registro general y Resonancia.jl con sus flechas"}
+![](fig/entorno.svg){fig-alt="Project.toml, Manifest.toml, registro general y JuliaDo.jl con sus flechas"}
 
 ## Entorno único del curso
 
@@ -46,15 +46,15 @@ julia --project=. -e 'using Pkg; Pkg.instantiate()'
 
 Equivale a `uv sync`.
 
-## `Resonancia.jl` y `Revise.jl`
+## `JuliaDo.jl` y `Revise.jl`
 
 - Paquete local en modo desarrollo (`path` en el `Manifest.toml`).
-- `using Revise` **antes** de `using Resonancia`: los cambios se aplican sin reiniciar.
+- `using Revise` **antes** de `using JuliaDo`: los cambios se aplican sin reiniciar.
 
 ## Práctica
 
 - Leer `Project.toml` con `TOML.parsefile`.
-- `pkgversion(Resonancia)`.
+- `pkgversion(JuliaDo)`.
 - `psd_welch` y `buscar_picos`: picos en 2,54 y 7,03 Hz.
 
 ## La doy por superada si…

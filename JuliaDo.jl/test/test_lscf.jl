@@ -1,4 +1,4 @@
-# Pruebas de src/lscf.jl (M7.3, ampliación PolyMAX). Las incluye runtests.jl.
+# Pruebas de src/lscf.jl (ampliación PolyMAX). Las incluye runtests.jl.
 using LinearAlgebra, Random
 
 # Tres modos con residuos complejos fijos (frecuencia natural en Hz, razón de amortiguamiento, residuo)

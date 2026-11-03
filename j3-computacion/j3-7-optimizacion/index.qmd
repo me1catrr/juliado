@@ -5,7 +5,7 @@ subtitle: "J3.7 · Nivel J3 · Computación científica"
 via: J
 nivel: J3
 requiere: []
-perfil: [mse, uco]
+perfil: [estudiante, uco]
 estado: borrador
 verificado: "Julia 1.12.3"
 engine: julia
@@ -23,16 +23,16 @@ format:
 
 ![](fig/portada.svg){.portada fig-alt="A la izquierda, puntos azules con ruido alrededor de un pico de resonancia y la curva naranja ajustada, junto a una curva gris discontinua del punto de partida; una flecha verde con la palabra mín lleva a la derecha, donde elipses concéntricas azules son las curvas de nivel de una función de coste y una línea naranja quebrada baja por el valle hasta un punto verde en el mínimo"}
 
-Casi todo lo que se hace con datos de vibraciones acaba en la misma pregunta: **¿qué valores de los parámetros del modelo hacen que este se parezca más a lo medido?** El amortiguamiento de un modo, la rigidez de un entrepiso, la masa de una planta no se miden directamente: se **estiman** minimizando una función de coste que mide la distancia entre modelo y datos. Esta unidad enseña a plantear ese problema, a resolverlo con `Optim.jl` y `LsqFit.jl`, a elegir el método, a no caer en un mínimo local, y a **cuantificar la incertidumbre** del resultado, con dos aplicaciones de la vía M: el ajuste de la FRF de un oscilador de 1 GDL (M7) y la actualización de un modelo de edificio con frecuencias medidas (M6.7).
+Casi todo lo que se hace con datos de vibraciones acaba en la misma pregunta: **¿qué valores de los parámetros del modelo hacen que este se parezca más a lo medido?** El amortiguamiento de un modo, la rigidez de un entrepiso, la masa de una planta no se miden directamente: se **estiman** minimizando una función de coste que mide la distancia entre modelo y datos. Esta unidad enseña a plantear ese problema, a resolverlo con `Optim.jl` y `LsqFit.jl`, a elegir el método, a no caer en un mínimo local, y a **cuantificar la incertidumbre** del resultado, con dos aplicaciones de vibraciones: el ajuste de la FRF de un oscilador de 1 GDL y la actualización de un modelo de edificio con frecuencias medidas (*model updating*).
 
 ::: {.callout-note}
 ## Cómo se lee esta unidad
-**Tiempo orientativo: 120 minutos.** Objetivos (5), teoría en cinco píldoras (35), práctica guiada (45), «Pídeselo a Claude» (15), ejercicios (15) y cierre (5). **Los datos de la FRF son sintéticos** (se generan en la página, con semilla fija y un ruido conocido, para saber la respuesta correcta); los de la actualización del modelo son los registros sintéticos del edificio de tres plantas de `datos/sinteticos/`. Ninguno es una medida de una estructura real. Se usan `Optim.jl`, `LsqFit.jl` y las funciones de `Resonancia.jl`.
+**Tiempo orientativo: 120 minutos.** Objetivos (5), teoría en cinco píldoras (35), práctica guiada (45), «Pídeselo a Claude» (15), ejercicios (15) y cierre (5). **Los datos de la FRF son sintéticos** (se generan en la página, con semilla fija y un ruido conocido, para saber la respuesta correcta); los de la actualización del modelo son los registros sintéticos del edificio de tres plantas de `datos/sinteticos/`. Ninguno es una medida de una estructura real. Se usan `Optim.jl`, `LsqFit.jl` y las funciones de `JuliaDo.jl`.
 :::
 
 ```{julia}
 #| include: false
-using Optim, LsqFit, CSV, DataFrames, LinearAlgebra, Random, Statistics, Resonancia
+using Optim, LsqFit, CSV, DataFrames, LinearAlgebra, Random, Statistics, JuliaDo
 include("../../recursos/_tema.jl")
 RAIZ = "../../"
 ```
@@ -47,9 +47,9 @@ RAIZ = "../../"
 - detectar mínimos locales con una estrategia multi-start, imponer cotas y comprobar la sensibilidad a la inicialización;
 - actualizar la rigidez de un modelo de edificio con frecuencias medidas y dar el resultado con su incertidumbre.
 
-**Prerrequisitos.** El curso no los impone en el temario; conviene [J3.3](../j3-3-algebra-numerica/index.qmd) (mínimos cuadrados lineales y condicionamiento) y [J3.5](../j3-5-integracion-ad/index.qmd) (diferenciación automática), y haber visto en [M6.7](https://me1catrr.github.io/resonancia/mse/m06-vibraciones-ii/) la idea de *model updating*.
+**Prerrequisitos.** El curso no los impone en el temario; conviene [J3.3](../j3-3-algebra-numerica/index.qmd) (mínimos cuadrados lineales y condicionamiento) y [J3.5](../j3-5-integracion-ad/index.qmd) (diferenciación automática).
 
-**Reparto con otras unidades.** La teoría de la identificación modal está en [M7](https://me1catrr.github.io/resonancia/mse/m07-identificacion/) y la del *model updating*, en M6.7. Aquí se implementa y se comprueba con cifras.
+**Reparto con otras unidades.** La teoría de la identificación modal y del *model updating* no se desarrolla aquí: se implementa y se comprueba con cifras.
 
 ## Teoría breve
 
@@ -75,7 +75,7 @@ $$
 H(f)=\frac{A}{1-(f/f_0)^2+2\mathrm{i}\,\zeta\,f/f_0},\qquad A=\frac1k ,
 $$ {#eq-frf}
 
-implementada en `frf_1gdl` de `Resonancia.jl`. Se simulan 201 frecuencias entre 2 y 4 Hz con ruido gaussiano de 5 µm/kN en la parte real y en la imaginaria, y se minimiza @eq-coste con Optim.jl:
+implementada en `frf_1gdl` de `JuliaDo.jl`. Se simulan 201 frecuencias entre 2 y 4 Hz con ruido gaussiano de 5 µm/kN en la parte real y en la imaginaria, y se minimiza @eq-coste con Optim.jl:
 
 ```{julia}
 m_osc, f0_ver, ζ_ver = 2.0e5, 2.94, 0.02
@@ -141,7 +141,7 @@ El residuo $\hat\sigma=4{,}88$ µm/kN recupera el ruido simulado (5), con $N-p=3
 
 ```{julia}
 #| label: fig-frf
-#| fig-cap: "Ajuste de la FRF de un oscilador de 1 GDL. (a) Módulo de los 201 datos (gris), curva del punto de partida (discontinua) y curva ajustada (naranja). (b) Los mismos datos en el plano de Argand (parte real frente a imaginaria): la FRF de 1 GDL traza una circunferencia, que es lo que ajusta el método *circle-fit* de M7.2."
+#| fig-cap: "Ajuste de la FRF de un oscilador de 1 GDL. (a) Módulo de los 201 datos (gris), curva del punto de partida (discontinua) y curva ajustada (naranja). (b) Los mismos datos en el plano de Argand (parte real frente a imaginaria): la FRF de 1 GDL traza una circunferencia, que es lo que ajusta el método *circle-fit* de la identificación modal."
 #| fig-alt: "Dos paneles. El panel a muestra el módulo de la FRF en micrómetros por kilonewton frente a la frecuencia de 2 a 4 hercios: puntos grises dispersos alrededor de un pico alto en 2,94 hercios, una curva gris discontinua con un pico más bajo y desplazado, y una curva naranja que pasa por los puntos. El panel b muestra la parte real frente a la imaginaria: los puntos dibujan una circunferencia con ruido y la curva naranja es una circunferencia que los ajusta."
 let
     n = length(f)
@@ -266,7 +266,7 @@ Quieres ajustar los 3 parámetros de una FRF a 400 datos con ruido y tienes un b
 
 ### J3.7.4 Mínimos locales, multi-start y cotas {#j3-7-4}
 
-Un método de descenso termina en el mínimo local que le toca según el punto de partida. La defensa estándar es la **estrategia multi-start**: lanzar el ajuste desde muchos puntos iniciales repartidos por la región admisible y quedarse con el de menor coste, comprobando **cuántos** alcanzan ese mismo valor. Si lo alcanzan casi todos, el mínimo es fiable; si solo uno, hay que desconfiar. `puntos_iniciales(lo, hi, n)` de `Resonancia.jl` los reparte con una secuencia determinista (de Halton), de modo que el resultado se repite exactamente. Con la FRF compleja, un mínimo local es raro:
+Un método de descenso termina en el mínimo local que le toca según el punto de partida. La defensa estándar es la **estrategia multi-start**: lanzar el ajuste desde muchos puntos iniciales repartidos por la región admisible y quedarse con el de menor coste, comprobando **cuántos** alcanzan ese mismo valor. Si lo alcanzan casi todos, el mínimo es fiable; si solo uno, hay que desconfiar. `puntos_iniciales(lo, hi, n)` de `JuliaDo.jl` los reparte con una secuencia determinista (de Halton), de modo que el resultado se repite exactamente. Con la FRF compleja, un mínimo local es raro:
 
 ```{julia}
 arranques = puntos_iniciales([1.0, 0.005, 1.0], [5.0, 0.3, 100.0], 30)
@@ -479,7 +479,7 @@ fisica = [s[1] < 1.3 for s in sol]                      # solución cercana a la
  frecuencias_de_la_otra = round.(frecuencias_cortante(sol[findfirst(!, fisica)]), digits=3), frecuencias_medidas = round.(fm, digits=3))
 ```
 
-Hay **dos** soluciones con coste prácticamente nulo: la buena, $\boldsymbol\theta\approx(1{,}02;\,0{,}90;\,0{,}98)$ (25 de los 30 arranques), y otra, $(1{,}97;\,0{,}62;\,0{,}74)$ (los otros 5), con las **mismas** tres frecuencias pero con un entrepiso 1 de rigidez casi doble. Solo se descarta con información adicional: un prior físico (cotas $0{,}5\le\theta\le1{,}5$), las formas modales (MAC, M6.7) o más sensores. La covarianza de LsqFit, que solo describe el entorno de **una** solución, no lo habría avisado.
+Hay **dos** soluciones con coste prácticamente nulo: la buena, $\boldsymbol\theta\approx(1{,}02;\,0{,}90;\,0{,}98)$ (25 de los 30 arranques), y otra, $(1{,}97;\,0{,}62;\,0{,}74)$ (los otros 5), con las **mismas** tres frecuencias pero con un entrepiso 1 de rigidez casi doble. Solo se descarta con información adicional: un prior físico (cotas $0{,}5\le\theta\le1{,}5$), las formas modales (MAC) o más sensores. La covarianza de LsqFit, que solo describe el entorno de **una** solución, no lo habría avisado.
 
 ::: {.callout-tip .nota-python}
 ## En Python
@@ -490,7 +490,7 @@ Hay **dos** soluciones con coste prácticamente nulo: la buena, $\boldsymbol\the
 
 ::: {.callout-tip}
 ## Prompt
-«Con Julia, `--project=.`, `Optim`, `LsqFit` y `Resonancia.jl`: (1) genera los datos de la FRF de un oscilador de 1 GDL (`frf_1gdl`) con `f0 = 2,94 Hz`, `ζ = 0,02`, `A = 14,65 µm/kN`, 201 frecuencias entre 2 y 4 Hz y ruido gaussiano de 5 µm/kN en parte real e imaginaria con `MersenneTwister(7)`; (2) ajústala con `curve_fit` (modelo `frf_1gdl_ri`) desde `[2,7; 0,05; 20]` y dame los parámetros con su error típico y el intervalo del 95 %; (3) repite desde 30 puntos de `puntos_iniciales([1,0,005,1],[5,0,3,100],30)` con cotas y di cuántos llegan al mismo coste; (4) compara el número de evaluaciones del coste de Nelder–Mead, BFGS y Levenberg–Marquardt con los parámetros reescalados. No cambies los métodos para que salga mejor. No inventes valores: si algo no converge, dilo.»
+«Con Julia, `--project=.`, `Optim`, `LsqFit` y `JuliaDo.jl`: (1) genera los datos de la FRF de un oscilador de 1 GDL (`frf_1gdl`) con `f0 = 2,94 Hz`, `ζ = 0,02`, `A = 14,65 µm/kN`, 201 frecuencias entre 2 y 4 Hz y ruido gaussiano de 5 µm/kN en parte real e imaginaria con `MersenneTwister(7)`; (2) ajústala con `curve_fit` (modelo `frf_1gdl_ri`) desde `[2,7; 0,05; 20]` y dame los parámetros con su error típico y el intervalo del 95 %; (3) repite desde 30 puntos de `puntos_iniciales([1,0,005,1],[5,0,3,100],30)` con cotas y di cuántos llegan al mismo coste; (4) compara el número de evaluaciones del coste de Nelder–Mead, BFGS y Levenberg–Marquardt con los parámetros reescalados. No cambies los métodos para que salga mejor. No inventes valores: si algo no converge, dilo.»
 
 **Verifica.** (a) Que el ajuste da $f_0\approx2{,}9404$, $\zeta\approx0{,}01994$ y $A\approx14{,}63$, con el valor verdadero dentro de cada intervalo del 95 %. (b) Que el residuo $\hat\sigma$ es $\approx4{,}9$ (cerca del ruido de 5). (c) Que los 30 arranques con cotas dan el mismo coste (9 491,1). (d) Que cuenta **evaluaciones**, no segundos, y que LM necesita bastantes menos que Nelder–Mead. (e) Que no ha escogido el mejor de varios resultados sin decirlo ni ha cambiado la semilla. (f) Que no da por buena una fila con `converged = true` y un coste mucho mayor que el mínimo.
 :::

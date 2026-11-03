@@ -32,10 +32,10 @@ deps = ["SHA"]
 uuid = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 version = "1.11.0"
 
-[[deps.Resonancia]]
+[[deps.JuliaDo]]
 deps = ["LinearAlgebra", "SparseArrays"]
 path = "."
-uuid = "ac46af11-716c-49c0-a88a-6c641342bc1e"
+uuid = "556d901c-f090-45c9-8277-e1f809c78e56"
 version = "0.3.0"
 
 [[deps.SHA]]

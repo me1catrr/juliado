@@ -28,12 +28,12 @@ Mucho de lo que se hace en monitorización estructural tiene forma de **red**: l
 
 ::: {.callout-note}
 ## Cómo se lee esta unidad
-**Tiempo orientativo: 60 minutos.** Objetivos (3), teoría en cinco píldoras (15), práctica guiada (22), «Pídeselo a Claude» (8), ejercicios (10) y cierre (2). Unidad **opcional** del perfil uco; la red de sensores se usa en [M9](https://me1catrr.github.io/resonancia/mse/m09-redes-sensores/). **Los datos son sintéticos**: la posición de los 16 nodos de un puente se genera en la página con semilla fija. Se usan `Graphs.jl` y las funciones de `Resonancia.jl` (`red_sensores`, `reticulado_plano`, `adyacencia_barras`, `grafo_de_matriz`, `laplaciana`).
+**Tiempo orientativo: 60 minutos.** Objetivos (3), teoría en cinco píldoras (15), práctica guiada (22), «Pídeselo a Claude» (8), ejercicios (10) y cierre (2). Unidad **opcional** del perfil uco. **Los datos son sintéticos**: la posición de los 16 nodos de un puente se genera en la página con semilla fija. Se usan `Graphs.jl` y las funciones de `JuliaDo.jl` (`red_sensores`, `reticulado_plano`, `adyacencia_barras`, `grafo_de_matriz`, `laplaciana`).
 :::
 
 ```{julia}
 #| include: false
-using Graphs, LinearAlgebra, SparseArrays, Random, Statistics, Resonancia
+using Graphs, LinearAlgebra, SparseArrays, Random, Statistics, JuliaDo
 include("../../recursos/_tema.jl")
 ```
 
@@ -47,7 +47,7 @@ include("../../recursos/_tema.jl")
 
 **Prerrequisitos.** El curso no los impone en el temario; conviene J1.5 (arrays) y J3.3 (matrices dispersas y valores propios).
 
-**Reparto con otras unidades.** El diseño y la planificación de redes de sensores se tratan en [M9](https://me1catrr.github.io/resonancia/mse/m09-redes-sensores/); aquí se aprende la herramienta.
+**Reparto con otras unidades.** El diseño de redes de sensores no se trata aquí; se aprende la herramienta.
 
 ## Teoría breve
 
@@ -72,7 +72,7 @@ end
 
 La suma de una fila de $\mathbf A$ es el **grado** del nodo (cuántos enlaces tiene), y la suma de todos los grados es $2|E|$ (cada arista se cuenta dos veces).
 
-El ejemplo de la unidad es una red inalámbrica de 16 sensores en un puente de 70 m: dos filas de 8 nodos separadas 6 m, con una variación aleatoria de la posición (semilla fija). Dos nodos pueden comunicarse si están a menos del **alcance** $r$ de la radio (@fig-red). `red_sensores` de `Resonancia.jl` devuelve la matriz de adyacencia **ponderada** (con las distancias) y `SimpleGraph(W)` la convierte en grafo:
+El ejemplo de la unidad es una red inalámbrica de 16 sensores en un puente de 70 m: dos filas de 8 nodos separadas 6 m, con una variación aleatoria de la posición (semilla fija). Dos nodos pueden comunicarse si están a menos del **alcance** $r$ de la radio (@fig-red). `red_sensores` de `JuliaDo.jl` devuelve la matriz de adyacencia **ponderada** (con las distancias) y `SimpleGraph(W)` la convierte en grafo:
 
 ![De la red física al grafo: dos nodos están unidos si su distancia es menor que el alcance $r$ de la radio, y el peso de la arista es esa distancia.](fig/red.svg){#fig-red fig-alt="A la izquierda, cinco nodos A a E dibujados con un círculo discontinuo de radio igual al alcance de 12 metros alrededor de A: B y C están dentro, D queda fuera, y la línea A a D se marca como fuera de alcance. A la derecha, el grafo equivalente con las mismas posiciones y las aristas con sus distancias: A-B 9,4; A-C 10,3; B-C 10,1; B-D 11,0; C-D 10,5 y D-E 9,2 metros; A es el nodo base."}
 
@@ -277,7 +277,7 @@ println("| barras quitadas | componentes | núcleo de L | λ₂ (Fiedler) |\n|--
 
 : Barras retiradas del módulo central del reticulado de 14 nudos (cruzan en total tres). Con las tres quitadas aparecen dos subestructuras y un segundo modo de sólido rígido. {#tbl-reticulado}
 
-Dos avisos. (1) La conectividad es una condición **necesaria** para que una estructura sea estable, **no suficiente**: quitar una sola barra del reticulado (@tbl-reticulado) lo deja conexo pero ya sin $b+r\ge2j$, es decir, **hipostático** (un mecanismo); eso lo detecta el conteo de Maxwell y la rigidez, no solo el grafo. (2) La unión con la vía M es directa: el patrón de ceros de la matriz de rigidez *es* un grafo (`grafo_de_matriz`), y sus componentes conexas son bloques desacoplados que se pueden resolver por separado (J3.3). Para el edificio de tres plantas, el grafo es un camino 1–2–3 (cada planta solo se acopla con la contigua).
+Dos avisos. (1) La conectividad es una condición **necesaria** para que una estructura sea estable, **no suficiente**: quitar una sola barra del reticulado (@tbl-reticulado) lo deja conexo pero ya sin $b+r\ge2j$, es decir, **hipostático** (un mecanismo); eso lo detecta el conteo de Maxwell y la rigidez, no solo el grafo. (2) La unión con las vibraciones es directa: el patrón de ceros de la matriz de rigidez *es* un grafo (`grafo_de_matriz`), y sus componentes conexas son bloques desacoplados que se pueden resolver por separado (J3.3). Para el edificio de tres plantas, el grafo es un camino 1–2–3 (cada planta solo se acopla con la contigua).
 
 ```{julia}
 #| label: fig-reticulado
@@ -353,7 +353,7 @@ g17 = SimpleGraph(red_sensores(extra; alcance=12.0))
 
 ::: {.callout-tip}
 ## Prompt
-«Con Julia, `--project=.`, `Graphs` y `Resonancia.jl`: genera las 16 posiciones de sensores del puente con `MersenneTwister(9)` (dos filas, x = 10 i + 3(u−0,5), y ∈ {0; 6} + 2(u−0,5)), construye la red con `red_sensores(pos; alcance=12.0)` y (1) dime el número de enlaces, los puntos de articulación y los puentes; (2) calcula con `dijkstra_shortest_paths` la ruta del nodo 1 al 16 de mínima energía (peso `W .^ 2`) con alcance de 20 m y compárala con la de mínimo número de saltos; (3) halla el alcance mínimo de conexión con `kruskal_mst`. Comprueba cada resultado con una segunda vía (por ejemplo, la conectividad con los valores propios de la laplaciana). No inventes valores: si algo no sale, dilo.»
+«Con Julia, `--project=.`, `Graphs` y `JuliaDo.jl`: genera las 16 posiciones de sensores del puente con `MersenneTwister(9)` (dos filas, x = 10 i + 3(u−0,5), y ∈ {0; 6} + 2(u−0,5)), construye la red con `red_sensores(pos; alcance=12.0)` y (1) dime el número de enlaces, los puntos de articulación y los puentes; (2) calcula con `dijkstra_shortest_paths` la ruta del nodo 1 al 16 de mínima energía (peso `W .^ 2`) con alcance de 20 m y compárala con la de mínimo número de saltos; (3) halla el alcance mínimo de conexión con `kruskal_mst`. Comprueba cada resultado con una segunda vía (por ejemplo, la conectividad con los valores propios de la laplaciana). No inventes valores: si algo no sale, dilo.»
 
 **Verifica.** (a) Que hay 28 enlaces, puntos de articulación 12 y 14, y un puente 12–14. (b) Que la ruta de mínima energía tiene 8 saltos y 747 m², y la de mínimo número de saltos, 5 y 1 195 m². (c) Que el alcance mínimo es 11,35 m. (d) Que la segunda vía coincide (el número de valores propios nulos de la laplaciana es el de componentes). (e) Que no ha usado pesos cero para «sin enlace» donde sí había enlace. (f) Que no ha ordenado nodos por índice dando por hecho que son contiguos tras quitar uno.
 :::
@@ -404,4 +404,4 @@ Un compañero afirma: «mi red de sensores está bien, todos los nodos están co
 
 **Cierre.** Escribe tres líneas: qué he entendido, qué todavía no domino y cuál es mi siguiente paso pequeño. Antes de aceptar una «ruta óptima» de Claude, pregunta por el criterio de peso.
 
-**Siguiente:** [M9 · Nodos embebidos y redes de sensores](https://me1catrr.github.io/resonancia/mse/m09-redes-sensores/), donde se usa la red de sensores, o el [índice de J3](../index.qmd).
+**Siguiente:** vuelve al [índice de J3](../index.qmd).

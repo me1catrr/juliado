@@ -1,9 +1,9 @@
-# Genera los registros sintéticos del edificio de cortante de tres plantas (caso transversal de M02).
-#   julia --project=. scripts/m02/generar_edificio.jl
-# Escenarios (véase Resonancia.edificio_tres_plantas): A referencia, B variabilidad ambiental (-1 % de rigidez),
+# Genera los registros sintéticos del edificio de cortante de tres plantas del curso.
+#   julia --project=. scripts/datos/generar_edificio.jl
+# Escenarios (véase JuliaDo.edificio_tres_plantas): A referencia, B variabilidad ambiental (-1 % de rigidez),
 # C daño (-10 % de rigidez en el entrepiso 2). Excitación ambiental: fuerza de ruido blanco independiente en cada
 # planta; sensores: aceleración absoluta de las tres plantas con ruido blanco. Semillas fijas.
-using Resonancia, LinearAlgebra, Random, Printf
+using JuliaDo, LinearAlgebra, Random, Printf
 
 const FS = 100.0
 const DT = 1 / FS

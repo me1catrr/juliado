@@ -1,4 +1,4 @@
-# Pruebas de src/semiespectro.jl (M7.1 y M7.9). Las incluye runtests.jl.
+# Pruebas de src/semiespectro.jl. Las incluye runtests.jl.
 using LinearAlgebra, Random, Statistics
 
 @testset "semiespectro: definición y relación con la PSD" begin

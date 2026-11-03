@@ -52,7 +52,7 @@ cond(A)   eigen(A)   eigen(K, M)
 
 $f$ = 1,105 · 2,939 · 4,390 Hz
 
-Coincide con `modos_propios` de `Resonancia.jl`; $\boldsymbol\Phi^{\mathsf T}\mathbf M\boldsymbol\Phi=\mathbf I$.
+Coincide con `modos_propios` de `JuliaDo.jl`; $\boldsymbol\Phi^{\mathsf T}\mathbf M\boldsymbol\Phi=\mathbf I$.
 
 ## La doy por superada si…
 

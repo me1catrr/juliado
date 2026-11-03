@@ -5,7 +5,7 @@ subtitle: "J2.8 · Nivel J2 · Datos y estadística"
 via: J
 nivel: J2
 requiere: []
-perfil: [mse, uco]
+perfil: [estudiante, uco]
 python: true
 estado: borrador
 verificado: "Julia 1.12.3"
@@ -28,18 +28,18 @@ Un sistema de monitorización no se limita a medir: tiene que **decidir**. ¿Est
 
 ::: {.callout-note}
 ## Cómo se lee esta unidad
-**Tiempo orientativo: 90 minutos.** Objetivos (4), teoría en cinco píldoras (18), práctica guiada (40), «Pídeselo a Claude» (12), ejercicios (14) y cierre (2). **Los datos son sintéticos**: son los registros del edificio de tres plantas de `datos/sinteticos/edificio-3-plantas` (estados A, B y C de M2) y, para los eventos, impactos añadidos a propósito con una semilla fija; así se conoce la respuesta correcta. No son medidas de ninguna estructura real.
+**Tiempo orientativo: 90 minutos.** Objetivos (4), teoría en cinco píldoras (18), práctica guiada (40), «Pídeselo a Claude» (12), ejercicios (14) y cierre (2). **Los datos son sintéticos**: son los registros del edificio de tres plantas de `datos/sinteticos/edificio-3-plantas` (estados A, B y C) y, para los eventos, impactos añadidos a propósito con una semilla fija; así se conoce la respuesta correcta. No son medidas de ninguna estructura real.
 :::
 
 ::: {.callout-note title="Sobre MLJ: por qué esta unidad no lo usa"}
-El temario anuncia esta unidad «con MLJ», el entorno de aprendizaje automático de Julia, que ofrece una interfaz común (`machine`, `fit!`, `evaluate`) a decenas de modelos de otros paquetes. **No se usa aquí**, por una razón práctica de reproducibilidad: al probar la instalación de MLJ y de los paquetes de modelos que necesitaría (árboles de decisión, regresión regularizada, vecinos próximos), el gestor de paquetes degradaba `CSV` y `Parsers` a versiones anteriores, lo que afectaba a las unidades que ya leen datos con ellos. Para no romper el entorno único del curso, los modelos de esta unidad (k vecinos, discriminante lineal y regresión logística), la validación cruzada y las métricas son **implementaciones propias, breves y con pruebas**, en `Resonancia.jl`. Tienen una ventaja didáctica: se ve qué hace cada paso.
+El temario anuncia esta unidad «con MLJ», el entorno de aprendizaje automático de Julia, que ofrece una interfaz común (`machine`, `fit!`, `evaluate`) a decenas de modelos de otros paquetes. **No se usa aquí**, por una razón práctica de reproducibilidad: al probar la instalación de MLJ y de los paquetes de modelos que necesitaría (árboles de decisión, regresión regularizada, vecinos próximos), el gestor de paquetes degradaba `CSV` y `Parsers` a versiones anteriores, lo que afectaba a las unidades que ya leen datos con ellos. Para no romper el entorno único del curso, los modelos de esta unidad (k vecinos, discriminante lineal y regresión logística), la validación cruzada y las métricas son **implementaciones propias, breves y con pruebas**, en `JuliaDo.jl`. Tienen una ventaja didáctica: se ve qué hace cada paso.
 
 **Qué cambiaría con MLJ.** La lógica de la unidad es la misma. Con MLJ se declararía un modelo (`KNNClassifier(K=5)`), se evaluaría con `evaluate(modelo, X, y; resampling=CV(nfolds=5, shuffle=true, rng=1), measure=[accuracy, ...])` y se podrían probar con la misma interfaz árboles, bosques o máquinas de vectores soporte, además de ajustar hiperparámetros y encadenar el escalado con el modelo (*pipelines*). Una vez entendido lo que sigue, pasar a MLJ es cuestión de aprender su sintaxis y de resolver la compatibilidad del entorno. Documentación: [MLJ](https://juliaai.github.io/MLJ.jl/stable/) (consultada el 27-10-2026).
 :::
 
 ```{julia}
 #| include: false
-using CSV, DataFrames, Statistics, StatsBase, Random, LinearAlgebra, Resonancia
+using CSV, DataFrames, Statistics, StatsBase, Random, LinearAlgebra, JuliaDo
 include("../../recursos/_tema.jl")
 RAIZ = "../../"
 ```
@@ -53,9 +53,9 @@ RAIZ = "../../"
 - estimar con **validación cruzada** (estratificada y repetida) el rendimiento que tendrá un modelo con datos nuevos, y reconocer el sobreajuste y la fuga de información;
 - leer una **matriz de confusión** y las métricas de precisión, exhaustividad, F1 y AUC, y elegir un umbral según el coste de una falsa alarma frente a un evento perdido.
 
-**Prerrequisitos.** El curso no los impone en el temario; conviene J2.4 (frecuencia de los modos por segmentos), J2.5 y J2.6 (azar e inferencia) y J2.7 (regresión, de la que la logística es el equivalente para clases). La teoría del espectro está en M3 y la del edificio de tres plantas, en M2.
+**Prerrequisitos.** El curso no los impone en el temario; conviene J2.4 (frecuencia de los modos por segmentos), J2.5 y J2.6 (azar e inferencia) y J2.7 (regresión, de la que la logística es el equivalente para clases). El cálculo del espectro se trata en [J3.8](../../j3-computacion/j3-8-senales/index.qmd).
 
-**Reparto con otras unidades.** Aquí se aprende a clasificar y a evaluar. La detección de novedad sin etiquetas de daño (PCA, distancia de Mahalanobis) se trata en M12 y en L7; el análisis de datos reales de una campaña, también en M12.
+**Reparto con otras unidades.** Aquí se aprende a clasificar y a evaluar. La detección de novedad sin etiquetas de daño (PCA, distancia de Mahalanobis) queda fuera de esta unidad.
 
 ## Teoría breve
 
@@ -458,7 +458,6 @@ Falso: «no avisar nunca» da exactamente ese 88 %. Hay que mirar la exhaustivid
 
 - Farrar y Worden, el planteamiento de la monitorización estructural como aprendizaje automático [@farrar2012], y su introducción más breve [@farrar2007].
 - La documentación de [MLJ](https://juliaai.github.io/MLJ.jl/stable/) muestra la interfaz común a decenas de modelos, y la de [GLM.jl](https://juliastats.org/GLM.jl/stable/) incluye la regresión logística (`Binomial()` con enlace logit).
-- La detección de novedad sin ejemplos de daño (PCA, Mahalanobis) se ve en M12 y L7.
 
 ## Práctica guiada
 
@@ -527,7 +526,7 @@ El AUC cae a 0,719 y la exhaustividad a 0,095 (4 eventos de 42), pero la **exact
 
 ## Python
 
-La versión probada con `pytest` está en `python/clasificacion.py`: las mismas funciones (k-NN, LDA, regresión logística por IRLS, pliegues estratificados, matriz de confusión, métricas y ROC) con `numpy`, y `scipy.signal.welch` para el espectro. Como el espectro de `scipy` y el de `Resonancia.jl` no coinciden en el último decimal, las pruebas comprueban las **identidades** (el gradiente de la logística se anula, el AUC coincide con el estadístico $U$ de Mann–Whitney) y la **recuperación de los resultados** de la página (medias por estado, exactitud de LDA entre 0,65 y 0,85, AUC de eventos por encima de 0,9).
+La versión probada con `pytest` está en `python/clasificacion.py`: las mismas funciones (k-NN, LDA, regresión logística por IRLS, pliegues estratificados, matriz de confusión, métricas y ROC) con `numpy`, y `scipy.signal.welch` para el espectro. Como el espectro de `scipy` y el de `JuliaDo.jl` no coinciden en el último decimal, las pruebas comprueban las **identidades** (el gradiente de la logística se anula, el AUC coincide con el estadístico $U$ de Mann–Whitney) y la **recuperación de los resultados** de la página (medias por estado, exactitud de LDA entre 0,65 y 0,85, AUC de eventos por encima de 0,9).
 
 ```python
 import numpy as np, pandas as pd
@@ -562,7 +561,7 @@ Un flujo completo de clasificación: características espectrales de ventanas, t
 
 ::: {.callout-tip}
 ## Prompt
-«Con Julia, `--project=.` y `Resonancia.jl` (sin instalar paquetes nuevos: MLJ no está en el entorno): lee `escenario_A.csv`, `escenario_B.csv` y `escenario_C.csv` de `datos/sinteticos/edificio-3-plantas` (separador `;`, 100 Hz, columna `a3_ms2`). Divide cada registro en ventanas de 20 s y calcula con `frecuencias_modales` (`nseg=1024`, bandas 0,8–1,5, 2,5–3,4 y 3,8–5,0 Hz) las tres frecuencias de cada una. Clasifica el estado A/B/C con k-NN (k = 5) y con LDA, estandarizando **dentro** de cada pliegue (`ajustar_escalado`), con validación cruzada estratificada de 5 pliegues y la permutación `randperm(Xoshiro(2026), 90)`. Dame la matriz de confusión, la exactitud y la precisión, exhaustividad y F1 de cada estado, y repite la validación con 20 barajados (semillas 1 a 20) para darme media y desviación típica. Explica qué estados se confunden y por qué. No inventes cifras: si algo no sale, dilo. Di claramente que los datos son sintéticos.»
+«Con Julia, `--project=.` y `JuliaDo.jl` (sin instalar paquetes nuevos: MLJ no está en el entorno): lee `escenario_A.csv`, `escenario_B.csv` y `escenario_C.csv` de `datos/sinteticos/edificio-3-plantas` (separador `;`, 100 Hz, columna `a3_ms2`). Divide cada registro en ventanas de 20 s y calcula con `frecuencias_modales` (`nseg=1024`, bandas 0,8–1,5, 2,5–3,4 y 3,8–5,0 Hz) las tres frecuencias de cada una. Clasifica el estado A/B/C con k-NN (k = 5) y con LDA, estandarizando **dentro** de cada pliegue (`ajustar_escalado`), con validación cruzada estratificada de 5 pliegues y la permutación `randperm(Xoshiro(2026), 90)`. Dame la matriz de confusión, la exactitud y la precisión, exhaustividad y F1 de cada estado, y repite la validación con 20 barajados (semillas 1 a 20) para darme media y desviación típica. Explica qué estados se confunden y por qué. No inventes cifras: si algo no sale, dilo. Di claramente que los datos son sintéticos.»
 
 **Verifica.** (a) Que ha estandarizado dentro de cada pliegue y no con todos los datos, y que los pliegues son estratificados. (b) Que la matriz de LDA es [20 10 0; 6 22 2; 0 2 28] (exactitud 0,778) y que la de k-NN es parecida, con A y B confundidos y C bien reconocido (exhaustividad ≈ 0,93). (c) Que la media con 20 barajados es de unos 0,74 (LDA) y 0,71 (k-NN), con desviación de unos 0,02–0,03, y que **no declara un ganador** con esa diferencia. (d) Que no informa de la exactitud sobre los datos de entrenamiento como si fuera la del modelo. (e) Que presenta los datos como sintéticos y que no ha añadido paquetes.
 :::

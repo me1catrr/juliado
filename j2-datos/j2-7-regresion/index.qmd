@@ -5,7 +5,7 @@ subtitle: "J2.7 · Nivel J2 · Datos y estadística"
 via: J
 nivel: J2
 requiere: []
-perfil: [mse, uco, planta]
+perfil: [estudiante, uco, planta]
 python: true
 estado: borrador
 verificado: "Julia 1.12.3"
@@ -49,7 +49,7 @@ include("../../recursos/_tema.jl")
 
 **Prerrequisitos.** El curso no los impone en el temario; conviene J1.5 (mínimos cuadrados con `\`), J2.5 y J2.6 (distribuciones y contrastes).
 
-**Reparto con otras unidades.** La teoría de los mínimos cuadrados (QR, condicionamiento) está en [J3.3](../../j3-computacion/j3-3-algebra-numerica/index.qmd). El seguimiento continuo de frecuencias y el control estadístico se tratan en M7.
+**Reparto con otras unidades.** La teoría de los mínimos cuadrados (QR, condicionamiento) está en [J3.3](../../j3-computacion/j3-3-algebra-numerica/index.qmd).
 
 ## Teoría breve
 
@@ -256,7 +256,6 @@ end
 
 - Stigler, la historia del método de mínimos cuadrados [@stigler1986], y Galton, el origen del término «regresión» [@galton1886].
 - Documentación de [GLM.jl](https://juliastats.org/GLM.jl/stable/) (modelos lineales y lineales generalizados, entre ellos la regresión logística).
-- La compensación ambiental de frecuencias se ve con más detalle en M7.
 
 ## Práctica guiada
 

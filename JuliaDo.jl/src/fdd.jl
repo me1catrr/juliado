@@ -1,4 +1,4 @@
-# Descomposición en el dominio de la frecuencia (FDD) y su versión mejorada (EFDD), M7.7.
+# Descomposición en el dominio de la frecuencia (FDD) y su versión mejorada (EFDD).
 # Redactado a partir de la descripción del método en Brincker et al. (2000, 2001) tal y como la resume
 # el tutorial de Magalhães y Cunha (2011); la implementación es propia.
 

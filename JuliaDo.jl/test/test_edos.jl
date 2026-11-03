@@ -1,4 +1,4 @@
-# Pruebas de src/edos.jl (J3.6). Las incluye runtests.jl dentro de su `using Test` y `using Resonancia`.
+# Pruebas de src/edos.jl (J3.6). Las incluye runtests.jl dentro de su `using Test` y `using JuliaDo`.
 
 @testset "respuesta_libre_1gdl" begin
     f0, z = 2.94, 0.02

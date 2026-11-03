@@ -5,7 +5,7 @@ subtitle: "J1.4 · Nivel J1 · Julia esencial"
 via: J
 nivel: J1
 requiere: [J1.3]
-perfil: [mse, uco, planta]
+perfil: [estudiante, uco, planta]
 python: true
 estado: borrador
 verificado: "Julia 1.12.3"
@@ -24,7 +24,7 @@ format:
 
 ![](fig/portada.svg){.portada fig-alt="Una señal con dos frecuencias entra por la izquierda en una caja etiquetada descriptores(x) y de ella sale a la derecha una lista con cuatro valores: rms, pico, cresta y curtosis"}
 
-Una función es la unidad mínima de trabajo reutilizable: recibe datos, hace un cálculo y devuelve un resultado. En el curso, todo análisis de una señal acaba siendo una cadena de funciones: quitar la media, calcular un espectro, buscar picos. Aquí se aprende a escribirlas bien (con argumentos con nombre, varios valores de retorno y documentación) y a combinarlas. Como ejemplo se construyen los **descriptores temporales** que se usarán en [M3.2](https://me1catrr.github.io/resonancia/mse/m03-senales-i/): RMS, pico, factor de cresta y curtosis.
+Una función es la unidad mínima de trabajo reutilizable: recibe datos, hace un cálculo y devuelve un resultado. En el curso, todo análisis de una señal acaba siendo una cadena de funciones: quitar la media, calcular un espectro, buscar picos. Aquí se aprende a escribirlas bien (con argumentos con nombre, varios valores de retorno y documentación) y a combinarlas. Como ejemplo se construyen los **descriptores temporales** que se usarán en el resto del curso: RMS, pico, factor de cresta y curtosis.
 
 ::: {.callout-note}
 ## Cómo se lee esta unidad
@@ -33,7 +33,7 @@ Una función es la unidad mínima de trabajo reutilizable: recibe datos, hace un
 
 ```{julia}
 #| include: false
-using Random, Statistics, Resonancia
+using Random, Statistics, JuliaDo
 include("../../recursos/_tema.jl")
 ```
 
@@ -49,7 +49,7 @@ include("../../recursos/_tema.jl")
 
 **Prerrequisitos.** [J1.3](../j1-3-tipos/index.qmd): tipos, bucles y ámbito.
 
-**Reparto con otras unidades.** Aquí se trata la sintaxis de las funciones; el despacho múltiple (varios métodos con el mismo nombre) está en [J1.8](../j1-8-tipos-propios/index.qmd), y el significado físico de los descriptores, en M3.2.
+**Reparto con otras unidades.** Aquí se trata la sintaxis de las funciones; el despacho múltiple (varios métodos con el mismo nombre) está en [J1.8](../j1-8-tipos-propios/index.qmd).
 
 ## Teoría breve
 
@@ -115,7 +115,7 @@ $\sqrt{(1+1+4+4)/4}=\sqrt{2{,}5}\approx1{,}5811$ (la media del vector es cero, a
 
 ### J1.4.3 Docstrings {#j1-4-3}
 
-Un **docstring** es una cadena de texto justo antes de la función. Es lo que muestra `?descriptores` en el REPL y lo que usa la documentación del paquete. En el curso se sigue la convención de `Resonancia.jl`: primera línea con la firma, una frase que explica qué hace, los argumentos con sus **unidades** y, si ayuda, un ejemplo.
+Un **docstring** es una cadena de texto justo antes de la función. Es lo que muestra `?descriptores` en el REPL y lo que usa la documentación del paquete. En el curso se sigue la convención de `JuliaDo.jl`: primera línea con la firma, una frase que explica qué hace, los argumentos con sus **unidades** y, si ayuda, un ejemplo.
 
 ````julia
 """
@@ -136,7 +136,7 @@ La función `descriptores` de arriba ya lleva un docstring con esa estructura: p
 
 ::: {.callout-warning}
 ## Errores frecuentes
-Una función sin documentar es una función que dentro de un mes nadie, tampoco quien la escribió, sabrá si usar. Y una función que sirve en varias páginas no se copia: se mueve a `Resonancia.jl` con su docstring y su test (regla del curso).
+Una función sin documentar es una función que dentro de un mes nadie, tampoco quien la escribió, sabrá si usar. Y una función que sirve en varias páginas no se copia: se mueve a `JuliaDo.jl` con su docstring y su test (regla del curso).
 :::
 
 ### J1.4.4 `map`, `filter`, `reduce` y comprensiones {#j1-4-4}
@@ -225,7 +225,7 @@ Vamos a construir los descriptores de la señal de J1.1 y a aplicarlos por venta
 
 La curtosis de una distribución normal vale 3; una senoide pura, 1,5. Esta señal, suma de dos senoides con algo de ruido, queda en 2,03: cerca de lo sinusoidal. Más adelante, una curtosis alta delatará impactos o defectos.
 
-**Paso 2. Por ventanas.** Una comprensión recorre la señal en trozos de 200 muestras (2 s) y aplica la función a cada uno. Se comprueba contra `rms_por_ventana` de `Resonancia.jl`.
+**Paso 2. Por ventanas.** Una comprensión recorre la señal en trozos de 200 muestras (2 s) y aplica la función a cada uno. Se comprueba contra `rms_por_ventana` de `JuliaDo.jl`.
 
 ```{julia}
 m = 200                       # muestras por ventana
@@ -273,7 +273,7 @@ Las comprensiones existen con la misma idea (`[k**2 for k in range(1, 6) if k % 
 
 ::: {.callout-note}
 ## Qué se ha conseguido
-Una función con argumento con nombre, que devuelve cuatro valores, documentada, contrastada con la del paquete y aplicada por ventanas con una comprensión. Es el esqueleto de cualquier análisis por tramos que se verá en M3 y M7.
+Una función con argumento con nombre, que devuelve cuatro valores, documentada, contrastada con la del paquete y aplicada por ventanas con una comprensión. Es el esqueleto de cualquier análisis por tramos, como los de [J2.4](../../j2-datos/j2-4-makie/index.qmd) y [J3.8](../../j3-computacion/j3-8-senales/index.qmd).
 :::
 
 ## «Pídeselo a Claude» {#pideselo}

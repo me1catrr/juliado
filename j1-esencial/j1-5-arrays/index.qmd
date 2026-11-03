@@ -5,7 +5,7 @@ subtitle: "J1.5 · Nivel J1 · Julia esencial"
 via: J
 nivel: J1
 requiere: [J1.4]
-perfil: [mse, uco, planta]
+perfil: [estudiante, uco, planta]
 python: true
 estado: borrador
 verificado: "Julia 1.12.3"
@@ -28,12 +28,12 @@ Casi todo lo que se hace con datos de vibraciones es álgebra de matrices. Un re
 
 ::: {.callout-note}
 ## Cómo se lee esta unidad
-**Tiempo orientativo: 120 minutos.** Objetivos (5), teoría en cinco píldoras (25), práctica guiada (55), «Pídeselo a Claude» (15), ejercicios (15) y cierre (5). El concepto matemático de los modos y los valores propios se explica en [M2](https://me1catrr.github.io/resonancia/mse/m02-matematicas/) y [M5](https://me1catrr.github.io/resonancia/mse/m05-vibraciones-i/); aquí interesa **cómo se programa**.
+**Tiempo orientativo: 120 minutos.** Objetivos (5), teoría en cinco píldoras (25), práctica guiada (55), «Pídeselo a Claude» (15), ejercicios (15) y cierre (5). Aquí no se desarrolla la teoría de los modos y los valores propios: interesa **cómo se programa**.
 :::
 
 ```{julia}
 #| include: false
-using Random, Statistics, LinearAlgebra, Resonancia
+using Random, Statistics, LinearAlgebra, JuliaDo
 include("../../recursos/_tema.jl")
 ```
 
@@ -49,7 +49,7 @@ include("../../recursos/_tema.jl")
 
 **Prerrequisitos.** [J1.4](../j1-4-funciones/index.qmd): funciones y comprensiones.
 
-**Reparto con otras unidades.** Las matrices con estructura (Toeplitz, Hankel, dispersas) y la SVD se tratan en matematicado ([A1](https://me1catrr.github.io/matematicado/algebra/matrices/a1-3.html) y [A3](https://me1catrr.github.io/matematicado/algebra/svd/index.html)) y en [J3.3](../../j3-computacion/j3-3-algebra-numerica/index.qmd). Leer y trocear tablas con `DataFrames` es el tema de [J1.6](../j1-6-datos/index.qmd).
+**Reparto con otras unidades.** Las matrices con estructura (Toeplitz, Hankel, dispersas) y la SVD se tratan en [J3.3](../../j3-computacion/j3-3-algebra-numerica/index.qmd). Leer y trocear tablas con `DataFrames` es el tema de [J1.6](../j1-6-datos/index.qmd).
 
 ## Teoría breve
 
@@ -65,7 +65,7 @@ t = range(0, 1, length=5)          # rango de 5 puntos entre 0 y 1
 (size(A), length(v), size(Z), collect(t))
 ```
 
-**Convención del curso para un registro multicanal:** una **matriz `N × c`**, con las muestras en filas y los canales en columnas. Así `X[:, j]` es el registro completo del canal `j` y es contiguo en memoria, porque Julia almacena las matrices **por columnas** (*column-major*, igual que MATLAB y Fortran, y al revés que NumPy). Es lo que devuelven las funciones de lectura de `Resonancia.jl` (`leer_torroja` da una matriz `N × 3`).
+**Convención del curso para un registro multicanal:** una **matriz `N × c`**, con las muestras en filas y los canales en columnas. Así `X[:, j]` es el registro completo del canal `j` y es contiguo en memoria, porque Julia almacena las matrices **por columnas** (*column-major*, igual que MATLAB y Fortran, y al revés que NumPy). Es lo que devuelven las funciones de lectura de `JuliaDo.jl` (`leer_torroja` da una matriz `N × 3`).
 
 ::: {.ejercicio tipo="numerico" id="j1-5-1-tam" respuesta="24000" tol="0%" unidad="bytes"}
 Un registro de 3 canales y 1000 muestras en `Float64` (8 bytes por número), ¿cuántos bytes ocupa?
@@ -166,7 +166,7 @@ x = Asist \ b
  cond = round(cond(Asist), digits=3), valores_propios = round.(eigvals(Asist), digits=4))
 ```
 
-La regla de oro: **resolver con `A \ b`**, que usa una factorización estable, y no calcular `inv(A)`, que es más lento y menos preciso. El condicionamiento mide cuánto se amplifica un error en los datos; si `cond(A)` es 10ⁿ, se pierden unas *n* cifras decimales (se justifica en [A1.1 de matematicado](https://me1catrr.github.io/matematicado/algebra/matrices/a1-1.html)).
+La regla de oro: **resolver con `A \ b`**, que usa una factorización estable, y no calcular `inv(A)`, que es más lento y menos preciso. El condicionamiento mide cuánto se amplifica un error en los datos; si `cond(A)` es 10ⁿ, se pierden unas *n* cifras decimales (se ve con más detalle en [J3.3](../../j3-computacion/j3-3-algebra-numerica/index.qmd)).
 
 ::: {.ejercicio tipo="vf" id="j1-5-4-inv" respuesta="falso"}
 Para resolver $\mathbf A\mathbf x=\mathbf b$ es mejor calcular primero `inv(A)` y multiplicar por `b`.
@@ -208,7 +208,7 @@ Tres tropiezos habituales con matrices. (1) `A * B` es el producto matricial y `
 
 ## Práctica guiada
 
-Vamos a construir las matrices del edificio de la @fig-edificio, calcular sus frecuencias naturales y formas modales y comprobarlas con `Resonancia.jl`. Los datos son los del caso transversal de M2: $m=2\cdot10^5$ kg por planta y $k_1=k_2=5\cdot10^7$ N/m, $k_3=4\cdot10^7$ N/m.
+Vamos a construir las matrices del edificio de la @fig-edificio, calcular sus frecuencias naturales y formas modales y comprobarlas con `JuliaDo.jl`. Los datos son los del edificio de tres plantas del curso: $m=2\cdot10^5$ kg por planta y $k_1=k_2=5\cdot10^7$ N/m, $k_3=4\cdot10^7$ N/m.
 
 ::: {.panel-tabset}
 ## Julia
@@ -235,7 +235,7 @@ f = sqrt.(E.values) ./ (2π)           # Hz
 
 Las tres frecuencias son 1,105 Hz, 2,939 Hz y 4,390 Hz. Es lo habitual en un edificio: el primer modo, con todas las plantas moviéndose en el mismo sentido, es el de menor frecuencia, y cada modo superior añade un cambio de signo en la forma.
 
-**Paso 3. Comprobar con el paquete.** `Resonancia.jl` tiene el mismo modelo y la misma función. Se verifica que los resultados coinciden y que los modos son ortogonales respecto de M.
+**Paso 3. Comprobar con el paquete.** `JuliaDo.jl` tiene el mismo modelo y la misma función. Se verifica que los resultados coinciden y que los modos son ortogonales respecto de M.
 
 ```{julia}
 Mp, _, Kp = edificio_tres_plantas()
@@ -279,7 +279,7 @@ C = cov(Xs0)
 (covarianza = round.(C, digits=3), correlacion = round.(cor(Xs0), digits=3))
 ```
 
-Los canales 1 y 2 están muy correlacionados (0,91) porque comparten el modo de 2,5 Hz; los canales 2 y 3 (0,31), solo parcialmente, por el de 7 Hz; y los canales 1 y 3 casi nada. La matriz de covarianza es simétrica y sus valores propios (0,010, 0,082 y 0,849) dicen cuánta varianza hay en cada dirección: es el punto de partida de la descomposición en valores singulares que se estudia en [A3 de matematicado](https://me1catrr.github.io/matematicado/algebra/svd/index.html).
+Los canales 1 y 2 están muy correlacionados (0,91) porque comparten el modo de 2,5 Hz; los canales 2 y 3 (0,31), solo parcialmente, por el de 7 Hz; y los canales 1 y 3 casi nada. La matriz de covarianza es simétrica y sus valores propios (0,010, 0,082 y 0,849) dicen cuánta varianza hay en cada dirección: es el punto de partida de la descomposición en valores singulares que se estudia en [J3.3](../../j3-computacion/j3-3-algebra-numerica/index.qmd).
 
 ## Python
 
@@ -301,14 +301,14 @@ Diferencias respecto de Julia: los índices empiezan en 0; NumPy guarda por fila
 
 ::: {.callout-note}
 ## Qué se ha conseguido
-Se han construido M y K de un sistema real, se han obtenido sus tres frecuencias naturales (1,105, 2,939 y 4,390 Hz) y se han contrastado con el paquete del curso, se han dibujado los modos y se ha centrado un registro multicanal sin bucles. Con estas piezas empieza M5.
+Se han construido M y K de un sistema real, se han obtenido sus tres frecuencias naturales (1,105, 2,939 y 4,390 Hz) y se han contrastado con el paquete del curso, se han dibujado los modos y se ha centrado un registro multicanal sin bucles.
 :::
 
 ## «Pídeselo a Claude» {#pideselo}
 
 ::: {.callout-tip}
 ## Prompt
-«Con Julia y `--project=.`: (1) construye las matrices de masa y rigidez de un edificio de cortante de tres plantas con masas de 2·10⁵ kg y rigideces de entrepiso de 5·10⁷, 5·10⁷ y 4·10⁷ N/m; (2) calcula sus frecuencias naturales en Hz y las formas modales con `eigen(Symmetric(K), Symmetric(M))`; (3) compara con `edificio_tres_plantas` y `modos_propios` de `Resonancia.jl`; (4) comprueba que `Phi' * M * Phi` es la identidad. Resuelve con `\` y no uses `inv`. Dime los valores. No inventes resultados: si algo no coincide, dilo.»
+«Con Julia y `--project=.`: (1) construye las matrices de masa y rigidez de un edificio de cortante de tres plantas con masas de 2·10⁵ kg y rigideces de entrepiso de 5·10⁷, 5·10⁷ y 4·10⁷ N/m; (2) calcula sus frecuencias naturales en Hz y las formas modales con `eigen(Symmetric(K), Symmetric(M))`; (3) compara con `edificio_tres_plantas` y `modos_propios` de `JuliaDo.jl`; (4) comprueba que `Phi' * M * Phi` es la identidad. Resuelve con `\` y no uses `inv`. Dime los valores. No inventes resultados: si algo no coincide, dilo.»
 
 **Verifica.** (a) Que las frecuencias son 1,105, 2,939 y 4,390 Hz, y que el orden de magnitud es razonable: una sola planta de las mismas $m$ y $k$ daría $\sqrt{k/m}/2\pi\approx2{,}5$ Hz. (b) Que `K` es simétrica y que la fila 1 suma $k_1$ y las filas 2 y 3 suman cero (una estructura sin apoyos no tendría rigidez para el movimiento de sólido rígido). (c) Que usa `Symmetric` y que no calcula `inv(K)`. (d) Que las unidades son kg, N/m y Hz, y que divide por $2\pi$ al pasar de rad/s a Hz. (e) Que no sobrescribe `M` o `K` con operaciones que modifican en sitio sin avisarlo.
 :::
@@ -358,7 +358,7 @@ Explica por qué se escribe `K \ F` en lugar de `inv(K) * F` para hallar los des
 - Distingo copia, vista y alias, y sé cuándo `B = A` es peligroso.
 - Centro un registro canal a canal con `X .- mean(X, dims=1)`.
 - Resuelvo `A \ b` y calculo `cond`, `norm` y `eigen`.
-- Construyo M y K de un sistema de 3 GDL, obtengo sus frecuencias y las contrasto con `Resonancia.jl`.
+- Construyo M y K de un sistema de 3 GDL, obtengo sus frecuencias y las contrasto con `JuliaDo.jl`.
 
 **Cierre.** Escribe tres líneas: qué he entendido, qué todavía no domino y cuál es mi siguiente paso pequeño. Revisa con `git diff` lo que haya escrito Claude antes de aceptarlo.
 

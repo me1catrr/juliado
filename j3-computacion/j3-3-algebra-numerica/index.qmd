@@ -5,7 +5,7 @@ subtitle: "J3.3 · Nivel J3 · Computación científica"
 via: J
 nivel: J3
 requiere: []
-perfil: [mse, uco]
+perfil: [estudiante, uco]
 estado: borrador
 verificado: "Julia 1.12.3"
 engine: julia
@@ -23,16 +23,16 @@ format:
 
 ![](fig/portada.svg){.portada fig-alt="Cuatro factorizaciones dibujadas como productos de bloques cuadrados: una matriz igual a un triángulo inferior por uno superior; igual a una matriz ortogonal por un triángulo superior; e igual a dos matrices ortogonales con una diagonal entre ellas"}
 
-En J1.5 se resolvió `A \ b` y se calcularon valores propios sin preguntar *cómo*. Esta unidad abre la caja: toda la álgebra lineal numérica se reduce a **factorizar** una matriz en piezas más sencillas (triangulares, ortogonales, diagonales) y trabajar con ellas. Saber qué factorización existe y cuál conviene según el problema es lo que separa un cálculo preciso y rápido de uno lento o inestable. Los ejemplos son los de la vía M: el edificio de tres plantas, las matrices de Hankel de las señales y una cadena de miles de masas.
+En J1.5 se resolvió `A \ b` y se calcularon valores propios sin preguntar *cómo*. Esta unidad abre la caja: toda la álgebra lineal numérica se reduce a **factorizar** una matriz en piezas más sencillas (triangulares, ortogonales, diagonales) y trabajar con ellas. Saber qué factorización existe y cuál conviene según el problema es lo que separa un cálculo preciso y rápido de uno lento o inestable. Los ejemplos son de vibraciones: el edificio de tres plantas, las matrices de Hankel de las señales y una cadena de miles de masas.
 
 ::: {.callout-note}
 ## Cómo se lee esta unidad
-**Tiempo orientativo: 120 minutos.** Objetivos (5), teoría en seis píldoras (25), práctica guiada (55), «Pídeselo a Claude» (15), ejercicios (15) y cierre (5). Solo se usan las bibliotecas estándar `LinearAlgebra` y `SparseArrays` y las funciones de `Resonancia.jl`.
+**Tiempo orientativo: 120 minutos.** Objetivos (5), teoría en seis píldoras (25), práctica guiada (55), «Pídeselo a Claude» (15), ejercicios (15) y cierre (5). Solo se usan las bibliotecas estándar `LinearAlgebra` y `SparseArrays` y las funciones de `JuliaDo.jl`.
 :::
 
 ```{julia}
 #| include: false
-using LinearAlgebra, SparseArrays, Random, Statistics, Resonancia
+using LinearAlgebra, SparseArrays, Random, Statistics, JuliaDo
 include("../../recursos/_tema.jl")
 ```
 
@@ -46,16 +46,16 @@ include("../../recursos/_tema.jl")
 - estimar el rango numérico con la SVD y construir aproximaciones de bajo rango;
 - calcular valores propios de un problema generalizado `K φ = λ M φ` con Cholesky, y resolver con matrices dispersas.
 
-**Prerrequisitos.** El curso no los impone en el temario; conviene J1.5 (arrays y `LinearAlgebra`) y la página [A1 de matematicado](https://me1catrr.github.io/matematicado/algebra/matrices/a1-1.html), que explica la teoría de normas y condicionamiento.
+**Prerrequisitos.** El curso no los impone en el temario; conviene J1.5 (arrays y `LinearAlgebra`).
 
-**Reparto con otras unidades.** La teoría (propiedades, demostraciones) está en [A1 de matematicado](https://me1catrr.github.io/matematicado/algebra/matrices/index.html) y la SVD aplicada, en [A3 de matematicado](https://me1catrr.github.io/matematicado/algebra/svd/index.html) y M7. Aquí se implementa y se verifica con cifras.
+**Reparto con otras unidades.** Aquí no se demuestran propiedades: se implementa y se verifica con cifras.
 
 ## Teoría breve
 
 ::: {.callout-note .historia icon=false title="Un poco de historia: de la eliminación gaussiana a la SVD"}
 Muchas de las factorizaciones de hoy nacieron antes de que se hablase de matrices. G. W. Stewart cuenta que Gauss describió en 1823 su algoritmo de eliminación como una reducción de una forma cuadrática; que Jacobi (1846) dio un algoritmo para diagonalizar una matriz simétrica, y que la descomposición en valores singulares, en 1873, «se ve como una más de una larga serie de resultados sobre formas canónicas»: Beltrami, Jordan y Sylvester llegaron a ella desde el álgebra lineal, y Schmidt y Weyl, desde las ecuaciones integrales [@stewart1993]. El tratado de referencia actual para los algoritmos es el de Golub y Van Loan [@golub2013].
 
-<span class="fuentes-caja">Fuente: Stewart (1993) [@stewart1993]; los datos son los ya recogidos y comprobados en la página A1 de matematicado, antes M2.1 de Resonancia (consulta del 25-10-2026). Si alguna fuente discrepa de una fecha, prevalece la de la fuente enlazada.</span>
+<span class="fuentes-caja">Fuente: Stewart (1993) [@stewart1993] (consulta del 25-10-2026). Si alguna fuente discrepa de una fecha, prevalece la de la fuente enlazada.</span>
 :::
 
 ### J3.3.1 LU con pivoteo {#j3-3-1}
@@ -99,7 +99,7 @@ Son las frecuencias del edificio de J1.5 (1,1048, 2,9387 y 4,3902 Hz).
 
 ### J3.3.3 QR y mínimos cuadrados {#j3-3-3}
 
-Con más ecuaciones que incógnitas ($\mathbf A\in\mathbb R^{m\times n}$, $m>n$) se busca el $\mathbf x$ que minimiza $\lVert\mathbf A\mathbf x-\mathbf b\rVert_2$. La factorización **QR** ($\mathbf A=\mathbf Q\mathbf R$, con $\mathbf Q$ de columnas ortonormales) lo resuelve con la estabilidad de una matriz ortogonal, y es lo que hace `A \ b` si `A` es rectangular. La alternativa, las **ecuaciones normales** $\mathbf A^{\mathsf T}\mathbf A\,\mathbf x=\mathbf A^{\mathsf T}\mathbf b$, es más corta de escribir pero **eleva al cuadrado el condicionamiento**: $\kappa(\mathbf A^{\mathsf T}\mathbf A)=\kappa(\mathbf A)^2$ ([A1.1 de matematicado](https://me1catrr.github.io/matematicado/algebra/matrices/a1-1.html)). Se ve con un ajuste polinómico de la frecuencia de un modo frente a la temperatura:
+Con más ecuaciones que incógnitas ($\mathbf A\in\mathbb R^{m\times n}$, $m>n$) se busca el $\mathbf x$ que minimiza $\lVert\mathbf A\mathbf x-\mathbf b\rVert_2$. La factorización **QR** ($\mathbf A=\mathbf Q\mathbf R$, con $\mathbf Q$ de columnas ortonormales) lo resuelve con la estabilidad de una matriz ortogonal, y es lo que hace `A \ b` si `A` es rectangular. La alternativa, las **ecuaciones normales** $\mathbf A^{\mathsf T}\mathbf A\,\mathbf x=\mathbf A^{\mathsf T}\mathbf b$, es más corta de escribir pero **eleva al cuadrado el condicionamiento**: $\kappa(\mathbf A^{\mathsf T}\mathbf A)=\kappa(\mathbf A)^2$. Se ve con un ajuste polinómico de la frecuencia de un modo frente a la temperatura:
 
 ```{julia}
 #| output: asis
@@ -163,7 +163,7 @@ let
 end
 ```
 
-Este es el primer paso de los métodos de identificación de M7 (ERA, SSI): **contar los modos** mirando dónde acaba el salto entre valores singulares. Con ruido no hay un cero exacto: se busca el codo, y la decisión es del analista.
+Este es el primer paso de los métodos de identificación modal (ERA, SSI): **contar los modos** mirando dónde acaba el salto entre valores singulares. Con ruido no hay un cero exacto: se busca el codo, y la decisión es del analista.
 
 ::: {.ejercicio tipo="numerico" id="j3-3-4-rango" respuesta="4" tol="0%"}
 ¿Cuál es el rango numérico de la matriz de Hankel de una señal que es suma de dos senoides de frecuencias distintas?
@@ -250,7 +250,6 @@ No se elige el método por costumbre sino por la **estructura** (@fig-elegir): c
 
 - Driscoll y Braun, *Fundamentals of Numerical Computation*, caps. 2 y 3 (factorizaciones y mínimos cuadrados), edición en línea gratuita [@driscoll2022].
 - Golub y Van Loan, *Matrix Computations*: la referencia de los algoritmos [@golub2013].
-- La teoría de normas, condicionamiento y SVD, en [A1](https://me1catrr.github.io/matematicado/algebra/matrices/a1-1.html) y [A3](https://me1catrr.github.io/matematicado/algebra/svd/index.html) de matematicado.
 
 ## Práctica guiada
 
@@ -285,7 +284,7 @@ El cociente entre el cuarto y el quinto es 7,4 frente a 2,4 entre el primero y e
 
 ::: {.callout-tip}
 ## Prompt
-«Con Julia, `--project=.`, `LinearAlgebra`, `SparseArrays` y `Resonancia.jl`: (1) construye una cadena de 2000 masas con `cadena_masas_muelles(2000)`, resuelve `K u = f` con una fuerza unidad en el último grado de libertad y comprueba que `u[end]` vale 2000 y que `K` no se convierte a densa; (2) calcula las 10 primeras frecuencias de la cadena de 10 masas con `modos_propios` y compáralas con la fórmula analítica `f_j = (1/π) sin((2j-1)π/(2(2n+1)))`; (3) calcula los valores singulares de la matriz de Hankel de 10 s de `sin(2π·2,5t) + 0,4 sin(2π·7t)` a 100 Hz con ventana de 100 y dime cuántos son significativos. No uses `inv`. No inventes valores: si algo no sale, dilo.»
+«Con Julia, `--project=.`, `LinearAlgebra`, `SparseArrays` y `JuliaDo.jl`: (1) construye una cadena de 2000 masas con `cadena_masas_muelles(2000)`, resuelve `K u = f` con una fuerza unidad en el último grado de libertad y comprueba que `u[end]` vale 2000 y que `K` no se convierte a densa; (2) calcula las 10 primeras frecuencias de la cadena de 10 masas con `modos_propios` y compáralas con la fórmula analítica `f_j = (1/π) sin((2j-1)π/(2(2n+1)))`; (3) calcula los valores singulares de la matriz de Hankel de 10 s de `sin(2π·2,5t) + 0,4 sin(2π·7t)` a 100 Hz con ventana de 100 y dime cuántos son significativos. No uses `inv`. No inventes valores: si algo no sale, dilo.»
 
 **Verifica.** (a) Que `u[end]` es 2000 y que el residuo `norm(K*u - f)` es del orden de $10^{-15}$. (b) Que el error máximo frente a la fórmula analítica es del orden de $10^{-16}$. (c) Que hay cuatro valores singulares significativos (150,2; 150,1; 60,0; 59,7) y el quinto es $\approx10^{-13}$. (d) Que no ha usado `inv(K)` ni `Matrix(K)` con $n=2000$. (e) Que no ha dado por «aproximadamente igual» algo que difiere en la tercera cifra.
 :::

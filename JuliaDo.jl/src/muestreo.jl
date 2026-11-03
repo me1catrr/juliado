@@ -1,7 +1,7 @@
 """
     descriptores_temporales(x) -> NamedTuple
 
-Descriptores temporales de `x` (M3.2). Los momentos usan el divisor `N` (no `N-1`):
+Descriptores temporales de `x`. Los momentos usan el divisor `N` (no `N-1`):
 
 - `media` μ y `varianza` σ²;
 - `rms` total `√(mean(x²))` y `rms_fluctuante` σ, que cumplen `rms² = μ² + σ²`;
@@ -32,7 +32,7 @@ end
 """
     cuantizar(x; bits, rango, offset=0.0) -> (y, saturada, q)
 
-Convertidor analógico-digital ideal (M3.3) de `bits` bits y entrada bipolar `[-rango, rango]`, en las
+Convertidor analógico-digital ideal de `bits` bits y entrada bipolar `[-rango, rango]`, en las
 unidades de `x`. A la señal se le suma antes `offset` (una componente continua del sensor o del
 acondicionamiento). Paso de cuantificación `q = 2·rango/2^bits`; cada muestra se redondea al nivel más
 próximo `q·c` con el código entero `c ∈ [-2^(bits-1), 2^(bits-1) - 1]`, y los valores que caen fuera se
@@ -53,6 +53,6 @@ end
     frecuencia_aparente(f, fs) -> Float64
 
 Frecuencia (Hz) con la que aparece en `[0, fs/2]` una sinusoide de frecuencia `f` muestreada a `fs`
-sin filtro antialiasing (M3.4): `|f - fs·round(f/fs)|`.
+sin filtro antialiasing: `|f - fs·round(f/fs)|`.
 """
 frecuencia_aparente(f::Real, fs::Real) = abs(f - fs * round(f / fs))

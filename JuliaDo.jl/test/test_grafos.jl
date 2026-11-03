@@ -1,4 +1,4 @@
-# Pruebas de src/grafos.jl (J3.9). Las incluye runtests.jl dentro de su `using Test` y `using Resonancia`.
+# Pruebas de src/grafos.jl (J3.9). Las incluye runtests.jl dentro de su `using Test` y `using JuliaDo`.
 # El paquete no depende de Graphs.jl: las componentes conexas se cuentan con el núcleo de la laplaciana.
 
 using LinearAlgebra, SparseArrays

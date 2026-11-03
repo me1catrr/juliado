@@ -1,7 +1,7 @@
 """Versión Python de J1.7: espectro de Welch y figura de dos paneles con matplotlib.
 
 ``scipy.signal.welch`` con ventana de Hann periódica, solape del 50 % y media restada por
-segmento equivale a ``psd_welch`` de Resonancia.jl (densidad espectral unilateral).
+segmento equivale a ``psd_welch`` de JuliaDo.jl (densidad espectral unilateral).
 """
 import matplotlib
 

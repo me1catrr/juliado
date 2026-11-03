@@ -41,7 +41,7 @@ Tras `;`, argumentos **con nombre**.
 
 Firma, qué hace, argumentos **con unidades**, ejemplo.
 
-`?descriptores` los muestra. La función que sirve en varias páginas va a `Resonancia.jl`.
+`?descriptores` los muestra. La función que sirve en varias páginas va a `JuliaDo.jl`.
 
 ## `map`, `filter`, `reduce`
 

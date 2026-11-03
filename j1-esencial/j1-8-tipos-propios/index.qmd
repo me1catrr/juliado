@@ -5,7 +5,7 @@ subtitle: "J1.8 · Nivel J1 · Julia esencial"
 via: J
 nivel: J1
 requiere: [J1.7]
-perfil: [mse, uco]
+perfil: [estudiante, uco]
 python: true
 estado: borrador
 verificado: "Julia 1.12.3"
@@ -28,7 +28,7 @@ Hasta ahora un registro de vibraciones ha sido una matriz suelta y, a su lado, u
 
 ::: {.callout-note}
 ## Cómo se lee esta unidad
-**Tiempo orientativo: 90 minutos.** Objetivos (4), teoría en cinco píldoras (18), práctica guiada (40), «Pídeselo a Claude» (12), ejercicios (14) y cierre (2). El tipo se define en la propia página. Cuando se reutilice en varias unidades se moverá a `Resonancia.jl`, con su docstring y su test, como exige la regla del curso.
+**Tiempo orientativo: 90 minutos.** Objetivos (4), teoría en cinco píldoras (18), práctica guiada (40), «Pídeselo a Claude» (12), ejercicios (14) y cierre (2). El tipo se define en la propia página. Cuando se reutilice en varias unidades se moverá a `JuliaDo.jl`, con su docstring y su test, como exige la regla del curso.
 :::
 
 ```{julia}

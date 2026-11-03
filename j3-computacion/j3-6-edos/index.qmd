@@ -5,7 +5,7 @@ subtitle: "J3.6 · Nivel J3 · Computación científica"
 via: J
 nivel: J3
 requiere: []
-perfil: [mse, uco]
+perfil: [estudiante, uco]
 estado: borrador
 verificado: "Julia 1.12.3; OrdinaryDiffEq 7.8.1"
 engine: julia
@@ -27,12 +27,12 @@ Una estructura es, ante todo, una **ecuación diferencial**: $m\ddot x+c\dot x+k
 
 ::: {.callout-note}
 ## Cómo se lee esta unidad
-**Tiempo orientativo: 120 minutos.** Objetivos (4), teoría en ocho píldoras (30), práctica guiada (40), «Pídeselo a Claude» (12), ejercicios (32) y cierre (2). **Todos los datos se generan en la página** (parámetros declarados y, donde hay azar, semilla fija), así que se conoce la respuesta correcta. El oscilador de 1 GDL es el del edificio de la vía M (masa $2\cdot10^{5}$ kg, $f_0=2{,}94$ Hz, $\zeta=2\ \%$); el edificio es el de tres plantas de M2; **el mástil del viento es un ejemplo ilustrativo inventado**, sin relación con ninguna estructura real ni con una norma. Se usan `OrdinaryDiffEq.jl` y las funciones de `Resonancia.jl`.
+**Tiempo orientativo: 120 minutos.** Objetivos (4), teoría en ocho píldoras (30), práctica guiada (40), «Pídeselo a Claude» (12), ejercicios (32) y cierre (2). **Todos los datos se generan en la página** (parámetros declarados y, donde hay azar, semilla fija), así que se conoce la respuesta correcta. El oscilador de 1 GDL es el del edificio del curso (masa $2\cdot10^{5}$ kg, $f_0=2{,}94$ Hz, $\zeta=2\ \%$); el edificio es el de tres plantas; **el mástil del viento es un ejemplo ilustrativo inventado**, sin relación con ninguna estructura real ni con una norma. Se usan `OrdinaryDiffEq.jl` y las funciones de `JuliaDo.jl`.
 :::
 
 ```{julia}
 #| include: false
-using OrdinaryDiffEq, LinearAlgebra, Random, Statistics, Resonancia
+using OrdinaryDiffEq, LinearAlgebra, Random, Statistics, JuliaDo
 include("../../recursos/_tema.jl")
 RAIZ = "../../"
 sup(n) = join(get(Dict('-' => '⁻', '0' => '⁰', '1' => '¹', '2' => '²', '3' => '³', '4' => '⁴', '5' => '⁵', '6' => '⁶', '7' => '⁷', '8' => '⁸', '9' => '⁹'), c, c) for c in string(n))
@@ -50,9 +50,9 @@ pot10(x) = "10" * sup(round(Int, log10(x)))                                     
 - reconocer un sistema rígido y elegir entre `Tsit5` y un método para sistemas rígidos (`Rodas5P`, `FBDF`) con un argumento numérico;
 - simular un oscilador forzado, uno no lineal (Duffing) y la respuesta de un mástil al viento, y detectar sucesos con una función de *callback*.
 
-**Prerrequisitos.** El curso no los impone en el temario; conviene [J3.3](../j3-3-algebra-numerica/index.qmd) (valores propios y matriz exponencial), [J3.5](../j3-5-integracion-ad/index.qmd) (error y tolerancias) y, de la vía M, el oscilador de 1 GDL ([M5](https://me1catrr.github.io/resonancia/mse/m05-vibraciones-i/)) y sus sistemas de varios grados de libertad ([M6](https://me1catrr.github.io/resonancia/mse/m06-vibraciones-ii/)).
+**Prerrequisitos.** El curso no los impone en el temario; conviene [J3.3](../j3-3-algebra-numerica/index.qmd) (valores propios y matriz exponencial) y [J3.5](../j3-5-integracion-ad/index.qmd) (error y tolerancias).
 
-**Reparto con otras unidades.** La teoría de vibraciones está en M5 y M6; la respuesta en frecuencia, en M7 y J3.7. Aquí se **integra en el tiempo** y se contrasta con esas soluciones.
+**Reparto con otras unidades.** La respuesta en frecuencia se trata en [J3.7](../j3-7-optimizacion/index.qmd). Aquí se **integra en el tiempo** y se contrasta con esas soluciones.
 
 ## Teoría breve
 
@@ -65,7 +65,7 @@ $$
 \begin{cases}\dot x=v\\ \dot v=-2\zeta\omega_0\,v-\omega_0^2\,x\end{cases},\qquad \mathbf u=\begin{bmatrix}x\\v\end{bmatrix}.
 $$ {#eq-primer-orden}
 
-Es un sistema **lineal**, $\dot{\mathbf u}=\mathbf A\mathbf u$ con $\mathbf A=\begin{bmatrix}0&1\\-\omega_0^2&-2\zeta\omega_0\end{bmatrix}$, y su solución exacta se conoce (`respuesta_libre_1gdl`, de `Resonancia.jl`): por eso sirve para **medir** el error de cualquier integrador. El oscilador es el del edificio de la vía M, con masa $2\cdot10^{5}$ kg, $f_0=2{,}94$ Hz (periodo $T=0{,}340$ s) y $\zeta=2\ \%$; se parte de un desplazamiento de 1 mm sin velocidad.
+Es un sistema **lineal**, $\dot{\mathbf u}=\mathbf A\mathbf u$ con $\mathbf A=\begin{bmatrix}0&1\\-\omega_0^2&-2\zeta\omega_0\end{bmatrix}$, y su solución exacta se conoce (`respuesta_libre_1gdl`, de `JuliaDo.jl`): por eso sirve para **medir** el error de cualquier integrador. El oscilador es el del edificio del curso, con masa $2\cdot10^{5}$ kg, $f_0=2{,}94$ Hz (periodo $T=0{,}340$ s) y $\zeta=2\ \%$; se parte de un desplazamiento de 1 mm sin velocidad.
 
 Integrar es avanzar con un paso $h$. **Euler explícito** usa la pendiente del principio del paso:
 
@@ -529,7 +529,7 @@ $0{,}3489$ mm (`Ass(3.5)`); la simulación da $0{,}3489$ mm con la misma cifra. 
 
 Un sistema es **rígido** (*stiff*) cuando tiene dinámicas con escalas de tiempo muy distintas: una muy rápida, que se amortigua enseguida y ya no interesa, y otra lenta, que es la que se quiere seguir. Un método explícito como `Tsit5` debe mantener el paso **estable** respecto al modo rápido aunque su efecto haya desaparecido, y el paso queda limitado por la estabilidad, no por la precisión. La medida habitual es la **razón de rigidez**: el cociente entre el mayor y el menor $\lvert\mathrm{Re}\,\lambda\rvert$ de los autovalores de la matriz del sistema.
 
-Ejemplo: el edificio de tres plantas de M2 con un sensor ficticio (masa de 1 kg) montado en la planta 3 con una rigidez de $10^{9}$ N/m y un amortiguamiento crítico por la mitad ($\zeta_s=0{,}5$): un modo rápido de 5 kHz que se amortigua en décimas de milisegundo, junto a los modos del edificio (1,1 a 4,4 Hz). Se integran 20 s desde un desplazamiento de 1 mm en la planta 3 con tres métodos y la **misma tolerancia** ($10^{-8}$), y se compara con la solución exacta $\mathbf u(t)=e^{\mathbf At}\mathbf u_0$ (`expm`):
+Ejemplo: el edificio de tres plantas con un sensor ficticio (masa de 1 kg) montado en la planta 3 con una rigidez de $10^{9}$ N/m y un amortiguamiento crítico por la mitad ($\zeta_s=0{,}5$): un modo rápido de 5 kHz que se amortigua en décimas de milisegundo, junto a los modos del edificio (1,1 a 4,4 Hz). Se integran 20 s desde un desplazamiento de 1 mm en la planta 3 con tres métodos y la **misma tolerancia** ($10^{-8}$), y se compara con la solución exacta $\mathbf u(t)=e^{\mathbf At}\mathbf u_0$ (`expm`):
 
 ```{julia}
 M, C, K = edificio_tres_plantas()
@@ -809,7 +809,7 @@ De 8,2 a 4,1 mm: **añadir amortiguamiento** (un amortiguador de masa sintonizad
 
 ::: {.callout-tip}
 ## Prompt
-«Con Julia, `--project=.`, `OrdinaryDiffEq` y `Resonancia.jl`: (1) integra con `Tsit5` el oscilador forzado `m x'' + c x' + k x = F0 cos(2π fe t)` con `m = 5000 kg`, `f0 = 2 Hz`, `ζ = 0,005`, `F0 = 64,8 N` y `fe = 2 Hz` durante 300 s desde el reposo, y dime la amplitud de los últimos 50 s; (2) compárala con `F0 * abs(frf_1gdl(fe, f0, ζ, 1/k))`; (3) repite con `reltol` de `1e-3`, `1e-6` y `1e-9` y dime el número de pasos y el error respecto a la solución teórica; (4) con un `ContinuousCallback`, dime el instante en que |x| supera 5 mm. Explica qué tolerancias has usado y por qué.»
+«Con Julia, `--project=.`, `OrdinaryDiffEq` y `JuliaDo.jl`: (1) integra con `Tsit5` el oscilador forzado `m x'' + c x' + k x = F0 cos(2π fe t)` con `m = 5000 kg`, `f0 = 2 Hz`, `ζ = 0,005`, `F0 = 64,8 N` y `fe = 2 Hz` durante 300 s desde el reposo, y dime la amplitud de los últimos 50 s; (2) compárala con `F0 * abs(frf_1gdl(fe, f0, ζ, 1/k))`; (3) repite con `reltol` de `1e-3`, `1e-6` y `1e-9` y dime el número de pasos y el error respecto a la solución teórica; (4) con un `ContinuousCallback`, dime el instante en que |x| supera 5 mm. Explica qué tolerancias has usado y por qué.»
 
 **Verifica.** (a) Que la amplitud permanente es $8{,}207$ mm y que coincide con la fórmula en al menos cuatro cifras. (b) Que el número de pasos **aumenta** al bajar la tolerancia y el error **baja**, y que Claude ha medido el error contra una solución conocida, no solo con el número de pasos. (c) Que el instante en que se supera 5 mm es cercano a 15,0 s y que no ha sido leído de una malla de tiempos. (d) Que ha medido la amplitud **después** del transitorio (la constante de tiempo es 15,9 s). (e) Que no ha cambiado de método o de tolerancia sin decirlo ni ha elegido el mejor de varias ejecuciones. (f) Que `sol.stats` y no el reloj ha dado el coste, y que las unidades son SI.
 :::

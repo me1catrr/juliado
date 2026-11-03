@@ -5,7 +5,7 @@ subtitle: "J2.1 · Nivel J2 · Datos y estadística"
 via: J
 nivel: J2
 requiere: []
-perfil: [mse, uco, planta]
+perfil: [estudiante, uco, planta]
 python: true
 estado: borrador
 verificado: "Julia 1.12.3"
@@ -49,7 +49,7 @@ RAIZ = "../../"
 
 **Prerrequisitos.** El curso no los impone en el temario; conviene J1.1 y J1.2 (entorno, `--project=.`) y J1.6 (datos tabulares).
 
-**Reparto con otras unidades.** Aquí se organiza y se verifica la reproducibilidad. Las herramientas de datos (fechas, uniones, limpieza) vienen en [J2.2](../j2-2-dataframes/index.qmd) y [J2.3](../j2-3-limpieza/index.qmd); el control de versiones con Git, en [C3](https://me1catrr.github.io/claudedo/).
+**Reparto con otras unidades.** Aquí se organiza y se verifica la reproducibilidad. Las herramientas de datos (fechas, uniones, limpieza) vienen en [J2.2](../j2-2-dataframes/index.qmd) y [J2.3](../j2-3-limpieza/index.qmd).
 
 ## Teoría breve
 

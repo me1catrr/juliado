@@ -1,4 +1,4 @@
-# Pruebas de src/fdd.jl (M7.7: FDD y EFDD). Las incluye runtests.jl.
+# Pruebas de src/fdd.jl (FDD y EFDD). Las incluye runtests.jl.
 using LinearAlgebra, Random, Statistics
 
 # viga con 6 canales y formas sin(iπx/L); modos 1 a 4, los dos centrales separados 0,12 Hz
@@ -64,7 +64,7 @@ end
 @testset "efdd_modo: recupera cuatro modos conocidos, dos de ellos próximos" begin
     d = fdd_caso()
     pk(i) = d.s[1, i] > d.s[1, i-1] && d.s[1, i] > d.s[1, i+1]
-    tolζ = [0.25, 0.4, 0.4, 0.25]      # el amortiguamiento de modos próximos se subestima (véase M7.7)
+    tolζ = [0.25, 0.4, 0.4, 0.25]      # el amortiguamiento de modos próximos se subestima
     for (m, fm) in enumerate(d.fn)
         c = [i for i in 2:length(d.f)-1 if pk(i) && abs(d.f[i] - fm) <= 0.04]
         @test !isempty(c)
